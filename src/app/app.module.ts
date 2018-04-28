@@ -14,6 +14,7 @@ import { fuseConfig } from './fuse-config';
 import { AppComponent } from './app.component';
 import { FuseMainModule } from './main/main.module';
 import { FuseSampleModule } from './main/content/sample/sample.module';
+import { ProcessesClassesModule } from './main/content/processes/processes.module';
 
 const appRoutes: Routes = [
     {
@@ -37,7 +38,8 @@ const appRoutes: Routes = [
         FuseModule.forRoot(fuseConfig),
         FuseSharedModule,
         FuseMainModule,
-        FuseSampleModule
+        FuseSampleModule,
+        ProcessesClassesModule
     ],
     bootstrap   : [
         AppComponent
