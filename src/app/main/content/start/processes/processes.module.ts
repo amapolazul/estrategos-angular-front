@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
+import { SharedModule } from '../../../../core/modules/shared.module';
 import { RouterModule, Routes } from '@angular/router';
-import { SharedModule } from '../../../core/modules/shared.module';
 
 import { ProcessesComponent } from './processes.component';
 import { ProductComponent } from './tabs/product/product.component';
@@ -13,7 +13,6 @@ const routes: Routes = [
         component: ProcessesComponent
     }
 ];
-
 @NgModule({
     imports     : [
         SharedModule,
@@ -26,6 +25,6 @@ const routes: Routes = [
         CharacterizationComponent
     ]
 })
-export class ProcessesClassesModule
+export class ProcessesModule
 {
 }

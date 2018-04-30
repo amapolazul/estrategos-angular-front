@@ -14,13 +14,17 @@ import { fuseConfig } from './fuse-config';
 import { AppComponent } from './app.component';
 import { FuseMainModule } from './main/main.module';
 import { FuseSampleModule } from './main/content/sample/sample.module';
-import { ProcessesClassesModule } from './main/content/processes/processes.module';
 
 const appRoutes: Routes = [
+    {
+        path        : 'processes',
+        loadChildren: './main/content/start/start.module#StartModule'
+    },
     {
         path      : '**',
         redirectTo: 'sample'
     }
+
 ];
 
 @NgModule({
@@ -38,8 +42,7 @@ const appRoutes: Routes = [
         FuseModule.forRoot(fuseConfig),
         FuseSharedModule,
         FuseMainModule,
-        FuseSampleModule,
-        ProcessesClassesModule
+        FuseSampleModule
     ],
     bootstrap   : [
         AppComponent

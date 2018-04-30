@@ -18,7 +18,15 @@ export const navigation = [
                     'bg'   : '#F44336',
                     'fg'   : '#FFFFFF'
                 }
+            },
+            {
+                'id': 'processes',
+                'title': 'Processes',
+                'type': 'item',
+                'icon': 'help',
+                'url': '/processes'
             }
         ]
     }
 ];
+   

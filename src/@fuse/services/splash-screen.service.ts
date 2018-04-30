@@ -47,12 +47,13 @@ export class FuseSplashScreenService
                         opacity: '0',
                         zIndex : '99999'
                     }),
-                    animate('400ms ease', style({opacity: '1'}))
+                    animate('100ms ease', style({opacity: '1'}))
                 ]).create(this.splashScreenEl);
 
         setTimeout(() => {
             this.player.play();
         }, 0);
+        
     }
 
     hide()
@@ -61,7 +62,7 @@ export class FuseSplashScreenService
             this.animationBuilder
                 .build([
                     style({opacity: '1'}),
-                    animate('400ms ease', style({
+                    animate('100ms ease', style({
                         opacity: '0',
                         zIndex : '-10'
                     }))

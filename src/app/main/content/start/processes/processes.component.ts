@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MaterialModule } from '../../../../core/modules/material.module';
 
 @Component({
     selector   : 'processes-helper-classes',
@@ -7,7 +9,7 @@ import { Component } from '@angular/core';
 })
 export class ProcessesComponent
 {
-    constructor()
+    constructor(private formBuilder: FormBuilder)
     {
     }
 
