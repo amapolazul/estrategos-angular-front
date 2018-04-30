@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { SharedModule } from '../../../../core/modules/shared.module';
+import { SharedModule } from '../../../core/modules/shared.module';
 import { RouterModule, Routes } from '@angular/router';
 
 import { ProcessesComponent } from './processes.component';

@@ -4,6 +4,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { FuseSampleComponent } from './sample.component';
 
+
 const routes = [
     {
         path     : 'sample',

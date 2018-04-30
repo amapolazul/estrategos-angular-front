@@ -8,17 +8,18 @@ import 'hammerjs';
 
 import { FuseModule } from '@fuse/fuse.module';
 import { FuseSharedModule } from '@fuse/shared.module';
-
+import { SharedModule } from './core/modules/shared.module';
 import { fuseConfig } from './fuse-config';
 
 import { AppComponent } from './app.component';
 import { FuseMainModule } from './main/main.module';
 import { FuseSampleModule } from './main/content/sample/sample.module';
+import { ProcessesModule } from './main/content/processes/processes.module';
 
 const appRoutes: Routes = [
     {
         path        : 'processes',
-        loadChildren: './main/content/start/start.module#StartModule'
+        loadChildren: './main/content/processes/processes.module#ProcessesModule'
     },
     {
         path      : '**',
@@ -37,12 +38,13 @@ const appRoutes: Routes = [
         HttpClientModule,
         RouterModule.forRoot(appRoutes),
         TranslateModule.forRoot(),
-
+        SharedModule,
         // Fuse Main and Shared modules
         FuseModule.forRoot(fuseConfig),
         FuseSharedModule,
         FuseMainModule,
-        FuseSampleModule
+        FuseSampleModule,
+        ProcessesModule
     ],
     bootstrap   : [
         AppComponent
