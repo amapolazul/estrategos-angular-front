@@ -4,37 +4,33 @@
 
     <div class="mat-white-bg mat-elevation-z4 p-24">
 
-        <div fxLayout="column"  fxLayoutAlign="start start" fxLayout.gt-md="row">
+        <div fxLayoutAlign="start start" fxLayout.gt-md="row">
 
-            <form name="form"  fxLayout="column" fxFlex="100" [formGroup]="form">
-                <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
-
+            <form name="form" layout-align="column" fxFlex="100" [formGroup]="processForm">
+                <div fxLayout="column" fxFlex="1 0 auto">
                     <mat-form-field fxFlex="100">
                         <input matInput placeholder="Proceso / Sub proceso" formControlName="process" required>
-                        <mat-error *ngIf="formErrors.firstName.required">
-                            First Name is required!
+                        <mat-error *ngIf="formErrors.process.required">
+                            Proceso / sub proceso es requerido !
                         </mat-error>
                     </mat-form-field>
-                </div>
-                <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
                     <mat-form-field fxFlex="100">
-                        <input matInput placeholder="Código proceso" formControlName="processCode" required>
-                        <mat-error *ngIf="formErrors.firstName.required">
-                            First Name is required!
+                        <input matInput placeholder="Código proceso" formControlName="processcode" required>
+                        <mat-error *ngIf="formErrors.processcode.required">
+                            Código proceso es requerido !
                         </mat-error>
                     </mat-form-field>
-                </div>
-                <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
                     <mat-form-field fxFlex="100">
-                        <input matInput placeholder="Descripción" formControlName="description" required>
-                        <mat-error *ngIf="formErrors.firstName.required">
-                            First Name is required!
+                        <textarea matInput placeholder="Descripción" formControlName="description" required></textarea>
+                        <mat-error *ngIf="formErrors.description.required">
+                            Description es requerido !
                         </mat-error>
                     </mat-form-field>
-                </div>
-                <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
                     <mat-form-field fxFlex="100">
-                        <mat-select placeholder="Country" formControlName="country" required>
+                        <mat-select placeholder="Tipo de proceso" formControlName="procesType" required>
                             <mat-option [value]="'001'">
                                 000120
                             </mat-option>
@@ -45,30 +41,41 @@
                                 000120
                             </mat-option>
                         </mat-select>
-                        <mat-error *ngIf="formErrors.country.required">
+                        <mat-error *ngIf="formErrors.procesType.required">
                             Country is required!
                         </mat-error>
                     </mat-form-field>
-                </div>
-                <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
                     <mat-form-field fxFlex="100">
-                        <input matInput placeholder="First name" formControlName="firstName" required>
-                        <mat-error *ngIf="formErrors.firstName.required">
+                        <input matInput placeholder="Responsable" formControlName="responsible" required>
+                        <mat-error *ngIf="formErrors.responsible.required">
                             First Name is required!
                         </mat-error>
                     </mat-form-field>
-                </div>
-                <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
                     <mat-form-field fxFlex="100">
-                        <input matInput placeholder="First name" formControlName="firstName" required>
-                        <mat-error *ngIf="formErrors.firstName.required">
+                        <input matInput placeholder="Nombre del responsable" formControlName="responsible2" required>
+                        <mat-error *ngIf="formErrors.responsible2.required">
                             First Name is required!
                         </mat-error>
                     </mat-form-field>
+
+                    <mat-form-field fxFlex="100">
+                        <input matInput placeholder="Nombre del documento" formControlName="document" required>
+                        <mat-error *ngIf="formErrors.document.required">
+                            First Name is required!
+                        </mat-error>
+                    </mat-form-field>
+
+                    <div class="button-row" fxLayoutAlign="center center" fxLayout="row" fxFlex="100">
+                        <button mat-button color="accent">Guardar</button>
+                        <button mat-button color="warn">Salir</button>
+                    </div>
+
                 </div>
 
             </form>
-      
+
         </div>
 
     </div>

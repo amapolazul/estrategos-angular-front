@@ -6,6 +6,7 @@ import { ProcessesComponent } from './processes.component';
 import { ProductComponent } from './tabs/product/product.component';
 import { ProcessComponent } from './tabs/process/process.component';
 import { CharacterizationComponent } from './tabs/characterization/characterization.component';
+import { DialogComponent } from '../processes/tabs/product/dialog/dialog.component';
 
 const routes: Routes = [
     {
@@ -22,7 +23,8 @@ const routes: Routes = [
         ProcessesComponent,
         ProductComponent,
         ProcessComponent,
-        CharacterizationComponent
+        CharacterizationComponent,
+        DialogComponent
     ]
 })
 export class ProcessesModule

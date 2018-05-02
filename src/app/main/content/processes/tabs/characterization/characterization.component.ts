@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
     selector   : 'characterization-classes',
@@ -7,9 +8,20 @@ import { Component } from '@angular/core';
 })
 export class CharacterizationComponent
 {
+    rows: any[];
+    loadingIndicator = true;
+    reorderable = true;
 
-    constructor()
+    constructor(private http: HttpClient)
     {
 
+    }
+
+    ngOnInit(){
+        this.http.get('api/product')
+            .subscribe((product: any) => {
+                this.rows = product;
+                this.loadingIndicator = false;
+            });
     }
 }

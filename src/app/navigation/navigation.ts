@@ -21,7 +21,7 @@ export const navigation = [
             },
             {
                 'id': 'processes',
-                'title': 'Processes',
+                'title': 'Crear procesos',
                 'type': 'item',
                 'icon': 'help',
                 'url': '/processes'
