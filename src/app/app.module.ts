@@ -15,11 +15,16 @@ import { AppComponent } from './app.component';
 import { FuseMainModule } from './main/main.module';
 import { FuseSampleModule } from './main/content/sample/sample.module';
 import { ProcessesModule } from './main/content/processes/processes.module';
+import { SystemTablesModule } from './main/content/system-tables/system-tables.module'
 
 const appRoutes: Routes = [
     {
         path        : 'processes',
         loadChildren: './main/content/processes/processes.module#ProcessesModule'
+    },
+    {
+        path        : 'system-table',
+        loadChildren: './main/content/system-tables/system-tables.module#SystemTablesModule'
     },
     {
         path      : '**',
@@ -44,7 +49,8 @@ const appRoutes: Routes = [
         FuseSharedModule,
         FuseMainModule,
         FuseSampleModule,
-        ProcessesModule
+        ProcessesModule,
+        SystemTablesModule
     ],
     bootstrap   : [
         AppComponent

@@ -23,8 +23,47 @@ export const navigation = [
                 'id': 'processes',
                 'title': 'Crear procesos',
                 'type': 'item',
-                'icon': 'help',
+                'icon': 'create_new_folder',
                 'url': '/processes'
+            },
+            {
+                'id': 'system-table',
+                'title': 'Tablas de sistema',
+                'type': 'collapse',
+                'icon': 'extension',
+                'url': '/system-table',     
+                'children' : [
+                    {
+                        'id'        : 'rating',
+                        'title'     : 'Calificación del riesgo',
+                        'type'      : 'item',
+                        'url'       : '/system-table/risk/rating'
+                    },
+                    {
+                        'id'        : 'types',
+                        'title'     : 'Tipos de riesgo',
+                        'type'      : 'item',
+                        'url'       : '/system-table/risk/types',
+                    },
+                    {
+                        'id'        : 'probability',
+                        'title'     : 'Probabilida del riesgo',
+                        'type'      : 'item',
+                        'url'       : '/system-table/risk/probability',
+                    },
+                    {
+                        'id'        : 'impact',
+                        'title'     : 'Impactos',
+                        'type'      : 'item',
+                        'url'       : '/system-table/risk/impact',
+                    },
+                    {
+                        'id'        : 'causes',
+                        'title'     : 'Causas',
+                        'type'      : 'item',
+                        'url'       : '/system-table/risk/causes',
+                    }
+                ]
             }
         ]
     }
