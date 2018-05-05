@@ -28,9 +28,9 @@ export class CharacterizationComponent
             });
     }
 
-    productDialog(){
+    characterizationDialog(){
         this.dialogRef = this.dialog.open(CharacterizationDialogComponent, {
-            panelClass: 'product-dialog'
+            panelClass: 'characterization-dialog'
         });
         this.dialogRef.afterClosed()
             .subscribe(response => {

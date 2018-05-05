@@ -25,10 +25,12 @@ const routes: Routes = [
         ProductComponent,
         ProcessComponent,
         CharacterizationComponent,
-        DialogComponent
+        DialogComponent,
+        CharacterizationDialogComponent
     ],
     entryComponents: [
-        DialogComponent
+        DialogComponent,
+        CharacterizationDialogComponent
     ]
 })
 export class ProcessesModule
