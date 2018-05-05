@@ -20,11 +20,11 @@ export const navigation = [
                 }
             },
             {
-                'id': 'processes',
+                'id': 'cargar-procesos',
                 'title': 'Crear procesos',
                 'type': 'item',
                 'icon': 'create_new_folder',
-                'url': '/processes'
+                'url': '/cargar-procesos'
             },
             {
                 'id': 'system-table',

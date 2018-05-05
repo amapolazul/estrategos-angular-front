@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
-    selector: 'probability',
+    selector: 'risk-probability',
     templateUrl: './probability.component.html',
     styleUrls: ['./probability.component.scss']
 })

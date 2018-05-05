@@ -19,7 +19,7 @@ import { SystemTablesModule } from './main/content/system-tables/system-tables.m
 
 const appRoutes: Routes = [
     {
-        path        : 'processes',
+        path        : 'cargar-procesos',
         loadChildren: './main/content/processes/processes.module#ProcessesModule'
     },
     {

@@ -28,10 +28,9 @@ export class ProductComponent
             });
     }
 
-    newDialog(){
-        console.log('Hola bb')
+    productDialog(){
         this.dialogRef = this.dialog.open(DialogComponent, {
-            panelClass: 'dialog'
+            panelClass: 'product-dialog'
         });
         this.dialogRef.afterClosed()
             .subscribe(response => {

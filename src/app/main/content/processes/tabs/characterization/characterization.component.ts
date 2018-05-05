@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { MatDialog } from '@angular/material';
+import { CharacterizationDialogComponent } from './dialog/characterization-dialog.component'
 
 @Component({
     selector   : 'characterization-classes',
@@ -9,10 +11,11 @@ import { HttpClient } from '@angular/common/http';
 export class CharacterizationComponent
 {
     rows: any[];
+    dialogRef: any;
     loadingIndicator = true;
     reorderable = true;
 
-    constructor(private http: HttpClient)
+    constructor(private http: HttpClient,public dialog: MatDialog)
     {
 
     }
@@ -22,6 +25,16 @@ export class CharacterizationComponent
             .subscribe((product: any) => {
                 this.rows = product;
                 this.loadingIndicator = false;
+            });
+    }
+
+    productDialog(){
+        this.dialogRef = this.dialog.open(CharacterizationDialogComponent, {
+            panelClass: 'product-dialog'
+        });
+        this.dialogRef.afterClosed()
+            .subscribe(response => {
+
             });
     }
 }
