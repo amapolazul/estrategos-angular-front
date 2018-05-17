@@ -45,6 +45,8 @@ export class FuseShortcutsComponent implements OnInit, OnDestroy
                 );
     }
 
+    ngOnInit(){}
+    /*
     ngOnInit()
     {
         const cookieExists = this.cookieService.check('FUSE2.shortcuts');
@@ -92,7 +94,7 @@ export class FuseShortcutsComponent implements OnInit, OnDestroy
                 }
             });
     }
-
+    */
     ngOnDestroy()
     {
         this.matchMediaSubscription.unsubscribe();

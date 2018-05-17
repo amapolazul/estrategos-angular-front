@@ -13,7 +13,7 @@ import { fuseConfig } from './fuse-config';
 
 import { AppComponent } from './app.component';
 import { FuseMainModule } from './main/main.module';
-import { FuseSampleModule } from './main/content/sample/sample.module';
+import { HomeModule } from './main/content/home/home.module';
 import { ProcessesModule } from './main/content/processes/processes.module';
 import { SystemTablesModule } from './main/content/system-tables/system-tables.module'
 
@@ -28,9 +28,8 @@ const appRoutes: Routes = [
     },
     {
         path      : '**',
-        redirectTo: 'sample'
+        redirectTo: 'home'
     }
-
 ];
 
 @NgModule({
@@ -48,7 +47,7 @@ const appRoutes: Routes = [
         FuseModule.forRoot(fuseConfig),
         FuseSharedModule,
         FuseMainModule,
-        FuseSampleModule,
+        HomeModule,
         ProcessesModule,
         SystemTablesModule
     ],
