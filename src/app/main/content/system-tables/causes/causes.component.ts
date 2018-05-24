@@ -1,17 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { MatDialog } from '@angular/material';
+import { CausesDialogComponent } from './dialog/causes-dialog.component';
 
 @Component({
     selector: 'risk-causes',
     templateUrl: './causes.component.html',
     styleUrls: ['./causes.component.scss']
 })
-export class SystemCausesComponent {
+export class SystemCausesComponent implements OnInit {
+
     rows: any[];
+    dialogRef: any;
     loadingIndicator = true;
     reorderable = true;
 
-    constructor(private http: HttpClient)
+    constructor(private http: HttpClient, public dialog: MatDialog)
     {
 
     }
@@ -23,4 +27,14 @@ export class SystemCausesComponent {
                 this.loadingIndicator = false;
             });
     }
+
+  causesDialog(){
+    this.dialogRef = this.dialog.open(CausesDialogComponent, {
+      panelClass: 'characterization-dialog'
+    });
+    this.dialogRef.afterClosed()
+      .subscribe(response => {
+
+      });
+  }
 }

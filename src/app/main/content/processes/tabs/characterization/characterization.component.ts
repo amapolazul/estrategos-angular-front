@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material';
-import { CharacterizationDialogComponent } from './dialog/characterization-dialog.component'
+import { CharacterizationDialogComponent } from './dialog/characterization-dialog.component';
 
 @Component({
     selector   : 'characterization-classes',

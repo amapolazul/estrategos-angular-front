@@ -67,6 +67,10 @@
                         </mat-error>
                     </mat-form-field>
 
+                    <input type="file" id="file1" (change)="handleFileInput($event.target.files)">
+
+                    <input type="file" (change)="fileUpload($event)" placeholder="Upload file" accept=".pdf,.doc,.docx">
+
                     <div class="button-row" fxLayoutAlign="center center" fxLayout="row" fxFlex="100">
                         <button mat-button color="accent">Guardar</button>
                         <button mat-button color="warn">Salir</button>

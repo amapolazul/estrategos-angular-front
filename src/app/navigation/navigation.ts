@@ -6,18 +6,12 @@ export const navigation = [
         'type'    : 'group',
         'children': [
             {
-                'id'   : 'sample',
-                'title': 'Sample',
+                'id'   : 'home',
+                'title': 'Inicio',
                 'translate': 'NAV.SAMPLE.TITLE',
                 'type' : 'item',
                 'icon' : 'email',
-                'url'  : '/sample',
-                'badge': {
-                    'title': 25,
-                    'translate': 'NAV.SAMPLE.BADGE',
-                    'bg'   : '#F44336',
-                    'fg'   : '#FFFFFF'
-                }
+                'url'  : '/home',
             },
             {
                 'id': 'cargar-procesos',
@@ -31,41 +25,44 @@ export const navigation = [
                 'title': 'Tablas de sistema',
                 'type': 'collapse',
                 'icon': 'extension',
-                'url': '/system-table',     
                 'children' : [
                     {
                         'id'        : 'rating',
                         'title'     : 'Calificación del riesgo',
                         'type'      : 'item',
-                        'url'       : '/system-table/risk/rating'
-                    },
-                    {
-                        'id'        : 'types',
-                        'title'     : 'Tipos de riesgo',
-                        'type'      : 'item',
-                        'url'       : '/system-table/risk/types',
+                        'url'       : 'tablas-sistema/calificacion',
+                        'exactMatch': true
                     },
                     {
                         'id'        : 'probability',
                         'title'     : 'Probabilida del riesgo',
                         'type'      : 'item',
-                        'url'       : '/system-table/risk/probability',
+                        'url'       : '/tablas-sistema/probabilidad',
+                        'exactMatch': true
                     },
                     {
                         'id'        : 'impact',
                         'title'     : 'Impactos',
                         'type'      : 'item',
-                        'url'       : '/system-table/risk/impact',
+                        'url'       : '/tablas-sistema/impacto',
+                        'exactMatch': true
                     },
                     {
                         'id'        : 'causes',
-                        'title'     : 'Causas',
+                        'title'     : 'Causas del riesgo',
                         'type'      : 'item',
-                        'url'       : '/system-table/risk/causes',
+                        'url'       : 'tablas-sistema/causas',
+                        'exactMatch': true
+                    },
+                    {
+                      'id'        : 'tipos',
+                      'title'     : 'Tipos de riesgos',
+                      'type'      : 'item',
+                      'url'       : 'tablas-sistema/tipos',
+                      'exactMatch': true
                     }
                 ]
             }
         ]
     }
 ];
-   

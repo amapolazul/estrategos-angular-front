@@ -1,0 +1,38 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">Impacto del riesgo</span>
+            <button mat-button class="mat-icon-button" (click)="dialogRef.close()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 m-0">
+        <form name="composeForm" [formGroup]="composeForm" class="compose-form" fxLayout="column" fxFlex>
+
+            <mat-form-field>
+                <input matInput name="impact" placeholder="Impacto" formControlName="bcc" type="text">
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput name="points" placeholder="Puntaje" formControlName="points">
+            </mat-form-field>
+
+            <mat-form-field>
+                <textarea matInput name="description" placeholder="Descripcion" formControlName="description" rows="4">
+                </textarea>
+            </mat-form-field>
+            <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="space-between center">
+                <div>
+                    <button mat-raised-button class="save-button mat-accent" aria-label="Guardar">
+                        Guardar
+                    </button>
+                    <button mat-raised-button class="save-button mat-accent" aria-label="Cancelar">
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </form>
+        <div>
+</div>

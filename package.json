@@ -51,6 +51,7 @@
     "intl": "1.2.5",
     "moment": "2.21.0",
     "ng2-charts": "1.6.0",
+    "ng2-tree": "2.0.0-rc.11",
     "ngrx-store-freeze": "0.2.1",
     "ngx-color-picker": "5.3.4",
     "ngx-cookie-service": "1.0.10",

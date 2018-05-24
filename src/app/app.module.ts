@@ -15,19 +15,20 @@ import { AppComponent } from './app.component';
 import { FuseMainModule } from './main/main.module';
 import { HomeModule } from './main/content/home/home.module';
 import { ProcessesModule } from './main/content/processes/processes.module';
-import { SystemTablesModule } from './main/content/system-tables/system-tables.module'
+import { SystemTablesModule } from './main/content/system-tables/system-tables.module';
+import { FuseAngularMaterialModule } from '../app/main/content/components/angular-material/angular-material.module';
 
 const appRoutes: Routes = [
     {
-        path        : 'cargar-procesos',
+        path: 'cargar-procesos',
         loadChildren: './main/content/processes/processes.module#ProcessesModule'
     },
     {
-        path        : 'system-table',
+        path: 'system-table',
         loadChildren: './main/content/system-tables/system-tables.module#SystemTablesModule'
     },
     {
-        path      : '**',
+        path: '**',
         redirectTo: 'home'
     }
 ];
@@ -36,7 +37,7 @@ const appRoutes: Routes = [
     declarations: [
         AppComponent
     ],
-    imports     : [
+    imports: [
         BrowserModule,
         BrowserAnimationsModule,
         HttpClientModule,
@@ -49,12 +50,12 @@ const appRoutes: Routes = [
         FuseMainModule,
         HomeModule,
         ProcessesModule,
-        SystemTablesModule
+        SystemTablesModule,
+        FuseAngularMaterialModule
     ],
-    bootstrap   : [
+    bootstrap: [
         AppComponent
     ]
 })
-export class AppModule
-{
+export class AppModule {
 }

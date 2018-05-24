@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ProbabilityDialogComponent } from './dialog/probability-dialog.component';
+import { MatDialog } from '@angular/material';
+
 
 @Component({
     selector: 'risk-probability',
@@ -8,10 +11,11 @@ import { HttpClient } from '@angular/common/http';
 })
 export class SystemProbabilityComponent {
     rows: any[];
+    dialogRef: any;
     loadingIndicator = true;
     reorderable = true;
 
-    constructor(private http: HttpClient)
+    constructor(private http: HttpClient, public dialog: MatDialog)
     {
 
     }
@@ -23,4 +27,14 @@ export class SystemProbabilityComponent {
                 this.loadingIndicator = false;
             });
     }
+  probabilityDialog(){
+    this.dialogRef = this.dialog.open(ProbabilityDialogComponent, {
+      panelClass: 'characterization-dialog'
+    });
+    this.dialogRef.afterClosed()
+      .subscribe(response => {
+
+      });
+  }
 }
+
