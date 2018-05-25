@@ -1,7 +1,7 @@
 <div class="dialog-content-wrapper">
     <mat-toolbar matDialogTitle class="mat-accent m-0">
         <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
-            <span class="title dialog-title">Characterización</span>
+            <span class="title dialog-title">Calificación del Riesgo</span>
             <button mat-button class="mat-icon-button" (click)="dialogRef.close()" aria-label="Close dialog">
                 <mat-icon>close</mat-icon>
             </button>
@@ -12,15 +12,19 @@
         <form name="composeForm" [formGroup]="composeForm" class="compose-form" fxLayout="column" fxFlex>
 
             <mat-form-field>
-                <input matInput name="bcc" placeholder="Proceso" formControlName="bcc" type="email">
+                <input matInput name="bcc" placeholder="Calificacion del riesgo " formControlName="bcc" type="email">
             </mat-form-field>
 
             <mat-form-field>
-                <input matInput name="subject" placeholder="Producto / servicio" formControlName="subject">
+                <input matInput name="subject" placeholder="Rango mínimo" formControlName="subject">
             </mat-form-field>
 
+          <mat-form-field>
+            <input matInput name="subject" placeholder="Rango máximo" formControlName="subject">
+          </mat-form-field>
+
             <mat-form-field>
-                <textarea matInput name="message" placeholder="Caracteristicas" formControlName="message" rows="4">
+                <textarea matInput name="message" placeholder="Acción a tomar" formControlName="message" rows="4">
                 </textarea>
             </mat-form-field>
             <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="space-between center">

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { RatingDialogComponent } from '../rating/dialog/rating-dialog.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
     selector: 'risk-rating',
@@ -8,10 +10,11 @@ import { HttpClient } from '@angular/common/http';
 })
 export class SystemRatingComponent {
     rows: any[];
+    dialogRef: any;
     loadingIndicator = true;
     reorderable = true;
 
-    constructor(private http: HttpClient)
+    constructor(private http: HttpClient, public dialog: MatDialog)
     {
 
     }
@@ -23,4 +26,14 @@ export class SystemRatingComponent {
                 this.loadingIndicator = false;
             });
     }
+
+  ratingDialog(){
+    this.dialogRef = this.dialog.open(RatingDialogComponent, {
+      panelClass: 'rating-dialog'
+    });
+    this.dialogRef.afterClosed()
+      .subscribe(response => {
+
+      });
+  }
 }

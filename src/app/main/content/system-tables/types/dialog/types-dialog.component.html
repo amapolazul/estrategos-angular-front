@@ -1,7 +1,7 @@
 <div class="dialog-content-wrapper">
     <mat-toolbar matDialogTitle class="mat-accent m-0">
         <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
-            <span class="title dialog-title">Characterización</span>
+            <span class="title dialog-title">Tipos de riesgos</span>
             <button mat-button class="mat-icon-button" (click)="dialogRef.close()" aria-label="Close dialog">
                 <mat-icon>close</mat-icon>
             </button>
@@ -12,17 +12,9 @@
         <form name="composeForm" [formGroup]="composeForm" class="compose-form" fxLayout="column" fxFlex>
 
             <mat-form-field>
-                <input matInput name="bcc" placeholder="Proceso" formControlName="bcc" type="email">
+                <input matInput name="bcc" placeholder="Tipos de Riesgos" formControlName="bcc" type="email">
             </mat-form-field>
 
-            <mat-form-field>
-                <input matInput name="subject" placeholder="Producto / servicio" formControlName="subject">
-            </mat-form-field>
-
-            <mat-form-field>
-                <textarea matInput name="message" placeholder="Caracteristicas" formControlName="message" rows="4">
-                </textarea>
-            </mat-form-field>
             <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="space-between center">
                 <div>
                     <button mat-raised-button class="save-button mat-accent" aria-label="Guardar">
@@ -34,5 +26,5 @@
                 </div>
             </div>
         </form>
-        <div>
+    </div>
 </div>

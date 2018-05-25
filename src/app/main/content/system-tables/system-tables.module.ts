@@ -11,6 +11,8 @@ import { SystemTypesComponent } from './types/types.component';
 import { CausesDialogComponent } from './causes/dialog/causes-dialog.component';
 import { ImpactDialogComponent } from './impact/dialog/impact-dialog.component';
 import { ProbabilityDialogComponent } from './probability/dialog/probability-dialog.component';
+import { RatingDialogComponent } from './rating/dialog/rating-dialog.component';
+import { TypesDialogComponent } from './types/dialog/types-dialog.component';
 
 const routes = [
   {
@@ -51,12 +53,16 @@ const routes = [
     SystemTypesComponent,
     CausesDialogComponent,
     ImpactDialogComponent,
-    ProbabilityDialogComponent
+    ProbabilityDialogComponent,
+    RatingDialogComponent,
+    TypesDialogComponent
   ],
   entryComponents: [
     CausesDialogComponent,
     ImpactDialogComponent,
-    ProbabilityDialogComponent
+    ProbabilityDialogComponent,
+    RatingDialogComponent,
+    TypesDialogComponent
   ]
 })
 export class SystemTablesModule

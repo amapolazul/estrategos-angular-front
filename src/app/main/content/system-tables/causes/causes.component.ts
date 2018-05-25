@@ -30,7 +30,7 @@ export class SystemCausesComponent implements OnInit {
 
   causesDialog(){
     this.dialogRef = this.dialog.open(CausesDialogComponent, {
-      panelClass: 'characterization-dialog'
+      panelClass: 'causes-dialog'
     });
     this.dialogRef.afterClosed()
       .subscribe(response => {

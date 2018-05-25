@@ -27,9 +27,10 @@ export class SystemProbabilityComponent {
                 this.loadingIndicator = false;
             });
     }
+
   probabilityDialog(){
     this.dialogRef = this.dialog.open(ProbabilityDialogComponent, {
-      panelClass: 'characterization-dialog'
+      panelClass: 'probability-dialog'
     });
     this.dialogRef.afterClosed()
       .subscribe(response => {

@@ -30,7 +30,7 @@ export class SystemImpactComponent {
 
   impactDialog(){
     this.dialogRef = this.dialog.open(ImpactDialogComponent, {
-      panelClass: 'characterization-dialog'
+      panelClass: 'impact-dialog'
     });
     this.dialogRef.afterClosed()
       .subscribe(response => {

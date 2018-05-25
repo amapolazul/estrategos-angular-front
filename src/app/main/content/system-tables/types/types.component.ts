@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { TypesDialogComponent } from '../types/dialog/types-dialog.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
     selector: 'risk-types',
@@ -8,10 +10,11 @@ import { HttpClient } from '@angular/common/http';
 })
 export class SystemTypesComponent {
     rows: any[];
+    dialogRef: any;
     loadingIndicator = true;
     reorderable = true;
 
-    constructor(private http: HttpClient)
+    constructor(private http: HttpClient, public dialog: MatDialog)
     {
 
     }
@@ -23,4 +26,14 @@ export class SystemTypesComponent {
                 this.loadingIndicator = false;
             });
     }
+
+  typesDialog(){
+    this.dialogRef = this.dialog.open(TypesDialogComponent, {
+      panelClass: 'types-dialog'
+    });
+    this.dialogRef.afterClosed()
+      .subscribe(response => {
+
+      });
+  }
 }

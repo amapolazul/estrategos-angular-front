@@ -4,18 +4,18 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 
 @Component({
-    selector     : 'characterization-dialog',
-    templateUrl  : './characterization-dialog.component.html',
-    styleUrls    : ['./characterization-dialog.component.scss'],
+    selector     : 'types-dialog',
+    templateUrl  : './types-dialog.component.html',
+    styleUrls    : ['./types-dialog.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class CharacterizationDialogComponent implements OnInit
+export class TypesDialogComponent implements OnInit
 {
     showExtraToFields = false;
     composeForm: FormGroup;
 
     constructor(
-        public dialogRef: MatDialogRef<CharacterizationDialogComponent>,
+        public dialogRef: MatDialogRef<TypesDialogComponent>,
         @Inject(MAT_DIALOG_DATA) private data: any
     )
     {  }
