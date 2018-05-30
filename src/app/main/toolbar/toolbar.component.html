@@ -21,7 +21,36 @@
             </div>
 
             <div class="px-8 px-mat-16">
-                <fuse-shortcuts></fuse-shortcuts>
+              <button mat-button [matMenuTriggerFor]="systemTables" class="user-button">
+                <div fxLayout="row" fxLayoutAlign="center center">
+                  <span class="username mr-12" fxHide fxShow.gt-sm>Tablas de sistema</span>
+                  <mat-icon class="s-16" fxHide.xs>keyboard_arrow_down</mat-icon>
+                </div>
+              </button>
+
+              <mat-menu #systemTables="matMenu" [overlapTrigger]="false">
+
+                <button mat-menu-item>
+                  <a routerLink="/tablas-sistema/calificacion"><span>Calificación del riesgo</span></a>
+                </button>
+
+                <button mat-menu-item class="">
+                  <a routerLink="/tablas-sistema/probabilidad"><span>Probabilidad del riesgo</span></a>
+                </button>
+
+                <button mat-menu-item class="">
+                  <a routerLink="/tablas-sistema/impacto"><span>Impacto</span></a>
+                </button>
+
+                <button mat-menu-item class="">
+                  <a routerLink="/tablas-sistema/causas"><span>Causas del riesgo</span></a>
+                </button>
+
+                <button mat-menu-item class="">
+                  <a routerLink="/tablas-sistema/tipos"><span>Tipos de riesgos</span></a>
+                </button>
+
+              </mat-menu>
             </div>
 
         </div>
@@ -56,10 +85,10 @@
 
             </mat-menu>
 
-            <!-- 
-            
-            <div class="toolbar-separator"></div>
 
+
+            <div class="toolbar-separator"></div>
+<!--
             <fuse-search-bar (onInput)="search($event)"></fuse-search-bar>
 
             <div class="toolbar-separator"></div>
@@ -92,8 +121,9 @@
                     aria-label="Toggle quick panel">
                 <mat-icon class="icon">format_list_bulleted</mat-icon>
             </button>
-            
-            -->
+
+-->
+
         </div>
     </div>
 </mat-toolbar>

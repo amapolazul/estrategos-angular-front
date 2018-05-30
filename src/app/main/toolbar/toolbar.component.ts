@@ -57,7 +57,7 @@ export class FuseToolbarComponent
 
         this.languages = [
             {
-                'id'   : 'en',
+                'id'   : 'Tablas de sistema',
                 'title': 'English',
                 'flag' : 'us'
             },

@@ -20,7 +20,8 @@ export const navigation = [
                 'icon': 'create_new_folder',
                 'url': '/cargar-procesos'
             },
-            {
+          /*
+          {
                 'id': 'system-table',
                 'title': 'Tablas de sistema',
                 'type': 'collapse',
@@ -63,6 +64,7 @@ export const navigation = [
                     }
                 ]
             }
+            */
         ]
     }
 ];
