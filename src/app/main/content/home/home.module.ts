@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { HomeComponent } from './home.component';
-
+import { TreeModule } from 'ng2-tree';
 
 const routes = [
     {
@@ -19,7 +19,8 @@ const routes = [
     imports     : [
         RouterModule.forChild(routes),
         TranslateModule,
-        FuseSharedModule
+        FuseSharedModule,
+        TreeModule
     ],
     exports     : [
         HomeComponent
