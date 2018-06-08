@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { TypesDialogComponent } from '../types/dialog/types-dialog.component';
 import { MatDialog } from '@angular/material';
@@ -8,9 +8,10 @@ import { MatDialog } from '@angular/material';
     templateUrl: './types.component.html',
     styleUrls: ['./types.component.scss']
 })
-export class SystemTypesComponent {
+export class SystemTypesComponent implements OnInit {
     rows: any[];
     dialogRef: any;
+    riskTypes: any;
     loadingIndicator = true;
     reorderable = true;
 
@@ -20,11 +21,17 @@ export class SystemTypesComponent {
     }
 
     ngOnInit(){
-        this.http.get('api/product')
-            .subscribe((product: any) => {
-                this.rows = product;
-                this.loadingIndicator = false;
-            });
+      console.log('Hola bb');
+        this.http.get('http://localhost:9000/tipo-riesgo/')
+          .subscribe((product: any) => {
+            this.rows = product;
+            console.log(this.rows);
+            this.loadingIndicator = false;
+          });
+           // .subscribe(data => {
+           //   console.log(data);
+           //   var riskTypes = data;
+           // });
     }
 
   typesDialog(){
