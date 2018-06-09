@@ -1,39 +1,45 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { TreeModel, NodeEvent } from 'ng2-tree';
+import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {NodeEvent, TreeModel} from 'ng2-tree';
+import {ProcessesService} from '../processes/services/processes.service';
+import {forEach} from '@angular/router/src/utils/collection';
+
 
 @Component({
-    selector   : 'fuse-sample',
-    templateUrl: './home.component.html',
-    styleUrls  : ['./home.component.scss'],
-    template: `<tree [tree]="tree" (nodeSelected)="logEvent($event)"></tree>`
+  template: '<tree [tree]="tree" #treeComponent (nodeSelected)="getSubNodes($event)"></tree>'
 })
-export class HomeComponent
-{
+export class HomeComponent implements AfterViewInit {
+  tree: TreeModel = {
+    value: 'Programming languages by programming paradigm',
+    id: 1,
+    children: [
 
+    ]
+  };
 
-    public tree: TreeModel = {
-      value: 'Programming languages by programming paradigm',
-      children: [
-        {
-          value: 'Object-oriented programming',
-          children: [{ value: 'Java' }, { value: 'C++' }, { value: 'C#' }]
-        },
-        {
-          value: 'Prototype-based programming',
-          children: [{ value: 'JavaScript' }, { value: 'CoffeeScript' }, { value: 'Lua' }]
-        }
-      ]
-    };
+  constructor(private processesService: ProcessesService) {
 
-    // 3 - print caught event to the console
-    public logEvent(e: NodeEvent): void {
-      console.log(e);
-    }
+  }
 
-    constructor(private formBuilder: FormBuilder)
-    {
+  @ViewChild('treeComponent') treeComponent;
 
-    }
+  ngAfterViewInit(): void {
 
+  }
+
+  getSubNodes(node: NodeEvent): void {
+    const nodeId = node.node.id;
+    console.log(nodeId);
+    this.processesService.getSubProcessByParentId(nodeId).subscribe( (result) => {
+      const oopNodeController = this.treeComponent.getControllerByNodeId(nodeId);
+
+      const newChildren: Array<TreeModel> = result.map(x => {
+        return {value: x.proceso_Nombre, id: x.proceso_Id, children: []};
+      });
+
+      oopNodeController.setChildren(newChildren);
+      oopNodeController.reloadChildren();
+      oopNodeController.expand();
+
+    });
+  }
 }

@@ -12,6 +12,7 @@ import { FuseQuickPanelModule } from 'app/main/quick-panel/quick-panel.module';
 import { FuseToolbarModule } from 'app/main/toolbar/toolbar.module';
 
 import { FuseMainComponent } from './main.component';
+import {ProcessesService} from './content/processes/services/processes.service';
 
 
 @NgModule({
@@ -36,6 +37,9 @@ import { FuseMainComponent } from './main.component';
         FuseNavbarModule,
         FuseQuickPanelModule,
         FuseToolbarModule,
+    ],
+    providers: [
+      ProcessesService
     ],
     exports     : [
         FuseMainComponent
