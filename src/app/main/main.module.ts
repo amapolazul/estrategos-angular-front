@@ -9,9 +9,8 @@ import { FuseNavbarModule } from 'app/main/navbar/navbar.module';
 import { FuseQuickPanelModule } from 'app/main/quick-panel/quick-panel.module';
 import { FuseToolbarModule } from 'app/main/toolbar/toolbar.module';
 import { FuseMainComponent } from './main.component';
-
-import { }
-
+import { ProcessesService } from './content/processes/services/processes.service';
+import { TypesRiskService } from './content/system-tables/types/service/types-risk.service';
 
 @NgModule({
     declarations: [
@@ -32,8 +31,10 @@ import { }
         FuseQuickPanelModule,
         FuseToolbarModule,
     ],
-    providers   :[
 
+    providers: [
+        ProcessesService,
+        TypesRiskService
     ],
     exports     : [
         FuseMainComponent
@@ -41,4 +42,5 @@ import { }
 })
 export class FuseMainModule
 {
+
 }

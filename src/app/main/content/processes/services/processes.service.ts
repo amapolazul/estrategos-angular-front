@@ -1,10 +1,11 @@
-import { BaseService } from '../../commons/base-service.service';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import { Injectable } from '@angular/core';
+import {BaseService} from '../../commons/base-service.service';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
+import {ProcesoTreeResponse, Proceso} from '../models/process.model';
+import {Injectable} from '@angular/core';
 
 @Injectable()
-export class SystemTablesService extends BaseService {
+export class ProcessesService extends BaseService {
 
   serviceUrl: string;
 

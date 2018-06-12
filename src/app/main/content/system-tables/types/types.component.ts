@@ -1,7 +1,7 @@
 import { Component, OnInit} from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { TypesDialogComponent } from '../types/dialog/types-dialog.component';
 import { MatDialog } from '@angular/material';
+import { TypesRiskService } from '../../system-tables/types/service/types-risk.service';
 
 @Component({
     selector: 'risk-types',
@@ -14,15 +14,14 @@ export class SystemTypesComponent implements OnInit {
     loadingIndicator = true;
     reorderable = true;
 
-    constructor(private http: HttpClient, public dialog: MatDialog)
-    {
+    constructor(private typesRiskService: TypesRiskService, public dialog: MatDialog) {
 
     }
 
     ngOnInit(){
-        this.http.get('http://localhost:9000/tipo-riesgo/')
-          .subscribe((product: any) => {
+        this.typesRiskService.getTypeRisk().subscribe((product: any) => {
             this.riskTypes = product;
+            console.log('Hola bb')
             console.log(this.riskTypes);
             this.loadingIndicator = false;
           });
