@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { TypesDialogComponent } from '../types/dialog/types-dialog.component';
 import { MatDialog } from '@angular/material';
@@ -9,9 +9,8 @@ import { MatDialog } from '@angular/material';
     styleUrls: ['./types.component.scss']
 })
 export class SystemTypesComponent implements OnInit {
-    rows: any[];
+    riskTypes: any[];
     dialogRef: any;
-    riskTypes: any;
     loadingIndicator = true;
     reorderable = true;
 
@@ -21,26 +20,21 @@ export class SystemTypesComponent implements OnInit {
     }
 
     ngOnInit(){
-      console.log('Hola bb');
         this.http.get('http://localhost:9000/tipo-riesgo/')
           .subscribe((product: any) => {
-            this.rows = product;
-            console.log(this.rows);
+            this.riskTypes = product;
+            console.log(this.riskTypes);
             this.loadingIndicator = false;
           });
-           // .subscribe(data => {
-           //   console.log(data);
-           //   var riskTypes = data;
-           // });
     }
 
-  typesDialog(){
-    this.dialogRef = this.dialog.open(TypesDialogComponent, {
-      panelClass: 'types-dialog'
-    });
-    this.dialogRef.afterClosed()
-      .subscribe(response => {
-
+    typesDialog(){
+      this.dialogRef = this.dialog.open(TypesDialogComponent, {
+        panelClass: 'types-dialog'
       });
-  }
+      this.dialogRef.afterClosed()
+        .subscribe(response => {
+
+        });
+    }
 }
