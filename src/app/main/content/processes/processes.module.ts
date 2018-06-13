@@ -8,6 +8,7 @@ import { ProcessComponent } from './tabs/process/process.component';
 import { CharacterizationComponent } from './tabs/characterization/characterization.component';
 import { DialogComponent } from '../processes/tabs/product/dialog/dialog.component';
 import { CharacterizationDialogComponent } from '../processes/tabs/characterization/dialog/characterization-dialog.component';
+import { CharacterizationInfoDialogComponent } from '../processes/tabs/characterization/dialog/characterization-info-dialog.component';
 
 const routes: Routes = [
     {
@@ -26,11 +27,13 @@ const routes: Routes = [
         ProcessComponent,
         CharacterizationComponent,
         DialogComponent,
-        CharacterizationDialogComponent
+        CharacterizationDialogComponent,
+        CharacterizationInfoDialogComponent
     ],
     entryComponents: [
         DialogComponent,
-        CharacterizationDialogComponent
+        CharacterizationDialogComponent,
+        CharacterizationInfoDialogComponent
     ]
 })
 export class ProcessesModule

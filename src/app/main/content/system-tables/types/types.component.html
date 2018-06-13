@@ -14,7 +14,6 @@
 
                     <ngx-datatable class="material"
                         [rows]="riskTypes"
-                        [columns]="[{ prop: 'Tipos de riesgos' }]"
                         [loadingIndicator]="loadingIndicator"
                         [columnMode]="'force'"
                         [headerHeight]="48"
@@ -23,6 +22,9 @@
                         [scrollbarH]="true"
                         [reorderable]="reorderable"
                         [limit]="10">
+
+                      <ngx-datatable-column name="Tipo de riesgo" prop="tipo_riesgo">
+                        </ngx-datatable-column>
 
                     </ngx-datatable>
 
