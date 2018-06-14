@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material';
 import { CausesDialogComponent } from './dialog/causes-dialog.component';
+import { CausesRiskService } from './service/causes-risk.service';
+
 
 @Component({
     selector: 'risk-causes',
@@ -10,22 +12,22 @@ import { CausesDialogComponent } from './dialog/causes-dialog.component';
 })
 export class SystemCausesComponent implements OnInit {
 
-    rows: any[];
+    causesRisk: any[];
     dialogRef: any;
     loadingIndicator = true;
     reorderable = true;
 
-    constructor(private http: HttpClient, public dialog: MatDialog)
-    {
+    constructor(private causesRiskService: CausesRiskService, public dialog: MatDialog) {
 
     }
 
     ngOnInit(){
-        this.http.get('api/product')
-            .subscribe((product: any) => {
-                this.rows = product;
-                this.loadingIndicator = false;
-            });
+      this.causesRiskService.getCausesRisk().subscribe((data: any) => {
+        console.log("bb");
+        this.causesRisk = data;
+        console.log(this.causesRisk);
+        this.loadingIndicator = false;
+      });
     }
 
   causesDialog(){

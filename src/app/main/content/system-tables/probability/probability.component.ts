@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { ProbabilityDialogComponent } from './dialog/probability-dialog.component';
 import { MatDialog } from '@angular/material';
+import { ProbabilityRiskService } from '../probability/service/probability-risk.service';
 
 
 @Component({
@@ -9,24 +9,22 @@ import { MatDialog } from '@angular/material';
     templateUrl: './probability.component.html',
     styleUrls: ['./probability.component.scss']
 })
-export class SystemProbabilityComponent {
-    rows: any[];
+export class SystemProbabilityComponent implements OnInit {
+    probabilityRisk: any[];
     dialogRef: any;
     loadingIndicator = true;
     reorderable = true;
 
-    constructor(private http: HttpClient, public dialog: MatDialog)
-    {
+  constructor(private probabilityRiskService: ProbabilityRiskService, public dialog: MatDialog) {
 
-    }
+  }
 
-    ngOnInit(){
-        this.http.get('api/product')
-            .subscribe((product: any) => {
-                this.rows = product;
-                this.loadingIndicator = false;
-            });
-    }
+  ngOnInit(){
+    this.probabilityRiskService.getProbabilityRisk().subscribe((data: any) => {
+      this.probabilityRisk = data;
+      this.loadingIndicator = false;
+    });
+  }
 
   probabilityDialog(){
     this.dialogRef = this.dialog.open(ProbabilityDialogComponent, {
