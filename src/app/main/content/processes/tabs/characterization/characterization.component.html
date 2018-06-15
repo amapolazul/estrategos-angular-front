@@ -16,6 +16,21 @@
                     [footerHeight]="56" [rowHeight]="'auto'" [scrollbarH]="true" [reorderable]="reorderable" [selectionType]="'checkbox'"
                     [limit]="10">
 
+                    <ngx-datatable-column [width]="130"
+                                          [canAutoResize]="false"
+                                          [sortable]="false">
+
+                      <ng-template ngx-datatable-header-template>
+                        <!--button mat-button>Más info</button-->
+                        <!-- Parce este botón es el que lanza la información de la caracterización -->
+                        <button mat-raised-button color="accent" (click)="characterizationInfoDialog()">Ver</button>
+                      </ng-template>
+
+                      <ng-template ngx-datatable-cell-template>
+                        <button mat-raised-button color="accent" (click)="characterizationInfoDialog()">Ver</button>
+                      </ng-template>
+                    </ngx-datatable-column>
+
                     <ngx-datatable-column name="Proceso" prop="proceso">
                     </ngx-datatable-column>
 

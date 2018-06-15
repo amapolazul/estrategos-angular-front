@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material';
 import { CharacterizationDialogComponent } from './dialog/characterization-dialog.component';
+import { CharacterizationInfoDialogComponent } from './dialog/characterization-info-dialog.component';
+
 
 @Component({
     selector   : 'characterization-classes',
@@ -36,5 +38,15 @@ export class CharacterizationComponent implements OnInit
             .subscribe(response => {
 
             });
+    }
+
+    characterizationInfoDialog(){
+        this.dialogRef = this.dialog.open(CharacterizationInfoDialogComponent, {
+          panelClass: 'characterization-info-dialog'
+        });
+        this.dialogRef.afterClosed()
+          .subscribe(response => {
+
+          });
     }
 }

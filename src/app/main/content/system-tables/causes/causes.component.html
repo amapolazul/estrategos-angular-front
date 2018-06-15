@@ -12,11 +12,18 @@
 
                 <div class=" mat-elevation-z8">
 
-                    <ngx-datatable class="material" [rows]="rows" [loadingIndicator]="loadingIndicator" [columnMode]="'force'" [headerHeight]="48"
-                        [footerHeight]="56" [rowHeight]="'auto'" [scrollbarH]="true" [reorderable]="reorderable" [selectionType]="'checkbox'"
-                        [limit]="10">
+                  <ngx-datatable class="material"
+                                 [rows]="causesRisk"
+                                 [loadingIndicator]="loadingIndicator"
+                                 [columnMode]="'force'"
+                                 [headerHeight]="48"
+                                 [footerHeight]="56"
+                                 [rowHeight]="'auto'"
+                                 [scrollbarH]="true"
+                                 [reorderable]="reorderable"
+                                 [limit]="10">
 
-                        <ngx-datatable-column name="Causa del riesgo" prop="causa-del-riesgo">
+                        <ngx-datatable-column name="Causa del riesgo" prop="causa_riesgo">
                         </ngx-datatable-column>
 
                         <ngx-datatable-column name="Descripción" prop="descripcion">

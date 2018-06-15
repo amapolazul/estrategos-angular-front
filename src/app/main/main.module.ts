@@ -11,7 +11,11 @@ import { FuseToolbarModule } from 'app/main/toolbar/toolbar.module';
 import { FuseMainComponent } from './main.component';
 import { ProcessesService } from './content/processes/services/processes.service';
 import { TypesRiskService } from './content/system-tables/types/service/types-risk.service';
-import {ResponsablesService} from './content/responsables/responsables.service';
+import { ResponsablesService } from './content/responsables/responsables.service';
+import { ProbabilityRiskService } from './content/system-tables/probability/service/probability-risk.service';
+import { ImpactRiskService } from './content/system-tables/impact/service/impact-risk.service';
+import { CausesRiskService } from './content/system-tables/causes/service/causes-risk.service';
+
 
 @NgModule({
     declarations: [
@@ -36,7 +40,10 @@ import {ResponsablesService} from './content/responsables/responsables.service';
     providers: [
         ProcessesService,
         TypesRiskService,
-        ResponsablesService
+        ResponsablesService,
+        ProbabilityRiskService,
+        ImpactRiskService,
+        CausesRiskService
     ],
     exports     : [
         FuseMainComponent

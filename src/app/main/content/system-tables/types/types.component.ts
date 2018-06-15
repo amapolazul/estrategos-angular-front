@@ -19,11 +19,9 @@ export class SystemTypesComponent implements OnInit {
     }
 
     ngOnInit(){
-        this.typesRiskService.getTypeRisk().subscribe((product: any) => {
-            this.riskTypes = product;
-            console.log('Hola bb')
-            console.log(this.riskTypes);
-            this.loadingIndicator = false;
+        this.typesRiskService.getTypeRisk().subscribe((data: any) => {
+          this.riskTypes = data;
+          this.loadingIndicator = false;
           });
     }
 
