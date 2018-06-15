@@ -11,7 +11,7 @@ import { CharacterizationDialogComponent } from '../processes/tabs/characterizat
 
 const routes: Routes = [
     {
-        path     : 'cargar-procesos',
+        path     : 'procesos/:id',
         component: ProcessesComponent
     }
 ];

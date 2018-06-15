@@ -1,7 +1,7 @@
 import {BaseService} from '../../commons/base-service.service';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
-import {ProcesoTreeResponse, Proceso} from '../models/process.model';
+import {Proceso, ProcesoCreateRequest} from '../models/process.model';
 import {Injectable} from '@angular/core';
 
 @Injectable()
@@ -15,11 +15,9 @@ export class ProcessesService extends BaseService {
 
   }
 
-  getSeedProcess(): Observable<ProcesoTreeResponse> {
-    return this.http.get<ProcesoTreeResponse>(this.serviceUrl + '/1');
+  createFullProcesses(procesoRequest: ProcesoCreateRequest): Observable<string> {
+    return this.http.post<string>(this.serviceUrl, procesoRequest);
   }
-
-  createProcesses
 
   getSubProcessByParentId(id): Observable<Proceso[]> {
     return this.http.get<Proceso[]>(this.serviceUrl + '/' + id + '/sub-procesos');

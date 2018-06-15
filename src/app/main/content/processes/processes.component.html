@@ -6,7 +6,7 @@
         <mat-tab-group dynamicHeight="true">
 
             <mat-tab label="Procesos">
-                <process-classes></process-classes>
+                <process-classes #process></process-classes>
             </mat-tab>
 
             <mat-tab label="Productos / Servicios">
@@ -20,6 +20,9 @@
         </mat-tab-group>
 
     </div>
-    <!-- / CONTENT -->
+  <div class="button-row" fxLayoutAlign="center center" fxLayout="row" fxFlex="100">
+    <button mat-button color="accent" (click)="processData()">Guardar</button>
+    <button mat-button color="warn">Salir</button>
+  </div>
 
 </div>

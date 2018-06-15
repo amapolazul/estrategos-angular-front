@@ -11,6 +11,7 @@ import { FuseToolbarModule } from 'app/main/toolbar/toolbar.module';
 import { FuseMainComponent } from './main.component';
 import { ProcessesService } from './content/processes/services/processes.service';
 import { TypesRiskService } from './content/system-tables/types/service/types-risk.service';
+import {ResponsablesService} from './content/responsables/responsables.service';
 
 @NgModule({
     declarations: [
@@ -34,7 +35,8 @@ import { TypesRiskService } from './content/system-tables/types/service/types-ri
 
     providers: [
         ProcessesService,
-        TypesRiskService
+        TypesRiskService,
+        ResponsablesService
     ],
     exports     : [
         FuseMainComponent

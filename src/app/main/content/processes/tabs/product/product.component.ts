@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material';
 import { DialogComponent } from '../product/dialog/dialog.component';
@@ -8,12 +8,13 @@ import { DialogComponent } from '../product/dialog/dialog.component';
     templateUrl: './product.component.html',
     styleUrls  : ['./product.component.scss']
 })
-export class ProductComponent
+export class ProductComponent implements OnInit
 {
     rows: any[];
     dialogRef: any;
     loadingIndicator = true;
     reorderable = true;
+
 
     constructor(private http: HttpClient,public dialog: MatDialog)
     {
@@ -21,20 +22,23 @@ export class ProductComponent
     }
 
     ngOnInit(){
-        this.http.get('api/product')
-            .subscribe((product: any) => {
-                this.rows = product;
-                this.loadingIndicator = false;
-            });
+
+      this.rows = new Array<any>();
+        // this.http.get('api/product')
+        //     .subscribe((product: any) => {
+        //         this.rows = product;
+        //         this.loadingIndicator = false;
+        //     });
     }
 
     productDialog(){
         this.dialogRef = this.dialog.open(DialogComponent, {
-            panelClass: 'product-dialog'
+            panelClass: 'product-dialog',
         });
         this.dialogRef.afterClosed()
             .subscribe(response => {
-
+              this.rows.push(response);
+              console.log(this.rows);
             });
     }
 }

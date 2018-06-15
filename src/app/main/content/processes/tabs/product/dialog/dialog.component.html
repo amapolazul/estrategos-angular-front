@@ -2,7 +2,7 @@
     <mat-toolbar matDialogTitle class="mat-accent m-0">
         <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
             <span class="title dialog-title">Productos / Servicios del proceso</span>
-            <button mat-button class="mat-icon-button" (click)="dialogRef.close()" aria-label="Close dialog">
+            <button mat-button class="mat-icon-button" aria-label="Close dialog">
                 <mat-icon>close</mat-icon>
             </button>
         </div>
@@ -12,23 +12,23 @@
         <form name="composeForm" [formGroup]="composeForm" class="compose-form" fxLayout="column" fxFlex>
 
             <mat-form-field>
-                <input matInput name="bcc" placeholder="Proceso" formControlName="bcc" type="email">
+                <input matInput name="proceso_Nombre" placeholder="Proceso" formControlName="proceso_Nombre">
             </mat-form-field>
 
             <mat-form-field>
-                <input matInput name="subject" placeholder="Producto / servicio" formControlName="subject">
+                <input matInput name="producto_Servicio_nombre" placeholder="Producto / servicio" formControlName="producto_Servicio_nombre">
             </mat-form-field>
 
             <mat-form-field>
-                <textarea matInput name="message" placeholder="Caracteristicas" formControlName="message" rows="4">
+                <textarea matInput name="producto_Caracteristicas" placeholder="Caracteristicas" formControlName="producto_Caracteristicas" rows="4">
                 </textarea>
             </mat-form-field>
             <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="space-between center">
                 <div>
-                    <button mat-raised-button class="save-button mat-accent" aria-label="Guardar">
+                    <button mat-raised-button class="save-button mat-accent" aria-label="Guardar" (click)="guardar()">
                         Guardar
                     </button>
-                    <button mat-raised-button class="save-button mat-accent" aria-label="Cancelar">
+                    <button mat-raised-button class="save-button mat-accent" aria-label="Cancelar" (click)="salir()">
                         Cancelar
                     </button>
                 </div>
@@ -36,3 +36,4 @@
         </form>
         <div>
 </div>
+    </div></div>

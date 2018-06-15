@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material';
 import { CharacterizationDialogComponent } from './dialog/characterization-dialog.component';
@@ -8,7 +8,7 @@ import { CharacterizationDialogComponent } from './dialog/characterization-dialo
     templateUrl: './characterization.component.html',
     styleUrls  : ['./characterization.component.scss']
 })
-export class CharacterizationComponent
+export class CharacterizationComponent implements OnInit
 {
     rows: any[];
     dialogRef: any;
@@ -21,11 +21,11 @@ export class CharacterizationComponent
     }
 
     ngOnInit(){
-        this.http.get('api/product')
-            .subscribe((product: any) => {
-                this.rows = product;
-                this.loadingIndicator = false;
-            });
+        // this.http.get('api/product')
+        //     .subscribe((product: any) => {
+        //         this.rows = product;
+        //         this.loadingIndicator = false;
+        //     });
     }
 
     characterizationDialog(){
