@@ -12,20 +12,30 @@
 
                 <div class=" mat-elevation-z8">
 
-                    <ngx-datatable class="material" [rows]="rows" [loadingIndicator]="loadingIndicator" [columnMode]="'force'" [headerHeight]="48"
-                        [footerHeight]="56" [rowHeight]="'auto'" [scrollbarH]="true" [reorderable]="reorderable" [selectionType]="'checkbox'"
-                        [limit]="10">
+                  <ngx-datatable class="material"
+                                 [rows]="ratingTypes"
+                                 [loadingIndicator]="loadingIndicator"
+                                 [columnMode]="'force'"
+                                 [headerHeight]="48"
+                                 [footerHeight]="56"
+                                 [rowHeight]="'auto'"
+                                 [scrollbarH]="true"
+                                 [reorderable]="reorderable"
+                                 [limit]="10">
 
-                        <ngx-datatable-column name="Calificación del riesgo" prop="calificacion">
+                        <ngx-datatable-column name="Calificación del riesgo" prop="nombre_calificacion_riesgo">
                         </ngx-datatable-column>
 
-                        <ngx-datatable-column name="Rango mínimo" prop="minimo">
+                        <ngx-datatable-column name="Rango mínimo" prop="rango_minimo">
                         </ngx-datatable-column>
 
-                        <ngx-datatable-column name="Rango máximo" prop="maximo">
+                        <ngx-datatable-column name="Rango máximo" prop="rango_maximo">
                         </ngx-datatable-column>
 
-                        <ngx-datatable-column name="Acción a tomar" prop="accion">
+                        <ngx-datatable-column name="Rango máximo" prop="color">
+                        </ngx-datatable-column>
+
+                        <ngx-datatable-column name="Acción a tomar" prop="accion_tomar">
                         </ngx-datatable-column>
 
                     </ngx-datatable>

@@ -14,7 +14,7 @@ import { TypesRiskService } from './content/system-tables/types/service/types-ri
 import { ProbabilityRiskService } from './content/system-tables/probability/service/probability-risk.service';
 import { ImpactRiskService } from './content/system-tables/impact/service/impact-risk.service';
 import { CausesRiskService } from './content/system-tables/causes/service/causes-risk.service';
-
+import { RatingRiskService } from './content/system-tables/rating/service/rating-risk.service';
 
 
 @NgModule({
@@ -42,7 +42,8 @@ import { CausesRiskService } from './content/system-tables/causes/service/causes
         TypesRiskService,
         ProbabilityRiskService,
         ImpactRiskService,
-        CausesRiskService
+        CausesRiskService,
+        RatingRiskService
     ],
     exports     : [
         FuseMainComponent

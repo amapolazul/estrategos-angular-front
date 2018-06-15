@@ -6,7 +6,7 @@ import { ImpactRiskModel } from '../model/impact-risk.model';
 
 @Injectable()
 export class ImpactRiskService extends BaseService {
-  TypesRiskModel
+
   serviceUrl: string;
 
   constructor(private http: HttpClient) {
