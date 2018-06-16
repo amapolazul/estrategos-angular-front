@@ -21,9 +21,10 @@ export class ProductoServicio {
 
 export class Caracterizacion {
   caraceterizacion_id?: number;
-  proceso_Id: number;
+  proceso_Id?: number;
   procedimiento_Nombre: string;
   procedimiento_Codigo: string;
+  procedimiento_Objetivo: string;
   documentosCaracterizacion: Array<DocumentoCaracterizacion>;
 }
 

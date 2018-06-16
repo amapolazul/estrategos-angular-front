@@ -4,7 +4,7 @@ import {MaterialModule} from '../../../core/modules/material.module';
 import {ProcessesService} from './services/processes.service';
 import {ResponsablesService} from '../responsables/responsables.service';
 import {Responsable} from '../responsables/models/responsables.model';
-import {Proceso} from './models/process.model';
+import {Proceso, ProductoServicio} from './models/process.model';
 
 @Component({
   selector: 'processes-classes',
@@ -13,10 +13,10 @@ import {Proceso} from './models/process.model';
 })
 export class ProcessesComponent implements OnInit{
 
-  responsables: Array<Responsable>;
   process: Proceso;
 
   @ViewChild('process') processComponent;
+  @ViewChild('products') productComponent;
 
 
   constructor(private formBuilder: FormBuilder,
@@ -29,6 +29,8 @@ export class ProcessesComponent implements OnInit{
 
   processData() {
     const proceso = <Proceso>this.processComponent.processForm.getRawValue();
+    const productsList = <Array<ProductoServicio>>this.productComponent.rows;
+    console.log(productsList);
     console.log(proceso);
   }
 

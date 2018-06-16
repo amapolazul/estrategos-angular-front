@@ -22,6 +22,13 @@
                         </mat-error>
                     </mat-form-field>
 
+                  <mat-form-field fxFlex="100">
+                    <textarea matInput placeholder="Descripción" formControlName="proceso_Descripcion" required> </textarea>
+                    <mat-error *ngIf="formErrors.proceso_Codigo.required">
+                      Código proceso es requerido !
+                    </mat-error>
+                  </mat-form-field>
+
                     <mat-form-field fxFlex="100">
                         <mat-select placeholder="Tipo de proceso" formControlName="proceso_Tipo" required>
                             <mat-option [value]="'001'">

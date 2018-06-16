@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {Responsable} from '../../../responsables/models/responsables.model';
@@ -18,7 +18,7 @@ export class ProcessComponent implements OnInit {
   responsables: Observable<Responsable[]>;
   processForm: FormGroup;
 
-  @Input() process: Proceso;
+  @Output() process: Proceso;
 
   constructor(private formBuilder: FormBuilder,
               private http: HttpClient,
@@ -28,6 +28,7 @@ export class ProcessComponent implements OnInit {
       proceso_Nombre: {},
       proceso_Codigo: {},
       proceso_Tipo: {},
+      proceso_Descripcion: {},
       proceso_Responsable_Id: {},
       proceso_Documento: {}
     };
@@ -39,11 +40,16 @@ export class ProcessComponent implements OnInit {
       proceso_Nombre: ['', Validators.required],
       proceso_Codigo: ['', Validators.required],
       proceso_Tipo: ['', Validators.required],
+      proceso_Descripcion: ['', Validators.required],
       proceso_Responsable_Id: ['', Validators.required],
       proceso_Documento: ['', Validators.required]
     });
 
     this.responsables = this.responsablesService.getAllResponsables();
+
+  }
+
+  getProcessName(value) {
 
   }
 }

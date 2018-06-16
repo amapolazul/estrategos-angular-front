@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material';
 import { DialogComponent } from '../product/dialog/dialog.component';
+import {FormType} from '../../../commons/form-type.enum';
 
 @Component({
     selector   : 'product-classes',
@@ -15,6 +16,7 @@ export class ProductComponent implements OnInit
     loadingIndicator = true;
     reorderable = true;
 
+    selected = [];
 
     constructor(private http: HttpClient,public dialog: MatDialog)
     {
@@ -23,12 +25,24 @@ export class ProductComponent implements OnInit
 
     ngOnInit(){
 
-      this.rows = new Array<any>();
+      this.rows = [];
         // this.http.get('api/product')
         //     .subscribe((product: any) => {
         //         this.rows = product;
         //         this.loadingIndicator = false;
         //     });
+    }
+
+    onSelect({ selected }) {
+      const product = this.selected[0];
+      this.dialogRef = this.dialog.open(DialogComponent, {
+        panelClass: 'product-dialog',
+        data : {
+          formType : FormType.edit,
+          product : product
+        }
+      });
+      console.log('Select Event', selected, this.selected);
     }
 
     productDialog(){
@@ -38,7 +52,35 @@ export class ProductComponent implements OnInit
         this.dialogRef.afterClosed()
             .subscribe(response => {
               this.rows.push(response);
-              console.log(this.rows);
+              this.rows = [...this.rows];
+              this.loadingIndicator = false;
             });
+    }
+
+    delete(row, rowIndex) {
+      if (rowIndex > -1) {
+        this.rows.splice(rowIndex, 1);
+        this.rows = [...this.rows];
+      }
+    }
+
+    edit(row, rowIndex){
+      console.log(rowIndex);
+      const product = row;
+      this.dialogRef = this.dialog.open(DialogComponent, {
+        panelClass: 'product-dialog',
+        data : {
+          formType : FormType.edit,
+          product : product
+        }
+      });
+
+      this.dialogRef.afterClosed()
+        .subscribe(response => {
+          console.log(response);
+          this.rows[rowIndex] = response;
+          this.rows = [...this.rows];
+          this.loadingIndicator = false;
+        });
     }
 }
