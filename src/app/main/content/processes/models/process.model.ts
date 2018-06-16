@@ -34,7 +34,7 @@ export class DocumentoCaracterizacion {
   procedimiento_Documento_Nombre: string;
   procedimiento_Documento_Descripcion: string;
   procedimiento_Documento_Codigo: string;
-  procedimiento_Documento_Arch: string
+  procedimiento_Documento_Arch: string;
 }
 
 export class ProcesoCreateRequest {

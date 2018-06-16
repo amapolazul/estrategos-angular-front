@@ -9,39 +9,45 @@
     </mat-toolbar>
 
     <div mat-dialog-content class="p-24 m-0">
-        <form name="composeForm" [formGroup]="composeForm" class="compose-form" fxLayout="column" fxFlex>
+        <mat-form-field>
+          <input matInput name="procedimiento" placeholder="Procedimiento"  type="text" [value]="caracterizacion.procedimiento_Nombre" disabled>
+        </mat-form-field>
 
-            <mat-form-field>
-                <input matInput name="bcc" placeholder="Proceso" formControlName="proceso" type="email">
-            </mat-form-field>
-
-          <mat-form-field>
-            <input matInput name="bcc" placeholder="Procedimiento" formControlName="procedimiento" type="text">
-          </mat-form-field>
+        <mat-form-field>
+          <input matInput name="procedimiento_cod" placeholder="Código procedimiento" [value]="caracterizacion.procedimiento_Codigo" type="text" disabled>
+        </mat-form-field>
 
           <mat-form-field>
-            <input matInput name="bcc" placeholder="Código procedimiento" formControlName="codigo_procedimiento" type="text">
+              <textarea matInput name="message" placeholder="Objetivo" [value]="caracterizacion.procedimiento_Objetivo" rows="4" disabled>
+              </textarea>
           </mat-form-field>
 
-            <mat-form-field>
-                <textarea matInput name="message" placeholder="Objetivo" formControlName="message" rows="4">
-                </textarea>
-            </mat-form-field>
+        <ngx-datatable class="material" [rows]="rows" [loadingIndicator]="loadingIndicator" [columnMode]="'force'" [headerHeight]="48"
+                       [footerHeight]="56" [rowHeight]="'auto'" [scrollbarH]="true" [reorderable]="reorderable" [selectionType]="'checkbox'"
+                       [limit]="10">
 
-          <mat-form-field>
-            <input matInput name="bcc" placeholder="Documento soporte" formControlName="documento_soporte" type="text">
-          </mat-form-field>
 
-            <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="space-between center">
-                <div>
-                    <button mat-raised-button class="save-button mat-accent" aria-label="Guardar">
-                        Guardar
-                    </button>
-                    <button mat-raised-button class="save-button mat-accent" aria-label="Cancelar">
-                        Cancelar
-                    </button>
-                </div>
-            </div>
-        </form>
-        <div>
+          <ngx-datatable-column name="Acciones" [sortable]="false">
+            <ng-template let-row="row" let-rowIndex="rowIndex" let-id="value" ngx-datatable-cell-template>
+              <button class="btn btn-sm btn-danger" (click)="delete(row, rowIndex)">
+                <mat-icon _ngcontent-c71="" class="secondary-text s-48 mat-icon material-icons" role="img" aria-hidden="true">delete</mat-icon>
+              </button>
+              <button class="btn btn-sm btn-danger" (click)="edit(row, rowIndex)">
+                <mat-icon _ngcontent-c71="" class="secondary-text s-48 mat-icon material-icons" role="img" aria-hidden="true">edit</mat-icon>
+              </button>
+              <button class="btn btn-sm btn-danger" (click)="attachFiles(row, rowIndex)">
+                <mat-icon _ngcontent-c33="" class="secondary-text s-48 mat-icon material-icons" role="img" aria-hidden="true">attach_file</mat-icon>
+              </button>
+            </ng-template>
+          </ngx-datatable-column>
+
+
+          <ngx-datatable-column name="Procedimiento" prop="procedimiento_Documento_Nombre">
+          </ngx-datatable-column>
+
+          <ngx-datatable-column name="Código procedimiento" prop="procedimiento_Documento_Codigo">
+          </ngx-datatable-column>
+
+        </ngx-datatable>
+    </div>
 </div>
