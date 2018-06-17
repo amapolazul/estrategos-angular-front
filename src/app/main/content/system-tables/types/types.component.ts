@@ -25,6 +25,10 @@ export class SystemTypesComponent implements OnInit {
           });
     }
 
+    saveTypeRisk(){
+
+    }
+
     typesDialog(){
       this.dialogRef = this.dialog.open(TypesDialogComponent, {
         panelClass: 'types-dialog'
