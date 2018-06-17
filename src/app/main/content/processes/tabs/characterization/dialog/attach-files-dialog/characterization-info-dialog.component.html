@@ -1,0 +1,53 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">Caracterización del proceso / Subproceso </span>
+            <button mat-button class="mat-icon-button" (click)="dialogRef.close()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 m-0">
+        <mat-form-field>
+          <input matInput name="procedimiento" placeholder="Procedimiento"  type="text" [value]="caracterizacion.procedimiento_Nombre" disabled>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput name="procedimiento_cod" placeholder="Código procedimiento" [value]="caracterizacion.procedimiento_Codigo" type="text" disabled>
+        </mat-form-field>
+
+          <mat-form-field>
+              <textarea matInput name="message" placeholder="Objetivo" [value]="caracterizacion.procedimiento_Objetivo" rows="4" disabled>
+              </textarea>
+          </mat-form-field>
+
+        <ngx-datatable class="material" [rows]="rows" [loadingIndicator]="loadingIndicator" [columnMode]="'force'" [headerHeight]="48"
+                       [footerHeight]="56" [rowHeight]="'auto'" [scrollbarH]="true" [reorderable]="reorderable" [selectionType]="'checkbox'"
+                       [limit]="10">
+
+
+          <ngx-datatable-column name="Acciones" [sortable]="false">
+            <ng-template let-row="row" let-rowIndex="rowIndex" let-id="value" ngx-datatable-cell-template>
+              <button class="btn btn-sm btn-danger" (click)="delete(row, rowIndex)">
+                <mat-icon _ngcontent-c71="" class="secondary-text s-48 mat-icon material-icons" role="img" aria-hidden="true">delete</mat-icon>
+              </button>
+              <button class="btn btn-sm btn-danger" (click)="edit(row, rowIndex)">
+                <mat-icon _ngcontent-c71="" class="secondary-text s-48 mat-icon material-icons" role="img" aria-hidden="true">edit</mat-icon>
+              </button>
+              <button class="btn btn-sm btn-danger" (click)="attachFiles(row, rowIndex)">
+                <mat-icon _ngcontent-c33="" class="secondary-text s-48 mat-icon material-icons" role="img" aria-hidden="true">attach_file</mat-icon>
+              </button>
+            </ng-template>
+          </ngx-datatable-column>
+
+
+          <ngx-datatable-column name="Procedimiento" prop="procedimiento_Documento_Nombre">
+          </ngx-datatable-column>
+
+          <ngx-datatable-column name="Código procedimiento" prop="procedimiento_Documento_Codigo">
+          </ngx-datatable-column>
+
+        </ngx-datatable>
+    </div>
+</div>

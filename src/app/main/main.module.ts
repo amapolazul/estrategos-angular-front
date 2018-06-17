@@ -11,11 +11,11 @@ import { FuseToolbarModule } from 'app/main/toolbar/toolbar.module';
 import { FuseMainComponent } from './main.component';
 import { ProcessesService } from './content/processes/services/processes.service';
 import { TypesRiskService } from './content/system-tables/types/service/types-risk.service';
+import { ResponsablesService } from './content/responsables/responsables.service';
 import { ProbabilityRiskService } from './content/system-tables/probability/service/probability-risk.service';
 import { ImpactRiskService } from './content/system-tables/impact/service/impact-risk.service';
 import { CausesRiskService } from './content/system-tables/causes/service/causes-risk.service';
 import { RatingRiskService } from './content/system-tables/rating/service/rating-risk.service';
-
 
 @NgModule({
     declarations: [
@@ -40,6 +40,7 @@ import { RatingRiskService } from './content/system-tables/rating/service/rating
     providers: [
         ProcessesService,
         TypesRiskService,
+        ResponsablesService,
         ProbabilityRiskService,
         ImpactRiskService,
         CausesRiskService,

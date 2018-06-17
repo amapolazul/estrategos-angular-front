@@ -14,11 +14,11 @@ export const navigation = [
                 'url'  : '/home',
             },
             {
-                'id': 'cargar-procesos',
+                'id': 'procesos',
                 'title': 'Crear procesos',
                 'type': 'item',
                 'icon': 'create_new_folder',
-                'url': '/cargar-procesos'
+                'url': '/procesos'
             },
           /*
           {
