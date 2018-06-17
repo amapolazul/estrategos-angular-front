@@ -23,25 +23,28 @@
                        [reorderable]="reorderable"
                        [limit]="10">
 
+          <ngx-datatable-column name="Acciones" [width]="130" [canAutoResize]="false" [sortable]="false">
+            <ng-template let-row="row" let-rowIndex="rowIndex" let-id="value" ngx-datatable-cell-template>
+              <button class="btn btn-sm btn-danger" (click)="edit(row, rowIndex)">
+                <mat-icon _ngcontent-c71="" class="secondary-text s-26 mat-icon material-icons" role="img" aria-hidden="true">edit</mat-icon>
+              </button>
+
+              <button class="btn btn-sm btn-danger" (click)="delete(row, rowIndex)">
+                <mat-icon _ngcontent-c71="" class="secondary-text s-26 mat-icon material-icons" role="img" aria-hidden="true">delete</mat-icon>
+              </button>
+            </ng-template>
+          </ngx-datatable-column>
+
           <ngx-datatable-column name="Productos / Servicios" prop="producto_Servicio_nombre">
           </ngx-datatable-column>
 
           <ngx-datatable-column name="Características del Producto / Servicio" prop="producto_Caracteristicas">
           </ngx-datatable-column>
 
-          <ngx-datatable-column name="Acciones" [sortable]="false">
-            <ng-template let-row="row" let-rowIndex="rowIndex" let-id="value" ngx-datatable-cell-template>
-              <button class="btn btn-sm btn-danger" (click)="delete(row, rowIndex)">
-                <mat-icon _ngcontent-c71="" class="secondary-text s-48 mat-icon material-icons" role="img" aria-hidden="true">delete</mat-icon>
-              </button>
-              <button class="btn btn-sm btn-danger" (click)="edit(row, rowIndex)">
-                <mat-icon _ngcontent-c71="" class="secondary-text s-48 mat-icon material-icons" role="img" aria-hidden="true">edit</mat-icon>
-              </button>
-            </ng-template>
-          </ngx-datatable-column>
         </ngx-datatable>
 
       </div>
     </div>
 
   </div>
+</div>
