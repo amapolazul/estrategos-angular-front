@@ -18,8 +18,8 @@ export class CausesRiskService extends BaseService {
     return this.http.get<CausesRiskModel[]>(this.serviceUrl + '/');
   }
 
-  postCausesRisk(): Observable<CausesRiskModel[]> {
-    return this.http.get<CausesRiskModel[]>(this.serviceUrl + '/');
+  postCausesRisk(causesRiskModel: CausesRiskModel): Observable<string> {
+    return this.http.post<string>(this.serviceUrl, causesRiskModel);
   }
 
   getResourceEndpoint(): string {
