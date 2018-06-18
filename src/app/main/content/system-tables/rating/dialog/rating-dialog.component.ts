@@ -39,13 +39,13 @@ export class RatingDialogComponent implements OnInit {
   }
 
   saveRatingRisk() {
-    const tipeRisk = <RatingRiskModel> this.composeForm.getRawValue();
-    this.saveDataRatingRisk(tipeRisk);
-    this.dialogRef.close(tipeRisk);
+    const ratingRisk = <RatingRiskModel> this.composeForm.getRawValue();
+    this.saveDataRatingRisk(ratingRisk);
+    this.dialogRef.close(ratingRisk);
   }
 
-  saveDataRatingRisk(riskTypes) {
-    this.ratingRiskService.postRatingRisk(riskTypes).subscribe((data: any) => {
+  saveDataRatingRisk(ratingRisk) {
+    this.ratingRiskService.postRatingRisk(ratingRisk).subscribe((data: any) => {
       this.restData = data;
       console.log(this.restData);
     });

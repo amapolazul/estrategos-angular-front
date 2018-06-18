@@ -18,8 +18,8 @@ export class ProbabilityRiskService extends BaseService {
     return this.http.get<ProbabilityRiskModel[]>(this.serviceUrl + '/');
   }
 
-  postProbabilityRisk(): Observable<ProbabilityRiskModel[]> {
-    return this.http.get<ProbabilityRiskModel[]>(this.serviceUrl + '/');
+  postProbabilityRisk(probabilityRiskModel: ProbabilityRiskModel): Observable<string> {
+    return this.http.post<string>(this.serviceUrl, probabilityRiskModel);
   }
 
   getResourceEndpoint(): string {

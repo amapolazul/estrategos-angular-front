@@ -12,23 +12,23 @@
     <form name="composeForm" [formGroup]="composeForm" class="compose-form" fxLayout="column" fxFlex>
 
       <mat-form-field>
-        <input matInput name="impact" placeholder="Impacto" formControlName="bcc" type="text">
+        <input matInput name="impact" placeholder="Impacto" formControlName="probabilidad" type="text">
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput name="points" placeholder="Puntaje" formControlName="points">
+        <input matInput name="points" placeholder="Puntaje" formControlName="puntaje">
       </mat-form-field>
 
       <mat-form-field>
-                <textarea matInput name="description" placeholder="Descripcion" formControlName="description" rows="4">
+                <textarea matInput name="description" placeholder="Descripcion" formControlName="descripcion" rows="4">
                 </textarea>
       </mat-form-field>
       <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="space-between center">
         <div>
-          <button mat-raised-button class="save-button mat-accent" aria-label="Guardar">
+          <button mat-raised-button class="save-button mat-accent" aria-label="Guardar" (click)="saveProbabilityRisk()">
             Guardar
           </button>
-          <button mat-raised-button class="save-button mat-accent" aria-label="Cancelar">
+          <button mat-raised-button class="save-button mat-accent" aria-label="Cancelar" (click)="closeModal()">
             Cancelar
           </button>
         </div>

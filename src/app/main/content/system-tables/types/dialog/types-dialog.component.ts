@@ -1,8 +1,8 @@
-import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { TypesRiskModel } from '../model/types-risk.model';
-import { TypesRiskService } from '../../../system-tables/types/service/types-risk.service';
+import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {TypesRiskModel} from '../model/types-risk.model';
+import {TypesRiskService} from '../../../system-tables/types/service/types-risk.service';
 
 
 @Component({
@@ -29,7 +29,7 @@ export class TypesDialogComponent implements OnInit {
     this.composeForm = this.formBuilder.group({
       tipo_riesgo: ['']
     });
-    if ( this.data ) {
+    if (this.data) {
       this.typesRiskModel = this.data.product;
       this.dataForm();
     }
@@ -37,7 +37,7 @@ export class TypesDialogComponent implements OnInit {
 
   saveRisk() {
     const tipeRisk = <TypesRiskModel> this.composeForm.getRawValue();
-    this.saveTypeRisk(tipeRisk)
+    this.saveTypeRisk(tipeRisk);
     this.dialogRef.close(tipeRisk);
   }
 
