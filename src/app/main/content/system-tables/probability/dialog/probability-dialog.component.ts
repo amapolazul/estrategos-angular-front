@@ -53,9 +53,9 @@ export class ProbabilityDialogComponent implements OnInit {
 
   private dataForm() {
     this.composeForm.setValue({
-      tipo_riesgo: this.probabilityRiskModel.probabilidad,
-      tipo_riesgo: this.probabilityRiskModel.puntaje,
-      tipo_riesgo: this.probabilityRiskModel.descripcion
+      probabilidad: this.probabilityRiskModel.probabilidad,
+      puntaje: this.probabilityRiskModel.puntaje,
+      descripcion: this.probabilityRiskModel.descripcion
     });
   }
 

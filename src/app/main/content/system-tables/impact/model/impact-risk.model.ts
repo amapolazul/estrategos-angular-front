@@ -3,7 +3,7 @@
  */
 export class ImpactRiskModel {
   id?: number;
-  imapacto: string;
+  impacto: string;
   puntaje: string;
   descripcion: string;
 
