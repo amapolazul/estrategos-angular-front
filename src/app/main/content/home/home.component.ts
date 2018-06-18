@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
 export class HomeComponent implements AfterViewInit {
 
   tree: TreeModel = {
-    value: 'Programming languages by programming paradigm',
+    value: 'Procesos / Sub-procesos',
     id: 1,
     children: [],
     settings : {

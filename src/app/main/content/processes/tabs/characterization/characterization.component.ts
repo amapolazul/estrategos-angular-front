@@ -56,8 +56,10 @@ export class CharacterizationComponent implements OnInit {
     });
     this.dialogRef.afterClosed()
       .subscribe(response => {
+        this.loadingIndicator = true;
         this.rows[rowIndex] = response;
         this.rows = [...this.rows];
+        this.loadingIndicator = false;
       });
   }
 

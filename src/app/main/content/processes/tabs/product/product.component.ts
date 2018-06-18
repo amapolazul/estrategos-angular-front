@@ -33,18 +33,6 @@ export class ProductComponent implements OnInit
         //     });
     }
 
-    onSelect({ selected }) {
-      const product = this.selected[0];
-      this.dialogRef = this.dialog.open(DialogComponent, {
-        panelClass: 'product-dialog',
-        data : {
-          formType : FormType.edit,
-          product : product
-        }
-      });
-      console.log('Select Event', selected, this.selected);
-    }
-
     productDialog(){
         this.dialogRef = this.dialog.open(DialogComponent, {
             panelClass: 'product-dialog',
