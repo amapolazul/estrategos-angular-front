@@ -19,6 +19,7 @@ export class SystemRatingComponent implements OnInit{
   }
 
   ngOnInit(){
+    this.ratingTypes = [];
     this.ratingRiskService.getRatingRisk().subscribe((data: any) => {
       this.ratingTypes = data;
       this.loadingIndicator = false;
@@ -31,7 +32,9 @@ export class SystemRatingComponent implements OnInit{
     });
     this.dialogRef.afterClosed()
       .subscribe(response => {
-
+        this.ratingTypes.push(response);
+        this.ratingTypes = [...this.ratingTypes];
+        this.loadingIndicator = false;
       });
   }
 }

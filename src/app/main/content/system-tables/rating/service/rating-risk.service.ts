@@ -18,8 +18,8 @@ export class RatingRiskService extends BaseService {
     return this.http.get<RatingRiskModel[]>(this.serviceUrl + '/');
   }
 
-  postRatingRisk(): Observable<RatingRiskModel[]> {
-    return this.http.get<RatingRiskModel[]>(this.serviceUrl + '/');
+  postRatingRisk(ratingRiskModel: RatingRiskModel): Observable<string> {
+    return this.http.post<string>(this.serviceUrl, ratingRiskModel);
   }
 
   getResourceEndpoint(): string {

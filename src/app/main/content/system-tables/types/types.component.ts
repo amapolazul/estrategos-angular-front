@@ -10,7 +10,6 @@ import {TypesRiskService} from '../../system-tables/types/service/types-risk.ser
 })
 export class SystemTypesComponent implements OnInit {
   riskTypes: any[];
-  restData: any;
   dialogRef: any;
   loadingIndicator = true;
   reorderable = true;

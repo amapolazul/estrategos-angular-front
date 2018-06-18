@@ -3,10 +3,12 @@
  */
 export class RatingRiskModel {
   id?: number;
-  rango_minimo: string;
-  rango_maximo: string;
-  color_alerta: string;
-  accion: string;
+  nombre_calificacion_riesgo: string;
+  rango_minimo: number;
+  rango_maximo: number;
+  color: string;
+  accion_tomar: string;
+
 }
 
 export class RatingRiskResponse {
