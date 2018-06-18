@@ -2,10 +2,10 @@ import { BaseService } from '../../../commons/base-service.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { CausesRiskModel } from '../model/causes-risk.model';
+import { RatingRiskModel } from '../model/rating-risk.model';
 
 @Injectable()
-export class CausesRiskService extends BaseService {
+export class RatingRiskService extends BaseService {
 
   serviceUrl: string;
 
@@ -14,12 +14,12 @@ export class CausesRiskService extends BaseService {
     this.serviceUrl = this.getResourceEndpoint();
   }
 
-  getCausesRisk(): Observable<CausesRiskModel[]> {
-    return this.http.get<CausesRiskModel[]>(this.serviceUrl + '/');
+  getRatingRisk(): Observable<RatingRiskModel[]> {
+    return this.http.get<RatingRiskModel[]>(this.serviceUrl + '/');
   }
 
-  postCausesRisk(causesRiskModel: CausesRiskModel): Observable<string> {
-    return this.http.post<string>(this.serviceUrl, causesRiskModel);
+  postRatingRisk(ratingRiskModel: RatingRiskModel): Observable<string> {
+    return this.http.post<string>(this.serviceUrl, ratingRiskModel);
   }
 
   getResourceEndpoint(): string {
@@ -27,6 +27,6 @@ export class CausesRiskService extends BaseService {
   }
 
   getResource(): string {
-    return 'causas-riesgos';
+    return 'calificacion-riesgo';
   }
 }

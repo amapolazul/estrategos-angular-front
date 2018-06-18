@@ -6,7 +6,7 @@ import { ProbabilityRiskModel } from '../model/probability-risk.model';
 
 @Injectable()
 export class ProbabilityRiskService extends BaseService {
-  TypesRiskModel
+
   serviceUrl: string;
 
   constructor(private http: HttpClient) {
@@ -18,8 +18,8 @@ export class ProbabilityRiskService extends BaseService {
     return this.http.get<ProbabilityRiskModel[]>(this.serviceUrl + '/');
   }
 
-  postProbabilityRisk(): Observable<ProbabilityRiskModel[]> {
-    return this.http.get<ProbabilityRiskModel[]>(this.serviceUrl + '/');
+  postProbabilityRisk(probabilityRiskModel: ProbabilityRiskModel): Observable<string> {
+    return this.http.post<string>(this.serviceUrl, probabilityRiskModel);
   }
 
   getResourceEndpoint(): string {

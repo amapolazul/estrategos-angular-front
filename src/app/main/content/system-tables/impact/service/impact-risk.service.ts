@@ -4,9 +4,10 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { ImpactRiskModel } from '../model/impact-risk.model';
 
+
 @Injectable()
 export class ImpactRiskService extends BaseService {
-  TypesRiskModel
+
   serviceUrl: string;
 
   constructor(private http: HttpClient) {
@@ -18,8 +19,8 @@ export class ImpactRiskService extends BaseService {
     return this.http.get<ImpactRiskModel[]>(this.serviceUrl + '/');
   }
 
-  postImpactRisk(): Observable<ImpactRiskModel[]> {
-    return this.http.get<ImpactRiskModel[]>(this.serviceUrl + '/');
+  postImpactRisk(impactRiskModel: ImpactRiskModel): Observable<string> {
+    return this.http.post<string>(this.serviceUrl, impactRiskModel);
   }
 
   getResourceEndpoint(): string {

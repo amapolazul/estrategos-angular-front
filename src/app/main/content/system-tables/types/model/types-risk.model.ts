@@ -2,6 +2,7 @@
  * Types Risk Model
  */
 export class TypesRiskModel {
+  id?: number;
   tipo_riesgo: string;
 }
 

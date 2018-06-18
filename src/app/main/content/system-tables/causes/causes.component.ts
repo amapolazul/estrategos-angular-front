@@ -36,7 +36,9 @@ export class SystemCausesComponent implements OnInit {
     });
     this.dialogRef.afterClosed()
       .subscribe(response => {
-
+        this.causesRisk.push(response);
+        this.causesRisk = [...this.causesRisk];
+        this.loadingIndicator = false;
       });
   }
 }

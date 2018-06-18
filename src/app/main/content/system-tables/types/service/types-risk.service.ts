@@ -2,7 +2,7 @@ import { BaseService } from '../../../commons/base-service.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { TypesRiskModel } from '../model/types-risk.model';
+import {TypesRiskModel, TypesRiskResponse} from '../model/types-risk.model';
 
 @Injectable()
 export class TypesRiskService extends BaseService {
@@ -18,8 +18,8 @@ export class TypesRiskService extends BaseService {
     return this.http.get<TypesRiskModel[]>(this.serviceUrl + '/');
   }
 
-  postTypeRisk(): Observable<TypesRiskModel[]> {
-    return this.http.get<TypesRiskModel[]>(this.serviceUrl + '/');
+  postTypeRisk(typeRisk: TypesRiskModel): Observable<string> {
+    return this.http.post<string>(this.serviceUrl, typeRisk);
   }
 
   getResourceEndpoint(): string {

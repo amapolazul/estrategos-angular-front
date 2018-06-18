@@ -23,7 +23,6 @@ export class SystemImpactComponent implements OnInit{
 
   ngOnInit(){
     this.probabilityRiskService.getImpactRisk().subscribe((data: any) => {
-      console.log("bb");
       this.impactRisk = data;
       console.log(this.impactRisk);
       this.loadingIndicator = false;
@@ -36,7 +35,9 @@ export class SystemImpactComponent implements OnInit{
     });
     this.dialogRef.afterClosed()
       .subscribe(response => {
-
+        this.impactRisk.push(response);
+        this.impactRisk = [...this.impactRisk];
+        this.loadingIndicator = false;
       });
   }
 }

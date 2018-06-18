@@ -15,7 +15,7 @@ import { ResponsablesService } from './content/responsables/responsables.service
 import { ProbabilityRiskService } from './content/system-tables/probability/service/probability-risk.service';
 import { ImpactRiskService } from './content/system-tables/impact/service/impact-risk.service';
 import { CausesRiskService } from './content/system-tables/causes/service/causes-risk.service';
-
+import { RatingRiskService } from './content/system-tables/rating/service/rating-risk.service';
 
 @NgModule({
     declarations: [
@@ -43,7 +43,8 @@ import { CausesRiskService } from './content/system-tables/causes/service/causes
         ResponsablesService,
         ProbabilityRiskService,
         ImpactRiskService,
-        CausesRiskService
+        CausesRiskService,
+        RatingRiskService
     ],
     exports     : [
         FuseMainComponent
