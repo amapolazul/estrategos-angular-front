@@ -29,6 +29,7 @@ export class DialogComponent implements OnInit
       this.composeForm = this.formBuilder.group({
         proceso_Nombre: [''],
         producto_Servicio_nombre: [''],
+        producto_Servicio_Codigo: [''],
         producto_Caracteristicas: ['']
       });
       if ( this.data && this.data.formType === FormType.edit ) {
@@ -42,6 +43,7 @@ export class DialogComponent implements OnInit
     this.composeForm.setValue({
       proceso_Nombre: this.productoServicio.proceso_Nombre,
       producto_Servicio_nombre: this.productoServicio.producto_Servicio_nombre || '',
+      producto_Servicio_Codigo: this.productoServicio.producto_Servicio_Codigo || '',
       producto_Caracteristicas: this.productoServicio.producto_Caracteristicas || ''
     });
   }

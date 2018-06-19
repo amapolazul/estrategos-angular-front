@@ -53,8 +53,9 @@ export class CharacterizationDialogComponent implements OnInit
     }
 
     guardar() {
-      const producto = <Caracterizacion> this.composeForm.getRawValue();
-      this.dialogRef.close(producto);
+      const caracterizacion = <Caracterizacion> this.composeForm.getRawValue();
+      caracterizacion.documentosCaracterizacion = [];
+      this.dialogRef.close(caracterizacion);
     }
 
 }

@@ -5,16 +5,19 @@ export class Proceso {
   proceso_Id?: number;
   proceso_Padre_Id?: number;
   proceso_Nombre: string;
+  proceso_Descripcion: string;
   proceso_Codigo: string;
-  proceso_Tipo: string;
+  proceso_Tipo: number;
   proceso_Responsable_Id: number;
-  // proceso_Documento: File;
+  proceso_Documento: string;
+  //proceso_Documento: File;
 }
 
 export class ProductoServicio {
   producto_Servicio_Id?: number;
-  proceso_Nombre?: string;
-  proceso_Id: number;
+  proceso_Id?: number;
+  proceso_Nombre: string;
+  producto_Servicio_Codigo: string;
   producto_Servicio_nombre: string;
   producto_Caracteristicas: string;
 }
@@ -25,7 +28,8 @@ export class Caracterizacion {
   procedimiento_Nombre: string;
   procedimiento_Codigo: string;
   procedimiento_Objetivo: string;
-  documentosCaracterizacion: Array<DocumentoCaracterizacion>;
+  documentosCaracterizacion: Array<DocumentoCaracterizacion> = [];
+
 }
 
 export class DocumentoCaracterizacion {
@@ -41,6 +45,14 @@ export class ProcesoCreateRequest {
   proceso: Proceso;
   productoServicios: Array<ProductoServicio>;
   caracterizaciones: Array<Caracterizacion>;
+
+  constructor(proceso: Proceso,
+              productoServicios: Array<ProductoServicio>,
+              caracterizaciones: Array<Caracterizacion>) {
+    this.proceso = proceso;
+    this.productoServicios = productoServicios;
+    this.caracterizaciones = caracterizaciones;
+  }
 }
 
 export class ProcesoTreeResponse {
