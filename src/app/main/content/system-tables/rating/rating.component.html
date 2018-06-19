@@ -23,6 +23,17 @@
                                  [reorderable]="reorderable"
                                  [limit]="10">
 
+                        <ngx-datatable-column name="Acciones" [width]="120" [canAutoResize]="false" [sortable]="false">
+                          <ng-template let-row="row" let-rowIndex="rowIndex" let-id="value" ngx-datatable-cell-template>
+                            <button class="btn btn-sm btn-danger" (click)="edit(row, rowIndex)">
+                              <mat-icon _ngcontent-c71="" class="secondary-text s-26 mat-icon material-icons" role="img" aria-hidden="true">edit</mat-icon>
+                            </button>
+                            <button class="btn btn-sm btn-danger" (click)="delete(row, rowIndex)">
+                              <mat-icon _ngcontent-c71="" class="secondary-text s-26 mat-icon material-icons" role="img" aria-hidden="true">delete</mat-icon>
+                            </button>
+                          </ng-template>
+                        </ngx-datatable-column>
+
                         <ngx-datatable-column name="Calificación del riesgo" prop="nombre_calificacion_riesgo">
                         </ngx-datatable-column>
 
@@ -32,7 +43,7 @@
                         <ngx-datatable-column name="Rango máximo" prop="rango_maximo">
                         </ngx-datatable-column>
 
-                        <ngx-datatable-column name="Rango máximo" prop="color">
+                        <ngx-datatable-column name="Color" prop="color">
                         </ngx-datatable-column>
 
                         <ngx-datatable-column name="Acción a tomar" prop="accion_tomar">

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProbabilityDialogComponent } from './dialog/probability-dialog.component';
 import { MatDialog } from '@angular/material';
 import { ProbabilityRiskService } from '../probability/service/probability-risk.service';
+import {FormType} from '../../commons/form-type.enum';
 
 
 @Component({
@@ -36,6 +37,33 @@ export class SystemProbabilityComponent implements OnInit {
         this.probabilityRisk = [...this.probabilityRisk];
         this.loadingIndicator = false;
       });
+  }
+
+  edit(row, rowIndex){
+    console.log(rowIndex);
+    const product = row;
+    this.dialogRef = this.dialog.open(ProbabilityDialogComponent, {
+      panelClass: 'probability-dialog',
+      data : {
+        formType : FormType.edit,
+        product : product
+      }
+    });
+
+    this.dialogRef.afterClosed()
+      .subscribe(response => {
+        console.log(response);
+        this.probabilityRisk[rowIndex] = response;
+        this.probabilityRisk = [...this.probabilityRisk];
+        this.loadingIndicator = false;
+      });
+  }
+
+  delete(row, rowIndex) {
+    if (rowIndex > -1) {
+      this.probabilityRisk.splice(rowIndex, 1);
+      this.probabilityRisk = [...this.probabilityRisk];
+    }
   }
 }
 

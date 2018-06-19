@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import { RatingDialogComponent } from '../rating/dialog/rating-dialog.component';
 import { MatDialog } from '@angular/material';
 import { RatingRiskService } from '../rating/service/rating-risk.service';
+import {FormType} from '../../commons/form-type.enum';
 
 @Component({
     selector: 'risk-rating',
@@ -36,5 +37,32 @@ export class SystemRatingComponent implements OnInit{
         this.ratingTypes = [...this.ratingTypes];
         this.loadingIndicator = false;
       });
+  }
+
+  edit(row, rowIndex){
+    console.log(rowIndex);
+    const product = row;
+    this.dialogRef = this.dialog.open(RatingDialogComponent, {
+      panelClass: 'rating-dialog',
+      data : {
+        formType : FormType.edit,
+        product : product
+      }
+    });
+
+    this.dialogRef.afterClosed()
+      .subscribe(response => {
+        console.log(response);
+        this.ratingTypes[rowIndex] = response;
+        this.ratingTypes = [...this.ratingTypes];
+        this.loadingIndicator = false;
+      });
+  }
+
+  delete(row, rowIndex) {
+    if (rowIndex > -1) {
+      this.ratingTypes.splice(rowIndex, 1);
+      this.ratingTypes = [...this.ratingTypes];
+    }
   }
 }

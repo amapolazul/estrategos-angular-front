@@ -11,21 +11,34 @@
     <div mat-dialog-content class="p-24 m-0">
         <form name="composeForm" [formGroup]="composeForm" class="compose-form" fxLayout="column" fxFlex>
 
-            <mat-form-field>
-                <input matInput name="bcc" placeholder="Calificacion del riesgo " formControlName="nombre_calificacion_riesgo" >
-            </mat-form-field>
+          <mat-form-field>
+              <input matInput name="bcc" placeholder="Calificacion del riesgo " formControlName="nombre_calificacion_riesgo" >
+          </mat-form-field>
 
-            <mat-form-field>
-                <input matInput name="subject" placeholder="Rango mínimo" formControlName="rango_minimo" type="number">
-            </mat-form-field>
+          <mat-form-field>
+              <input matInput name="subject" placeholder="Rango mínimo" formControlName="rango_minimo" type="number">
+          </mat-form-field>
 
           <mat-form-field>
             <input matInput name="subject" placeholder="Rango máximo" formControlName="rango_maximo" type="number">
           </mat-form-field>
 
-          <mat-form-field>
+          <!--mat-form-field>
             <input matInput name="subject" placeholder="Color" formControlName="color" >
-          </mat-form-field>
+          </mat-form-field-->
+
+          <mat-select placeholder="Color" formControlName="color" required>
+            <mat-option [value]="'Verde'" style="color: green;">
+              Verde
+            </mat-option>
+            <mat-option [value]="'Amarillo'" style="color: #FFC107;">
+              Amarillo
+            </mat-option>
+            <mat-option [value]="'Rojo'" style="color: red;">
+              Rojo
+            </mat-option>
+
+          </mat-select>
 
             <mat-form-field>
                 <textarea matInput name="message" placeholder="Acción a tomar" formControlName="accion_tomar" rows="4">

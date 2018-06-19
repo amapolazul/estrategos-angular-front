@@ -18,8 +18,7 @@
         </mat-form-field>
 
         <mat-form-field>
-            <textarea matInput name="message" placeholder="Objetivo" [value]="caracterizacion.procedimiento_Objetivo" rows="4" disabled>
-            </textarea>
+         <input matInput name="message" placeholder="Objetivo" [value]="caracterizacion.procedimiento_Objetivo" formControlName="procedimiento_Objetivo" disabled>
         </mat-form-field>
 
         <div class="button-row">

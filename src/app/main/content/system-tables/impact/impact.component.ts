@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ImpactDialogComponent } from './dialog/impact-dialog.component';
 import { MatDialog } from '@angular/material';
 import { ImpactRiskService } from '../impact/service/impact-risk.service';
+import {FormType} from '../../commons/form-type.enum';
 
 
 @Component({
@@ -39,5 +40,30 @@ export class SystemImpactComponent implements OnInit{
         this.impactRisk = [...this.impactRisk];
         this.loadingIndicator = false;
       });
+  }
+
+  edit(row, rowIndex){
+    console.log(rowIndex);
+    const product = row;
+    this.dialogRef = this.dialog.open(ImpactDialogComponent, {
+      panelClass: 'impact-dialog',
+      data : {
+        formType : FormType.edit,
+        product : product
+      }
+    });
+
+    this.dialogRef.afterClosed()
+      .subscribe(response => {
+        this.impactRisk = [...this.impactRisk];
+        this.loadingIndicator = false;
+      });
+  }
+
+  delete(row, rowIndex) {
+    if (rowIndex > -1) {
+      this.impactRisk.splice(rowIndex, 1);
+      this.impactRisk = [...this.impactRisk];
+    }
   }
 }

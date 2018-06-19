@@ -19,10 +19,10 @@
               <input matInput name="subject" placeholder="Código Procedimiento" formControlName="procedimiento_Codigo">
             </mat-form-field>
 
-            <mat-form-field>
-                <textarea matInput name="message" placeholder="Objetivo" formControlName="procedimiento_Objetivo">
-                </textarea>
-            </mat-form-field>
+          <mat-form-field>
+            <input matInput name="message" placeholder="Objetivo" formControlName="procedimiento_Objetivo">
+          </mat-form-field>
+
             <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="space-between center">
               <div>
                 <button mat-raised-button class="save-button mat-accent" aria-label="Guardar" (click)="guardar()">
