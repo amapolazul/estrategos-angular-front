@@ -18,6 +18,14 @@ export class CausesRiskService extends BaseService {
     return this.http.get<CausesRiskModel[]>(this.serviceUrl + '/');
   }
 
+  deleteCausesRisk(id: number): Observable<String> {
+    return this.http.delete<string>(this.serviceUrl + '/' + id);
+  }
+
+  updateCausesRisk(entity: CausesRiskModel) {
+    return this.http.put<string>(this.serviceUrl + '/' + entity.id, entity);
+  }
+
   postCausesRisk(causesRiskModel: CausesRiskModel): Observable<string> {
     return this.http.post<string>(this.serviceUrl, causesRiskModel);
   }

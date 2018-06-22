@@ -3,6 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {CausesRiskModel} from '../model/causes-risk.model';
 import {CausesRiskService} from '../service/causes-risk.service';
+import {FormType} from '../../../commons/form-type.enum';
 
 @Component({
   selector: 'causes-risk-dialog',
@@ -29,23 +30,40 @@ export class CausesDialogComponent implements OnInit {
       causa_riesgo: [''],
       descripcion: ['']
     });
-    if (this.data) {
-      this.causesRiskModel = this.data.product;
+    if (this.data && this.data.formType === FormType.edit) {
+      this.causesRiskModel = this.data.causesRisk;
       this.dataForm();
     }
   }
 
   saveImpactRisk() {
-    const causesRisk = <CausesRiskModel> this.composeForm.getRawValue();
-    this.saveDataImpactRisk(causesRisk);
-    this.dialogRef.close(causesRisk);
+    if (this.data && this.data.formType === FormType.edit) {
+      let causesRisk = <CausesRiskModel> this.composeForm.getRawValue();
+      causesRisk = this.mergeData(causesRisk);
+      this.updateDataImpactRisk(causesRisk);
+    } else {
+      const causesRisk = <CausesRiskModel> this.composeForm.getRawValue();
+      this.saveDataImpactRisk(causesRisk);
+    }
   }
 
   saveDataImpactRisk(causesRisk) {
     this.causesRiskService.postCausesRisk(causesRisk).subscribe((data: any) => {
       this.restData = data;
-      console.log(this.restData);
+      this.dialogRef.close(causesRisk);
     });
+  }
+
+  updateDataImpactRisk(causesRisk) {
+    this.causesRiskService.updateCausesRisk(causesRisk).subscribe((data: any) => {
+      this.restData = data;
+      this.dialogRef.close(causesRisk);
+    });
+  }
+
+  private mergeData(newData: CausesRiskModel) {
+    newData.id = this.causesRiskModel.id;
+    return newData;
   }
 
   private dataForm() {
@@ -54,6 +72,7 @@ export class CausesDialogComponent implements OnInit {
       descripcion: this.causesRiskModel.descripcion
     });
   }
+
 
   closeModal() {
     this.dialogRef.close();

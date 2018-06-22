@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material';
 import { CausesDialogComponent } from './dialog/causes-dialog.component';
 import { CausesRiskService } from './service/causes-risk.service';
 import {FormType} from '../../commons/form-type.enum';
+import {CausesRiskModel} from './model/causes-risk.model';
 
 @Component({
     selector: 'risk-causes',
@@ -23,7 +24,6 @@ export class SystemCausesComponent implements OnInit {
 
   ngOnInit() {
     this.causesRiskService.getCausesRisk().subscribe((data: any) => {
-      console.log("bb");
       this.causesRisk = data;
       console.log(this.causesRisk);
       this.loadingIndicator = false;
@@ -36,20 +36,18 @@ export class SystemCausesComponent implements OnInit {
     });
     this.dialogRef.afterClosed()
       .subscribe(response => {
-        this.causesRisk.push(response);
-        this.causesRisk = [...this.causesRisk];
-        this.loadingIndicator = false;
+        this.ngOnInit();
       });
   }
 
   edit(row, rowIndex){
     console.log(rowIndex);
-    const product = row;
+    const causesRisk = row;
     this.dialogRef = this.dialog.open(CausesDialogComponent, {
       panelClass: 'causes-dialog',
       data : {
         formType : FormType.edit,
-        product : product
+        causesRisk : causesRisk
       }
     });
 
@@ -63,7 +61,15 @@ export class SystemCausesComponent implements OnInit {
   }
 
   delete(row, rowIndex) {
+    console.log(row);
+    console.log(rowIndex);
     if (rowIndex > -1) {
+      const causes = <CausesRiskModel>row;
+      this.causesRiskService.deleteCausesRisk(causes.id).subscribe((result) => {
+        console.log('resultado -> ', result);
+      }, (error) => {
+        console.error(error);
+      });
       this.causesRisk.splice(rowIndex, 1);
       this.causesRisk = [...this.causesRisk];
     }
