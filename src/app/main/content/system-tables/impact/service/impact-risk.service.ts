@@ -19,6 +19,14 @@ export class ImpactRiskService extends BaseService {
     return this.http.get<ImpactRiskModel[]>(this.serviceUrl + '/');
   }
 
+  deleteImpactRisk(id: number): Observable<String> {
+    return this.http.delete<string>(this.serviceUrl + '/' + id);
+  }
+
+  updateImpactRisk(entity: ImpactRiskModel) {
+    return this.http.put<string>(this.serviceUrl + '/' + entity.id, entity);
+  }
+
   postImpactRisk(impactRiskModel: ImpactRiskModel): Observable<string> {
     return this.http.post<string>(this.serviceUrl, impactRiskModel);
   }

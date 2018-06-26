@@ -23,8 +23,12 @@ export class TypesRiskService extends BaseService {
     return this.http.post<string>(this.serviceUrl, typeRisk);
   }
 
-  deleteTypeRisk(typeRisk) {
-    return this.http.delete(this.serviceUrl + '/?' + typeRisk).map((response: Response) => response.json());
+  deleteTypeRisk(id: number): Observable<String> {
+    return this.http.delete<string>(this.serviceUrl + '/' + id);
+  }
+
+  updateTypeRisk(entity: TypesRiskModel) {
+    return this.http.put<string>(this.serviceUrl + '/' + entity.id, entity);
   }
 
   getResourceEndpoint(): string {

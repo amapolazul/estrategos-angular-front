@@ -18,6 +18,14 @@ export class ProbabilityRiskService extends BaseService {
     return this.http.get<ProbabilityRiskModel[]>(this.serviceUrl + '/');
   }
 
+  deleteProbabilityRisk(id: number): Observable<String> {
+    return this.http.delete<string>(this.serviceUrl + '/' + id);
+  }
+
+  updateProbabilityRisk(entity: ProbabilityRiskModel) {
+    return this.http.put<string>(this.serviceUrl + '/' + entity.id, entity);
+  }
+
   postProbabilityRisk(probabilityRiskModel: ProbabilityRiskModel): Observable<string> {
     return this.http.post<string>(this.serviceUrl, probabilityRiskModel);
   }
