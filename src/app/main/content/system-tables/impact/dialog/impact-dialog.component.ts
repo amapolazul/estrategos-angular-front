@@ -3,8 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import { ImpactRiskService } from '../../impact/service/impact-risk.service';
 import { ImpactRiskModel} from '../model/impact-risk.model';
-import {ProbabilityRiskModel} from '../../probability/model/probability-risk.model';
-
+import {FormType} from '../../../commons/form-type.enum';
 @Component({
     selector     : 'impact-dialog',
     templateUrl  : './impact-dialog.component.html',
@@ -34,23 +33,42 @@ export class ImpactDialogComponent implements OnInit
       puntaje: [''],
       descripcion: ['']
     });
-    if (this.data) {
+    if (this.data && this.data.formType === FormType.edit) {
       this.impactRiskModel = this.data.product;
       this.dataForm();
     }
   }
 
   saveImpactRisk() {
-    const impactRisk = <ImpactRiskModel> this.composeForm.getRawValue();
-    this.saveDataImpactRisk(impactRisk);
-    this.dialogRef.close(impactRisk);
+    if (this.data && this.data.formType === FormType.edit) {
+      let impactRisk = <ImpactRiskModel> this.composeForm.getRawValue();
+      impactRisk = this.mergeData(impactRisk);
+      this.updateDataCausesRisk(impactRisk);
+    }else{
+      const impactRisk = <ImpactRiskModel> this.composeForm.getRawValue();
+      this.saveDataImpactRisk(impactRisk);
+      
+    }
   }
 
   saveDataImpactRisk(impactRisk) {
     this.impactRiskService.postImpactRisk(impactRisk).subscribe((data: any) => {
       this.restData = data;
       console.log(this.restData);
+      this.dialogRef.close(impactRisk);
     });
+  }
+
+  updateDataCausesRisk(impactRisk) {
+    this.impactRiskService.updateImpactRisk(impactRisk).subscribe((data: any) => {
+      this.restData = data;
+      this.dialogRef.close(impactRisk);
+    });
+  }
+
+  private mergeData(newData: ImpactRiskModel) {
+    newData.id = this.impactRiskModel.id;
+    return newData;
   }
 
   private dataForm() {

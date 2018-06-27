@@ -4,6 +4,7 @@ import { ImpactDialogComponent } from './dialog/impact-dialog.component';
 import { MatDialog } from '@angular/material';
 import { ImpactRiskService } from '../impact/service/impact-risk.service';
 import {FormType} from '../../commons/form-type.enum';
+import { ImpactRiskModel } from './model/impact-risk.model';
 
 
 @Component({
@@ -36,9 +37,7 @@ export class SystemImpactComponent implements OnInit{
     });
     this.dialogRef.afterClosed()
       .subscribe(response => {
-        this.impactRisk.push(response);
-        this.impactRisk = [...this.impactRisk];
-        this.loadingIndicator = false;
+        this.ngOnInit();
       });
   }
 
@@ -55,13 +54,22 @@ export class SystemImpactComponent implements OnInit{
 
     this.dialogRef.afterClosed()
       .subscribe(response => {
+        this.impactRisk[rowIndex] = response;
         this.impactRisk = [...this.impactRisk];
         this.loadingIndicator = false;
       });
   }
 
-  delete(row, rowIndex) {
+  delete(row, rowIndex)  {
+    console.log(row);
+    console.log(rowIndex);
     if (rowIndex > -1) {
+      const impact = <ImpactRiskModel>row;
+      this.probabilityRiskService.deleteImpactRisk(impact.id).subscribe((result) => {
+        console.log('resultado -> ', result);
+      }, (error) => {
+        console.error(error);
+      });
       this.impactRisk.splice(rowIndex, 1);
       this.impactRisk = [...this.impactRisk];
     }

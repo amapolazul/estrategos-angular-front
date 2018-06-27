@@ -36,25 +36,25 @@ export class CausesDialogComponent implements OnInit {
     }
   }
 
-  saveImpactRisk() {
+  saveCausesRisk() {
     if (this.data && this.data.formType === FormType.edit) {
       let causesRisk = <CausesRiskModel> this.composeForm.getRawValue();
       causesRisk = this.mergeData(causesRisk);
-      this.updateDataImpactRisk(causesRisk);
+      this.updateDataCausesRisk(causesRisk);
     } else {
       const causesRisk = <CausesRiskModel> this.composeForm.getRawValue();
-      this.saveDataImpactRisk(causesRisk);
+      this.saveDataCausesRisk(causesRisk);
     }
   }
 
-  saveDataImpactRisk(causesRisk) {
+  saveDataCausesRisk(causesRisk) {
     this.causesRiskService.postCausesRisk(causesRisk).subscribe((data: any) => {
       this.restData = data;
       this.dialogRef.close(causesRisk);
     });
   }
 
-  updateDataImpactRisk(causesRisk) {
+  updateDataCausesRisk(causesRisk) {
     this.causesRiskService.updateCausesRisk(causesRisk).subscribe((data: any) => {
       this.restData = data;
       this.dialogRef.close(causesRisk);
@@ -72,7 +72,6 @@ export class CausesDialogComponent implements OnInit {
       descripcion: this.causesRiskModel.descripcion
     });
   }
-
 
   closeModal() {
     this.dialogRef.close();
