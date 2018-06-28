@@ -26,7 +26,7 @@ export class ImpactRiskService extends BaseService {
   updateImpactRisk(entity: ImpactRiskModel) {
     return this.http.put<string>(this.serviceUrl + '/' + entity.id, entity);
   }
-
+  
   postImpactRisk(impactRiskModel: ImpactRiskModel): Observable<string> {
     return this.http.post<string>(this.serviceUrl, impactRiskModel);
   }

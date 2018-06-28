@@ -17,11 +17,16 @@ import { HomeModule } from './main/content/home/home.module';
 import { ProcessesModule } from './main/content/processes/processes.module';
 import { SystemTablesModule } from './main/content/system-tables/system-tables.module';
 import { FuseAngularMaterialModule } from '../app/main/content/components/angular-material/angular-material.module';
+import { RiesgosModule } from './main/content/riesgos/riesgos.module';
 
 const appRoutes: Routes = [
     {
         path: 'cargar-procesos',
         loadChildren: './main/content/processes/processes.module#ProcessesModule'
+    },
+    {
+        path: 'riesgos',
+        loadChildren: './main/content/riesgos/riesgos.module#ProcessesModule'
     },
     {
         path: 'system-table',
@@ -51,6 +56,7 @@ const appRoutes: Routes = [
         HomeModule,
         ProcessesModule,
         SystemTablesModule,
+        RiesgosModule,
         FuseAngularMaterialModule
     ],
     bootstrap: [

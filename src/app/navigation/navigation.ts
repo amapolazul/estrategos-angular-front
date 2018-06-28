@@ -20,6 +20,13 @@ export const navigation = [
                 'icon': 'create_new_folder',
                 'url': '/procesos'
             },
+            {
+                'id': 'riesgos',
+                'title': 'Riesgos',
+                'type': 'item',
+                'icon': 'access_alarm',
+                'url': '/riesgos'
+            },
           /*
           {
                 'id': 'system-table',
