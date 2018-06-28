@@ -8,8 +8,14 @@ import { Component } from '@angular/core';
 export class EjerciciosListsComponent
 {
 
+    rows: any[];
+
     constructor()
     {
 
+    }
+
+    evaluacionDialog(){
+      console.log('Procesos');
     }
 }

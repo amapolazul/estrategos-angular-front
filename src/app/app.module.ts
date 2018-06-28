@@ -26,7 +26,7 @@ const appRoutes: Routes = [
     },
     {
         path: 'riesgos',
-        loadChildren: './main/content/riesgos/riesgos.module#ProcessesModule'
+        loadChildren: './main/content/riesgos/riesgos.module#RiesgosModule'
     },
     {
         path: 'system-table',

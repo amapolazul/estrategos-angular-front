@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '../../../core/modules/shared.module';
 import { RouterModule, Routes } from '@angular/router';
 import { RiesgosComponent } from './riesgos.component';
+import {RiesgosListsComponent} from './tabs/listado/riesgos-lists.component';
+import {EjerciciosListsComponent} from './tabs/ejercicios/ejercicios-lists.component';
 
 const routes: Routes = [
     {
@@ -15,7 +17,9 @@ const routes: Routes = [
         RouterModule.forChild(routes)
     ],
     declarations: [
-        RiesgosComponent
+        RiesgosComponent,
+        RiesgosListsComponent,
+        EjerciciosListsComponent
     ],
     entryComponents: [
 
