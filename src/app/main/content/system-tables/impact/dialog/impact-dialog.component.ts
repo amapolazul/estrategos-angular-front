@@ -1,21 +1,21 @@
-import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
-import { ImpactRiskService } from '../../impact/service/impact-risk.service';
-import { ImpactRiskModel} from '../model/impact-risk.model';
+import {ImpactRiskService} from '../../impact/service/impact-risk.service';
+import {ImpactRiskModel} from '../model/impact-risk.model';
 import {FormType} from '../../../commons/form-type.enum';
+
 @Component({
-    selector     : 'impact-dialog',
-    templateUrl  : './impact-dialog.component.html',
-    styleUrls    : ['./impact-dialog.component.scss'],
-    encapsulation: ViewEncapsulation.None
+  selector: 'impact-dialog',
+  templateUrl: './impact-dialog.component.html',
+  styleUrls: ['./impact-dialog.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
-export class ImpactDialogComponent implements OnInit
-{
-    showExtraToFields = false;
-    restData: any;
-    composeForm: FormGroup;
-    impactRiskModel = new ImpactRiskModel();
+export class ImpactDialogComponent implements OnInit {
+  showExtraToFields = false;
+  restData: any;
+  composeForm: FormGroup;
+  impactRiskModel = new ImpactRiskModel();
 
 
   constructor(
@@ -25,7 +25,6 @@ export class ImpactDialogComponent implements OnInit
     @Inject(MAT_DIALOG_DATA) private data: any
   ) {
   }
-
 
   ngOnInit() {
     this.composeForm = this.formBuilder.group({
@@ -44,10 +43,10 @@ export class ImpactDialogComponent implements OnInit
       let impactRisk = <ImpactRiskModel> this.composeForm.getRawValue();
       impactRisk = this.mergeData(impactRisk);
       this.updateDataCausesRisk(impactRisk);
-    }else{
+    } else {
       const impactRisk = <ImpactRiskModel> this.composeForm.getRawValue();
       this.saveDataImpactRisk(impactRisk);
-      
+
     }
   }
 

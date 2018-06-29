@@ -1,16 +1,35 @@
 <div id="riesgos-classes" class="page-layout simple tabbed" fxLayout="column">
-    <!-- CONTENT -->
-    <div class="content">
-        <mat-tab-group dynamicHeight="true">
+  <!-- CONTENT -->
+  <div class="content">
 
-            <mat-tab label="Riesgos">
-                <riesgos-lists #riesgos></riesgos-lists>
-            </mat-tab>
-
-            <mat-tab label="Ejercicios de evaluación, riesgos por proceso">
-                <ejercicios-lists #ejercicios></ejercicios-lists>
-            </mat-tab>
-
-        </mat-tab-group>
+    <div class="content p-24">
+      <mat-form-field fxFlex="100">
+        <mat-select placeholder="Procesos / Sub procesos">
+          <mat-option [value]="1">
+            Direccionamiento estratégico
+          </mat-option>
+          <mat-option [value]="2">
+            Control de compras
+          </mat-option>
+          <mat-option [value]="3">
+            Evaluación y control de riesgos
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
+
+    <mat-tab-group dynamicHeight="true">
+
+
+
+      <mat-tab label="Riesgos">
+        <riesgos-lists #riesgos></riesgos-lists>
+      </mat-tab>
+
+      <mat-tab label="Ejercicios de evaluación, riesgos por proceso">
+        <ejercicios-lists #ejercicios></ejercicios-lists>
+      </mat-tab>
+
+    </mat-tab-group>
+  </div>
 </div>

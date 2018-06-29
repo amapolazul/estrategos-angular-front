@@ -1,16 +1,17 @@
 import {Component, OnInit} from '@angular/core';
-import { RatingDialogComponent } from '../rating/dialog/rating-dialog.component';
-import { MatDialog } from '@angular/material';
-import { RatingRiskService } from '../rating/service/rating-risk.service';
+import {RatingDialogComponent} from '../rating/dialog/rating-dialog.component';
+import {MatDialog} from '@angular/material';
+import {RatingRiskService} from '../rating/service/rating-risk.service';
 import {FormType} from '../../commons/form-type.enum';
 
 @Component({
-    selector: 'risk-rating',
-    templateUrl: './rating.component.html',
-    styleUrls: ['./rating.component.scss']
+  selector: 'risk-rating',
+  templateUrl: './rating.component.html',
+  styleUrls: ['./rating.component.scss']
 })
-export class SystemRatingComponent implements OnInit{
+export class SystemRatingComponent implements OnInit {
   ratingTypes: any[];
+  temp: any[];
   dialogRef: any;
   loadingIndicator = true;
   reorderable = true;
@@ -19,15 +20,16 @@ export class SystemRatingComponent implements OnInit{
 
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.ratingTypes = [];
     this.ratingRiskService.getRatingRisk().subscribe((data: any) => {
       this.ratingTypes = data;
+      this.temp = [...data];
       this.loadingIndicator = false;
     });
   }
 
-  ratingDialog(){
+  ratingDialog() {
     this.dialogRef = this.dialog.open(RatingDialogComponent, {
       panelClass: 'rating-dialog'
     });
@@ -39,14 +41,14 @@ export class SystemRatingComponent implements OnInit{
       });
   }
 
-  edit(row, rowIndex){
+  edit(row, rowIndex) {
     console.log(rowIndex);
     const product = row;
     this.dialogRef = this.dialog.open(RatingDialogComponent, {
       panelClass: 'rating-dialog',
-      data : {
-        formType : FormType.edit,
-        product : product
+      data: {
+        formType: FormType.edit,
+        product: product
       }
     });
 
@@ -60,9 +62,22 @@ export class SystemRatingComponent implements OnInit{
   }
 
   delete(row, rowIndex) {
+    this.ratingRiskService.deleteRatingRisk(row.id).subscribe((data: any) => {
+      console.log(data);
+    });
     if (rowIndex > -1) {
       this.ratingTypes.splice(rowIndex, 1);
       this.ratingTypes = [...this.ratingTypes];
     }
+  }
+
+  updateFilter(event) {
+    const val = event.target.value.toLowerCase();
+
+    const temp = this.temp.filter(function(d) {
+      return d.nombre_calificacion_riesgo.toLowerCase().indexOf(val) !== -1 || !val;
+    });
+
+    this.ratingTypes = temp;
   }
 }

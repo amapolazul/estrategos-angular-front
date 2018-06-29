@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material';
 import { ImpactRiskService } from '../impact/service/impact-risk.service';
 import {FormType} from '../../commons/form-type.enum';
 import { ImpactRiskModel } from './model/impact-risk.model';
+import {ProbabilityDialogComponent} from '../probability/dialog/probability-dialog.component';
 
 
 @Component({
@@ -15,6 +16,7 @@ import { ImpactRiskModel } from './model/impact-risk.model';
 export class SystemImpactComponent implements OnInit{
 
     impactRisk: any[];
+    temp: any[];
     dialogRef: any;
     loadingIndicator = true;
     reorderable = true;
@@ -24,9 +26,10 @@ export class SystemImpactComponent implements OnInit{
   }
 
   ngOnInit(){
+    this.impactRisk = [];
     this.probabilityRiskService.getImpactRisk().subscribe((data: any) => {
       this.impactRisk = data;
-      console.log(this.impactRisk);
+      this.temp = [...data];
       this.loadingIndicator = false;
     });
   }
@@ -37,7 +40,9 @@ export class SystemImpactComponent implements OnInit{
     });
     this.dialogRef.afterClosed()
       .subscribe(response => {
-        this.ngOnInit();
+        this.impactRisk.push(response);
+        this.impactRisk = [...this.impactRisk];
+        this.loadingIndicator = false;
       });
   }
 
@@ -61,17 +66,22 @@ export class SystemImpactComponent implements OnInit{
   }
 
   delete(row, rowIndex)  {
-    console.log(row);
-    console.log(rowIndex);
+    this.probabilityRiskService.deleteImpactRisk(row.id).subscribe((data: any) => {
+      console.log(data);
+    });
     if (rowIndex > -1) {
-      const impact = <ImpactRiskModel>row;
-      this.probabilityRiskService.deleteImpactRisk(impact.id).subscribe((result) => {
-        console.log('resultado -> ', result);
-      }, (error) => {
-        console.error(error);
-      });
       this.impactRisk.splice(rowIndex, 1);
       this.impactRisk = [...this.impactRisk];
     }
+  }
+
+  updateFilter(event) {
+    const val = event.target.value.toLowerCase();
+
+    const temp = this.temp.filter(function(d) {
+      return d.impacto.toLowerCase().indexOf(val) !== -1 || !val;
+    });
+
+    this.impactRisk = temp;
   }
 }

@@ -6,6 +6,8 @@
 
         <div class="button-row">
             <button mat-raised-button color="primary" (click)="ratingDialog()">Nuevo</button>
+            <input class="search-datatable" type='text'
+                 placeholder='Escriba aquí para realizar una busqueda ...' (keyup)='updateFilter($event)'/>
         </div>
 
             <div class="content p-24">

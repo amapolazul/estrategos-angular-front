@@ -14,6 +14,7 @@ import {CausesRiskModel} from './model/causes-risk.model';
 export class SystemCausesComponent implements OnInit {
 
   causesRisk: any[];
+  temp: any[];
   dialogRef: any;
   loadingIndicator = true;
   reorderable = true;
@@ -25,7 +26,7 @@ export class SystemCausesComponent implements OnInit {
   ngOnInit() {
     this.causesRiskService.getCausesRisk().subscribe((data: any) => {
       this.causesRisk = data;
-      console.log(this.causesRisk);
+      this.temp = [...data];
       this.loadingIndicator = false;
     });
   }
@@ -73,6 +74,16 @@ export class SystemCausesComponent implements OnInit {
       this.causesRisk.splice(rowIndex, 1);
       this.causesRisk = [...this.causesRisk];
     }
+  }
+
+  updateFilter(event) {
+    const val = event.target.value.toLowerCase();
+
+    const temp = this.temp.filter(function(d) {
+      return d.causa_riesgo.toLowerCase().indexOf(val) !== -1 || !val;
+    });
+
+    this.causesRisk = temp;
   }
 
 }

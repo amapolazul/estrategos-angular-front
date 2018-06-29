@@ -11,6 +11,7 @@ import {FormType} from '../../commons/form-type.enum';
 })
 export class SystemTypesComponent implements OnInit {
   riskTypes: any[];
+  temp: any[];
   dialogRef: any;
   loadingIndicator = true;
   reorderable = true;
@@ -23,6 +24,7 @@ export class SystemTypesComponent implements OnInit {
     this.riskTypes = [];
     this.typesRiskService.getTypeRisk().subscribe((data: any) => {
       this.riskTypes = data;
+      this.temp = [...data];
       this.loadingIndicator = false;
     });
   }
@@ -40,14 +42,14 @@ export class SystemTypesComponent implements OnInit {
       });
   }
 
-  edit(row, rowIndex){
+  edit(row, rowIndex) {
     console.log(rowIndex);
     const product = row;
     this.dialogRef = this.dialog.open(TypesDialogComponent, {
       panelClass: 'types-dialog',
-      data : {
-        formType : FormType.edit,
-        product : product
+      data: {
+        formType: FormType.edit,
+        product: product
       }
     });
 
@@ -70,4 +72,13 @@ export class SystemTypesComponent implements OnInit {
     }
   }
 
+  updateFilter(event) {
+    const val = event.target.value.toLowerCase();
+
+    const temp = this.temp.filter(function(d) {
+      return d.tipo_riesgo.toLowerCase().indexOf(val) !== -1 || !val;
+    });
+
+    this.riskTypes = temp;
+  }
 }

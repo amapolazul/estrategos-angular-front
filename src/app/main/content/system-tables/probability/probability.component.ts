@@ -12,6 +12,7 @@ import {FormType} from '../../commons/form-type.enum';
 })
 export class SystemProbabilityComponent implements OnInit {
     probabilityRisk: any[];
+    temp: any[];
     dialogRef: any;
     loadingIndicator = true;
     reorderable = true;
@@ -21,8 +22,10 @@ export class SystemProbabilityComponent implements OnInit {
   }
 
   ngOnInit(){
+    this.probabilityRisk = [];
     this.probabilityRiskService.getProbabilityRisk().subscribe((data: any) => {
       this.probabilityRisk = data;
+      this.temp = [...data];
       this.loadingIndicator = false;
     });
   }
@@ -52,7 +55,6 @@ export class SystemProbabilityComponent implements OnInit {
 
     this.dialogRef.afterClosed()
       .subscribe(response => {
-        console.log(response);
         this.probabilityRisk[rowIndex] = response;
         this.probabilityRisk = [...this.probabilityRisk];
         this.loadingIndicator = false;
@@ -60,10 +62,23 @@ export class SystemProbabilityComponent implements OnInit {
   }
 
   delete(row, rowIndex) {
+    this.probabilityRiskService.deleteProbabilityRisk(row.id).subscribe((data: any) => {
+      console.log(data);
+    });
     if (rowIndex > -1) {
       this.probabilityRisk.splice(rowIndex, 1);
       this.probabilityRisk = [...this.probabilityRisk];
     }
+  }
+
+  updateFilter(event) {
+    const val = event.target.value.toLowerCase();
+
+    const temp = this.temp.filter(function(d) {
+      return d.probabilidad.toLowerCase().indexOf(val) !== -1 || !val;
+    });
+
+    this.probabilityRisk = temp;
   }
 }
 
