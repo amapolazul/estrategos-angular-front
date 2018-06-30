@@ -52,14 +52,11 @@
                       </mat-select>
                     </mat-form-field>
 
-                  <mat-form-field fxFlex="100">
-                        <input matInput placeholder="Nombre del documento" formControlName="proceso_Documento" required>
-                        <mat-error *ngIf="formErrors.proceso_Documento.required">
-                            First Name is required!
-                        </mat-error>
+                   <mat-form-field fxFlex="100">
+                        <input matInput placeholder="Nombre del documento" formControlName="proceso_Documento">
                     </mat-form-field>
 
-                    <!--<input type="file" (change)="fileUpload($event)" placeholder="Upload file" accept=".pdf,.doc,.docx">-->
+                    <input type="file" (change)="handleFileInput($event.target.files)" placeholder="Cargar archivo" >
 
                 </div>
 

@@ -39,6 +39,7 @@ export class DocumentoCaracterizacion {
   procedimiento_Documento_Descripcion: string;
   procedimiento_Documento_Codigo: string;
   procedimiento_Documento_Arch: string;
+  attached_file: File;
 }
 
 export class ProcesoCreateRequest {

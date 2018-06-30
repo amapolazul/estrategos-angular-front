@@ -15,6 +15,7 @@ export class CharacterizationInfoDialogComponent implements OnInit {
   rows = [];
   loadingIndicator = false;
   reorderable = true;
+  document: File = null;
 
   showAttachFilesForm = false;
 
@@ -50,8 +51,16 @@ export class CharacterizationInfoDialogComponent implements OnInit {
       this.showAttachFilesForm = true;
   }
 
+  handleFileInput(files: FileList) {
+    this.document =  files.item(0);
+    this.attachFileForm.patchValue({
+      procedimiento_Documento_Arch : this.document.name
+    });
+  }
+
   saveFile() {
     const documentoCaracterizacion = <DocumentoCaracterizacion>this.attachFileForm.getRawValue();
+    documentoCaracterizacion.attached_file = this.document;
     this.addDocumentoCaracterizacion(documentoCaracterizacion);
     this.rows = this.caracterizacion.documentosCaracterizacion;
     this.showAttachFilesForm = false;

@@ -15,9 +15,22 @@ export class ProcessesService extends BaseService {
 
   }
 
-  createFullProcesses(procesoRequest: ProcesoCreateRequest): Observable<string> {
+  createFullProcesses(procesoRequest: ProcesoCreateRequest): Observable<any> {
     return this.http.post<string>(this.serviceUrl, procesoRequest);
   }
+
+  uploadProcessesFiles(files: Array<File>): Observable<any> {
+    const endpoint = this.serviceUrl + '/upload';
+    const formData: FormData = new FormData();
+
+    for (let i = 0; i < files.length; i++){
+      const fileToUpload: File = files[i];
+      formData.append('fileKey', fileToUpload, fileToUpload.name);
+    }
+
+    return this.http.post<string>(endpoint, formData, {});
+  }
+
 
   getSubProcessByParentId(id): Observable<Proceso[]> {
     return this.http.get<Proceso[]>(this.serviceUrl + '/' + id + '/sub-procesos');

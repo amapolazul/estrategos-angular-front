@@ -1,11 +1,11 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {MaterialModule} from '../../../core/modules/material.module';
+import {FormBuilder} from '@angular/forms';
 import {ProcessesService} from './services/processes.service';
-import {ResponsablesService} from '../responsables/responsables.service';
-import {Responsable} from '../responsables/models/responsables.model';
 import {Caracterizacion, Proceso, ProcesoCreateRequest, ProductoServicio} from './models/process.model';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {CustomSnackBarMessages} from '../commons/messages.service';
+import {Observable} from 'rxjs/Observable';
+import {flatMap} from 'rxjs/operators';
 
 @Component({
   selector: 'processes-classes',
@@ -24,7 +24,9 @@ export class ProcessesComponent implements OnInit{
 
   constructor(private formBuilder: FormBuilder,
               private processService: ProcessesService,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              private customSnackMessage: CustomSnackBarMessages,
+              private router: Router) {
 
     this.activatedRoute.params.subscribe(x => {
       this.parentProcessId = x.id;
@@ -41,12 +43,41 @@ export class ProcessesComponent implements OnInit{
     const productsList = <Array<ProductoServicio>>this.productComponent.rows;
     const caracterizacionesList = <Array<Caracterizacion>>this.caracterizacionesComponent.rows;
 
-    const processRequest = this.createProcessesRequest(proceso, productsList, caracterizacionesList);
+    const totalDocuments: Array<File> = new Array();
+    if (this.processComponent.attached_file != null) {
+      totalDocuments.push(this.processComponent.attached_file);
+    }
 
-    this.processService.createFullProcesses(processRequest).subscribe((x) => {
-      console.log('guardado correctamente');
+    caracterizacionesList.forEach((caracterizacion) => {
+      caracterizacion.documentosCaracterizacion.forEach((doc) => {
+        totalDocuments.push(doc.attached_file);
+      });
     });
-    console.log(processRequest);
+
+    const processRequest = this.createProcessesRequest(proceso, productsList, caracterizacionesList);
+    if (totalDocuments.length > 0) {
+
+      const result = Observable.merge(
+        this.processService.uploadProcessesFiles(totalDocuments),
+        this.processService.createFullProcesses(processRequest)
+      );
+
+      result.subscribe(x => {
+        this.customSnackMessage.openSnackBar('Proceso creado correctamente');
+        this.router.navigate(['home']);
+      }, (error) => {
+        console.log('Error');
+      });
+
+    } else {
+      this.processService.createFullProcesses(processRequest).subscribe((x) => {
+        console.log('guardado correctamente');
+      });
+    }
+
+
+
+
   }
 
   private createProcessesRequest(processes: Proceso, products: ProductoServicio[], charact: Caracterizacion[]) {
