@@ -3,8 +3,15 @@
  */
 export class EjercicioModel {
   id?: number;
-  fecha_creacion: string;
-  descripcion_ejercicio: string;
+  fecha_creacion_ejercicio: number;
+  descripcion: string;
+  proceso_id: number;
+  estatus_id: number;
+  estatus_nobre: string;
+}
+
+export class EjercicioEstatus {
+  id: number;
   estatus: string;
 }
 

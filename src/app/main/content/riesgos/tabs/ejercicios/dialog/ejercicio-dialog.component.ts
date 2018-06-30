@@ -1,10 +1,12 @@
 import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
-import {EjercicioModel} from '../model/ejercicio.model';
+import {EjercicioEstatus, EjercicioModel} from '../model/ejercicio.model';
 import {EjercicioService} from '../service/ejercicio.service';
 import {CustomSnackBarMessages} from '../../../../commons/messages.service';
 import {FormType} from '../../../../commons/form-type.enum';
+import {Proceso} from '../../../../processes/models/process.model';
+import {Observable} from 'rxjs/Observable';
 
 
 @Component({
@@ -17,6 +19,8 @@ export class EjercicioDialogComponent implements OnInit {
   restData: any;
   composeForm: FormGroup;
   ejercicioModel = new EjercicioModel();
+  selectedProcess: Proceso;
+  ejercicioEstados: Observable<EjercicioEstatus[]>;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -25,40 +29,45 @@ export class EjercicioDialogComponent implements OnInit {
     private customSnackMessage: CustomSnackBarMessages,
     @Inject(MAT_DIALOG_DATA) private data: any
   ) {
+    this.selectedProcess = this.data.proceso;
   }
 
   ngOnInit() {
+
     this.composeForm = this.formBuilder.group({
-      fecha_creacion: [''],
-      descripcion_ejercicio: [''],
-      estatus: ['']
+      descripcion: [''],
+      estatus_id: ['']
     });
     if (this.data && this.data.formType === FormType.edit) {
       this.ejercicioModel = this.data.product;
       this.dataForm();
     }
+
+    this.ejercicioEstados = this.ejercicioService.getEjercicioEstados();
   }
 
   saveEjercicio() {
     if (this.data && this.data.formType === FormType.edit) {
-      let ratingRisk = <EjercicioModel> this.composeForm.getRawValue();
-      ratingRisk = this.mergeData(ratingRisk);
-      this.updateDataEjercicio(ratingRisk);
+      let ejercicio = <EjercicioModel> this.composeForm.getRawValue();
+      ejercicio = this.mergeData(ejercicio);
+      this.updateDataEjercicio(ejercicio);
       this.customSnackMessage.openSnackBar(' Editado correctamente');
-      this.dialogRef.close(ratingRisk);
+      this.dialogRef.close(ejercicio);
     } else {
-      const ratingRisk = <EjercicioModel> this.composeForm.getRawValue();
-      this.saveDataEjercicio(ratingRisk);
-      this.customSnackMessage.openSnackBar(' Creado correctamente');
-      this.dialogRef.close(ratingRisk);
+      const ejercicio = <EjercicioModel> this.composeForm.getRawValue();;
+      ejercicio.fecha_creacion_ejercicio = new Date().getTime();
+      ejercicio.proceso_id = this.selectedProcess.proceso_Id;
+      this.saveDataEjercicio(ejercicio).subscribe((x) => {
+        this.customSnackMessage.openSnackBar('Ejercicio creado correctamente');
+        this.dialogRef.close();
+      }, (error) => {
+        console.log('error', error);
+      });
     }
   }
 
-  saveDataEjercicio(ratingRisk) {
-    this.ejercicioService.postEjercicio(ratingRisk).subscribe((data: any) => {
-      this.restData = data;
-      console.log(this.restData);
-    });
+  saveDataEjercicio(ejercicio): Observable<string> {
+    return this.ejercicioService.postEjercicio(ejercicio);
   }
 
   updateDataEjercicio(ratingRisk) {
@@ -75,9 +84,8 @@ export class EjercicioDialogComponent implements OnInit {
 
   private dataForm() {
     this.composeForm.setValue({
-      fecha_creacion: this.ejercicioModel.fecha_creacion,
-      descripcion_ejercicio: this.ejercicioModel.descripcion_ejercicio,
-      estatus: this.ejercicioModel.estatus
+      descripcion_ejercicio: this.ejercicioModel.descripcion,
+      estatus: this.ejercicioModel.estatus_id
     });
   }
 

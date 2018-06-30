@@ -10,7 +10,6 @@ export class Proceso {
   proceso_Tipo: number;
   proceso_Responsable_Id: number;
   proceso_Documento: string;
-  //proceso_Documento: File;
 }
 
 export class ProductoServicio {

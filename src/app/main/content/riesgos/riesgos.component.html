@@ -4,9 +4,9 @@
 
     <div class="content p-24">
       <mat-form-field fxFlex="100">
-        <mat-select placeholder="Procesos / Sub procesos">
+        <mat-select placeholder="Procesos / Sub procesos" [(ngModel)]="selectedValue" (change)="initProcesosValues()">
           <mat-option>Seleccione uno</mat-option>
-          <mat-option *ngFor="let riesgo of listadoRiesgos" [value]="riesgo.proceso_Id">
+          <mat-option *ngFor="let riesgo of procesos" [value]="riesgo.proceso_Id">
             {{ riesgo.proceso_Nombre }}
           </mat-option>
         </mat-select>
@@ -15,14 +15,12 @@
 
     <mat-tab-group dynamicHeight="true">
 
-
-
       <mat-tab label="Riesgos">
-        <riesgos-lists #riesgos></riesgos-lists>
+        <riesgos-lists #riesgos ></riesgos-lists>
       </mat-tab>
 
       <mat-tab label="Ejercicios de evaluación, riesgos por proceso">
-        <ejercicios-lists #ejercicios></ejercicios-lists>
+        <ejercicios-lists #ejercicios [proceso]="selectedProcess" [ejercicios]="ejerciciosLs"></ejercicios-lists>
       </mat-tab>
 
     </mat-tab-group>

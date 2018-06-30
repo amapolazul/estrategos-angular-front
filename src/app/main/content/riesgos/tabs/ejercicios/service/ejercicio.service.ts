@@ -2,21 +2,26 @@ import { BaseService } from '../../../../commons/base-service.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { EjercicioModel } from '../model/ejercicio.model';
+import {EjercicioEstatus, EjercicioModel} from '../model/ejercicio.model';
 
 @Injectable()
 export class EjercicioService extends BaseService {
 
   serviceUrl: string;
-
+  serviceStatusUrl: string;
 
   constructor(private http: HttpClient) {
     super();
     this.serviceUrl = this.getResourceEndpoint();
+    this.serviceStatusUrl = this.getResourceStatusEndpoint();
   }
 
-  getEjercicio(): Observable<EjercicioModel[]> {
-    return this.http.get<EjercicioModel[]>(this.serviceUrl + '/1');
+  getEjerciciosPorProceso(procesoId: number): Observable<EjercicioModel[]> {
+    return this.http.get<EjercicioModel[]>(this.serviceUrl + '/procesos/' + procesoId);
+  }
+
+  getEjercicioEstados(): Observable<EjercicioEstatus[]> {
+    return this.http.get<EjercicioEstatus[]>(this.serviceStatusUrl);
   }
 
   deleteEjercicio(id: number): Observable<String> {
@@ -33,6 +38,14 @@ export class EjercicioService extends BaseService {
 
   getResourceEndpoint(): string {
     return this.generalUrl + this.getResource();
+  }
+
+  getResourceStatusEndpoint(): string {
+    return this.generalUrl + this.getStatusResource();
+  }
+
+  getStatusResource(): string {
+    return 'ejercicio-estados';
   }
 
   getResource(): string {

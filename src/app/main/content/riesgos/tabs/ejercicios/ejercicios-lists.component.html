@@ -13,7 +13,7 @@
       <div class=" mat-elevation-z8">
 
         <ngx-datatable class="material"
-                       [rows]="rows"
+                       [rows]="ejerciciosList"
                        [loadingIndicator]="loadingIndicator"
                        [columnMode]="'force'"
                        [headerHeight]="48"
@@ -23,13 +23,19 @@
                        [reorderable]="reorderable"
                        [limit]="10">
 
-          <ngx-datatable-column name="Fecha de creación" prop="fecha_creacion">
+          <ngx-datatable-column name="Fecha de creación" prop="fecha_creacion_ejercicio">
+            <ng-template let-row="row" let-rowIndex="rowIndex" let-id="value" ngx-datatable-cell-template>
+              <a (click)="goToEjercicio(row)">{{row.fecha_creacion_ejercicio | date:"yyyy/MM/dd"}}</a>
+            </ng-template>
           </ngx-datatable-column>
 
-          <ngx-datatable-column name="Descripción del ejercicio" prop="descripcion_ejercicio">
+          <ngx-datatable-column name="Descripción del ejercicio" prop="descripcion">
           </ngx-datatable-column>
 
-          <ngx-datatable-column name="Estatus" prop="estatus">
+          <ngx-datatable-column name="Acciones" [width]="150" [canAutoResize]="false" [sortable]="false">
+            <ng-template let-row="row" let-rowIndex="rowIndex" let-id="value" ngx-datatable-cell-template>
+              {{row.estatus_id === 1  ? 'En proceso' : 'Culminado'}}
+            </ng-template>
           </ngx-datatable-column>
 
         </ngx-datatable>
