@@ -26,6 +26,7 @@ export class SystemTypesComponent implements OnInit {
       this.riskTypes = data;
       this.temp = [...data];
       this.loadingIndicator = false;
+      console.log(this.riskTypes);
     });
   }
 

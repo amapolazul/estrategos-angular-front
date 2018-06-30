@@ -5,14 +5,9 @@
     <div class="content p-24">
       <mat-form-field fxFlex="100">
         <mat-select placeholder="Procesos / Sub procesos">
-          <mat-option [value]="1">
-            Direccionamiento estratégico
-          </mat-option>
-          <mat-option [value]="2">
-            Control de compras
-          </mat-option>
-          <mat-option [value]="3">
-            Evaluación y control de riesgos
+          <mat-option>Seleccione uno</mat-option>
+          <mat-option *ngFor="let riesgo of listadoRiesgos" [value]="riesgo.proceso_Id">
+            {{ riesgo.proceso_Nombre }}
           </mat-option>
         </mat-select>
       </mat-form-field>

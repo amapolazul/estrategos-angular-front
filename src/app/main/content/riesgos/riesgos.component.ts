@@ -1,4 +1,6 @@
 import {Component, OnInit } from '@angular/core';
+import {ProcessesService} from '../processes/services/processes.service';
+import {TreeModel} from 'ng2-tree';
 
 @Component({
   selector: 'riesgos-classes',
@@ -7,14 +9,18 @@ import {Component, OnInit } from '@angular/core';
 })
 export class RiesgosComponent implements OnInit{
 
-  constructor()
+  listadoRiesgos: any[];
+  procesos: any[];
+
+  constructor(private processesService: ProcessesService)
   {
   }
 
   ngOnInit() {
-
-    console.log('Riesgos y Ejercicios de evaluacion de riesgos');
-
+    /* EL ID del proceso esta quemado por que no existe un endpoint para listar todos los procesos : proceso_padre_id*/
+    this.processesService.getSubProcessByParentId(1).subscribe((data: any) => {
+        this.listadoRiesgos = data;
+        console.log(this.listadoRiesgos);
+    });
   }
-
 }
