@@ -4,6 +4,8 @@ import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {ImpactRiskService} from '../../impact/service/impact-risk.service';
 import {ImpactRiskModel} from '../model/impact-risk.model';
 import {FormType} from '../../../commons/form-type.enum';
+import {CustomSnackBarMessages} from '../../../commons/messages.service';
+
 
 @Component({
   selector: 'impact-dialog',
@@ -17,11 +19,11 @@ export class ImpactDialogComponent implements OnInit {
   composeForm: FormGroup;
   impactRiskModel = new ImpactRiskModel();
 
-
   constructor(
     private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<ImpactDialogComponent>,
     private impactRiskService: ImpactRiskService,
+    private customSnackMessage: CustomSnackBarMessages,
     @Inject(MAT_DIALOG_DATA) private data: any
   ) {
   }
@@ -43,10 +45,13 @@ export class ImpactDialogComponent implements OnInit {
       let impactRisk = <ImpactRiskModel> this.composeForm.getRawValue();
       impactRisk = this.mergeData(impactRisk);
       this.updateDataCausesRisk(impactRisk);
+      this.customSnackMessage.openSnackBar(' Editado correctamente');
+      this.dialogRef.close(impactRisk);
     } else {
       const impactRisk = <ImpactRiskModel> this.composeForm.getRawValue();
       this.saveDataImpactRisk(impactRisk);
-
+      this.customSnackMessage.openSnackBar(' Creado correctamente');
+      this.dialogRef.close(impactRisk);
     }
   }
 
@@ -81,7 +86,6 @@ export class ImpactDialogComponent implements OnInit {
   closeModal() {
     this.dialogRef.close();
   }
-
 
 }
 

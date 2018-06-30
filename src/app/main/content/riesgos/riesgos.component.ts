@@ -1,6 +1,5 @@
 import {Component, OnInit } from '@angular/core';
 import {ProcessesService} from '../processes/services/processes.service';
-import {TreeModel} from 'ng2-tree';
 
 @Component({
   selector: 'riesgos-classes',

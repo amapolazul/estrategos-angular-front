@@ -4,6 +4,8 @@ import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {CausesRiskModel} from '../model/causes-risk.model';
 import {CausesRiskService} from '../service/causes-risk.service';
 import {FormType} from '../../../commons/form-type.enum';
+import {CustomSnackBarMessages} from '../../../commons/messages.service';
+
 
 @Component({
   selector: 'causes-risk-dialog',
@@ -20,6 +22,7 @@ export class CausesDialogComponent implements OnInit {
     private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<CausesDialogComponent>,
     private causesRiskService: CausesRiskService,
+    private customSnackMessage: CustomSnackBarMessages,
     @Inject(MAT_DIALOG_DATA) private data: any
   ) {
   }
@@ -41,9 +44,13 @@ export class CausesDialogComponent implements OnInit {
       let causesRisk = <CausesRiskModel> this.composeForm.getRawValue();
       causesRisk = this.mergeData(causesRisk);
       this.updateDataCausesRisk(causesRisk);
+      this.customSnackMessage.openSnackBar(' Editado correctamente');
+      this.dialogRef.close(causesRisk);
     } else {
       const causesRisk = <CausesRiskModel> this.composeForm.getRawValue();
       this.saveDataCausesRisk(causesRisk);
+      this.customSnackMessage.openSnackBar(' Creado correctamente');
+      this.dialogRef.close(causesRisk);
     }
   }
 

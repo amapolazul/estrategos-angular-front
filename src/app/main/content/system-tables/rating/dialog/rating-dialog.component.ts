@@ -3,6 +3,9 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {RatingRiskModel} from '../../rating/model/rating-risk.model';
 import { RatingRiskService } from '../../../system-tables/rating/service/rating-risk.service';
+import {CustomSnackBarMessages} from '../../../commons/messages.service';
+import {FormType} from '../../../commons/form-type.enum';
+
 
 @Component({
   selector: 'rating-dialog',
@@ -20,6 +23,7 @@ export class RatingDialogComponent implements OnInit {
     private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<RatingDialogComponent>,
     private ratingRiskService: RatingRiskService,
+    private customSnackMessage: CustomSnackBarMessages,
     @Inject(MAT_DIALOG_DATA) private data: any
   ) {
   }
@@ -32,16 +36,25 @@ export class RatingDialogComponent implements OnInit {
       color: [''],
       accion_tomar: ['']
     });
-    if (this.data) {
+    if (this.data && this.data.formType === FormType.edit) {
       this.ratingRiskModel = this.data.product;
       this.dataForm();
     }
   }
 
   saveRatingRisk() {
-    const ratingRisk = <RatingRiskModel> this.composeForm.getRawValue();
-    this.saveDataRatingRisk(ratingRisk);
-    this.dialogRef.close(ratingRisk);
+    if (this.data && this.data.formType === FormType.edit) {
+      let ratingRisk = <RatingRiskModel> this.composeForm.getRawValue();
+      ratingRisk = this.mergeData(ratingRisk);
+      this.updateDataRatingRisk(ratingRisk);
+      this.customSnackMessage.openSnackBar(' Editado correctamente');
+      this.dialogRef.close(ratingRisk);
+    } else {
+      const ratingRisk = <RatingRiskModel> this.composeForm.getRawValue();
+      this.saveDataRatingRisk(ratingRisk);
+      this.customSnackMessage.openSnackBar(' Creado correctamente');
+      this.dialogRef.close(ratingRisk);
+    }
   }
 
   saveDataRatingRisk(ratingRisk) {
@@ -49,6 +62,18 @@ export class RatingDialogComponent implements OnInit {
       this.restData = data;
       console.log(this.restData);
     });
+  }
+
+  updateDataRatingRisk(ratingRisk) {
+    this.ratingRiskService.updateRatingRisk(ratingRisk).subscribe((data: any) => {
+      this.restData = data;
+      this.dialogRef.close(ratingRisk);
+    });
+  }
+
+  private mergeData(newData: RatingRiskModel) {
+    newData.id = this.ratingRiskModel.id;
+    return newData;
   }
 
   private dataForm() {
