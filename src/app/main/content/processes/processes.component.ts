@@ -71,7 +71,8 @@ export class ProcessesComponent implements OnInit{
 
     } else {
       this.processService.createFullProcesses(processRequest).subscribe((x) => {
-        console.log('guardado correctamente');
+        this.customSnackMessage.openSnackBar('Proceso creado correctamente');
+        this.router.navigate(['home']);
       });
     }
 
