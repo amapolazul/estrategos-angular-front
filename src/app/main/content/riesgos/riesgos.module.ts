@@ -5,6 +5,7 @@ import { RiesgosComponent } from './riesgos.component';
 import {RiesgosListsComponent} from './tabs/listado/riesgos-lists.component';
 import {EjerciciosListsComponent} from './tabs/ejercicios/ejercicios-lists.component';
 
+
 const routes: Routes = [
     {
         path     : 'riesgos',
@@ -19,10 +20,11 @@ const routes: Routes = [
     declarations: [
         RiesgosComponent,
         RiesgosListsComponent,
-        EjerciciosListsComponent
+        EjerciciosListsComponent,
+
     ],
     entryComponents: [
-
+        EjerciciosListsComponent
     ]
 })
 export class RiesgosModule

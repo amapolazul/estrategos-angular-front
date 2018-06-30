@@ -1,0 +1,43 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">Ejercicios  de evaluacion de riesgos</span>
+            <button mat-button class="mat-icon-button" (click)="dialogRef.close()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </mat-toolbar>
+
+  estatus
+
+    <div mat-dialog-content class="p-24 m-0">
+        <form name="composeForm" [formGroup]="composeForm" class="compose-form" fxLayout="column" fxFlex>
+
+          <mat-form-field>
+              <input matInput name="bcc" placeholder="Calificacion del riesgo " formControlName="fecha_creacion" >
+          </mat-form-field>
+
+            <mat-form-field>
+                <textarea matInput name="message" placeholder="Acción a tomar" formControlName="descripcion_ejercicio" rows="4">
+                </textarea>
+            </mat-form-field>
+
+            <mat-select placeholder="Estatus">
+              <mat-option>Seleccione un estado</mat-option>
+              <mat-option *ngFor="let riesgo of listadoRiesgos" [value]="riesgo.proceso_Id">
+                {{ riesgo.proceso_Nombre }}
+              </mat-option>
+            </mat-select>
+            <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="space-between center">
+                <div>
+                    <button mat-raised-button class="save-button mat-accent" aria-label="Guardar" (click)="saveEjercicio()">
+                        Guardar
+                    </button>
+                    <button mat-raised-button class="save-button mat-accent" aria-label="Cancelar" (click)="closeModal()">
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </form>
+        <div>
+</div>

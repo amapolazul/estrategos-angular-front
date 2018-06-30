@@ -17,6 +17,7 @@ import { ImpactRiskService } from './content/system-tables/impact/service/impact
 import { CausesRiskService } from './content/system-tables/causes/service/causes-risk.service';
 import { RatingRiskService } from './content/system-tables/rating/service/rating-risk.service';
 import {CustomSnackBarMessages} from './content/commons/messages.service';
+import {EjercicioService} from './content/riesgos/tabs/ejercicios/service/ejercicio.service';
 
 @NgModule({
     declarations: [
@@ -46,6 +47,7 @@ import {CustomSnackBarMessages} from './content/commons/messages.service';
         ImpactRiskService,
         CausesRiskService,
         RatingRiskService,
+        EjercicioService,
         CustomSnackBarMessages
     ],
     exports     : [

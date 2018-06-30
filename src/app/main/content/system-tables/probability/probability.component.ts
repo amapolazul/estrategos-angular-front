@@ -6,16 +6,16 @@ import {FormType} from '../../commons/form-type.enum';
 
 
 @Component({
-    selector: 'risk-probability',
-    templateUrl: './probability.component.html',
-    styleUrls: ['./probability.component.scss']
+  selector: 'risk-probability',
+  templateUrl: './probability.component.html',
+  styleUrls: ['./probability.component.scss']
 })
 export class SystemProbabilityComponent implements OnInit {
-    probabilityRisk: any[];
-    temp: any[];
-    dialogRef: any;
-    loadingIndicator = true;
-    reorderable = true;
+  probabilityRisk: any[];
+  temp: any[];
+  dialogRef: any;
+  loadingIndicator = true;
+  reorderable = true;
 
   constructor(private probabilityRiskService: ProbabilityRiskService, public dialog: MatDialog) {
 
@@ -81,4 +81,3 @@ export class SystemProbabilityComponent implements OnInit {
     this.probabilityRisk = temp;
   }
 }
-
