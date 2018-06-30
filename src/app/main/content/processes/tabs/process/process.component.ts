@@ -14,7 +14,7 @@ import {Proceso} from '../../models/process.model';
 export class ProcessComponent implements OnInit {
   form: FormGroup;
   formErrors: any;
-  fileToUpload1: File = null;
+  attached_file: File = null;
   responsables: Observable<Responsable[]>;
   processForm: FormGroup;
 
@@ -47,6 +47,13 @@ export class ProcessComponent implements OnInit {
 
     this.responsables = this.responsablesService.getAllResponsables();
 
+  }
+
+  handleFileInput(files: FileList) {
+    this.attached_file =  files.item(0);
+    this.processForm.patchValue({
+      proceso_Documento : this.attached_file.name
+    });
   }
 
   getProcessName(value) {

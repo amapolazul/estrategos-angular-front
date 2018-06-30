@@ -16,6 +16,7 @@ import { ProbabilityRiskService } from './content/system-tables/probability/serv
 import { ImpactRiskService } from './content/system-tables/impact/service/impact-risk.service';
 import { CausesRiskService } from './content/system-tables/causes/service/causes-risk.service';
 import { RatingRiskService } from './content/system-tables/rating/service/rating-risk.service';
+import {CustomSnackBarMessages} from './content/commons/messages.service';
 
 @NgModule({
     declarations: [
@@ -44,7 +45,8 @@ import { RatingRiskService } from './content/system-tables/rating/service/rating
         ProbabilityRiskService,
         ImpactRiskService,
         CausesRiskService,
-        RatingRiskService
+        RatingRiskService,
+        CustomSnackBarMessages
     ],
     exports     : [
         FuseMainComponent
