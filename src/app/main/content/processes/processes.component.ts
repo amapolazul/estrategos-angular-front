@@ -75,10 +75,6 @@ export class ProcessesComponent implements OnInit{
         this.router.navigate(['home']);
       });
     }
-
-
-
-
   }
 
   private createProcessesRequest(processes: Proceso, products: ProductoServicio[], charact: Caracterizacion[]) {
