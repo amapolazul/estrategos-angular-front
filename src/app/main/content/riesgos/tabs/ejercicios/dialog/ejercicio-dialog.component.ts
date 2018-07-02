@@ -54,7 +54,7 @@ export class EjercicioDialogComponent implements OnInit {
       this.customSnackMessage.openSnackBar(' Editado correctamente');
       this.dialogRef.close(ejercicio);
     } else {
-      const ejercicio = <EjercicioModel> this.composeForm.getRawValue();;
+      const ejercicio = <EjercicioModel> this.composeForm.getRawValue();
       ejercicio.fecha_creacion_ejercicio = new Date().getTime();
       ejercicio.proceso_id = this.selectedProcess.proceso_Id;
       this.saveDataEjercicio(ejercicio).subscribe((x) => {
