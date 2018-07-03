@@ -4,6 +4,8 @@ import {EjercicioService} from './service/ejercicio.service';
 import {EjercicioDialogComponent} from './dialog/ejercicio-dialog.component';
 import {Proceso} from '../../../processes/models/process.model';
 import {EjercicioModel} from './model/ejercicio.model';
+import {FormType} from '../../../commons/form-type.enum';
+import {ImpactDialogComponent} from '../../../system-tables/impact/dialog/impact-dialog.component';
 
 @Component({
   selector: 'ejercicios-lists',
@@ -43,6 +45,34 @@ export class EjerciciosListsComponent  implements OnInit {
           this.listEjerciciosProceso();
         });
     }
+
+  edit(row, rowIndex){
+    const process = row;
+    this.dialogRef = this.dialog.open(EjercicioDialogComponent, {
+      panelClass: 'ejercicio-dialog',
+      data : {
+        formType : FormType.edit,
+        proceso: process
+      }
+    });
+
+    this.dialogRef.afterClosed()
+      .subscribe(response => {
+        this.ejerciciosList[rowIndex] = response;
+        this.ejerciciosList = [...this.ejerciciosList];
+        this.loadingIndicator = false;
+      });
+  }
+
+  delete(row, rowIndex)  {
+    this.ejercicioService.deleteEjercicio(row.id).subscribe((data: any) => {
+      console.log(data);
+    });
+    if (rowIndex > -1) {
+      this.ejerciciosList.splice(rowIndex, 1);
+      this.ejerciciosList = [...this.ejerciciosList];
+    }
+  }
 
   listEjerciciosProceso() {
     this.ejercicioService.getEjerciciosPorProceso(this.process.proceso_Id).subscribe((data) => {
