@@ -30,6 +30,7 @@ import { DialogContentExampleDialog, DialogContentExample } from '../../../../..
 import { DialogDataExampleDialog, DialogDataExample } from '../../../../../assets/angular-material-examples/dialog-data/dialog-data-example';
 import { DialogElementsExampleDialog, DialogElementsExample } from '../../../../../assets/angular-material-examples/dialog-elements/dialog-elements-example';
 import { DialogOverviewExampleDialog, DialogOverviewExample } from '../../../../../assets/angular-material-examples/dialog-overview/dialog-overview-example';
+import { DialogOverviewConfirmDialog, DialogOverviewConfirm } from '../../../../../assets/angular-material-examples/dialog-confirm/dialog-confirm';
 import { ElevationOverviewExample } from '../../../../../assets/angular-material-examples/elevation-overview/elevation-overview-example';
 import { ExpansionOverviewExample } from '../../../../../assets/angular-material-examples/expansion-overview/expansion-overview-example';
 import { ExpansionStepsExample } from '../../../../../assets/angular-material-examples/expansion-steps/expansion-steps-example';
@@ -464,6 +465,12 @@ export const EXAMPLE_COMPONENTS = {
         component      : DialogOverviewExample,
         additionalFiles: ['dialog-overview-example-dialog.html'],
         selectorName   : 'DialogOverviewExample, DialogOverviewExampleDialog'
+    },
+    'dialog-confirm'              : {
+      title          : 'Dialog Confirm',
+      component      : DialogOverviewConfirm,
+      additionalFiles: ['dialog-confirm-dialog.html'],
+      selectorName   : 'DialogOverviewConfirm, DialogOverviewConfirmDialog'
     },
     'elevation-overview'           : {
         title          : 'Elevation CSS classes',
@@ -944,6 +951,7 @@ export const EXAMPLE_LIST = [
     DialogDataExampleDialog, DialogDataExample,
     DialogElementsExampleDialog, DialogElementsExample,
     DialogOverviewExampleDialog, DialogOverviewExample,
+    DialogOverviewConfirmDialog, DialogOverviewConfirm,
     ElevationOverviewExample,
     ExpansionOverviewExample,
     ExpansionStepsExample,
