@@ -13,6 +13,10 @@ import { ImpactDialogComponent } from './impact/dialog/impact-dialog.component';
 import { ProbabilityDialogComponent } from './probability/dialog/probability-dialog.component';
 import { RatingDialogComponent } from './rating/dialog/rating-dialog.component';
 import { TypesDialogComponent } from './types/dialog/types-dialog.component';
+import { ControlsDialogComponent } from './controls/dialog/controls-dialog.component';
+import { SystemControlsComponent } from './controls/controls.component';
+import {SystemResponseComponent} from './response/response.component';
+import {ResponseDialogComponent} from './response/dialog/response-dialog.component';
 
 const routes = [
   {
@@ -34,6 +38,14 @@ const routes = [
   {
     path     : 'tablas-sistema/tipos',
     component: SystemTypesComponent
+  },
+  {
+    path     : 'tablas-sistema/niveles-controles',
+    component: SystemControlsComponent
+  },
+  {
+    path     : 'tablas-sistema/respuestas-riesgo',
+    component: SystemResponseComponent
   }
 ];
 
@@ -51,18 +63,24 @@ const routes = [
     SystemProbabilityComponent,
     SystemRatingComponent,
     SystemTypesComponent,
+    SystemControlsComponent,
+    SystemResponseComponent,
     CausesDialogComponent,
     ImpactDialogComponent,
     ProbabilityDialogComponent,
     RatingDialogComponent,
-    TypesDialogComponent
+    TypesDialogComponent,
+    ControlsDialogComponent,
+    ResponseDialogComponent,
   ],
   entryComponents: [
     CausesDialogComponent,
     ImpactDialogComponent,
     ProbabilityDialogComponent,
     RatingDialogComponent,
-    TypesDialogComponent
+    TypesDialogComponent,
+    ControlsDialogComponent,
+    ResponseDialogComponent
   ]
 })
 export class SystemTablesModule
