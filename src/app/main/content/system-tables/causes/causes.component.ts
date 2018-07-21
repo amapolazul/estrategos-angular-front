@@ -33,7 +33,7 @@ export class SystemCausesComponent implements OnInit {
 
   causesDialog() {
     this.dialogRef = this.dialog.open(CausesDialogComponent, {
-      panelClass: 'causes-dialog'
+      panelClass: 'causes-tabs-riesgo'
     });
     this.dialogRef.afterClosed()
       .subscribe(response => {
@@ -45,7 +45,7 @@ export class SystemCausesComponent implements OnInit {
     console.log(rowIndex);
     const causesRisk = row;
     this.dialogRef = this.dialog.open(CausesDialogComponent, {
-      panelClass: 'causes-dialog',
+      panelClass: 'causes-tabs-riesgo',
       data : {
         formType : FormType.edit,
         causesRisk : causesRisk

@@ -33,7 +33,7 @@ export class SystemControlsComponent implements OnInit {
 
   controlsDialog() {
     this.dialogRef = this.dialog.open(ControlsDialogComponent, {
-      panelClass: 'controls-dialog'
+      panelClass: 'controls-tabs-riesgo'
     });
     this.dialogRef.afterClosed()
       .subscribe(response => {
@@ -45,7 +45,7 @@ export class SystemControlsComponent implements OnInit {
     console.log(rowIndex);
     const controlsRisk = row;
     this.dialogRef = this.dialog.open(ControlsDialogComponent, {
-      panelClass: 'controls-dialog',
+      panelClass: 'controls-tabs-riesgo',
       data : {
         formType : FormType.edit,
         controlsRisk : controlsRisk

@@ -449,7 +449,7 @@ export const EXAMPLE_COMPONENTS = {
         selectorName   : 'DialogContentExample, DialogContentExampleDialog'
     },
     'dialog-data'                  : {
-        title          : 'Injecting data when opening a dialog',
+        title          : 'Injecting data when opening a tabs-riesgo',
         component      : DialogDataExample,
         additionalFiles: ['dialog-data-example-dialog.html'],
         selectorName   : 'DialogDataExample, DialogDataExampleDialog'

@@ -5,7 +5,6 @@ import {EjercicioDialogComponent} from './dialog/ejercicio-dialog.component';
 import {Proceso} from '../../../processes/models/process.model';
 import {EjercicioModel} from './model/ejercicio.model';
 import {FormType} from '../../../commons/form-type.enum';
-import {ImpactDialogComponent} from '../../../system-tables/impact/dialog/impact-dialog.component';
 
 @Component({
   selector: 'ejercicios-lists',

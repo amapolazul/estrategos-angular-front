@@ -6,6 +6,7 @@ import {RiesgosListsComponent} from './tabs/listado/riesgos-lists.component';
 import {EjerciciosListsComponent} from './tabs/ejercicios/ejercicios-lists.component';
 import {EjercicioDialogComponent} from './tabs/ejercicios/dialog/ejercicio-dialog.component';
 import {AdministracionListsComponent} from './tabs/administracion/administracion-lists.component';
+import {DeclaracionComponent} from './tabs/administracion/declaracion/declaracion.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,10 @@ const routes: Routes = [
     {
       path     : 'administracion-riesgos',
       component: AdministracionListsComponent
+    },
+    {
+      path     : 'declaracion-riesgos',
+      component: DeclaracionComponent
     }
 
 ];
@@ -29,13 +34,15 @@ const routes: Routes = [
         RiesgosListsComponent,
         EjercicioDialogComponent,
         EjerciciosListsComponent,
-        AdministracionListsComponent
+        AdministracionListsComponent,
+        DeclaracionComponent
 
     ],
     entryComponents: [
         EjercicioDialogComponent,
         EjerciciosListsComponent,
-        AdministracionListsComponent
+        AdministracionListsComponent,
+        DeclaracionComponent
     ]
 })
 export class RiesgosModule

@@ -72,7 +72,7 @@ export class SystemTypesComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      console.log('The tabs-riesgo was closed');
       this.deleteRow(result, row, rowIndex);
     });
 

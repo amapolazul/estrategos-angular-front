@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 
 /**
- * @title Injecting data when opening a dialog
+ * @title Injecting data when opening a tabs-riesgo
  */
 @Component({
     selector   : 'dialog-data-example',

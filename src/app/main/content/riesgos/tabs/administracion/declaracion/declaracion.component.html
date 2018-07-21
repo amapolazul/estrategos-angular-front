@@ -1,0 +1,51 @@
+<div id="declaracion-classes" class="page-layout simple tabbed" fxLayout="column">
+  <!-- CONTENT -->
+  <div class="content">
+
+    <div class="content p-24">
+          <div>
+            <mat-form-field fxFlex="">
+              <input matInput name="bcc" placeholder="Proceso / Subproceso" disabled fxFlex="">
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field>
+              <input matInput name="bcc" placeholder="Fecha" disabled>
+            </mat-form-field>
+            <mat-form-field fxFlex="">
+              <input matInput name="bcc" placeholder="Nombre del ejercicio" disabled>
+            </mat-form-field>
+          </div>
+    </div>
+
+    <mat-tab-group dynamicHeight="true">
+
+      <mat-tab label="Declaracion">
+        <riesgos-lists #declaracion ></riesgos-lists>
+      </mat-tab>
+
+      <mat-tab label="Causas">
+        <riesgos-lists #causas ></riesgos-lists>
+      </mat-tab>
+
+      <mat-tab label="Efectos">
+        <riesgos-lists #efectos ></riesgos-lists>
+      </mat-tab>
+
+      <mat-tab label="Controles">
+        <riesgos-lists #controles ></riesgos-lists>
+      </mat-tab>
+
+    </mat-tab-group>
+  </div>
+  <div class="button-row" fxLayoutAlign="center center" fxLayout="row" style="color:#fff">
+    <button mat-raised-button color="primary">
+      <mat-icon aria-label="save icon">save</mat-icon>
+      Guardar
+    </button>
+    <button mat-raised-button color="warn">
+      <mat-icon aria-label="save icon">cancel</mat-icon>
+      Salir
+    </button>
+  </div>
+</div>
