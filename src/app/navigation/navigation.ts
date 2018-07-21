@@ -25,7 +25,21 @@ export const navigation = [
                 'title': 'Riesgos',
                 'type': 'item',
                 'icon': 'access_alarm',
-                'url': '/riesgos'
+                'url': '/riesgos',
+                'children' : [
+                    {
+                      'id'        : 'riesgos',
+                      'title'     : 'Administracion del riesgo',
+                      'type'      : 'item',
+                      'url'       : 'administracion-riesgos',
+                    },
+                    {
+                      'id'        : 'riesgos',
+                      'title'     : 'Declaracion del riesgo',
+                      'type'      : 'item',
+                      'url'       : 'declaracion-riesgos',
+                    }
+                  ]
             },
           /*
           {
