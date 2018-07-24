@@ -40,9 +40,11 @@ export class SystemImpactComponent implements OnInit{
     });
     this.dialogRef.afterClosed()
       .subscribe(response => {
-        this.impactRisk.push(response);
-        this.impactRisk = [...this.impactRisk];
-        this.loadingIndicator = false;
+        if( response ) {
+          this.impactRisk.push(response);
+          this.impactRisk = [...this.impactRisk];
+          this.loadingIndicator = false;
+        }
       });
   }
 
@@ -59,9 +61,11 @@ export class SystemImpactComponent implements OnInit{
 
     this.dialogRef.afterClosed()
       .subscribe(response => {
-        this.impactRisk[rowIndex] = response;
-        this.impactRisk = [...this.impactRisk];
-        this.loadingIndicator = false;
+        if( response ) {
+          this.impactRisk[rowIndex] = response;
+          this.impactRisk = [...this.impactRisk];
+          this.loadingIndicator = false;
+        }
       });
   }
 

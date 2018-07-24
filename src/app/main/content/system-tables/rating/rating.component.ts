@@ -35,9 +35,9 @@ export class SystemRatingComponent implements OnInit {
     });
     this.dialogRef.afterClosed()
       .subscribe(response => {
-        this.ratingTypes.push(response);
-        this.ratingTypes = [...this.ratingTypes];
-        this.loadingIndicator = false;
+        if( response ) {
+          this.ngOnInit();
+        }
       });
   }
 
@@ -54,10 +54,11 @@ export class SystemRatingComponent implements OnInit {
 
     this.dialogRef.afterClosed()
       .subscribe(response => {
-        console.log(response);
-        this.ratingTypes[rowIndex] = response;
-        this.ratingTypes = [...this.ratingTypes];
-        this.loadingIndicator = false;
+        if( response ) {
+          this.ratingTypes[rowIndex] = response;
+          this.ratingTypes = [...this.ratingTypes];
+          this.loadingIndicator = false;
+        }
       });
   }
 

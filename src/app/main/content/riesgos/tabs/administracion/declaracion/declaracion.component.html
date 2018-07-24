@@ -13,7 +13,7 @@
               <input matInput name="bcc" placeholder="Fecha" disabled>
             </mat-form-field>
             <mat-form-field fxFlex="">
-              <input matInput name="bcc" placeholder="Nombre del ejercicio" disabled>
+              <input matInput name="bcc" placeholder="Factor de riesgo" disabled>
             </mat-form-field>
           </div>
     </div>
@@ -25,15 +25,15 @@
       </mat-tab>
 
       <mat-tab label="Causas">
-        <riesgos-lists #causas></riesgos-lists>
+        <causas-lists #causas></causas-lists>
       </mat-tab>
 
       <mat-tab label="Efectos">
-        <riesgos-lists #efectos></riesgos-lists>
+        <efectos-lists #efecto></efectos-lists>
       </mat-tab>
 
       <mat-tab label="Controles">
-        <riesgos-lists #controles></riesgos-lists>
+        <controles-lists #controles></controles-lists>
       </mat-tab>
 
     </mat-tab-group>

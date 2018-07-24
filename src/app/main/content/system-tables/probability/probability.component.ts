@@ -36,9 +36,11 @@ export class SystemProbabilityComponent implements OnInit {
     });
     this.dialogRef.afterClosed()
       .subscribe(response => {
-        this.probabilityRisk.push(response);
-        this.probabilityRisk = [...this.probabilityRisk];
-        this.loadingIndicator = false;
+        if( response ) {
+          this.probabilityRisk.push(response);
+          this.probabilityRisk = [...this.probabilityRisk];
+          this.loadingIndicator = false;
+        }
       });
   }
 
@@ -55,9 +57,11 @@ export class SystemProbabilityComponent implements OnInit {
 
     this.dialogRef.afterClosed()
       .subscribe(response => {
-        this.probabilityRisk[rowIndex] = response;
-        this.probabilityRisk = [...this.probabilityRisk];
-        this.loadingIndicator = false;
+        if( response ) {
+          this.probabilityRisk[rowIndex] = response;
+          this.probabilityRisk = [...this.probabilityRisk];
+          this.loadingIndicator = false;
+        }
       });
   }
 

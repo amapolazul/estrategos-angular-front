@@ -37,7 +37,9 @@ export class SystemCausesComponent implements OnInit {
     });
     this.dialogRef.afterClosed()
       .subscribe(response => {
-        this.ngOnInit();
+        if( response ) {
+          this.ngOnInit();
+        }
       });
   }
 
@@ -54,10 +56,12 @@ export class SystemCausesComponent implements OnInit {
 
     this.dialogRef.afterClosed()
       .subscribe(response => {
-        console.log(response);
-        this.causesRisk[rowIndex] = response;
-        this.causesRisk = [...this.causesRisk];
-        this.loadingIndicator = false;
+        if( response ){
+          console.log(response);
+          this.causesRisk[rowIndex] = response;
+          this.causesRisk = [...this.causesRisk];
+          this.loadingIndicator = false;
+        }
       });
   }
 

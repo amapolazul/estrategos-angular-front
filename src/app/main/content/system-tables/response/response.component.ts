@@ -37,7 +37,9 @@ export class SystemResponseComponent implements OnInit {
     });
     this.dialogRef.afterClosed()
       .subscribe(response => {
-        this.ngOnInit();
+        if( response ) {
+          this.ngOnInit();
+        }
       });
   }
 
@@ -54,10 +56,12 @@ export class SystemResponseComponent implements OnInit {
 
     this.dialogRef.afterClosed()
       .subscribe(response => {
-        console.log(response);
-        this.responseRisk[rowIndex] = response;
-        this.responseRisk = [...this.responseRisk];
-        this.loadingIndicator = false;
+        if( response ) {
+          console.log(response);
+          this.responseRisk[rowIndex] = response;
+          this.responseRisk = [...this.responseRisk];
+          this.loadingIndicator = false;
+        }
       });
   }
 

@@ -39,9 +39,11 @@ export class SystemTypesComponent implements OnInit {
     });
     this.dialogRef.afterClosed()
       .subscribe(response => {
-        this.riskTypes.push(response);
-        this.riskTypes = [...this.riskTypes];
-        this.loadingIndicator = false;
+        if( response ) {
+          this.riskTypes.push(response);
+          this.riskTypes = [...this.riskTypes];
+          this.loadingIndicator = false;
+        }
       });
   }
 
@@ -58,10 +60,12 @@ export class SystemTypesComponent implements OnInit {
 
     this.dialogRef.afterClosed()
       .subscribe(response => {
-        console.log(response);
-        this.riskTypes[rowIndex] = response;
-        this.riskTypes = [...this.riskTypes];
-        this.loadingIndicator = false;
+        if( response ){
+          console.log(response);
+          this.riskTypes[rowIndex] = response;
+          this.riskTypes = [...this.riskTypes];
+          this.loadingIndicator = false;
+        }
       });
   }
 
