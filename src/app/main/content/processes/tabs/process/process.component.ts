@@ -5,6 +5,7 @@ import {Responsable} from '../../../responsables/models/responsables.model';
 import {ResponsablesService} from '../../../responsables/responsables.service';
 import {Observable} from 'rxjs/Observable';
 import {Proceso} from '../../models/process.model';
+import {ProcessCache} from '../../services/process-cache.service';
 
 @Component({
   selector: 'process-classes',
@@ -22,7 +23,8 @@ export class ProcessComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private http: HttpClient,
-              private responsablesService: ResponsablesService) {
+              private responsablesService: ResponsablesService,
+              private processCache: ProcessCache) {
     //  this.httpclient = http;
     this.formErrors = {
       proceso_Nombre: {},
@@ -56,7 +58,8 @@ export class ProcessComponent implements OnInit {
     });
   }
 
-  getProcessName(value) {
-
+  setProcessName(event) {
+    const processName = event.target.value;
+    this.processCache.setProcessName(processName);
   }
 }

@@ -38,10 +38,12 @@ export class CharacterizationComponent implements OnInit {
     });
     this.dialogRef.afterClosed()
       .subscribe(response => {
-        this.loadingIndicator = true;
-        this.rows.push(response);
-        this.rows = [...this.rows];
-        this.loadingIndicator = false;
+        if (response) {
+          this.loadingIndicator = true;
+          this.rows.push(response);
+          this.rows = [...this.rows];
+          this.loadingIndicator = false;
+        }
       });
   }
 
@@ -56,10 +58,12 @@ export class CharacterizationComponent implements OnInit {
     });
     this.dialogRef.afterClosed()
       .subscribe(response => {
-        this.loadingIndicator = true;
-        this.rows[rowIndex] = response;
-        this.rows = [...this.rows];
-        this.loadingIndicator = false;
+        if (response) {
+          this.loadingIndicator = true;
+          this.rows[rowIndex] = response;
+          this.rows = [...this.rows];
+          this.loadingIndicator = false;
+        }
       });
   }
 
@@ -83,10 +87,11 @@ export class CharacterizationComponent implements OnInit {
 
     this.dialogRef.afterClosed()
       .subscribe(response => {
-        console.log(response);
-        this.rows[rowIndex] = response;
-        this.rows = [...this.rows];
-        this.loadingIndicator = false;
+        if (response) {
+          this.rows[rowIndex] = response;
+          this.rows = [...this.rows];
+          this.loadingIndicator = false;
+        }
       });
   }
 }

@@ -9,7 +9,7 @@
             <form name="form" layout-align="column" fxFlex="100" [formGroup]="processForm">
                 <div fxLayout="column" fxFlex="1 0 auto">
                     <mat-form-field fxFlex="100">
-                        <input matInput placeholder="Proceso / Sub proceso" formControlName="proceso_Nombre" required>
+                        <input matInput placeholder="Proceso / Sub proceso" formControlName="proceso_Nombre" required (input)="setProcessName($event)">
                         <mat-error *ngIf="formErrors.proceso_Nombre.required">
                             Proceso / sub proceso es requerido !
                         </mat-error>

@@ -3,6 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ProductoServicio} from '../../../models/process.model';
 import {FormType} from '../../../../commons/form-type.enum';
+import {ProcessCache} from '../../../services/process-cache.service';
 
 @Component({
     selector     : 'product-dialog',
@@ -20,6 +21,7 @@ export class DialogComponent implements OnInit
     constructor(
         private formBuilder: FormBuilder,
         public dialogRef: MatDialogRef<DialogComponent>,
+        private processCache: ProcessCache,
         @Inject(MAT_DIALOG_DATA) private data: any
     )
     {  }
@@ -27,15 +29,22 @@ export class DialogComponent implements OnInit
     ngOnInit()
     {
       this.composeForm = this.formBuilder.group({
-        proceso_Nombre: [''],
-        producto_Servicio_nombre: [''],
-        producto_Servicio_Codigo: [''],
-        producto_Caracteristicas: ['']
+        proceso_Nombre: [{value: '', disabled: true}],
+        producto_Servicio_nombre: '',
+        producto_Servicio_Codigo: '',
+        producto_Caracteristicas: ''
       });
       if ( this.data && this.data.formType === FormType.edit ) {
         this.isEditing = true;
         this.productoServicio = this.data.product;
         this.llenarFormulario();
+      } else {
+        this.composeForm.setValue({
+          proceso_Nombre : this.processCache.getProcessName() || '',
+          producto_Servicio_nombre : '',
+          producto_Servicio_Codigo : '',
+          producto_Caracteristicas : ''
+        });
       }
     }
 

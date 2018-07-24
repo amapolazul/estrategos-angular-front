@@ -4,6 +4,7 @@ import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import {Caracterizacion, DocumentoCaracterizacion, ProductoServicio} from '../../../../models/process.model';
 import {FormType} from '../../../../../commons/form-type.enum';
+import {ProcessCache} from '../../../../services/process-cache.service';
 
 @Component({
     selector     : 'characterization-dialog',
@@ -21,6 +22,7 @@ export class CharacterizationDialogComponent implements OnInit
     constructor(
         private formBuilder: FormBuilder,
         public dialogRef: MatDialogRef<CharacterizationDialogComponent>,
+        private processCache: ProcessCache,
         @Inject(MAT_DIALOG_DATA) private data: any
 
     )
@@ -28,7 +30,7 @@ export class CharacterizationDialogComponent implements OnInit
 
     ngOnInit() {
       this.composeForm = this.formBuilder.group({
-        procedimiento_Nombre: [''],
+        procedimiento_Nombre: [{value: '', disabled: true}],
         procedimiento_Codigo: [''],
         procedimiento_Objetivo: [''],
       });
@@ -37,6 +39,12 @@ export class CharacterizationDialogComponent implements OnInit
         this.isEditing = true;
         this.caracterizacion = this.data.caracterizacion;
         this.llenarFormulario();
+      } else {
+        this.composeForm.setValue({
+          procedimiento_Nombre: this.processCache.getProcessName() || '',
+          procedimiento_Codigo: '',
+          procedimiento_Objetivo: ''
+        });
       }
     }
 
