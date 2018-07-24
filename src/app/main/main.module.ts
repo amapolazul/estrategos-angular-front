@@ -18,6 +18,8 @@ import { CausesRiskService } from './content/system-tables/causes/service/causes
 import { RatingRiskService } from './content/system-tables/rating/service/rating-risk.service';
 import {CustomSnackBarMessages} from './content/commons/messages.service';
 import {EjercicioService} from './content/riesgos/tabs/ejercicios/service/ejercicio.service';
+import {ResponseRiskService} from './content/system-tables/response/service/response-risk.service';
+import {ControlsRiskService} from './content/system-tables/controls/service/controls-risk.service';
 
 @NgModule({
     declarations: [
@@ -48,6 +50,8 @@ import {EjercicioService} from './content/riesgos/tabs/ejercicios/service/ejerci
         CausesRiskService,
         RatingRiskService,
         EjercicioService,
+        ResponseRiskService,
+        ControlsRiskService,
         CustomSnackBarMessages
     ],
     exports     : [

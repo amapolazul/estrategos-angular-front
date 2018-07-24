@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {TypesDialogComponent} from '../types/dialog/types-dialog.component';
-import {MatDialog} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {TypesRiskService} from '../../system-tables/types/service/types-risk.service';
 import {FormType} from '../../commons/form-type.enum';
+import { DialogOverviewConfirmDialog, DialogOverviewConfirm } from '../../../../../assets/angular-material-examples/dialog-confirm/dialog-confirm';
 
 @Component({
   selector: 'risk-types',
@@ -15,6 +16,7 @@ export class SystemTypesComponent implements OnInit {
   dialogRef: any;
   loadingIndicator = true;
   reorderable = true;
+  name :any;
 
   constructor(private typesRiskService: TypesRiskService, public dialog: MatDialog) {
 
@@ -64,13 +66,29 @@ export class SystemTypesComponent implements OnInit {
   }
 
   delete(row, rowIndex) {
-    this.typesRiskService.deleteTypeRisk(row.id).subscribe((data: any) => {
-      console.log(data);
+    const dialogRef = this.dialog.open(DialogOverviewConfirmDialog, {
+      width: '250px',
+      data: { name: row.tipo_riesgo }
     });
-    if (rowIndex > -1) {
-      this.riskTypes.splice(rowIndex, 1);
-      this.riskTypes = [...this.riskTypes];
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The tabs-riesgo was closed');
+      this.deleteRow(result, row, rowIndex);
+    });
+
+  }
+
+  deleteRow(result, row, rowIndex){
+    if( result === undefined){
+       this.typesRiskService.deleteTypeRisk(row.id).subscribe((data: any) => {
+       console.log(data);
+      });
+      if (rowIndex > -1) {
+        this.riskTypes.splice(rowIndex, 1);
+        this.riskTypes = [...this.riskTypes];
+      }
     }
+
   }
 
   updateFilter(event) {
@@ -83,3 +101,4 @@ export class SystemTypesComponent implements OnInit {
     this.riskTypes = temp;
   }
 }
+

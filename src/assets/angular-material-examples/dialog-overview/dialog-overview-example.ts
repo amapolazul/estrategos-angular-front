@@ -29,7 +29,7 @@ export class DialogOverviewExample
         });
 
         dialogRef.afterClosed().subscribe(result => {
-            console.log('The dialog was closed');
+            console.log('The tabs-riesgo was closed');
             this.animal = result;
         });
     }

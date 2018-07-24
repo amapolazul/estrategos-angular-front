@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>¿ Desea eliminar ? </h1>
+<div mat-dialog-content>
+    <p>{{data.name}}</p>
+</div>
+<div mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="data.name" tabindex="2">Cancelar</button>
+    <button mat-button class="mat-warn" (click)="onNoClick()" tabindex="-1">Eliminar</button>
+</div>
