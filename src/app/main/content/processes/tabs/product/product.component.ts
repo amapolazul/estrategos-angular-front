@@ -39,9 +39,11 @@ export class ProductComponent implements OnInit
         });
         this.dialogRef.afterClosed()
             .subscribe(response => {
-              this.rows.push(response);
-              this.rows = [...this.rows];
-              this.loadingIndicator = false;
+              if( response ) {
+                this.rows.push(response);
+                this.rows = [...this.rows];
+                this.loadingIndicator = false;
+              }
             });
     }
 

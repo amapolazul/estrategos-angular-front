@@ -20,6 +20,7 @@ import {CustomSnackBarMessages} from './content/commons/messages.service';
 import {EjercicioService} from './content/riesgos/tabs/ejercicios/service/ejercicio.service';
 import {ResponseRiskService} from './content/system-tables/response/service/response-risk.service';
 import {ControlsRiskService} from './content/system-tables/controls/service/controls-risk.service';
+import {ProcessCache} from './content/processes/services/process-cache.service';
 
 @NgModule({
     declarations: [
@@ -52,6 +53,7 @@ import {ControlsRiskService} from './content/system-tables/controls/service/cont
         EjercicioService,
         ResponseRiskService,
         ControlsRiskService,
+        ProcessCache,
         CustomSnackBarMessages
     ],
     exports     : [

@@ -52,14 +52,14 @@ export class RatingDialogComponent implements OnInit {
     } else {
       const ratingRisk = <RatingRiskModel> this.composeForm.getRawValue();
       this.saveDataRatingRisk(ratingRisk);
-      this.customSnackMessage.openSnackBar(' Creado correctamente');
-      this.dialogRef.close(ratingRisk);
     }
   }
 
   saveDataRatingRisk(ratingRisk) {
     this.ratingRiskService.postRatingRisk(ratingRisk).subscribe((data: any) => {
       this.restData = data;
+      this.customSnackMessage.openSnackBar(' Creado correctamente');
+      this.dialogRef.close(ratingRisk);
       console.log(this.restData);
     });
   }
