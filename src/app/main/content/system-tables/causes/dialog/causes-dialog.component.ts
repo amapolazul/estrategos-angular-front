@@ -44,12 +44,10 @@ export class CausesDialogComponent implements OnInit {
       let causesRisk = <CausesRiskModel> this.composeForm.getRawValue();
       causesRisk = this.mergeData(causesRisk);
       this.updateDataCausesRisk(causesRisk);
-      this.customSnackMessage.openSnackBar(' Editado correctamente');
       this.dialogRef.close(causesRisk);
     } else {
       const causesRisk = <CausesRiskModel> this.composeForm.getRawValue();
       this.saveDataCausesRisk(causesRisk);
-      this.customSnackMessage.openSnackBar(' Creado correctamente');
       this.dialogRef.close(causesRisk);
     }
   }
@@ -58,6 +56,7 @@ export class CausesDialogComponent implements OnInit {
     this.causesRiskService.postCausesRisk(causesRisk).subscribe((data: any) => {
       this.restData = data;
       this.dialogRef.close(causesRisk);
+      this.customSnackMessage.openSnackBar(' Creado correctamente');
     });
   }
 
@@ -65,6 +64,7 @@ export class CausesDialogComponent implements OnInit {
     this.causesRiskService.updateCausesRisk(causesRisk).subscribe((data: any) => {
       this.restData = data;
       this.dialogRef.close(causesRisk);
+      this.customSnackMessage.openSnackBar(' Editado correctamente');
     });
   }
 

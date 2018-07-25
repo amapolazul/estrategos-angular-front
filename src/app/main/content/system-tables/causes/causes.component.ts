@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material';
 import { CausesDialogComponent } from './dialog/causes-dialog.component';
 import { CausesRiskService } from './service/causes-risk.service';
 import {FormType} from '../../commons/form-type.enum';
-import {CausesRiskModel} from './model/causes-risk.model';
+import {DialogOverviewConfirmDialog} from '../../../../../assets/angular-material-examples/dialog-confirm/dialog-confirm';
+import {CustomSnackBarMessages} from '../../commons/messages.service';
 
 @Component({
     selector: 'risk-causes',
@@ -16,10 +16,13 @@ export class SystemCausesComponent implements OnInit {
   causesRisk: any[];
   temp: any[];
   dialogRef: any;
+  dialogConfirm: any;
   loadingIndicator = true;
   reorderable = true;
 
-  constructor(private causesRiskService: CausesRiskService, public dialog: MatDialog) {
+  constructor(private causesRiskService: CausesRiskService,
+              public dialog: MatDialog,
+              private customSnackMessage: CustomSnackBarMessages) {
 
   }
 
@@ -66,17 +69,27 @@ export class SystemCausesComponent implements OnInit {
   }
 
   delete(row, rowIndex) {
-    console.log(row);
-    console.log(rowIndex);
-    if (rowIndex > -1) {
-      const causes = <CausesRiskModel>row;
-      this.causesRiskService.deleteCausesRisk(causes.id).subscribe((result) => {
-        console.log('resultado -> ', result);
-      }, (error) => {
-        console.error(error);
+    this.dialogConfirm = this.dialog.open(DialogOverviewConfirmDialog, {
+      width: '250px',
+      data: { name: row.causa_riesgo }
+    });
+    this.dialogConfirm.afterClosed()
+      .subscribe(response => {
+        console.log(response)
+        this.deleteRow(response, row, rowIndex);
       });
-      this.causesRisk.splice(rowIndex, 1);
-      this.causesRisk = [...this.causesRisk];
+  }
+
+  deleteRow(result, row, rowIndex) {
+    if (result != undefined) {
+      this.causesRiskService.deleteCausesRisk(row.id).subscribe((data: any) => {
+        console.log(data);
+      });
+      if (rowIndex > -1) {
+        this.causesRisk.splice(rowIndex, 1);
+        this.causesRisk = [...this.causesRisk];
+        this.customSnackMessage.openSnackBar('Registro eliminado');
+      }
     }
   }
 

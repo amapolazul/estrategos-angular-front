@@ -46,12 +46,10 @@ export class ProbabilityDialogComponent implements OnInit {
       let probabilityRisk = <ProbabilityRiskModel> this.composeForm.getRawValue();
       probabilityRisk = this.mergeData(probabilityRisk);
       this.updateDataCausesRisk(probabilityRisk);
-      this.customSnackMessage.openSnackBar(' Editado correctamente');
       this.dialogRef.close(probabilityRisk);
     } else {
       const probabilityRisk = <ImpactRiskModel> this.composeForm.getRawValue();
       this.saveDataProbabilityRisk(probabilityRisk);
-      this.customSnackMessage.openSnackBar(' Creado correctamente');
       this.dialogRef.close(probabilityRisk);
     }
   }
@@ -59,6 +57,7 @@ export class ProbabilityDialogComponent implements OnInit {
   saveDataProbabilityRisk(probabilityRisk) {
     this.probabilityRiskService.postProbabilityRisk(probabilityRisk).subscribe((data: any) => {
       this.restData = data;
+      this.customSnackMessage.openSnackBar(' Creado correctamente');
       console.log(this.restData);
     });
   }
@@ -67,6 +66,7 @@ export class ProbabilityDialogComponent implements OnInit {
     this.probabilityRiskService.updateProbabilityRisk(probabilityRisk).subscribe((data: any) => {
       this.restData = data;
       this.dialogRef.close(probabilityRisk);
+      this.customSnackMessage.openSnackBar(' Editado correctamente');
     });
   }
 

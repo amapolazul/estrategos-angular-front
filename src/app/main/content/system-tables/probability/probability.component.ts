@@ -3,6 +3,8 @@ import { ProbabilityDialogComponent } from './dialog/probability-dialog.componen
 import { MatDialog } from '@angular/material';
 import { ProbabilityRiskService } from '../probability/service/probability-risk.service';
 import {FormType} from '../../commons/form-type.enum';
+import {DialogOverviewConfirmDialog} from '../../../../../assets/angular-material-examples/dialog-confirm/dialog-confirm';
+import {CustomSnackBarMessages} from '../../commons/messages.service';
 
 
 @Component({
@@ -14,10 +16,13 @@ export class SystemProbabilityComponent implements OnInit {
   probabilityRisk: any[];
   temp: any[];
   dialogRef: any;
+  dialogConfirm: any;
   loadingIndicator = true;
   reorderable = true;
 
-  constructor(private probabilityRiskService: ProbabilityRiskService, public dialog: MatDialog) {
+  constructor(private probabilityRiskService: ProbabilityRiskService,
+              public dialog: MatDialog,
+              private customSnackMessage: CustomSnackBarMessages) {
 
   }
 
@@ -66,12 +71,27 @@ export class SystemProbabilityComponent implements OnInit {
   }
 
   delete(row, rowIndex) {
-    this.probabilityRiskService.deleteProbabilityRisk(row.id).subscribe((data: any) => {
-      console.log(data);
+    this.dialogConfirm = this.dialog.open(DialogOverviewConfirmDialog, {
+      width: '250px',
+      data: { name: row.probabilidad }
     });
-    if (rowIndex > -1) {
-      this.probabilityRisk.splice(rowIndex, 1);
-      this.probabilityRisk = [...this.probabilityRisk];
+    this.dialogConfirm.afterClosed()
+      .subscribe(response => {
+        console.log(response)
+        this.deleteRow(response, row, rowIndex);
+      });
+  }
+
+  deleteRow(result, row, rowIndex) {
+    if( result!= undefined ) {
+      this.probabilityRiskService.deleteProbabilityRisk(row.id).subscribe((data: any) => {
+        console.log(data);
+      });
+      if (rowIndex > -1) {
+        this.probabilityRisk.splice(rowIndex, 1);
+        this.probabilityRisk = [...this.probabilityRisk];
+        this.customSnackMessage.openSnackBar('Registro eliminado');
+      }
     }
   }
 

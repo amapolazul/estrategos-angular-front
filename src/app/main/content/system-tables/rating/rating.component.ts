@@ -3,6 +3,8 @@ import {RatingDialogComponent} from '../rating/dialog/rating-dialog.component';
 import {MatDialog} from '@angular/material';
 import {RatingRiskService} from '../rating/service/rating-risk.service';
 import {FormType} from '../../commons/form-type.enum';
+import {DialogOverviewConfirmDialog} from '../../../../../assets/angular-material-examples/dialog-confirm/dialog-confirm';
+import {CustomSnackBarMessages} from '../../commons/messages.service';
 
 @Component({
   selector: 'risk-rating',
@@ -13,10 +15,13 @@ export class SystemRatingComponent implements OnInit {
   ratingTypes: any[];
   temp: any[];
   dialogRef: any;
+  dialogConfirm: any;
   loadingIndicator = true;
   reorderable = true;
 
-  constructor(private ratingRiskService: RatingRiskService, public dialog: MatDialog) {
+  constructor(private ratingRiskService: RatingRiskService,
+              public dialog: MatDialog,
+              private customSnackMessage: CustomSnackBarMessages) {
 
   }
 
@@ -63,14 +68,32 @@ export class SystemRatingComponent implements OnInit {
   }
 
   delete(row, rowIndex) {
-    this.ratingRiskService.deleteRatingRisk(row.id).subscribe((data: any) => {
-      console.log(data);
+    this.dialogConfirm = this.dialog.open(DialogOverviewConfirmDialog, {
+      width: '250px',
+      data: { name: row.nombre_calificacion_riesgo }
     });
-    if (rowIndex > -1) {
-      this.ratingTypes.splice(rowIndex, 1);
-      this.ratingTypes = [...this.ratingTypes];
+    this.dialogConfirm.afterClosed()
+      .subscribe(response => {
+        console.log(response)
+        this.deleteRow(response, row, rowIndex);
+      });
+
+  }
+
+  deleteRow(result, row, rowIndex) {
+    if( result != undefined) {
+      this.ratingRiskService.deleteRatingRisk(row.id).subscribe((data: any) => {
+        console.log(data);
+      });
+      if (rowIndex > -1) {
+        this.ratingTypes.splice(rowIndex, 1);
+        this.ratingTypes = [...this.ratingTypes];
+        this.customSnackMessage.openSnackBar('Registro eliminado');
+      }
     }
   }
+
+
 
   updateFilter(event) {
     const val = event.target.value.toLowerCase();

@@ -45,12 +45,10 @@ export class ControlsDialogComponent implements OnInit {
       let controlsRisk = <ControlsRiskModel> this.composeForm.getRawValue();
       controlsRisk = this.mergeData(controlsRisk);
       this.updateDataControlsRisk(controlsRisk);
-      this.customSnackMessage.openSnackBar(' Editado correctamente');
       this.dialogRef.close(controlsRisk);
     } else {
       const controlsRisk = <ControlsRiskModel> this.composeForm.getRawValue();
       this.saveDataControlsRisk(controlsRisk);
-      this.customSnackMessage.openSnackBar(' Creado correctamente');
       this.dialogRef.close(controlsRisk);
     }
   }
@@ -59,6 +57,7 @@ export class ControlsDialogComponent implements OnInit {
     this.controlsRiskService.postControlsRisk(controlsRisk).subscribe((data: any) => {
       this.restData = data;
       this.dialogRef.close(controlsRisk);
+      this.customSnackMessage.openSnackBar('Nivel creado correctamente');
     });
   }
 
@@ -66,6 +65,7 @@ export class ControlsDialogComponent implements OnInit {
     this.controlsRiskService.updateControlsRisk(controlsRisk).subscribe((data: any) => {
       this.restData = data;
       this.dialogRef.close(controlsRisk);
+      this.customSnackMessage.openSnackBar(' Editado correctamente');
     });
   }
 

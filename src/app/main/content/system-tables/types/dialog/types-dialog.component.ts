@@ -44,12 +44,10 @@ export class TypesDialogComponent implements OnInit {
       let tipeRisk = <TypesRiskModel> this.composeForm.getRawValue();
       tipeRisk = this.mergeData(tipeRisk);
       this.updateTypeRisk(tipeRisk);
-      this.customSnackMessage.openSnackBar(' Editado correctamente');
       this.dialogRef.close(tipeRisk);
     } else {
       const tipeRisk = <TypesRiskModel> this.composeForm.getRawValue();
       this.saveTypeRisk(tipeRisk);
-      this.customSnackMessage.openSnackBar(' Creado correctamente');
       this.dialogRef.close(tipeRisk);
     }
   }
@@ -58,6 +56,7 @@ export class TypesDialogComponent implements OnInit {
     this.typesRiskService.postTypeRisk(riskTypes).subscribe((data: any) => {
       this.restData = data;
       console.log(this.restData);
+      this.customSnackMessage.openSnackBar(' Creado correctamente');
     });
   }
 
@@ -65,6 +64,7 @@ export class TypesDialogComponent implements OnInit {
     this.typesRiskService.updateTypeRisk(riskTypes).subscribe((data: any) => {
       this.restData = data;
       this.dialogRef.close(riskTypes);
+      this.customSnackMessage.openSnackBar(' Editado correctamente');
     });
   }
 

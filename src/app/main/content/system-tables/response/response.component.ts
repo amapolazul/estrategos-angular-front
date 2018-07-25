@@ -4,7 +4,8 @@ import { MatDialog } from '@angular/material';
 import { ResponseDialogComponent } from './dialog/response-dialog.component';
 import { ResponseRiskService } from './service/response-risk.service';
 import {FormType} from '../../commons/form-type.enum';
-import {ResponseRiskModel} from './model/response-risk.model';
+import {DialogOverviewConfirmDialog} from '../../../../../assets/angular-material-examples/dialog-confirm/dialog-confirm';
+import {CustomSnackBarMessages} from '../../commons/messages.service';
 
 @Component({
     selector: 'risk-response',
@@ -16,10 +17,13 @@ export class SystemResponseComponent implements OnInit {
   responseRisk: any[];
   temp: any[];
   dialogRef: any;
+  dialogConfirm: any;
   loadingIndicator = true;
   reorderable = true;
 
-  constructor(private responseRiskService: ResponseRiskService, public dialog: MatDialog) {
+  constructor(private responseRiskService: ResponseRiskService,
+              public dialog: MatDialog,
+              private customSnackMessage: CustomSnackBarMessages) {
 
   }
 
@@ -66,17 +70,29 @@ export class SystemResponseComponent implements OnInit {
   }
 
   delete(row, rowIndex) {
-    console.log(row);
-    console.log(rowIndex);
-    if (rowIndex > -1) {
-      const response = <ResponseRiskModel>row;
-      this.responseRiskService.deleteResponseRisk(response.id).subscribe((result) => {
-        console.log('resultado -> ', result);
-      }, (error) => {
-        console.error(error);
+    this.dialogConfirm = this.dialog.open(DialogOverviewConfirmDialog, {
+      width: '250px',
+      data: { name: row.respuestaRiesgoNombre }
+    });
+
+    this.dialogConfirm.afterClosed()
+      .subscribe(response => {
+          console.log(response)
+          this.deleteRow(response, row, rowIndex);
       });
-      this.responseRisk.splice(rowIndex, 1);
-      this.responseRisk = [...this.responseRisk];
+
+  }
+
+  deleteRow(result, row, rowIndex){
+    if( result != undefined){
+      this.responseRiskService.deleteResponseRisk(row.id).subscribe((data: any) => {
+        console.log(data);
+      });
+      if (rowIndex > -1) {
+        this.responseRisk.splice(rowIndex, 1);
+        this.responseRisk = [...this.responseRisk];
+        this.customSnackMessage.openSnackBar('Registro eliminado');
+      }
     }
   }
 

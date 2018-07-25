@@ -4,7 +4,8 @@ import { MatDialog } from '@angular/material';
 import { ControlsDialogComponent } from './dialog/controls-dialog.component';
 import { ControlsRiskService } from './service/controls-risk.service';
 import {FormType} from '../../commons/form-type.enum';
-import {ControlsRiskModel} from './model/controls-risk.model';
+import {DialogOverviewConfirmDialog} from '../../../../../assets/angular-material-examples/dialog-confirm/dialog-confirm';
+import {CustomSnackBarMessages} from '../../commons/messages.service';
 
 @Component({
     selector: 'risk-controls',
@@ -16,10 +17,13 @@ export class SystemControlsComponent implements OnInit {
   controlsRisk: any[];
   temp: any[];
   dialogRef: any;
+  dialogConfirm: any;
   loadingIndicator = true;
   reorderable = true;
 
-  constructor(private controlsRiskService: ControlsRiskService, public dialog: MatDialog) {
+  constructor(private controlsRiskService: ControlsRiskService,
+              public dialog: MatDialog,
+              private customSnackMessage: CustomSnackBarMessages) {
 
   }
 
@@ -65,17 +69,27 @@ export class SystemControlsComponent implements OnInit {
   }
 
   delete(row, rowIndex) {
-    console.log(row);
-    console.log(rowIndex);
-    if (rowIndex > -1) {
-      const controls = <ControlsRiskModel>row;
-      this.controlsRiskService.deleteControlsRisk(controls.id).subscribe((result) => {
-        console.log('resultado -> ', result);
-      }, (error) => {
-        console.error(error);
+    this.dialogConfirm = this.dialog.open(DialogOverviewConfirmDialog, {
+      width: '250px',
+      data: { name: row.efectividad_nombre }
+    });
+    this.dialogConfirm.afterClosed()
+      .subscribe(response => {
+        console.log(response)
+        this.deleteRow(response, row, rowIndex);
       });
-      this.controlsRisk.splice(rowIndex, 1);
-      this.controlsRisk = [...this.controlsRisk];
+  }
+
+  deleteRow(result, row, rowIndex) {
+    if (result != undefined) {
+      this.controlsRiskService.deleteControlsRisk(row.id).subscribe((data: any) => {
+        console.log(data);
+      });
+      if (rowIndex > -1) {
+        this.controlsRisk.splice(rowIndex, 1);
+        this.controlsRisk = [...this.controlsRisk];
+        this.customSnackMessage.openSnackBar('Registro eliminado');
+      }
     }
   }
 

@@ -45,12 +45,10 @@ export class ImpactDialogComponent implements OnInit {
       let impactRisk = <ImpactRiskModel> this.composeForm.getRawValue();
       impactRisk = this.mergeData(impactRisk);
       this.updateDataCausesRisk(impactRisk);
-      this.customSnackMessage.openSnackBar(' Editado correctamente');
       this.dialogRef.close(impactRisk);
     } else {
       const impactRisk = <ImpactRiskModel> this.composeForm.getRawValue();
       this.saveDataImpactRisk(impactRisk);
-      this.customSnackMessage.openSnackBar(' Creado correctamente');
       this.dialogRef.close(impactRisk);
     }
   }
@@ -60,6 +58,7 @@ export class ImpactDialogComponent implements OnInit {
       this.restData = data;
       console.log(this.restData);
       this.dialogRef.close(impactRisk);
+      this.customSnackMessage.openSnackBar(' Creado correctamente');
     });
   }
 
@@ -67,6 +66,7 @@ export class ImpactDialogComponent implements OnInit {
     this.impactRiskService.updateImpactRisk(impactRisk).subscribe((data: any) => {
       this.restData = data;
       this.dialogRef.close(impactRisk);
+      this.customSnackMessage.openSnackBar(' Editado correctamente');
     });
   }
 

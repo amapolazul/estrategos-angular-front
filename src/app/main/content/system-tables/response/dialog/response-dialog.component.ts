@@ -44,12 +44,10 @@ export class ResponseDialogComponent implements OnInit {
       let responseRisk = <ResponseRiskModel> this.composeForm.getRawValue();
       responseRisk = this.mergeData(responseRisk);
       this.updateDataResponseRisk(responseRisk);
-      this.customSnackMessage.openSnackBar(' Editado correctamente');
       this.dialogRef.close(responseRisk);
     } else {
       const responseRisk = <ResponseRiskModel> this.composeForm.getRawValue();
       this.saveDataResponseRisk(responseRisk);
-      this.customSnackMessage.openSnackBar(' Creado correctamente');
       this.dialogRef.close(responseRisk);
     }
   }
@@ -58,6 +56,7 @@ export class ResponseDialogComponent implements OnInit {
     this.responseRiskService.postResponseRisk(responseRisk).subscribe((data: any) => {
       this.restData = data;
       this.dialogRef.close(responseRisk);
+      this.customSnackMessage.openSnackBar(' Creado correctamente');
     });
   }
 
@@ -65,6 +64,7 @@ export class ResponseDialogComponent implements OnInit {
     this.responseRiskService.updateResponseRisk(responseRisk).subscribe((data: any) => {
       this.restData = data;
       this.dialogRef.close(responseRisk);
+      this.customSnackMessage.openSnackBar(' Editado correctamente');
     });
   }
 

@@ -47,7 +47,6 @@ export class RatingDialogComponent implements OnInit {
       let ratingRisk = <RatingRiskModel> this.composeForm.getRawValue();
       ratingRisk = this.mergeData(ratingRisk);
       this.updateDataRatingRisk(ratingRisk);
-      this.customSnackMessage.openSnackBar(' Editado correctamente');
       this.dialogRef.close(ratingRisk);
     } else {
       const ratingRisk = <RatingRiskModel> this.composeForm.getRawValue();
@@ -68,6 +67,7 @@ export class RatingDialogComponent implements OnInit {
     this.ratingRiskService.updateRatingRisk(ratingRisk).subscribe((data: any) => {
       this.restData = data;
       this.dialogRef.close(ratingRisk);
+      this.customSnackMessage.openSnackBar(' Editado correctamente');
     });
   }
 

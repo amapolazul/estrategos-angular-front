@@ -3,7 +3,8 @@ import {TypesDialogComponent} from '../types/dialog/types-dialog.component';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {TypesRiskService} from '../../system-tables/types/service/types-risk.service';
 import {FormType} from '../../commons/form-type.enum';
-import { DialogOverviewConfirmDialog, DialogOverviewConfirm } from '../../../../../assets/angular-material-examples/dialog-confirm/dialog-confirm';
+import { DialogOverviewConfirmDialog } from '../../../../../assets/angular-material-examples/dialog-confirm/dialog-confirm';
+import {CustomSnackBarMessages} from '../../commons/messages.service';
 
 @Component({
   selector: 'risk-types',
@@ -14,11 +15,14 @@ export class SystemTypesComponent implements OnInit {
   riskTypes: any[];
   temp: any[];
   dialogRef: any;
+  dialogConfirm :any;
   loadingIndicator = true;
   reorderable = true;
   name :any;
 
-  constructor(private typesRiskService: TypesRiskService, public dialog: MatDialog) {
+  constructor(private typesRiskService: TypesRiskService,
+              public dialog: MatDialog,
+              private customSnackMessage: CustomSnackBarMessages) {
 
   }
 
@@ -61,7 +65,6 @@ export class SystemTypesComponent implements OnInit {
     this.dialogRef.afterClosed()
       .subscribe(response => {
         if( response ){
-          console.log(response);
           this.riskTypes[rowIndex] = response;
           this.riskTypes = [...this.riskTypes];
           this.loadingIndicator = false;
@@ -70,26 +73,28 @@ export class SystemTypesComponent implements OnInit {
   }
 
   delete(row, rowIndex) {
-    const dialogRef = this.dialog.open(DialogOverviewConfirmDialog, {
+    this.dialogConfirm = this.dialog.open(DialogOverviewConfirmDialog, {
       width: '250px',
       data: { name: row.tipo_riesgo }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The tabs-riesgo was closed');
-      this.deleteRow(result, row, rowIndex);
+    this.dialogConfirm.afterClosed()
+      .subscribe(response => {
+        console.log(response)
+        this.deleteRow(response, row, rowIndex);
     });
 
   }
 
   deleteRow(result, row, rowIndex){
-    if( result === undefined){
+    if( result != undefined){
        this.typesRiskService.deleteTypeRisk(row.id).subscribe((data: any) => {
        console.log(data);
       });
       if (rowIndex > -1) {
         this.riskTypes.splice(rowIndex, 1);
         this.riskTypes = [...this.riskTypes];
+        this.customSnackMessage.openSnackBar('Registro eliminado');
       }
     }
 
