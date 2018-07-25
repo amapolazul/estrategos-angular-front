@@ -21,6 +21,7 @@ import {EjercicioService} from './content/riesgos/tabs/ejercicios/service/ejerci
 import {ResponseRiskService} from './content/system-tables/response/service/response-risk.service';
 import {ControlsRiskService} from './content/system-tables/controls/service/controls-risk.service';
 import {ProcessCache} from './content/processes/services/process-cache.service';
+import {RiesgosServices} from './content/riesgos/services/riesgos-services';
 
 @NgModule({
     declarations: [
@@ -54,7 +55,8 @@ import {ProcessCache} from './content/processes/services/process-cache.service';
         ResponseRiskService,
         ControlsRiskService,
         ProcessCache,
-        CustomSnackBarMessages
+        CustomSnackBarMessages,
+        RiesgosServices
     ],
     exports     : [
         FuseMainComponent

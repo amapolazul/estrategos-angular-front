@@ -1,8 +1,10 @@
-import {Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ProcessesService} from '../processes/services/processes.service';
 import {Proceso} from '../processes/models/process.model';
 import {EjercicioModel} from './tabs/ejercicios/model/ejercicio.model';
 import {EjercicioService} from './tabs/ejercicios/service/ejercicio.service';
+import {RiesgosServices} from './services/riesgos-services';
+import {DeclaracionRiesgos} from './models/riesgos.models';
 
 @Component({
   selector: 'riesgos-classes',
@@ -14,11 +16,14 @@ export class RiesgosComponent implements OnInit{
   listadoRiesgos: any[];
   procesos: Proceso[];
   selectedProcess: Proceso;
-  ejerciciosLs: EjercicioModel[];
+  ejerciciosLs: EjercicioModel[] = new Array<EjercicioModel>();
   selectedValue: number;
 
+  @ViewChild('riesgos') riesgos;
+
   constructor(private processesService: ProcessesService,
-              private ejercicioService: EjercicioService)
+              private ejercicioService: EjercicioService,
+              private riesgosService: RiesgosServices)
   {
   }
 
@@ -36,14 +41,22 @@ export class RiesgosComponent implements OnInit{
     });
   }
 
+  listRiesgosPorProceso() {
+    this.riesgosService.getRiesgosPendientesPorProcesoId(this.selectedProcess.proceso_Id).subscribe((data) => {
+      const riesgosProcesos = <DeclaracionRiesgos[]> data;
+      this.riesgos.rows = [...riesgosProcesos];
+    });
+  }
+
   initProcesosValues(){
     const procesosFilter = this.procesos.filter(x => x.proceso_Id === this.selectedValue);
     if (procesosFilter.length === 0){
+      this.ejerciciosLs = [];
       console.log('No hay proceso seleccionado');
     } else {
       this.selectedProcess = procesosFilter.pop();
       this.listEjerciciosProceso();
-
+      this.listRiesgosPorProceso();
     }
   }
 }
