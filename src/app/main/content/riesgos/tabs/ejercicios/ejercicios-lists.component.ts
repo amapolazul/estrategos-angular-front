@@ -1,3 +1,4 @@
+
 import {Component, Input, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {EjercicioService} from './service/ejercicio.service';
@@ -5,6 +6,8 @@ import {EjercicioDialogComponent} from './dialog/ejercicio-dialog.component';
 import {Proceso} from '../../../processes/models/process.model';
 import {EjercicioModel} from './model/ejercicio.model';
 import {FormType} from '../../../commons/form-type.enum';
+import {DialogOverviewConfirmDialog} from '../../../../../../assets/angular-material-examples/dialog-confirm/dialog-confirm';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'ejercicios-lists',
@@ -16,6 +19,7 @@ export class EjerciciosListsComponent  implements OnInit {
   rows: any[];
   temp: any[];
   dialogRef: any;
+  dialogConfirm: any;
   loadingIndicator = true;
 
   @Input('proceso')
@@ -25,6 +29,7 @@ export class EjerciciosListsComponent  implements OnInit {
   ejerciciosList: EjercicioModel[];
 
   constructor(private ejercicioService: EjercicioService,
+              private router: Router,
               public dialog: MatDialog) {
   }
 
@@ -63,13 +68,27 @@ export class EjerciciosListsComponent  implements OnInit {
       });
   }
 
-  delete(row, rowIndex)  {
-    this.ejercicioService.deleteEjercicio(row.id).subscribe((data: any) => {
-      console.log(data);
+  delete(row, rowIndex) {
+    this.dialogConfirm = this.dialog.open(DialogOverviewConfirmDialog, {
+      width: '250px',
+      data: { name: row.descripcion }
     });
-    if (rowIndex > -1) {
-      this.ejerciciosList.splice(rowIndex, 1);
-      this.ejerciciosList = [...this.ejerciciosList];
+    this.dialogConfirm.afterClosed()
+      .subscribe(response => {
+        console.log(response)
+        this.deleteRow(response, row, rowIndex);
+      });
+  }
+
+  deleteRow(result, row, rowIndex)  {
+    if (result != undefined) {
+      this.ejercicioService.deleteEjercicio(row.id).subscribe((data: any) => {
+        console.log(data);
+      });
+      if (rowIndex > -1) {
+        this.ejerciciosList.splice(rowIndex, 1);
+        this.ejerciciosList = [...this.ejerciciosList];
+      }
     }
   }
 
@@ -82,6 +101,7 @@ export class EjerciciosListsComponent  implements OnInit {
   }
 
   goToEjercicio(row: EjercicioModel) {
-    alert('redirigiendo a ' + row.id);
+    //this.router.navigate(['administracion-riesgos',{id:row.id}]);
+    this.router.navigate(['administracion-riesgos']);
   }
 }

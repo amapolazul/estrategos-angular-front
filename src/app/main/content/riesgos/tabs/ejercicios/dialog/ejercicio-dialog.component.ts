@@ -51,14 +51,12 @@ export class EjercicioDialogComponent implements OnInit {
       let ejercicio = <EjercicioModel> this.composeForm.getRawValue();
       ejercicio = this.mergeData(ejercicio);
       this.updateDataEjercicio(ejercicio);
-      this.customSnackMessage.openSnackBar(' Editado correctamente');
       this.dialogRef.close(ejercicio);
     } else {
       const ejercicio = <EjercicioModel> this.composeForm.getRawValue();
       ejercicio.fecha_creacion_ejercicio = new Date().getTime();
       ejercicio.proceso_id = this.selectedProcess.proceso_Id;
       this.saveDataEjercicio(ejercicio).subscribe((x) => {
-        this.customSnackMessage.openSnackBar('Ejercicio creado correctamente');
         this.dialogRef.close();
       }, (error) => {
         console.log('error', error);
@@ -68,12 +66,14 @@ export class EjercicioDialogComponent implements OnInit {
 
   saveDataEjercicio(ejercicio): Observable<string> {
     return this.ejercicioService.postEjercicio(ejercicio);
+    this.customSnackMessage.openSnackBar('Ejercicio creado correctamente');
   }
 
   updateDataEjercicio(ratingRisk) {
     this.ejercicioService.updateEjercicio(ratingRisk).subscribe((data: any) => {
       this.restData = data;
       this.dialogRef.close(ratingRisk);
+      this.customSnackMessage.openSnackBar(' Editado correctamente');
     });
   }
 
