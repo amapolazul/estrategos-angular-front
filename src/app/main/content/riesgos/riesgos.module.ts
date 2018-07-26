@@ -12,6 +12,7 @@ import {EfectosListsComponent} from './tabs/administracion/declaracion/tabs/efec
 import {CausasListsComponent} from './tabs/administracion/declaracion/tabs/causas/causas-lists.component';
 import {ControlesListsComponent} from './tabs/administracion/declaracion/tabs/controles/controles-lists.component';
 import {CausasDeclaracionComponent} from './tabs/administracion/declaracion/tabs/causas/dialog/causas-declaracion.component';
+import {ControlesDeclaracionComponent} from './tabs/administracion/declaracion/tabs/controles/dialog/controles-declaracion.component';
 
 
 const routes: Routes = [
@@ -45,7 +46,8 @@ const routes: Routes = [
         EfectosListsComponent,
         CausasListsComponent,
         ControlesListsComponent,
-        CausasDeclaracionComponent
+        CausasDeclaracionComponent,
+        ControlesDeclaracionComponent
 
     ],
     entryComponents: [
@@ -57,7 +59,8 @@ const routes: Routes = [
         EfectosListsComponent,
         CausasListsComponent,
         ControlesListsComponent,
-        CausasDeclaracionComponent
+        CausasDeclaracionComponent,
+        ControlesDeclaracionComponent
     ]
 })
 export class RiesgosModule

@@ -44,7 +44,9 @@ export class CausasDeclaracionComponent implements OnInit {
   }
 
   onChange(itemSelect) {
-    this.descripcionProbabilidad = itemSelect.value.descripcion;
+    const probabilidadRiesgo = this.probabilidadRiesgo.find(x => x.id === itemSelect.value);
+    this.descripcionProbabilidad = probabilidadRiesgo.descripcion;
   }
+
 
 }
