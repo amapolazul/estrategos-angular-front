@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import {MatDialog} from '@angular/material';
+import {ControlesDeclaracionComponent} from './dialog/controles-declaracion.component';
+import {DialogOverviewConfirmDialog} from '../../../../../../../../../assets/angular-material-examples/dialog-confirm/dialog-confirm';
 
 @Component({
     selector   : 'controles-lists',
@@ -7,6 +10,8 @@ import { Component } from '@angular/core';
 })
 export class ControlesListsComponent
 {
+    dialogRef: any;
+    dialogConfirm: any;
     rows = [
       {
         'control_implementado' : 'Costos de producción',
@@ -21,8 +26,26 @@ export class ControlesListsComponent
         'efectividad'      : 'Media (3)'
       }];
 
-    constructor()
+    constructor(public dialog: MatDialog)
     {
 
     }
+
+  causasDialog() {
+    this.dialogRef = this.dialog.open(ControlesDeclaracionComponent, {
+      panelClass: 'controles-declaracion-dialog'
+    });
+  }
+
+
+  delete(row, rowIndex) {
+    this.dialogConfirm = this.dialog.open(DialogOverviewConfirmDialog, {
+      width: '250px',
+      data: { name: row.causa_riesgo }
+    });
+    this.dialogConfirm.afterClosed()
+      .subscribe(response => {
+
+      });
+  }
 }

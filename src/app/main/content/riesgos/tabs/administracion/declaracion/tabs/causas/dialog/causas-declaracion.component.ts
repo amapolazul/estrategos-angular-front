@@ -1,6 +1,8 @@
 import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {ProbabilityRiskService} from '../../../../../../../system-tables/probability/service/probability-risk.service';
+import {ProbabilityRiskModel} from '../../../../../../../system-tables/probability/model/probability-risk.model';
 
 @Component({
   selector: 'causas-declaracion-dialog',
@@ -11,9 +13,12 @@ import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 export class CausasDeclaracionComponent implements OnInit {
   restData: any;
   composeForm: FormGroup;
+  probabilidadRiesgo: ProbabilityRiskModel[];
+  descripcionProbabilidad: any;
 
   constructor(
     private formBuilder: FormBuilder,
+    private probabilityRiskService: ProbabilityRiskService,
     public dialogRef: MatDialogRef<CausasDeclaracionComponent>,
 
     @Inject(MAT_DIALOG_DATA) private data: any
@@ -21,14 +26,27 @@ export class CausasDeclaracionComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.descripcionProbabilidad ="";
     this.composeForm = this.formBuilder.group({
       causa: [''],
-      descripcion: ['']
+      descripcion: [''],
+      probabilidad_riesgo_id: ['']
+    });
+
+    this.probabilityRiskService.getProbabilityRisk().subscribe((data) => {
+      this.probabilidadRiesgo = data;
+      console.log(this.probabilidadRiesgo);
     });
   }
 
   closeModal() {
     this.dialogRef.close();
   }
+
+  onChange(itemSelect) {
+    const probabilidadRiesgo = this.probabilidadRiesgo.find(x => x.id === itemSelect.value);
+    this.descripcionProbabilidad = probabilidadRiesgo.descripcion;
+  }
+
 
 }

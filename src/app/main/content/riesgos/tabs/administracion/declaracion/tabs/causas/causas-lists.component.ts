@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {CausasDeclaracionComponent} from './dialog/causas-declaracion.component';
+import {DialogOverviewConfirmDialog} from '../../../../../../../../../assets/angular-material-examples/dialog-confirm/dialog-confirm';
 
 @Component({
     selector   : 'causas-lists',
@@ -10,6 +11,7 @@ import {CausasDeclaracionComponent} from './dialog/causas-declaracion.component'
 export class CausasListsComponent
 {
     dialogRef: any;
+    dialogConfirm: any;
     rows = [
       {
         'causa'       : 'Costos de producción',
@@ -34,4 +36,16 @@ export class CausasListsComponent
       panelClass: 'causas-declaracion-dialog'
     });
   }
+
+  delete(row, rowIndex) {
+    this.dialogConfirm = this.dialog.open(DialogOverviewConfirmDialog, {
+      width: '250px',
+      data: { name: row.causa_riesgo }
+    });
+    this.dialogConfirm.afterClosed()
+      .subscribe(response => {
+
+      });
+  }
+
 }
