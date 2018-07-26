@@ -7,7 +7,7 @@
       <form name="form" fxLayout="column" fxFlex="100" [formGroup]="declaracionForm">
 
         <mat-form-field fxFlex="">
-          <input matInput placeholder="Factor de Riesgo" formControlName="factor_riesgo" required>
+          <input matInput placeholder="Factor de Riesgo" formControlName="factor_riesgo" required (input)="actualizarFactorRiesgo($event)">
         </mat-form-field>
 
         <mat-form-field>

@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {RiesgosService} from '../../services/riesgos.service';
 import {DeclaracionRiesgos} from '../../models/riesgos.models';
 import {EjercicioService} from '../ejercicios/service/ejercicio.service';
@@ -22,7 +22,8 @@ export class AdministracionListsComponent implements OnInit {
   constructor(private riesgosService: RiesgosService,
               private activatedRoute: ActivatedRoute,
               private ejerciciosService: EjercicioService,
-              private procesoService: ProcessesService) {
+              private procesoService: ProcessesService,
+              private router: Router) {
     this.activatedRoute.params.subscribe(x => {
       this.ejercicioPadre = x.id;
     });
@@ -45,5 +46,9 @@ export class AdministracionListsComponent implements OnInit {
         this.proceso = y.proceso;
       });
     });
+  }
+
+  nuevoDeclaracionRiesgo() {
+    this.router.navigate(['declaracion-riesgos', this.ejercicioPadre]);
   }
 }

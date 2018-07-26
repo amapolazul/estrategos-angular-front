@@ -23,7 +23,7 @@ const routes: Routes = [
       component: AdministracionListsComponent
     },
     {
-      path     : 'declaracion-riesgos',
+      path     : 'declaracion-riesgos/:id',
       component: DeclaracionComponent
     }
 
