@@ -5,15 +5,15 @@
     <div class="content p-24">
       <div>
         <mat-form-field fxFlex="">
-          <input matInput name="bcc" placeholder="Proceso / Subproceso" disabled fxFlex="">
+          <input matInput name="bcc" placeholder="Proceso / Subproceso" disabled fxFlex="" [value]="proceso.proceso_Nombre">
         </mat-form-field>
       </div>
       <div>
         <mat-form-field>
-          <input matInput name="bcc" placeholder="Fecha" disabled>
+          <input matInput name="bcc" placeholder="Ejercicio" disabled [value]="ejercicio.fecha_creacion_ejercicio | date:'yyyy/MM/dd'">
         </mat-form-field>
         <mat-form-field fxFlex="">
-          <input matInput name="bcc" placeholder="Factor de riesgo" disabled>
+          <input matInput name="bcc" placeholder="Factor de riesgo" disabled [value]="factorRiesgo">
         </mat-form-field>
       </div>
     </div>
@@ -21,7 +21,7 @@
     <mat-tab-group dynamicHeight="true">
 
       <mat-tab label="Declaración">
-        <declaracion-create #declaracion></declaracion-create>
+        <declaracion-create #declaracion (cambiarFactorRiesgo)="actualizarFactorRiesgo($event)"></declaracion-create>
       </mat-tab>
 
       <mat-tab label="Causas">

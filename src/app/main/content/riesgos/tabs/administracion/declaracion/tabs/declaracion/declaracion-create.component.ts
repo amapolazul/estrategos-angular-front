@@ -1,5 +1,5 @@
-import {Component, Input, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {FormGroup, FormBuilder} from '@angular/forms';
 import {TypesRiskModel} from '../../../../../../system-tables/types/model/types-risk.model';
 import {TypesRiskService} from '../../../../../../system-tables/types/service/types-risk.service';
 import {ResponseRiskModel} from '../../../../../../system-tables/response/model/response-risk.model';
@@ -19,6 +19,8 @@ export class DeclaracionCreateComponent implements OnInit {
   tipoRiesgo: TypesRiskModel[];
   respuestaRiesgo: ResponseRiskModel[];
   estadoRiesgo: DeclaracionEstadoModel[];
+
+  @Output() cambiarFactorRiesgo = new EventEmitter<string>();
 
   constructor(private formBuilder: FormBuilder,
               private tipeRiskService: TypesRiskService,
@@ -57,6 +59,11 @@ export class DeclaracionCreateComponent implements OnInit {
       console.log(this.estadoRiesgo);
     });
 
+  }
+
+  actualizarFactorRiesgo(event) {
+    this.cambiarFactorRiesgo.next(event.target.value);
+    // this.declaracionRiesgoCache.setFactorRiesgoName();
   }
 
 }
