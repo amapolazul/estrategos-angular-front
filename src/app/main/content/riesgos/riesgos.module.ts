@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
-import { SharedModule } from '../../../core/modules/shared.module';
-import { RouterModule, Routes } from '@angular/router';
-import { RiesgosComponent } from './riesgos.component';
+import {NgModule} from '@angular/core';
+import {SharedModule} from '../../../core/modules/shared.module';
+import {RouterModule, Routes} from '@angular/router';
+import {RiesgosComponent} from './riesgos.component';
 import {RiesgosListsComponent} from './tabs/riesgos/riesgos-lists.component';
 import {EjerciciosListsComponent} from './tabs/ejercicios/ejercicios-lists.component';
 import {EjercicioDialogComponent} from './tabs/ejercicios/dialog/ejercicio-dialog.component';
@@ -12,6 +12,7 @@ import {EfectosListsComponent} from './tabs/administracion/declaracion/tabs/efec
 import {CausasListsComponent} from './tabs/administracion/declaracion/tabs/causas/causas-lists.component';
 import {ControlesListsComponent} from './tabs/administracion/declaracion/tabs/controles/controles-lists.component';
 import {CausasDeclaracionComponent} from './tabs/administracion/declaracion/tabs/causas/dialog/causas-declaracion.component';
+import {EfectosDeclaracionComponent} from './tabs/administracion/declaracion/tabs/efectos/dialog/efectos-declaracion.component';
 
 
 const routes: Routes = [
@@ -45,7 +46,8 @@ const routes: Routes = [
         EfectosListsComponent,
         CausasListsComponent,
         ControlesListsComponent,
-        CausasDeclaracionComponent
+        CausasDeclaracionComponent,
+        EfectosDeclaracionComponent
 
     ],
     entryComponents: [
@@ -57,7 +59,8 @@ const routes: Routes = [
         EfectosListsComponent,
         CausasListsComponent,
         ControlesListsComponent,
-        CausasDeclaracionComponent
+        CausasDeclaracionComponent,
+        EfectosDeclaracionComponent
     ]
 })
 export class RiesgosModule

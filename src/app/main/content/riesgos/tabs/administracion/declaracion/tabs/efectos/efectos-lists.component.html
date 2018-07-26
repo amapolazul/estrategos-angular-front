@@ -4,7 +4,11 @@
   <div class="mat-white-bg mat-elevation-z4 p-24" fxLayout="column">
 
     <div class="button-row">
+      <button mat-raised-button color="primary" (click)="efectosDialog()">Nuevo</button>
+    </div>
 
+    <div class="row">
+       Impacto total: {{impactoTotal}}
     </div>
 
     <div class="content p-24">
@@ -22,10 +26,18 @@
                        [reorderable]="reorderable"
                        [limit]="10">
 
-          <ngx-datatable-column name="Efecto" prop="efecto">
+          <ngx-datatable-column name="Acciones" [width]="130" [canAutoResize]="false" [sortable]="false">
+            <ng-template let-row="row" let-rowIndex="rowIndex" let-id="value" ngx-datatable-cell-template>
+              <button class="btn btn-sm btn-danger" (click)="delete(row, rowIndex)">
+                <mat-icon _ngcontent-c71="" class="secondary-text s-26 mat-icon material-icons" role="img" aria-hidden="true">delete</mat-icon>
+              </button>
+            </ng-template>
           </ngx-datatable-column>
 
-          <ngx-datatable-column name="Impacto" prop="impacto">
+          <ngx-datatable-column name="Efectp" prop="impacto">
+          </ngx-datatable-column>
+
+          <ngx-datatable-column name="Impacto" prop="impacto_riesgos_id">
           </ngx-datatable-column>
 
         </ngx-datatable>
