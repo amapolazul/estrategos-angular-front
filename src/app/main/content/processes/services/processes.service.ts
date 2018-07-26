@@ -31,6 +31,9 @@ export class ProcessesService extends BaseService {
     return this.http.post<string>(endpoint, formData, {});
   }
 
+  getProcesoById(procesoId): Observable<ProcesoCreateRequest> {
+    return this.http.get<ProcesoCreateRequest>(this.serviceUrl + '/' + procesoId );
+  }
 
   getSubProcessByParentId(id): Observable<Proceso[]> {
     return this.http.get<Proceso[]>(this.serviceUrl + '/' + id + '/sub-procesos');

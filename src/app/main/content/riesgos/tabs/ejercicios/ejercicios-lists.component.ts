@@ -51,20 +51,22 @@ export class EjerciciosListsComponent  implements OnInit {
     }
 
   edit(row, rowIndex){
-    const process = row;
+    const ejercicio = row;
+    console.log(ejercicio);
     this.dialogRef = this.dialog.open(EjercicioDialogComponent, {
       panelClass: 'ejercicio-dialog',
       data : {
         formType : FormType.edit,
-        proceso: process
+        proceso: this.process,
+        ejercicio: ejercicio
       }
     });
 
     this.dialogRef.afterClosed()
       .subscribe(response => {
-        this.ejerciciosList[rowIndex] = response;
-        this.ejerciciosList = [...this.ejerciciosList];
-        this.loadingIndicator = false;
+        if (response) {
+          this.listEjerciciosProceso();
+        }
       });
   }
 
@@ -75,13 +77,16 @@ export class EjerciciosListsComponent  implements OnInit {
     });
     this.dialogConfirm.afterClosed()
       .subscribe(response => {
-        console.log(response)
-        this.deleteRow(response, row, rowIndex);
+        if (response) {
+          console.log(response)
+          this.deleteRow(response, row, rowIndex);
+        }
+
       });
   }
 
   deleteRow(result, row, rowIndex)  {
-    if (result != undefined) {
+    if (result) {
       this.ejercicioService.deleteEjercicio(row.id).subscribe((data: any) => {
         console.log(data);
       });
@@ -101,7 +106,6 @@ export class EjerciciosListsComponent  implements OnInit {
   }
 
   goToEjercicio(row: EjercicioModel) {
-    //this.router.navigate(['administracion-riesgos',{id:row.id}]);
-    this.router.navigate(['administracion-riesgos']);
+    this.router.navigate(['administracion-riesgos', row.id]);
   }
 }

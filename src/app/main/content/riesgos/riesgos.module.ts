@@ -19,7 +19,7 @@ const routes: Routes = [
         component: RiesgosComponent
     },
     {
-      path     : 'administracion-riesgos',
+      path     : 'administracion-riesgos/:id',
       component: AdministracionListsComponent
     },
     {

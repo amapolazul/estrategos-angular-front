@@ -21,8 +21,9 @@ import {EjercicioService} from './content/riesgos/tabs/ejercicios/service/ejerci
 import {ResponseRiskService} from './content/system-tables/response/service/response-risk.service';
 import {ControlsRiskService} from './content/system-tables/controls/service/controls-risk.service';
 import {ProcessCache} from './content/processes/services/process-cache.service';
-import {RiesgosServices} from './content/riesgos/services/riesgos-services';
 import {DeclaracionEstadoService} from './content/riesgos/tabs/administracion/declaracion/tabs/declaracion/service/declaracion-estados.service';
+import {RiesgosService} from './content/riesgos/services/riesgos.service';
+
 
 @NgModule({
     declarations: [
@@ -57,7 +58,7 @@ import {DeclaracionEstadoService} from './content/riesgos/tabs/administracion/de
         ControlsRiskService,
         ProcessCache,
         CustomSnackBarMessages,
-        RiesgosServices,
+        RiesgosService,
         DeclaracionEstadoService
     ],
     exports     : [
