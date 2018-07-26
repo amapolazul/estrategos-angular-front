@@ -39,7 +39,7 @@ export class EjercicioDialogComponent implements OnInit {
       estatus_id: ['']
     });
     if (this.data && this.data.formType === FormType.edit) {
-      this.ejercicioModel = this.data.product;
+      this.ejercicioModel = this.data.ejercicio;
       this.dataForm();
     }
 
@@ -49,9 +49,10 @@ export class EjercicioDialogComponent implements OnInit {
   saveEjercicio() {
     if (this.data && this.data.formType === FormType.edit) {
       let ejercicio = <EjercicioModel> this.composeForm.getRawValue();
+      ejercicio.proceso_id = this.selectedProcess.proceso_Id;
+      ejercicio.fecha_creacion_ejercicio = this.data.ejercicio.fecha_creacion_ejercicio;
       ejercicio = this.mergeData(ejercicio);
       this.updateDataEjercicio(ejercicio);
-      this.dialogRef.close(ejercicio);
     } else {
       const ejercicio = <EjercicioModel> this.composeForm.getRawValue();
       ejercicio.fecha_creacion_ejercicio = new Date().getTime();
@@ -69,10 +70,10 @@ export class EjercicioDialogComponent implements OnInit {
     return this.ejercicioService.postEjercicio(ejercicio);
   }
 
-  updateDataEjercicio(ratingRisk) {
-    this.ejercicioService.updateEjercicio(ratingRisk).subscribe((data: any) => {
+  updateDataEjercicio(ejercicio) {
+    this.ejercicioService.updateEjercicio(ejercicio).subscribe((data: any) => {
       this.restData = data;
-      this.dialogRef.close(ratingRisk);
+      this.dialogRef.close(ejercicio);
       this.customSnackMessage.openSnackBar(' Editado correctamente');
     });
   }
@@ -84,8 +85,8 @@ export class EjercicioDialogComponent implements OnInit {
 
   private dataForm() {
     this.composeForm.setValue({
-      descripcion_ejercicio: this.ejercicioModel.descripcion,
-      estatus: this.ejercicioModel.estatus_id
+      descripcion: this.ejercicioModel.descripcion,
+      estatus_id: this.ejercicioModel.estatus_id
     });
   }
 
