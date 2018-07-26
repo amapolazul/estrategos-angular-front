@@ -20,13 +20,27 @@ export class DeclaracionCreateComponent implements OnInit {
   respuestaRiesgo: ResponseRiskModel[];
   estadoRiesgo: DeclaracionEstadoModel[];
 
-  constructor(private tipeRiskService: TypesRiskService,
+  constructor(private formBuilder: FormBuilder,
+              private tipeRiskService: TypesRiskService,
               private responseRiskService: ResponseRiskService,
               private declaracionEstadoService: DeclaracionEstadoService) {
-
   }
 
   ngOnInit() {
+
+    this.declaracionForm = this.formBuilder.group({
+      ejercicio_riesgo_id: [''],
+      tipo_riesgo_id: [''],
+      respuesta_riesgo_id: [''],
+      estatus_riesgo_id: [''],
+      factor_riesgo: [''],
+      descripcion: [''],
+      probabilidad: [''],
+      historico: [''],
+      impacto: [''],
+      severidad: [''],
+      riesgo_residual: ['']
+    });
 
     this.tipeRiskService.getTypeRisk().subscribe((data) => {
       this.tipoRiesgo = data;

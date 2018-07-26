@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {MatDialog} from '@angular/material';
+import {CausasDeclaracionComponent} from './dialog/causas-declaracion.component';
 
 @Component({
     selector   : 'causas-lists',
@@ -7,6 +9,7 @@ import { Component } from '@angular/core';
 })
 export class CausasListsComponent
 {
+    dialogRef: any;
     rows = [
       {
         'causa'       : 'Costos de producción',
@@ -21,8 +24,14 @@ export class CausasListsComponent
         'probabilidad'      : 'Media (3)'
       }];
 
-    constructor()
+    constructor(public dialog: MatDialog)
     {
 
     }
+
+  causasDialog() {
+    this.dialogRef = this.dialog.open(CausasDeclaracionComponent, {
+      panelClass: 'causas-declaracion-dialog'
+    });
+  }
 }
