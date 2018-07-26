@@ -12,11 +12,8 @@ import {EfectosListsComponent} from './tabs/administracion/declaracion/tabs/efec
 import {CausasListsComponent} from './tabs/administracion/declaracion/tabs/causas/causas-lists.component';
 import {ControlesListsComponent} from './tabs/administracion/declaracion/tabs/controles/controles-lists.component';
 import {CausasDeclaracionComponent} from './tabs/administracion/declaracion/tabs/causas/dialog/causas-declaracion.component';
-<<<<<<< HEAD
 import {EfectosDeclaracionComponent} from './tabs/administracion/declaracion/tabs/efectos/dialog/efectos-declaracion.component';
-=======
 import {ControlesDeclaracionComponent} from './tabs/administracion/declaracion/tabs/controles/dialog/controles-declaracion.component';
->>>>>>> 62af76f139dc31d3f3e5177b65da65cdfa3d475f
 
 
 const routes: Routes = [
