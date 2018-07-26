@@ -3,7 +3,7 @@ import {ProcessesService} from '../processes/services/processes.service';
 import {Proceso} from '../processes/models/process.model';
 import {EjercicioModel} from './tabs/ejercicios/model/ejercicio.model';
 import {EjercicioService} from './tabs/ejercicios/service/ejercicio.service';
-import {RiesgosServices} from './services/riesgos-services';
+import {RiesgosService} from './services/riesgos.service';
 import {DeclaracionRiesgos} from './models/riesgos.models';
 
 @Component({
@@ -23,7 +23,7 @@ export class RiesgosComponent implements OnInit{
 
   constructor(private processesService: ProcessesService,
               private ejercicioService: EjercicioService,
-              private riesgosService: RiesgosServices)
+              private riesgosService: RiesgosService)
   {
   }
 

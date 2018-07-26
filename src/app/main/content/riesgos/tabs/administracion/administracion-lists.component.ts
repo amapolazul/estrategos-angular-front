@@ -1,40 +1,49 @@
-import { Component } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {RiesgosService} from '../../services/riesgos.service';
+import {DeclaracionRiesgos} from '../../models/riesgos.models';
+import {EjercicioService} from '../ejercicios/service/ejercicio.service';
+import {EjercicioModel} from '../ejercicios/model/ejercicio.model';
+import {Proceso} from '../../../processes/models/process.model';
+import {ProcessesService} from '../../../processes/services/processes.service';
 
 @Component({
     selector   : 'administracion-lists',
     templateUrl: './administracion-lists.component.html',
     styleUrls  : ['./administracion-lists.component.scss']
 })
-export class AdministracionListsComponent
-{
-    rows = [
-      {
-        'alerta'       : 'Costos de producción',
-        'probabilidad' : 'Media (3)',
-        'impacto'      : 'Alto (4)',
-        'severidad'    : '12',
-        'estatus'      : 'Pendiente',
-        'fecha_ultimo_ejercicio' : '04-06-2018'
-      },
-      {
-        'alerta'       : 'producción',
-        'probabilidad' : 'Media (3)',
-        'impacto'      : 'Alto (4)',
-        'severidad'    : '12',
-        'estatus'      : 'Mitigado',
-        'fecha_ultimo_ejercicio' : '13-06-2018'
-      },
-      {
-        'alerta'       : 'Activiades de compras',
-        'probabilidad' : 'Baja (1)',
-        'impacto'      : 'Media (3)',
-        'severidad'    : '76',
-        'estatus'      : 'Pendiente',
-        'fecha_ultimo_ejercicio' : '21-06-2018'
-      }];
+export class AdministracionListsComponent implements OnInit {
+  rows = [];
 
-    constructor()
-    {
+  ejercicioPadre: number;
+  ejercicio: EjercicioModel = new EjercicioModel();
+  proceso: Proceso = new Proceso();
 
-    }
+  constructor(private riesgosService: RiesgosService,
+              private activatedRoute: ActivatedRoute,
+              private ejerciciosService: EjercicioService,
+              private procesoService: ProcessesService) {
+    this.activatedRoute.params.subscribe(x => {
+      this.ejercicioPadre = x.id;
+    });
+
+  }
+
+  ngOnInit() {
+    this.riesgosService.getRiesgosPorEjercicioId(this.ejercicioPadre).subscribe(x => {
+      const result = <DeclaracionRiesgos[]> x;
+      this.rows = [...result];
+    });
+
+    this.traerInformacionEjercicioProceso();
+  }
+
+  traerInformacionEjercicioProceso() {
+    this.ejerciciosService.getEjercicioPorId(this.ejercicioPadre).subscribe(x => {
+      this.ejercicio = x;
+      this.procesoService.getProcesoById(x.proceso_id).subscribe( y => {
+        this.proceso = y.proceso;
+      });
+    });
+  }
 }

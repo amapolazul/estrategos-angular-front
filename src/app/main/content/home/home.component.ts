@@ -38,7 +38,6 @@ export class HomeComponent implements AfterViewInit {
 
   getSubNodes(node: NodeEvent): void {
     const nodeId = node.node.id;
-    console.log(nodeId);
     this.processesService.getSubProcessByParentId(nodeId).subscribe((result) => {
       const oopNodeController = this.treeComponent.getControllerByNodeId(nodeId);
 

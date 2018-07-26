@@ -101,7 +101,6 @@ export class EjerciciosListsComponent  implements OnInit {
   }
 
   goToEjercicio(row: EjercicioModel) {
-    //this.router.navigate(['administracion-riesgos',{id:row.id}]);
-    this.router.navigate(['administracion-riesgos']);
+    this.router.navigate(['administracion-riesgos', row.id]);
   }
 }

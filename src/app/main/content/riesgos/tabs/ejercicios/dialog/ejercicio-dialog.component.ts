@@ -57,6 +57,7 @@ export class EjercicioDialogComponent implements OnInit {
       ejercicio.fecha_creacion_ejercicio = new Date().getTime();
       ejercicio.proceso_id = this.selectedProcess.proceso_Id;
       this.saveDataEjercicio(ejercicio).subscribe((x) => {
+        this.customSnackMessage.openSnackBar('Ejercicio creado correctamente');
         this.dialogRef.close();
       }, (error) => {
         console.log('error', error);
@@ -66,7 +67,6 @@ export class EjercicioDialogComponent implements OnInit {
 
   saveDataEjercicio(ejercicio): Observable<string> {
     return this.ejercicioService.postEjercicio(ejercicio);
-    this.customSnackMessage.openSnackBar('Ejercicio creado correctamente');
   }
 
   updateDataEjercicio(ratingRisk) {

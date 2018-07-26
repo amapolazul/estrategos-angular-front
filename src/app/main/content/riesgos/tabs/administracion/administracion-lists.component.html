@@ -8,15 +8,15 @@
       <div>
         <div>
           <mat-form-field fxFlex="">
-            <input matInput name="bcc" placeholder="Proceso / Subproceso" disabled fxFlex="">
+            <input matInput name="bcc" placeholder="Proceso / Subproceso" disabled fxFlex="" [value]="proceso.proceso_Nombre">
           </mat-form-field>
         </div>
         <div>
           <mat-form-field>
-            <input matInput name="bcc" placeholder="Fecha" disabled>
+            <input matInput name="bcc" placeholder="Fecha" disabled [value]="ejercicio.fecha_creacion_ejercicio | date:'yyyy/MM/dd'">
           </mat-form-field>
           <mat-form-field fxFlex="">
-            <input matInput name="bcc" placeholder="Nombre del ejercicio" disabled>
+            <input matInput name="bcc" placeholder="Nombre del ejercicio" disabled [value]="ejercicio.descripcion">
           </mat-form-field>
         </div>
       </div>
@@ -39,10 +39,13 @@
                        [reorderable]="reorderable"
                        [limit]="10">
 
-          <ngx-datatable-column name="Alerta" prop="alerta">
+          <ngx-datatable-column name="Alerta" prop="calificacion_riesgo">
           </ngx-datatable-column>
 
-          <ngx-datatable-column name="Riesgo" prop="probabilidad">
+          <ngx-datatable-column name="Riesgo" prop="factor_riesgo">
+          </ngx-datatable-column>
+
+          <ngx-datatable-column name="Probabilidad" prop="probabilidad">
           </ngx-datatable-column>
 
           <ngx-datatable-column name="Impacto" prop="impacto">
@@ -51,10 +54,16 @@
           <ngx-datatable-column name="Severidad" prop="severidad">
           </ngx-datatable-column>
 
-          <ngx-datatable-column name="Estatus" prop="estatus">
+          <ngx-datatable-column name="Estatus" prop="estatus_riesgo_id">
+            <ng-template let-row="row" let-rowIndex="rowIndex" let-id="value" ngx-datatable-cell-template>
+              {{row.estatus_riesgo_id === 1  ? 'Pendiente' : 'Mitigado'}}
+            </ng-template>
           </ngx-datatable-column>
 
           <ngx-datatable-column name="Fecha ulitmo ejercicio" prop="fecha_ultimo_ejercicio">
+            <ng-template let-row="row" let-rowIndex="rowIndex" let-id="value" ngx-datatable-cell-template>
+              {{row.fecha_ejercicio | date:"yyyy/MM/dd"}}
+            </ng-template>
           </ngx-datatable-column>
 
         </ngx-datatable>

@@ -16,6 +16,10 @@ export class EjercicioService extends BaseService {
     this.serviceStatusUrl = this.getResourceStatusEndpoint();
   }
 
+  getEjercicioPorId(ejercicioId: number): Observable<EjercicioModel> {
+    return this.http.get<EjercicioModel>(this.serviceUrl + '/' + ejercicioId);
+  }
+
   getEjerciciosPorProceso(procesoId: number): Observable<EjercicioModel[]> {
     return this.http.get<EjercicioModel[]>(this.serviceUrl + '/procesos/' + procesoId);
   }

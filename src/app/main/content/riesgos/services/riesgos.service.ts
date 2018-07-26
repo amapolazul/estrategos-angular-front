@@ -5,7 +5,7 @@ import {Injectable} from '@angular/core';
 import {DeclaracionRiesgos} from '../models/riesgos.models';
 
 @Injectable()
-export class RiesgosServices extends BaseService {
+export class RiesgosService extends BaseService {
 
   serviceUrl: string;
   serviceStatusUrl: string;
