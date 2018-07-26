@@ -1,34 +1,47 @@
 <div class="dialog-content-wrapper">
-    <mat-toolbar matDialogTitle class="mat-accent m-0">
-        <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
-            <span class="title dialog-title">Causas, declaración del riesgo</span>
-            <button mat-button class="mat-icon-button" (click)="dialogRef.close()" aria-label="Close dialog">
-                <mat-icon>close</mat-icon>
-            </button>
-        </div>
-    </mat-toolbar>
+  <mat-toolbar matDialogTitle class="mat-accent m-0">
+    <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+      <span class="title dialog-title">Causas, declaración del riesgo</span>
+      <button mat-button class="mat-icon-button" (click)="dialogRef.close()" aria-label="Close dialog">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar>
 
-    <div mat-dialog-content class="p-24 m-0">
-        <form name="composeForm" [formGroup]="composeForm" class="compose-form" fxLayout="column" fxFlex>
+  <div mat-dialog-content class="p-24 m-0">
+    <form name="composeForm" [formGroup]="composeForm" class="compose-form" fxLayout="column" fxFlex>
 
-            <mat-form-field>
-                <input matInput name="causes" placeholder="Causa" formControlName="causa" type="text">
-            </mat-form-field>
+      <mat-form-field>
+        <input matInput name="causes" placeholder="Causa" formControlName="causa" type="text">
+      </mat-form-field>
 
-            <mat-form-field>
+      <mat-form-field>
                 <textarea matInput name="descripcion" placeholder="Descripción" formControlName="descripcion" rows="4">
                 </textarea>
-            </mat-form-field>
-            <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="space-between center">
-                <div>
-                    <button mat-raised-button class="save-button mat-accent" aria-label="Guardar" (click)="saveCausesRisk()">
-                        Guardar
-                    </button>
-                    <button mat-raised-button class="save-button mat-accent" aria-label="Cancelar" (click)="closeModal()">
-                        Cancelar
-                    </button>
-                </div>
-            </div>
-        </form>
-    </div>
+      </mat-form-field>
+
+      <mat-form-field fxFlex="">
+        <mat-select placeholder="Probabilidad" formControlName="probabilidad_riesgo_id" required (change)="onChange($event)">
+          <mat-option *ngFor="let probabilidad of probabilidadRiesgo" [value]="probabilidad">
+            {{ probabilidad.probabilidad }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput name="causes" placeholder="Descripcion probabilidad" [value]="descripcionProbabilidad" type="text" disabled>
+      </mat-form-field>
+
+      <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="space-between center">
+        <div>
+          <button mat-raised-button class="save-button mat-accent" aria-label="Guardar" (click)="saveCausesRisk()">
+            Guardar
+          </button>
+          <button mat-raised-button class="save-button mat-accent" aria-label="Cancelar" (click)="closeModal()">
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>
