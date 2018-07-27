@@ -5,9 +5,11 @@
 
     <div class="button-row">
       <button mat-raised-button color="primary" (click)="causasDialog()">Nuevo</button>
-      <mat-form-field>
-        <input matInput name="impacto_total" placeholder="Impacto Total" type="text" disabled [align]="right">
-      </mat-form-field>
+
+      <div class="text-right" style="position: relative">
+        <h2>Probabilidad promedio: {{probabilidadTotal}}</h2>
+      </div>
+
     </div>
 
     <div class="content p-24">
@@ -36,7 +38,7 @@
           <ngx-datatable-column name="Causa" prop="causa">
           </ngx-datatable-column>
 
-          <ngx-datatable-column name="Probabilidad" prop="probabilidad">
+          <ngx-datatable-column name="Probabilidad" prop="descripcion">
           </ngx-datatable-column>
 
         </ngx-datatable>

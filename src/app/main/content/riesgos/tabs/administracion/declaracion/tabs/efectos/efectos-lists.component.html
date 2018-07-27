@@ -5,10 +5,10 @@
 
     <div class="button-row">
       <button mat-raised-button color="primary" (click)="efectosDialog()">Nuevo</button>
-    </div>
 
-    <div class="row">
-       Impacto total: {{impactoTotal}}
+      <div class="text-right" style="position: relative">
+        <h2>Impacto promedio: {{impactoTotal}}</h2>
+      </div>
     </div>
 
     <div class="content p-24">
@@ -34,10 +34,10 @@
             </ng-template>
           </ngx-datatable-column>
 
-          <ngx-datatable-column name="Efectp" prop="impacto">
+          <ngx-datatable-column name="Efecto" prop="impacto">
           </ngx-datatable-column>
 
-          <ngx-datatable-column name="Impacto" prop="impacto_riesgos_id">
+          <ngx-datatable-column name="Impacto" prop="descripcion">
           </ngx-datatable-column>
 
         </ngx-datatable>

@@ -23,7 +23,7 @@
       <mat-form-field fxFlex="">
         <mat-select placeholder="Probabilidad" formControlName="probabilidad_riesgo_id" required (change)="onChange($event)">
           <mat-option *ngFor="let probabilidad of probabilidadRiesgo" [value]="probabilidad.id">
-            {{ probabilidad.probabilidad }}
+            {{ probabilidad.probabilidad }} ({{ probabilidad.puntaje }})
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -34,7 +34,7 @@
 
       <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="space-between center">
         <div>
-          <button mat-raised-button class="save-button mat-accent" aria-label="Guardar" (click)="saveCausesRisk()">
+          <button mat-raised-button class="save-button mat-accent" aria-label="Guardar" (click)="guardarCausa()">
             Guardar
           </button>
           <button mat-raised-button class="save-button mat-accent" aria-label="Cancelar" (click)="closeModal()">

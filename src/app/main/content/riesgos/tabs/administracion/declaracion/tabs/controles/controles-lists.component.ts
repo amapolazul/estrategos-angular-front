@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {ControlesDeclaracionComponent} from './dialog/controles-declaracion.component';
-import {DialogOverviewConfirmDialog} from '../../../../../../../../../assets/angular-material-examples/dialog-confirm/dialog-confirm';
 
 @Component({
     selector   : 'controles-lists',
@@ -12,40 +11,47 @@ export class ControlesListsComponent
 {
     dialogRef: any;
     dialogConfirm: any;
-    rows = [
-      {
-        'control_implementado' : 'Costos de producción',
-        'efectividad'      : 'Alto (4)'
-      },
-      {
-        'control_implementado' : 'producción',
-        'efectividad'      : 'Alto (4)'
-      },
-      {
-        'control_implementado'  : 'Activiades de compras',
-        'efectividad'      : 'Media (3)'
-      }];
+    puntajes = [];
+    rows = [];
+    efectividadTotal = 0;
 
     constructor(public dialog: MatDialog)
     {
 
     }
 
-  causasDialog() {
-    this.dialogRef = this.dialog.open(ControlesDeclaracionComponent, {
-      panelClass: 'controles-declaracion-dialog'
-    });
-  }
-
-
-  delete(row, rowIndex) {
-    this.dialogConfirm = this.dialog.open(DialogOverviewConfirmDialog, {
-      width: '250px',
-      data: { name: row.causa_riesgo }
-    });
-    this.dialogConfirm.afterClosed()
-      .subscribe(response => {
-
+    controlesDialog() {
+      this.dialogRef = this.dialog.open(ControlesDeclaracionComponent, {
+        panelClass: 'controles-declaracion-dialog'
       });
-  }
+
+      this.dialogRef.afterClosed().subscribe(response => {
+        if (response) {
+          this.rows.push(response.formInfo);
+          this.puntajes.push(response.efectividadValue);
+          this.calcularEfectividadTotal();
+          this.rows = [...this.rows];
+        }
+      });
+    }
+
+    calcularEfectividadTotal() {
+      if (this.puntajes.length > 0) {
+        const suma = this.puntajes.reduce((x, y) => x + y);
+        this.efectividadTotal = Math.ceil(suma / this.puntajes.length);
+      } else {
+        this.efectividadTotal = 0;
+      }
+    }
+
+
+    delete(row, rowIndex) {
+      if (rowIndex > -1) {
+        this.puntajes.splice(rowIndex, 1);
+        this.rows.splice(rowIndex, 1);
+        this.rows = [...this.rows];
+
+        this.calcularEfectividadTotal();
+      }
+    }
 }
