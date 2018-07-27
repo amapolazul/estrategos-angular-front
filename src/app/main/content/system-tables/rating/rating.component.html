@@ -1,60 +1,65 @@
 <div id="risk-rating" class="p-24" fxFlex="100%">
 
-        <div class="mat-title">Calificación del riesgo</div>
+  <div class="mat-title">Calificación del riesgo</div>
 
-        <div class="mat-white-bg mat-elevation-z4 p-24" fxLayout="column">
+  <div class="mat-white-bg mat-elevation-z4 p-24" fxLayout="column">
 
-        <div class="button-row" fxLayout="">
-            <button mat-raised-button color="primary" (click)="ratingDialog()">Nuevo</button>
-            <input class="search-datatable" type='text' fxLayout=""
-                 placeholder='Escriba aquí para realizar una busqueda ...' (keyup)='updateFilter($event)'/>
-        </div>
+    <div class="button-row">
+      <button mat-raised-button color="primary" (click)="ratingDialog()">Nuevo</button>
+      <input class="search-datatable" type='text' 
+             placeholder='Escriba aquí para realizar una busqueda ...' (keyup)='updateFilter($event)'/>
+    </div>
 
-            <div class="content p-24">
+    <div class="content p-24">
 
-                <div class=" mat-elevation-z8">
+      <div class=" mat-elevation-z8">
 
-                  <ngx-datatable class="material"
-                                 [rows]="ratingTypes"
-                                 [loadingIndicator]="loadingIndicator"
-                                 [columnMode]="'force'"
-                                 [headerHeight]="48"
-                                 [footerHeight]="56"
-                                 [rowHeight]="'auto'"
-                                 [scrollbarH]="true"
-                                 [reorderable]="reorderable"
-                                 [limit]="10">
+        <ngx-datatable class="material"
+                       [rows]="ratingTypes"
+                       [loadingIndicator]="loadingIndicator"
+                       [rowClass]="getRowClass"
+                       [columnMode]="'force'"
+                       [headerHeight]="48"
+                       [footerHeight]="56"
+                       [rowHeight]="'auto'"
+                       [scrollbarH]="true"
+                       [reorderable]="reorderable"
+                       [limit]="10">
 
-                        <ngx-datatable-column name="Acciones" [width]="120" [canAutoResize]="false" [sortable]="false">
-                          <ng-template let-row="row" let-rowIndex="rowIndex" let-id="value" ngx-datatable-cell-template>
-                            <button class="btn btn-sm btn-danger" (click)="edit(row, rowIndex)">
-                              <mat-icon _ngcontent-c71="" class="secondary-text s-26 mat-icon material-icons" role="img" aria-hidden="true">edit</mat-icon>
-                            </button>
-                            <button class="btn btn-sm btn-danger" (click)="delete(row, rowIndex)">
-                              <mat-icon _ngcontent-c71="" class="secondary-text s-26 mat-icon material-icons" role="img" aria-hidden="true">delete</mat-icon>
-                            </button>
-                          </ng-template>
-                        </ngx-datatable-column>
+          <ngx-datatable-column name="Acciones" [width]="120" [canAutoResize]="false" [sortable]="false">
+            <ng-template let-row="row" let-rowIndex="rowIndex" let-id="value" ngx-datatable-cell-template>
+              <button class="btn btn-sm btn-danger" (click)="edit(row, rowIndex)">
+                <mat-icon _ngcontent-c71="" class="secondary-text s-26 mat-icon material-icons" role="img"
+                          aria-hidden="true">edit
+                </mat-icon>
+              </button>
+              <button class="btn btn-sm btn-danger" (click)="delete(row, rowIndex)">
+                <mat-icon _ngcontent-c71="" class="secondary-text s-26 mat-icon material-icons" role="img"
+                          aria-hidden="true">delete
+                </mat-icon>
+              </button>
+            </ng-template>
+          </ngx-datatable-column>
 
-                        <ngx-datatable-column name="Calificación del riesgo" prop="nombre_calificacion_riesgo">
-                        </ngx-datatable-column>
+          <ngx-datatable-column name="Calificación del riesgo" prop="nombre_calificacion_riesgo">
+          </ngx-datatable-column>
 
-                        <ngx-datatable-column name="Rango mínimo" prop="rango_minimo">
-                        </ngx-datatable-column>
+          <ngx-datatable-column name="Rango mínimo" prop="rango_minimo">
+          </ngx-datatable-column>
 
-                        <ngx-datatable-column name="Rango máximo" prop="rango_maximo">
-                        </ngx-datatable-column>
+          <ngx-datatable-column name="Rango máximo" prop="rango_maximo">
+          </ngx-datatable-column>
 
-                        <ngx-datatable-column name="Color" prop="color">
-                        </ngx-datatable-column>
+          <ngx-datatable-column name="Color" prop="color" headerClass="" [cellClass]="getCellClass">
+          </ngx-datatable-column>
 
-                        <ngx-datatable-column name="Acción a tomar" prop="accion_tomar">
-                        </ngx-datatable-column>
+          <ngx-datatable-column name="Acción a tomar" prop="accion_tomar">
+          </ngx-datatable-column>
 
-                    </ngx-datatable>
+        </ngx-datatable>
 
-                </div>
-            </div>
+      </div>
+    </div>
 
-        </div>
+  </div>
 </div>

@@ -93,7 +93,13 @@ export class SystemRatingComponent implements OnInit {
     }
   }
 
-
+  getCellClass({ row, column, value }): any {
+    return {
+      'is-yellow': value === 'Amarillo',
+      'is-green': value === 'Verde',
+      'is-red': value === 'Rojo'
+    };
+  }
 
   updateFilter(event) {
     const val = event.target.value.toLowerCase();
