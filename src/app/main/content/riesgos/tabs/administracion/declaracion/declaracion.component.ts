@@ -70,8 +70,7 @@ export class DeclaracionComponent implements OnInit{
 
 
     this.riesgosService.crearRiesgoService(request).subscribe(x => {
-      console.log('guardado con id', x);
-      this.customSnackMessage.openSnackBar('Risgo creado correctamente');
+      this.customSnackMessage.openSnackBar('Riesgo creado correctamente');
       this.router.navigate(['administracion-riesgos', this.ejercicioPadre]);
     }, error => {
       console.log(error);
