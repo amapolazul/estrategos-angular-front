@@ -23,6 +23,7 @@ import {ControlsRiskService} from './content/system-tables/controls/service/cont
 import {ProcessCache} from './content/processes/services/process-cache.service';
 import {DeclaracionEstadoService} from './content/riesgos/tabs/administracion/declaracion/tabs/declaracion/service/declaracion-estados.service';
 import {RiesgosService} from './content/riesgos/services/riesgos.service';
+import {RiesgosCalculosService} from './content/riesgos/services/riesgos-calculos.service';
 
 
 @NgModule({
@@ -57,6 +58,7 @@ import {RiesgosService} from './content/riesgos/services/riesgos.service';
         ResponseRiskService,
         ControlsRiskService,
         ProcessCache,
+        RiesgosCalculosService,
         CustomSnackBarMessages,
         RiesgosService,
         DeclaracionEstadoService

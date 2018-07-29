@@ -21,7 +21,7 @@
       </mat-form-field>
 
       <mat-form-field fxFlex="">
-        <mat-select placeholder="Efectividad" formControlName="probabilidad_riesgo_id" required (change)="onChange($event)">
+        <mat-select placeholder="Efectividad" formControlName="efectividad_riesgos_id" required (change)="onChange($event)">
           <mat-option *ngFor="let efectividad of efectividadRiesgo" [value]="efectividad.id">
             {{ efectividad.efectividad_nombre }} ({{efectividad.puntaje}})
           </mat-option>

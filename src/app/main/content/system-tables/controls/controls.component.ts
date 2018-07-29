@@ -60,7 +60,7 @@ export class SystemControlsComponent implements OnInit {
 
     this.dialogRef.afterClosed()
       .subscribe(response => {
-        if( response ) {
+        if ( response ) {
           this.controlsRisk[rowIndex] = response;
           this.controlsRisk = [...this.controlsRisk];
           this.loadingIndicator = false;
@@ -81,7 +81,7 @@ export class SystemControlsComponent implements OnInit {
   }
 
   deleteRow(result, row, rowIndex) {
-    if (result != undefined) {
+    if (result) {
       this.controlsRiskService.deleteControlsRisk(row.id).subscribe((data: any) => {
         console.log(data);
       });

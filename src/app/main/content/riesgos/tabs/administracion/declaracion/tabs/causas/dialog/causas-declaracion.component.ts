@@ -60,6 +60,4 @@ export class CausasDeclaracionComponent implements OnInit {
     this.descripcionProbabilidad = probabilidadRiesgo.descripcion;
     this.probabilidadValue = probabilidadRiesgo.puntaje;
   }
-
-
 }

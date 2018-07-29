@@ -2,7 +2,7 @@ import {BaseService} from '../../commons/base-service.service';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {Injectable} from '@angular/core';
-import {DeclaracionRiesgos} from '../models/riesgos.models';
+import {DeclaracionRiesgos, DeclaracionRiesgosRequest} from '../models/riesgos.models';
 
 @Injectable()
 export class RiesgosService extends BaseService {
@@ -14,6 +14,10 @@ export class RiesgosService extends BaseService {
     super();
     this.serviceUrl = this.getResourceEndpoint();
     this.serviceStatusUrl = this.getResourceStatusEndpoint();
+  }
+
+  crearRiesgoService(request: DeclaracionRiesgosRequest): Observable<number> {
+    return this.http.post<number>(this.serviceUrl, request);
   }
 
   getRiesgosPendientesPorProcesoId(procesoId: number): Observable<DeclaracionRiesgos[]> {

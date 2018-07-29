@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {CausasDeclaracionComponent} from './dialog/causas-declaracion.component';
 import {DialogOverviewConfirmDialog} from '../../../../../../../../../assets/angular-material-examples/dialog-confirm/dialog-confirm';
+import {RiesgosCalculosService} from '../../../../../services/riesgos-calculos.service';
 
 @Component({
     selector   : 'causas-lists',
@@ -15,11 +16,13 @@ export class CausasListsComponent
 
     puntajes = [];
     rows = [];
-    probabilidadTotal = 0;
+    probabilidadTotal: number;
 
-    constructor(public dialog: MatDialog)
+    @Output() actualizarProbabilidad = new EventEmitter<string>();
+
+    constructor(public dialog: MatDialog, private riesgosCalculos: RiesgosCalculosService)
     {
-
+      this.probabilidadTotal = 0;
     }
 
   causasDialog() {
@@ -39,13 +42,16 @@ export class CausasListsComponent
 
   calcularProbabilidadTotal() {
     if (this.puntajes.length > 0) {
-      const suma = this.puntajes.reduce((x, y) => x + y);
+      const suma = this.puntajes.reduce((x, y) => parseInt(x) + parseInt(y));
+      console.log(suma);
       this.probabilidadTotal = Math.ceil(suma / this.puntajes.length);
+
     } else {
       this.probabilidadTotal = 0;
     }
+    this.riesgosCalculos.setProbabilidadPromedio(this.probabilidadTotal);
+    this.actualizarProbabilidad.next('');
   }
-
 
   delete(row, rowIndex) {
     if (rowIndex > -1) {

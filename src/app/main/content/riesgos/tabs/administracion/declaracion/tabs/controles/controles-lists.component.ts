@@ -1,6 +1,7 @@
-import {Component} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {ControlesDeclaracionComponent} from './dialog/controles-declaracion.component';
+import {RiesgosCalculosService} from '../../../../../services/riesgos-calculos.service';
 
 @Component({
     selector   : 'controles-lists',
@@ -15,7 +16,10 @@ export class ControlesListsComponent
     rows = [];
     efectividadTotal = 0;
 
-    constructor(public dialog: MatDialog)
+    @Output() actualizarEfectividad = new EventEmitter<string>();
+
+    constructor(public dialog: MatDialog,
+                private riesgosCalculosService: RiesgosCalculosService)
     {
 
     }
@@ -42,6 +46,9 @@ export class ControlesListsComponent
       } else {
         this.efectividadTotal = 0;
       }
+
+      this.riesgosCalculosService.setEfectividadPromedio(this.efectividadTotal);
+      this.actualizarEfectividad.next();
     }
 
 

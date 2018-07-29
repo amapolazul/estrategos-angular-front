@@ -1,6 +1,7 @@
-import {Component} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {EfectosDeclaracionComponent} from './dialog/efectos-declaracion.component';
+import {RiesgosCalculosService} from '../../../../../services/riesgos-calculos.service';
 
 @Component({
     selector   : 'efectos-lists',
@@ -16,7 +17,10 @@ export class EfectosListsComponent
 
     impactoTotal: number;
 
-    constructor(public dialog: MatDialog) {
+    @Output() actualizarImpacto = new EventEmitter<string>();
+
+    constructor(public dialog: MatDialog,
+                private riesgosCauculosService: RiesgosCalculosService) {
       this.impactoTotal = 0;
     }
 
@@ -42,6 +46,9 @@ export class EfectosListsComponent
     } else {
       this.impactoTotal = 0;
     }
+
+    this.riesgosCauculosService.setImpactoPromedio(this.impactoTotal);
+    this.actualizarImpacto.next();
   }
 
 
