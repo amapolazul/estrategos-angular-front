@@ -1,0 +1,44 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">Productos / Servicios del proceso</span>
+            <button mat-button class="mat-icon-button" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 m-0">
+        <form name="composeForm" [formGroup]="composeForm" class="compose-form" fxLayout="column" fxFlex>
+
+            <mat-form-field>
+                <input matInput name="proceso_Nombre" placeholder="Proceso" formControlName="proceso_Nombre" disabled >
+            </mat-form-field>
+
+
+            <mat-form-field>
+                <input matInput name="producto_Servicio_nombre" placeholder="Producto / servicio" formControlName="producto_Servicio_nombre">
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput name="producto_Servicio_Codigo" placeholder="Codigo Producto" formControlName="producto_Servicio_Codigo">
+            </mat-form-field>
+
+            <mat-form-field>
+                <textarea matInput name="producto_Caracteristicas" placeholder="Caracteristicas" formControlName="producto_Caracteristicas" rows="4">
+                </textarea>
+            </mat-form-field>
+            <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="space-between center">
+                <div>
+                    <button mat-raised-button class="save-button mat-accent" aria-label="Guardar" (click)="guardar()">
+                        Guardar
+                    </button>
+                    <button mat-raised-button class="save-button mat-accent" aria-label="Cancelar" (click)="salir()">
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </form>
+        <div>
+</div>
+    </div></div>

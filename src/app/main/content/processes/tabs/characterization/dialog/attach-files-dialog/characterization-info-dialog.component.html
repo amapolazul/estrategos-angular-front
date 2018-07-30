@@ -1,0 +1,123 @@
+<div class="dialog-content-wrapper" *ngIf="!showAttachFilesForm">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">Caracterización del proceso / Subproceso </span>
+            <button mat-button class="mat-icon-button" (click)="closeDialog()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 m-0">
+        <mat-form-field>
+          <input matInput name="procedimiento" placeholder="Procedimiento"  type="text" [value]="caracterizacion.procedimiento_Nombre" disabled>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput name="procedimiento_cod" placeholder="Código procedimiento" [value]="caracterizacion.procedimiento_Codigo" type="text" disabled>
+        </mat-form-field>
+
+        <mat-form-field>
+         <input matInput name="message" placeholder="Objetivo" [value]="caracterizacion.procedimiento_Objetivo" formControlName="procedimiento_Objetivo" disabled>
+        </mat-form-field>
+
+        <div class="button-row">
+          <button mat-raised-button color="primary" (click)="showAttachFilesFormF()">Nuevo</button>
+        </div>
+
+        <ngx-datatable class="material"
+                       [rows]="rows"
+                       [loadingIndicator]="loadingIndicator"
+                       [columnMode]="'force'"
+                       [headerHeight]="48"
+                       [footerHeight]="56"
+                       [rowHeight]="'auto'"
+                       [scrollbarH]="true"
+                       [reorderable]="reorderable"
+                       [selectionType]="'checkbox'"
+                       [limit]="10">
+
+          <ngx-datatable-column name="Acciones" [sortable]="false">
+            <ng-template let-row="row" let-rowIndex="rowIndex" let-id="value" ngx-datatable-cell-template>
+              <button class="btn btn-sm btn-danger" (click)="delete(row, rowIndex)">
+                <mat-icon _ngcontent-c71="" class="secondary-text s-48 mat-icon material-icons" role="img" aria-hidden="true">delete</mat-icon>
+              </button>
+              <!--<button class="btn btn-sm btn-danger" (click)="edit(row, rowIndex)">-->
+                <!--<mat-icon _ngcontent-c71="" class="secondary-text s-48 mat-icon material-icons" role="img" aria-hidden="true">edit</mat-icon>-->
+              <!--</button>-->
+            </ng-template>
+          </ngx-datatable-column>
+
+
+          <ngx-datatable-column name="Documentos (Formularios) Anexos" prop="procedimiento_Documento_Nombre">
+          </ngx-datatable-column>
+
+          <ngx-datatable-column name="Código Documento" prop="procedimiento_Documento_Codigo">
+          </ngx-datatable-column>
+
+        </ngx-datatable>
+
+        <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="space-between center">
+          <div>
+            <button mat-raised-button class="save-button mat-accent" aria-label="Guardar" (click)="closeAndSaveAttachFiles()">
+              Guardar
+            </button>
+            <button mat-raised-button class="save-button mat-accent" aria-label="Cancelar" (click)="closeDialog()">
+              Cancelar
+            </button>
+          </div>
+        </div>
+    </div>
+</div>
+
+<div class="dialog-content-wrapper" *ngIf="showAttachFilesForm">
+  <mat-toolbar matDialogTitle class="mat-accent m-0">
+    <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+      <span class="title dialog-title">Caracterización del proceso / Subproceso </span>
+      <button mat-button class="mat-icon-button" (click)="dialogRef.close()" aria-label="Close dialog">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar>
+
+  <div mat-dialog-content class="p-24 m-0">
+    <form name="attachFileForm" [formGroup]="attachFileForm" class="compose-form" fxLayout="column" fxFlex>
+
+      <mat-form-field>
+        <input matInput name="procedimiento" placeholder="Procedimiento"  type="text" [value]="caracterizacion.procedimiento_Nombre" disabled>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput name="nombre_documento" placeholder="Nombre Documento" formControlName="procedimiento_Documento_Nombre" type="text">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput name="codigo_documento" placeholder="Código Documento" formControlName="procedimiento_Documento_Codigo" type="text">
+      </mat-form-field>
+
+      <mat-form-field>
+                <textarea matInput name="descripcion" placeholder="Descripción" formControlName="procedimiento_Documento_Descripcion">
+                </textarea>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput name="procedimiento_Documento_Arch" placeholder="Anexo" formControlName="procedimiento_Documento_Arch" type="text" disabled>
+      </mat-form-field>
+
+      <input type="file" (change)="handleFileInput($event.target.files)" placeholder="Cargar archivo" required>
+
+      <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="space-between center">
+        <div>
+          <button mat-raised-button class="save-button mat-accent" aria-label="Guardar" (click)="saveFile()">
+            Guardar
+          </button>
+          <button mat-raised-button class="save-button mat-accent" aria-label="Cancelar" (click)="cancel()">
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</div>
+

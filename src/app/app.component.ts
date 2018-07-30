@@ -22,6 +22,9 @@ export class AppComponent
         private fuseTranslationLoader: FuseTranslationLoaderService
     )
     {
+        // Set Fuse Splash
+        this.fuseSplashScreen.hide();
+
         // Add languages
         this.translate.addLangs(['en', 'tr']);
 

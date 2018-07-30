@@ -1,2 +1,17 @@
 // Import Fuse main library
 @import "@fuse/scss/core";
+
+.is-green {
+
+  color: green!important;
+}
+
+.is-red {
+
+  color: red!important;
+}
+
+.is-yellow {
+
+  color: #FFC107!important;
+}
