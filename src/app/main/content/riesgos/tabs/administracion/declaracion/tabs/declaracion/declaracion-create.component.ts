@@ -70,7 +70,7 @@ export class DeclaracionCreateComponent implements OnInit {
     this.declaracionForm.controls['probabilidad'].disable();
     this.declaracionForm.controls['impacto'].setValue(this.riesgosCalculosService.getImpactoPromedio());
     this.declaracionForm.controls['impacto'].disable();
-    this.declaracionForm.controls['severidad'].setValue(this.riesgosCalculosService.calcularRiesgoResidual());
+    this.declaracionForm.controls['severidad'].setValue(this.riesgosCalculosService.calcularSeveridad());
     this.declaracionForm.controls['severidad'].disable();
     this.declaracionForm.controls['riesgo_residual'].setValue(this.riesgosCalculosService.calcularRiesgoResidual());
     this.declaracionForm.controls['riesgo_residual'].disable();

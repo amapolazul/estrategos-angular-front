@@ -35,6 +35,14 @@ export class SystemProbabilityComponent implements OnInit {
     });
   }
 
+  reloadTableServices(){
+    this.probabilityRiskService.getProbabilityRisk().subscribe((data: any) => {
+      this.probabilityRisk = data;
+      this.temp = [...data];
+      this.loadingIndicator = false;
+    });
+  }
+
   probabilityDialog(){
     this.dialogRef = this.dialog.open(ProbabilityDialogComponent, {
       panelClass: 'probability-dialog'
@@ -42,9 +50,7 @@ export class SystemProbabilityComponent implements OnInit {
     this.dialogRef.afterClosed()
       .subscribe(response => {
         if( response ) {
-          this.probabilityRisk.push(response);
-          this.probabilityRisk = [...this.probabilityRisk];
-          this.loadingIndicator = false;
+          this.reloadTableServices()
         }
       });
   }
@@ -63,9 +69,7 @@ export class SystemProbabilityComponent implements OnInit {
     this.dialogRef.afterClosed()
       .subscribe(response => {
         if( response ) {
-          this.probabilityRisk[rowIndex] = response;
-          this.probabilityRisk = [...this.probabilityRisk];
-          this.loadingIndicator = false;
+          this.reloadTableServices();
         }
       });
   }
@@ -83,15 +87,15 @@ export class SystemProbabilityComponent implements OnInit {
   }
 
   deleteRow(result, row, rowIndex) {
-    if( result!= undefined ) {
+    if( result ) {
       this.probabilityRiskService.deleteProbabilityRisk(row.id).subscribe((data: any) => {
         console.log(data);
+        if (rowIndex > -1) {
+          this.probabilityRisk.splice(rowIndex, 1);
+          this.probabilityRisk = [...this.probabilityRisk];
+          this.customSnackMessage.openSnackBar('Registro eliminado');
+        }
       });
-      if (rowIndex > -1) {
-        this.probabilityRisk.splice(rowIndex, 1);
-        this.probabilityRisk = [...this.probabilityRisk];
-        this.customSnackMessage.openSnackBar('Registro eliminado');
-      }
     }
   }
 

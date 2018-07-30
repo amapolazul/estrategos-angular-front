@@ -34,6 +34,14 @@ export class SystemCausesComponent implements OnInit {
     });
   }
 
+  reloadTableServices(){
+    this.causesRiskService.getCausesRisk().subscribe((data: any) => {
+      this.causesRisk = data;
+      this.temp = [...data];
+      this.loadingIndicator = false;
+    });
+  }
+
   causesDialog() {
     this.dialogRef = this.dialog.open(CausesDialogComponent, {
       panelClass: 'causes-tabs-riesgo'
@@ -41,7 +49,7 @@ export class SystemCausesComponent implements OnInit {
     this.dialogRef.afterClosed()
       .subscribe(response => {
         if( response ) {
-          this.ngOnInit();
+          this.reloadTableServices();
         }
       });
   }
@@ -61,9 +69,7 @@ export class SystemCausesComponent implements OnInit {
       .subscribe(response => {
         if( response ){
           console.log(response);
-          this.causesRisk[rowIndex] = response;
-          this.causesRisk = [...this.causesRisk];
-          this.loadingIndicator = false;
+          this.reloadTableServices();
         }
       });
   }
@@ -81,15 +87,15 @@ export class SystemCausesComponent implements OnInit {
   }
 
   deleteRow(result, row, rowIndex) {
-    if (result != undefined) {
+    if (result ) {
       this.causesRiskService.deleteCausesRisk(row.id).subscribe((data: any) => {
         console.log(data);
+        if (rowIndex > -1) {
+          this.causesRisk.splice(rowIndex, 1);
+          this.causesRisk = [...this.causesRisk];
+          this.customSnackMessage.openSnackBar('Registro eliminado');
+        }
       });
-      if (rowIndex > -1) {
-        this.causesRisk.splice(rowIndex, 1);
-        this.causesRisk = [...this.causesRisk];
-        this.customSnackMessage.openSnackBar('Registro eliminado');
-      }
     }
   }
 

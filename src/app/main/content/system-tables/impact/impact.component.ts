@@ -36,6 +36,14 @@ export class SystemImpactComponent implements OnInit {
     });
   }
 
+  reloadTableServices(){
+    this.probabilityRiskService.getImpactRisk().subscribe((data: any) => {
+      this.impactRisk = data;
+      this.temp = [...data];
+      this.loadingIndicator = false;
+    });
+  }
+
   impactDialog() {
     this.dialogRef = this.dialog.open(ImpactDialogComponent, {
       panelClass: 'impact-dialog'
@@ -43,9 +51,7 @@ export class SystemImpactComponent implements OnInit {
     this.dialogRef.afterClosed()
       .subscribe(response => {
         if (response) {
-          this.impactRisk.push(response);
-          this.impactRisk = [...this.impactRisk];
-          this.loadingIndicator = false;
+          this.reloadTableServices();
         }
       });
   }
@@ -64,9 +70,7 @@ export class SystemImpactComponent implements OnInit {
     this.dialogRef.afterClosed()
       .subscribe(response => {
         if (response) {
-          this.impactRisk[rowIndex] = response;
-          this.impactRisk = [...this.impactRisk];
-          this.loadingIndicator = false;
+          this.reloadTableServices();
         }
       });
   }
@@ -84,15 +88,14 @@ export class SystemImpactComponent implements OnInit {
   }
 
   deleteRow(result, row, rowIndex) {
-    if (result != undefined) {
+    if (result ) {
       this.probabilityRiskService.deleteImpactRisk(row.id).subscribe((data: any) => {
-        console.log(data);
+        if (rowIndex > -1) {
+          this.impactRisk.splice(rowIndex, 1);
+          this.impactRisk = [...this.impactRisk];
+          this.customSnackMessage.openSnackBar('Registro eliminado');
+        }
       });
-      if (rowIndex > -1) {
-        this.impactRisk.splice(rowIndex, 1);
-        this.impactRisk = [...this.impactRisk];
-        this.customSnackMessage.openSnackBar('Registro eliminado');
-      }
     }
   }
 

@@ -51,4 +51,12 @@ export class AdministracionListsComponent implements OnInit {
   nuevoDeclaracionRiesgo() {
     this.router.navigate(['declaracion-riesgos', this.ejercicioPadre]);
   }
+
+  getCellClass({ row, column, value }): any {
+    return {
+      'is-yellow': value === 'Amarillo',
+      'is-green': value === 'Verde',
+      'is-red': value === 'Rojo'
+    };
+  }
 }
