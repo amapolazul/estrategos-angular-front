@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ResponseRiskModel} from '../model/response-risk.model';
 import {ResponseRiskService} from '../service/response-risk.service';
 import {FormType} from '../../../commons/form-type.enum';
@@ -15,6 +15,7 @@ import {CustomSnackBarMessages} from '../../../commons/messages.service';
 })
 export class ResponseDialogComponent implements OnInit {
   restData: any;
+  formErrors: any;
   composeForm: FormGroup;
   responseRiskModel = new ResponseRiskModel();
 
@@ -25,12 +26,16 @@ export class ResponseDialogComponent implements OnInit {
     private customSnackMessage: CustomSnackBarMessages,
     @Inject(MAT_DIALOG_DATA) private data: any
   ) {
-  }
 
+    // Reactive form errors
+    this.formErrors = {
+      respuestaRiesgoNombre: {}
+    };
+  }
 
   ngOnInit() {
     this.composeForm = this.formBuilder.group({
-      respuestaRiesgoNombre: [''],
+      respuestaRiesgoNombre: ['', [Validators.required]],
       descripcion: ['']
     });
     if (this.data && this.data.formType === FormType.edit) {

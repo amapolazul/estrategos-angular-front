@@ -9,7 +9,7 @@
     </mat-toolbar>
 
     <div mat-dialog-content class="p-24 m-0">
-        <form name="composeForm" [formGroup]="composeForm" class="compose-form" fxLayout="column" fxFlex>
+        <form name="composeForm" [formGroup]="composeForm" (ngSubmit)="saveRatingRisk()" class="compose-form" fxLayout="column" fxFlex>
 
           <mat-form-field>
               <input matInput name="bcc" placeholder="Calificacion del riesgo " formControlName="nombre_calificacion_riesgo" >
@@ -46,7 +46,7 @@
             </mat-form-field>
             <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="space-between center">
                 <div>
-                    <button mat-raised-button class="save-button mat-accent" aria-label="Guardar" (click)="saveRatingRisk()">
+                    <button mat-raised-button class="save-button mat-accent" aria-label="Guardar" [disabled]="composeForm.invalid" type="submit">
                         Guardar
                     </button>
                     <button mat-raised-button class="save-button mat-accent" aria-label="Cancelar" (click)="closeModal()">

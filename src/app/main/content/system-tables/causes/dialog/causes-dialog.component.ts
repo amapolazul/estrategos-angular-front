@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {CausesRiskModel} from '../model/causes-risk.model';
 import {CausesRiskService} from '../service/causes-risk.service';
 import {FormType} from '../../../commons/form-type.enum';
@@ -15,6 +15,7 @@ import {CustomSnackBarMessages} from '../../../commons/messages.service';
 })
 export class CausesDialogComponent implements OnInit {
   restData: any;
+  formErrors: any;
   composeForm: FormGroup;
   causesRiskModel = new CausesRiskModel();
 
@@ -25,12 +26,15 @@ export class CausesDialogComponent implements OnInit {
     private customSnackMessage: CustomSnackBarMessages,
     @Inject(MAT_DIALOG_DATA) private data: any
   ) {
+    this.formErrors = {
+      causa_riesgo: {},
+      descripcion: {}
+    };
   }
-
-
+  
   ngOnInit() {
     this.composeForm = this.formBuilder.group({
-      causa_riesgo: [''],
+      causa_riesgo: ['', [Validators.required]],
       descripcion: ['']
     });
     if (this.data && this.data.formType === FormType.edit) {
