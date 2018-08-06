@@ -35,6 +35,14 @@ export class SystemResponseComponent implements OnInit {
     });
   }
 
+  reloadTableServices(){
+    this.responseRiskService.getResponseRisk().subscribe((data: any) => {
+      this.responseRisk = data;
+      this.temp = [...data];
+      this.loadingIndicator = false;
+    });
+  }
+
   responseDialog() {
     this.dialogRef = this.dialog.open(ResponseDialogComponent, {
       panelClass: 'response-tabs-riesgo'
@@ -42,7 +50,7 @@ export class SystemResponseComponent implements OnInit {
     this.dialogRef.afterClosed()
       .subscribe(response => {
         if( response ) {
-          this.ngOnInit();
+          this.reloadTableServices();
         }
       });
   }
@@ -62,9 +70,7 @@ export class SystemResponseComponent implements OnInit {
       .subscribe(response => {
         if( response ) {
           console.log(response);
-          this.responseRisk[rowIndex] = response;
-          this.responseRisk = [...this.responseRisk];
-          this.loadingIndicator = false;
+          this.reloadTableServices();
         }
       });
   }
@@ -84,15 +90,15 @@ export class SystemResponseComponent implements OnInit {
   }
 
   deleteRow(result, row, rowIndex){
-    if( result != undefined){
+    if( result ){
       this.responseRiskService.deleteResponseRisk(row.id).subscribe((data: any) => {
         console.log(data);
+        if (rowIndex > -1) {
+          this.responseRisk.splice(rowIndex, 1);
+          this.responseRisk = [...this.responseRisk];
+          this.customSnackMessage.openSnackBar('Registro eliminado');
+        }
       });
-      if (rowIndex > -1) {
-        this.responseRisk.splice(rowIndex, 1);
-        this.responseRisk = [...this.responseRisk];
-        this.customSnackMessage.openSnackBar('Registro eliminado');
-      }
     }
   }
 

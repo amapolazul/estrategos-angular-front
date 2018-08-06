@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ProbabilityRiskModel} from '../../probability/model/probability-risk.model';
 import {ProbabilityRiskService} from '../../probability/service/probability-risk.service';
 import {CustomSnackBarMessages} from '../../../commons/messages.service';
@@ -15,8 +15,8 @@ import {ImpactRiskModel} from '../../impact/model/impact-risk.model';
   encapsulation: ViewEncapsulation.None
 })
 export class ProbabilityDialogComponent implements OnInit {
-  showExtraToFields = false;
   restData: any;
+  formErrors: any;
   composeForm: FormGroup;
   probabilityRiskModel = new ProbabilityRiskModel();
 
@@ -27,12 +27,18 @@ export class ProbabilityDialogComponent implements OnInit {
     private customSnackMessage: CustomSnackBarMessages,
     @Inject(MAT_DIALOG_DATA) private data: any
   ) {
+    this.formErrors = {
+      nombre_calificacion_riesgo: {},
+      probabilidad: {},
+      puntaje: {},
+      descripcion: {}
+    };
   }
 
   ngOnInit() {
     this.composeForm = this.formBuilder.group({
-      probabilidad: [''],
-      puntaje: [''],
+      probabilidad: ['', [Validators.required]],
+      puntaje: ['', [Validators.required]],
       descripcion: ['']
     });
     if (this.data && this.data.formType === FormType.edit) {

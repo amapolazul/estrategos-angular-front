@@ -2,7 +2,6 @@ import { Component, ElementRef, HostBinding, Inject, OnDestroy, Renderer2, ViewE
 import { DOCUMENT } from '@angular/common';
 import { Platform } from '@angular/cdk/platform';
 import { Subscription } from 'rxjs/Subscription';
-
 import { FuseConfigService } from '@fuse/services/config.service';
 
 @Component({
@@ -25,6 +24,7 @@ export class FuseMainComponent implements OnDestroy
         @Inject(DOCUMENT) private document: any
     )
     {
+
         this.onConfigChanged =
             this.fuseConfig.onConfigChanged
                 .subscribe(

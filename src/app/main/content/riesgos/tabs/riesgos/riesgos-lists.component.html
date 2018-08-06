@@ -22,7 +22,7 @@
                        [reorderable]="reorderable"
                        [limit]="10">
 
-          <ngx-datatable-column name="Alerta" prop="calificacion_riesgo">
+          <ngx-datatable-column name="Alerta" prop="calificacion_riesgo" headerClass="" [cellClass]="getCellClass">
           </ngx-datatable-column>
 
           <ngx-datatable-column name="Riesgo" prop="factor_riesgo">

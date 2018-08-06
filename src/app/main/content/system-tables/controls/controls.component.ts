@@ -35,6 +35,14 @@ export class SystemControlsComponent implements OnInit {
     });
   }
 
+  reloadTableServices(){
+    this.controlsRiskService.getControlsRisk().subscribe((data: any) => {
+      this.controlsRisk = data;
+      this.temp = [...data];
+      this.loadingIndicator = false;
+    });
+  }
+
   controlsDialog() {
     this.dialogRef = this.dialog.open(ControlsDialogComponent, {
       panelClass: 'controls-tabs-riesgo'
@@ -42,7 +50,7 @@ export class SystemControlsComponent implements OnInit {
     this.dialogRef.afterClosed()
       .subscribe(response => {
         if( response ) {
-          this.ngOnInit();
+          this.reloadTableServices();
         }
       });
   }
@@ -61,9 +69,7 @@ export class SystemControlsComponent implements OnInit {
     this.dialogRef.afterClosed()
       .subscribe(response => {
         if ( response ) {
-          this.controlsRisk[rowIndex] = response;
-          this.controlsRisk = [...this.controlsRisk];
-          this.loadingIndicator = false;
+          this.reloadTableServices();
         }
       });
   }
@@ -84,12 +90,12 @@ export class SystemControlsComponent implements OnInit {
     if (result) {
       this.controlsRiskService.deleteControlsRisk(row.id).subscribe((data: any) => {
         console.log(data);
+        if (rowIndex > -1) {
+          this.controlsRisk.splice(rowIndex, 1);
+          this.controlsRisk = [...this.controlsRisk];
+          this.customSnackMessage.openSnackBar('Registro eliminado');
+        }
       });
-      if (rowIndex > -1) {
-        this.controlsRisk.splice(rowIndex, 1);
-        this.controlsRisk = [...this.controlsRisk];
-        this.customSnackMessage.openSnackBar('Registro eliminado');
-      }
     }
   }
 

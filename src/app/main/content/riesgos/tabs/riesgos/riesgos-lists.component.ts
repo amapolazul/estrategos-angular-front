@@ -14,4 +14,12 @@ export class RiesgosListsComponent
     {
 
     }
+
+    getCellClass({ row, column, value }): any {
+      return {
+        'is-yellow': value === 'Amarillo',
+        'is-green': value === 'Verde',
+        'is-red': value === 'Rojo'
+      };
+    }
 }

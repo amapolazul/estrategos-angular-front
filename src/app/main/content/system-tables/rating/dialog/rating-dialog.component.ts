@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {RatingRiskModel} from '../../rating/model/rating-risk.model';
 import { RatingRiskService } from '../../../system-tables/rating/service/rating-risk.service';
 import {CustomSnackBarMessages} from '../../../commons/messages.service';
@@ -14,8 +14,8 @@ import {FormType} from '../../../commons/form-type.enum';
   encapsulation: ViewEncapsulation.None
 })
 export class RatingDialogComponent implements OnInit {
-  showExtraToFields = false;
   restData: any;
+  formErrors: any;
   composeForm: FormGroup;
   ratingRiskModel = new RatingRiskModel();
 
@@ -26,15 +26,23 @@ export class RatingDialogComponent implements OnInit {
     private customSnackMessage: CustomSnackBarMessages,
     @Inject(MAT_DIALOG_DATA) private data: any
   ) {
+    // Reactive form errors
+    this.formErrors = {
+      nombre_calificacion_riesgo: {},
+      rango_minimo: {},
+      rango_maximo: {},
+      accion_tomar: {},
+      color: {}
+    };
   }
 
   ngOnInit() {
     this.composeForm = this.formBuilder.group({
-      nombre_calificacion_riesgo: [''],
-      rango_minimo: [''],
-      rango_maximo: [''],
-      color: [''],
-      accion_tomar: ['']
+      nombre_calificacion_riesgo: ['', [Validators.required]],
+      rango_minimo: ['', [Validators.required]],
+      rango_maximo: ['', [Validators.required]],
+      color: ['', [Validators.required]],
+      accion_tomar: ['', [Validators.required]]
     });
     if (this.data && this.data.formType === FormType.edit) {
       this.ratingRiskModel = this.data.product;

@@ -36,6 +36,14 @@ export class SystemTypesComponent implements OnInit {
     });
   }
 
+  reloadTableServices(){
+    this.typesRiskService.getTypeRisk().subscribe((data: any) => {
+      this.riskTypes = data;
+      this.temp = [...data];
+      this.loadingIndicator = false;
+      console.log(this.riskTypes);
+    });
+  }
 
   typesDialog() {
     this.dialogRef = this.dialog.open(TypesDialogComponent, {
@@ -44,9 +52,7 @@ export class SystemTypesComponent implements OnInit {
     this.dialogRef.afterClosed()
       .subscribe(response => {
         if( response ) {
-          this.riskTypes.push(response);
-          this.riskTypes = [...this.riskTypes];
-          this.loadingIndicator = false;
+          this.reloadTableServices();
         }
       });
   }
@@ -65,9 +71,7 @@ export class SystemTypesComponent implements OnInit {
     this.dialogRef.afterClosed()
       .subscribe(response => {
         if( response ){
-          this.riskTypes[rowIndex] = response;
-          this.riskTypes = [...this.riskTypes];
-          this.loadingIndicator = false;
+          this.reloadTableServices();
         }
       });
   }
@@ -87,17 +91,16 @@ export class SystemTypesComponent implements OnInit {
   }
 
   deleteRow(result, row, rowIndex){
-    if( result != undefined){
+    if( result ){
        this.typesRiskService.deleteTypeRisk(row.id).subscribe((data: any) => {
        console.log(data);
+         if (rowIndex > -1) {
+           this.riskTypes.splice(rowIndex, 1);
+           this.riskTypes = [...this.riskTypes];
+           this.customSnackMessage.openSnackBar('Registro eliminado');
+         }
       });
-      if (rowIndex > -1) {
-        this.riskTypes.splice(rowIndex, 1);
-        this.riskTypes = [...this.riskTypes];
-        this.customSnackMessage.openSnackBar('Registro eliminado');
-      }
     }
-
   }
 
   updateFilter(event) {

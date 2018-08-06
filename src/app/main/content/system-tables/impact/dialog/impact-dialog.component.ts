@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ImpactRiskService} from '../../impact/service/impact-risk.service';
 import {ImpactRiskModel} from '../model/impact-risk.model';
 import {FormType} from '../../../commons/form-type.enum';
@@ -14,8 +14,8 @@ import {CustomSnackBarMessages} from '../../../commons/messages.service';
   encapsulation: ViewEncapsulation.None
 })
 export class ImpactDialogComponent implements OnInit {
-  showExtraToFields = false;
   restData: any;
+  formErrors: any;
   composeForm: FormGroup;
   impactRiskModel = new ImpactRiskModel();
 
@@ -26,12 +26,17 @@ export class ImpactDialogComponent implements OnInit {
     private customSnackMessage: CustomSnackBarMessages,
     @Inject(MAT_DIALOG_DATA) private data: any
   ) {
+    this.formErrors = {
+      impacto: {},
+      puntaje: {},
+      descripcion: {}
+    };
   }
 
   ngOnInit() {
     this.composeForm = this.formBuilder.group({
-      impacto: [''],
-      puntaje: [''],
+      impacto:  ['', [Validators.required]],
+      puntaje:  ['', [Validators.required]],
       descripcion: ['']
     });
     if (this.data && this.data.formType === FormType.edit) {

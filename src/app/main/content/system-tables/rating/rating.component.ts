@@ -34,6 +34,14 @@ export class SystemRatingComponent implements OnInit {
     });
   }
 
+  reloadTableServices(){
+    this.ratingRiskService.getRatingRisk().subscribe((data: any) => {
+      this.ratingTypes = data;
+      this.temp = [...data];
+      this.loadingIndicator = false;
+    });
+  }
+
   ratingDialog() {
     this.dialogRef = this.dialog.open(RatingDialogComponent, {
       panelClass: 'rating-dialog'
@@ -41,7 +49,7 @@ export class SystemRatingComponent implements OnInit {
     this.dialogRef.afterClosed()
       .subscribe(response => {
         if( response ) {
-          this.ngOnInit();
+          this.reloadTableServices();
         }
       });
   }
@@ -60,9 +68,7 @@ export class SystemRatingComponent implements OnInit {
     this.dialogRef.afterClosed()
       .subscribe(response => {
         if( response ) {
-          this.ratingTypes[rowIndex] = response;
-          this.ratingTypes = [...this.ratingTypes];
-          this.loadingIndicator = false;
+          this.reloadTableServices();
         }
       });
   }
@@ -81,15 +87,15 @@ export class SystemRatingComponent implements OnInit {
   }
 
   deleteRow(result, row, rowIndex) {
-    if( result != undefined) {
+    if( result ) {
       this.ratingRiskService.deleteRatingRisk(row.id).subscribe((data: any) => {
         console.log(data);
+        if (rowIndex > -1) {
+          this.ratingTypes.splice(rowIndex, 1);
+          this.ratingTypes = [...this.ratingTypes];
+          this.customSnackMessage.openSnackBar('Registro eliminado');
+        }
       });
-      if (rowIndex > -1) {
-        this.ratingTypes.splice(rowIndex, 1);
-        this.ratingTypes = [...this.ratingTypes];
-        this.customSnackMessage.openSnackBar('Registro eliminado');
-      }
     }
   }
 
