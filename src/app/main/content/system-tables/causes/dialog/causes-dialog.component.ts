@@ -31,7 +31,7 @@ export class CausesDialogComponent implements OnInit {
       descripcion: {}
     };
   }
-  
+
   ngOnInit() {
     this.composeForm = this.formBuilder.group({
       causa_riesgo: ['', [Validators.required]],
