@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {NodeEvent, NodeMenuItemAction, TreeModel} from 'ng2-tree';
 import {ProcessesService} from '../processes/services/processes.service';
 import {Router} from '@angular/router';
@@ -7,7 +7,7 @@ import {Router} from '@angular/router';
 @Component({
   template: '<tree [tree]="tree" #treeComponent (nodeSelected)="getSubNodes($event)" (menuItemSelected)="onMenuItemSelected($event)"></tree>'
 })
-export class HomeComponent implements AfterViewInit {
+export class HomeComponent implements OnInit {
 
   tree: TreeModel = {
     value: 'Procesos / Sub-procesos',
@@ -21,16 +21,16 @@ export class HomeComponent implements AfterViewInit {
     }
   };
 
-  constructor(private processesService: ProcessesService,
-              private router: Router) {
-
-  }
-
   @ViewChild('treeComponent') treeComponent;
 
-  ngAfterViewInit(): void {
-
+  constructor(private processesService: ProcessesService,
+              private router: Router) {
+    this.tree.emitLoadNextLevel = true;
   }
+
+  ngOnInit(): void {
+  }
+
 
   onMenuItemSelected(node: NodeEvent): void {
     this.router.navigate(['procesos', node.node.id]);
@@ -45,11 +45,10 @@ export class HomeComponent implements AfterViewInit {
         return {value: x.proceso_Nombre, id: x.proceso_Id, children: []};
       });
 
+
       oopNodeController.setChildren(newChildren);
-      oopNodeController.reloadChildren();
       oopNodeController.expand();
 
     });
   }
-
 }

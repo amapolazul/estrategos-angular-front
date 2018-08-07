@@ -8,7 +8,7 @@ import { TreeModule } from 'ng2-tree';
 const routes = [
     {
         path     : 'home',
-        component: HomeComponent
+        component: HomeComponent,
     }
 ];
 
