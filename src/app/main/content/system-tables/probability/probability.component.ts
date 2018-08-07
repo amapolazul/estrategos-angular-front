@@ -49,8 +49,8 @@ export class SystemProbabilityComponent implements OnInit {
     });
     this.dialogRef.afterClosed()
       .subscribe(response => {
-        if( response ) {
-          this.reloadTableServices()
+        if ( response ) {
+          this.reloadTableServices();
         }
       });
   }
