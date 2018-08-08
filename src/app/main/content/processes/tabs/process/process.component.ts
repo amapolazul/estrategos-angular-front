@@ -40,11 +40,11 @@ export class ProcessComponent implements OnInit {
 
     this.processForm = this.formBuilder.group({
       proceso_Nombre: ['', Validators.required],
-      proceso_Codigo: ['', Validators.required],
-      proceso_Tipo: ['', Validators.required],
-      proceso_Descripcion: ['', Validators.required],
-      proceso_Responsable_Id: ['', Validators.required],
-      proceso_Documento: ['', Validators.required]
+      proceso_Codigo: [''],
+      proceso_Tipo: [''],
+      proceso_Descripcion: [''],
+      proceso_Responsable_Id: [''],
+      proceso_Documento: ['']
     });
 
     this.responsables = this.responsablesService.getAllResponsables();

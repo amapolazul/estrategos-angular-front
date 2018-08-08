@@ -15,3 +15,13 @@
 
   color: #FFC107!important;
 }
+
+.ngx-datatable.material {
+  .datatable-header {
+    .datatable-header-cell {
+      color:#1e88e1;
+      font-size: 14px;
+      font-weight: bold;
+    }
+  }
+}

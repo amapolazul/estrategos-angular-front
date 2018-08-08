@@ -1,59 +1,63 @@
 <div class="dialog-content-wrapper">
-    <mat-toolbar matDialogTitle class="mat-accent m-0">
-        <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
-            <span class="title dialog-title">Calificación del Riesgo</span>
-            <button mat-button class="mat-icon-button" (click)="dialogRef.close()" aria-label="Close dialog">
-                <mat-icon>close</mat-icon>
-            </button>
-        </div>
-    </mat-toolbar>
+  <mat-toolbar matDialogTitle class="mat-accent m-0">
+    <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+      <span class="title dialog-title">Calificación del Riesgo</span>
+      <button mat-button class="mat-icon-button" (click)="dialogRef.close()" aria-label="Close dialog">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar>
 
-    <div mat-dialog-content class="p-24 m-0">
-        <form name="composeForm" [formGroup]="composeForm" (ngSubmit)="saveRatingRisk()" class="compose-form" fxLayout="column" fxFlex>
+  <div mat-dialog-content class="p-24 m-0">
 
-          <mat-form-field>
-              <input matInput name="bcc" placeholder="Calificacion del riesgo " formControlName="nombre_calificacion_riesgo" >
+      <form name="composeForm" [formGroup]="composeForm" (ngSubmit)="saveRatingRisk()" class="compose-form" fxLayout="column" fxFlex>
+
+        <mat-form-field>
+          <mat-label><b>Calificacion del riesgo</b></mat-label>
+          <input matInput name="bcc" placeholder="Calificacion del riesgo " formControlName="nombre_calificacion_riesgo">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label><b>Rango mínimo</b></mat-label>
+          <input matInput name="subject" placeholder="Rango mínimo" min="0" max="100" formControlName="rango_minimo" type="number">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label><b>Rango máximo</b></mat-label>
+          <input matInput name="subject" placeholder="Rango máximo" min="0" max="100" formControlName="rango_maximo" type="number">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label><b>Color</b></mat-label>
+        <mat-select placeholder="Color" formControlName="color" required>
+          <mat-option [value]="'Verde'" style="color: green;" >
+            Verde
+          </mat-option>
+          <mat-option [value]="'Amarillo'" style="color: #FFC107;">
+            Amarillo
+          </mat-option>
+          <mat-option [value]="'Rojo'" style="color: red;">
+            Rojo
+          </mat-option>
+        </mat-select>
+
           </mat-form-field>
-
-          <mat-form-field>
-              <input matInput name="subject" placeholder="Rango mínimo" formControlName="rango_minimo" type="number">
-          </mat-form-field>
-
-          <mat-form-field>
-            <input matInput name="subject" placeholder="Rango máximo" formControlName="rango_maximo" type="number">
-          </mat-form-field>
-
-          <!--mat-form-field>
-            <input matInput name="subject" placeholder="Color" formControlName="color" >
-          </mat-form-field-->
-
-          <mat-select placeholder="Color" formControlName="color" required>
-            <mat-option [value]="'Verde'" style="color: green;">
-              Verde
-            </mat-option>
-            <mat-option [value]="'Amarillo'" style="color: #FFC107;">
-              Amarillo
-            </mat-option>
-            <mat-option [value]="'Rojo'" style="color: red;">
-              Rojo
-            </mat-option>
-
-          </mat-select>
-
-            <mat-form-field>
+      <mat-form-field>
+        <mat-label><b>Acción a tomar</b></mat-label>
                 <textarea matInput name="message" placeholder="Acción a tomar" formControlName="accion_tomar" rows="4">
                 </textarea>
-            </mat-form-field>
-            <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="space-between center">
-                <div>
-                    <button mat-raised-button class="save-button mat-accent" aria-label="Guardar" [disabled]="composeForm.invalid" type="submit">
-                        Guardar
-                    </button>
-                    <button mat-raised-button class="save-button mat-accent" aria-label="Cancelar" (click)="closeModal()">
-                        Cancelar
-                    </button>
-                </div>
-            </div>
-        </form>
+      </mat-form-field>
+      <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="space-between center">
         <div>
+          <button mat-raised-button class="save-button mat-accent" aria-label="Guardar" [disabled]="composeForm.invalid"
+                  type="submit">
+            Guardar
+          </button>
+          <button mat-raised-button class="save-button mat-accent" aria-label="Cancelar" (click)="closeModal()">
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>

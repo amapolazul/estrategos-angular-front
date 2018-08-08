@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {RatingRiskModel} from '../../rating/model/rating-risk.model';
 import { RatingRiskService } from '../../../system-tables/rating/service/rating-risk.service';
 import {CustomSnackBarMessages} from '../../../commons/messages.service';

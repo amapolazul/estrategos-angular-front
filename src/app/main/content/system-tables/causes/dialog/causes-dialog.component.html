@@ -12,10 +12,12 @@
         <form name="composeForm" [formGroup]="composeForm" (ngSubmit)="saveCausesRisk()" class="compose-form" fxLayout="column" fxFlex>
 
             <mat-form-field>
+              <mat-label><b>Causa del riesgo</b></mat-label>
                 <input matInput name="causes" placeholder="Causa del riesgo" formControlName="causa_riesgo" type="text">
             </mat-form-field>
 
             <mat-form-field>
+              <mat-label><b>Descripción</b></mat-label>
                 <textarea matInput name="descripcion" placeholder="Descripción" formControlName="descripcion" rows="4">
                 </textarea>
             </mat-form-field>

@@ -12,14 +12,17 @@
         <form name="composeForm" [formGroup]="composeForm" class="compose-form" fxLayout="column" fxFlex>
 
             <mat-form-field>
+              <mat-label><b>Procedimiento</b></mat-label>
                 <input matInput name="subject" placeholder="Procedimiento" formControlName="procedimiento_Nombre">
             </mat-form-field>
 
             <mat-form-field>
+              <mat-label><b>Código Procedimiento</b></mat-label>
               <input matInput name="subject" placeholder="Código Procedimiento" formControlName="procedimiento_Codigo">
             </mat-form-field>
 
           <mat-form-field>
+            <mat-label><b>Objetivo</b></mat-label>
             <input matInput name="message" placeholder="Objetivo" formControlName="procedimiento_Objetivo">
           </mat-form-field>
 
