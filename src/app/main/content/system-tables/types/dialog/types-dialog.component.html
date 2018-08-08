@@ -12,6 +12,7 @@
     <form name="composeForm" [formGroup]="composeForm" (ngSubmit)="saveRisk()" class="compose-form" fxLayout="column" fxFlex>
 
       <mat-form-field>
+        <mat-label><b>Tipos de riesgo</b></mat-label>
         <input matInput name="bcc" placeholder="Tipos de riesgo" formControlName="tipo_riesgo">
       </mat-form-field>
 
