@@ -36,13 +36,10 @@
                       <mat-label><b>Tipo de proceso</b></mat-label>
                         <mat-select placeholder="Tipo de proceso" formControlName="proceso_Tipo" >
                             <mat-option [value]="1">
-                                000120
+                                MISION
                             </mat-option>
                             <mat-option [value]="2">
-                                000120
-                            </mat-option>
-                            <mat-option [value]="3">
-                                000120
+                                APOYO
                             </mat-option>
                         </mat-select>
                         <mat-error *ngIf="formErrors.proceso_Tipo.required">
@@ -53,7 +50,7 @@
                     <mat-form-field fxFlex="100">
                       <mat-label><b>Responsable</b></mat-label>
                       <mat-select placeholder="Responsable" formControlName="proceso_Responsable_Id" >
-                        <mat-option *ngFor="let resp of responsables | async" [value]="resp.id">{{resp.email}}</mat-option>
+                        <mat-option *ngFor="let resp of responsables | async" [value]="resp.responsable_id">{{resp.nombre}}</mat-option>
                       </mat-select>
                     </mat-form-field>
 

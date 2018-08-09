@@ -29,7 +29,7 @@ export class RiesgosComponent implements OnInit{
 
   ngOnInit() {
     /* EL ID del proceso esta quemado por que no existe un endpoint para listar todos los procesos : proceso_padre_id*/
-    this.processesService.getSubProcessByParentId(1).subscribe((data) => {
+    this.processesService.getProcesos().subscribe((data) => {
         this.procesos = data;
     });
   }
