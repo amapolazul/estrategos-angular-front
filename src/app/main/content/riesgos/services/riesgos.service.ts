@@ -28,6 +28,10 @@ export class RiesgosService extends BaseService {
     return this.http.get<DeclaracionRiesgos[]>(this.serviceUrl + '?ejercicioId=' + ejercicioId);
   }
 
+  getRiesgoPorId(riesgoId: number): Observable<DeclaracionRiesgosRequest> {
+    return this.http.get<DeclaracionRiesgosRequest>(this.serviceUrl + '/' + riesgoId);
+  }
+
   getResourceEndpoint(): string {
     return this.generalUrl + this.getResource();
   }

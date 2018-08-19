@@ -29,6 +29,7 @@ export class CausasDeclaracionRiesgos {
   declaracion_riesgo_id?: number;
   causa: string;
   descripcion: string;
+  probabilidad_string?: string;
 }
 
 export class EfectosDeclaracionRiesgos {
@@ -37,6 +38,7 @@ export class EfectosDeclaracionRiesgos {
   declaracion_riesgo_id?: number ;
   impacto: string;
   descripcion: string;
+  efecto_declaracion_string?: string;
 }
 
 export class ControlesDeclaracionRiesgos {
@@ -45,6 +47,7 @@ export class ControlesDeclaracionRiesgos {
   declaracion_riesgo_id?: number;
   control: string;
   descripcion: string;
+  efectividad_declaracion_string: string;
 }
 
 export class DeclaracionRiesgosRequest {

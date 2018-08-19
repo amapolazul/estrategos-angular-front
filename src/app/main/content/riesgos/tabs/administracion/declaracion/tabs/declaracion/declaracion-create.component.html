@@ -52,33 +52,28 @@
           </mat-checkbox>
         </div>
 
-        <div fxLayout="column" fxFlex="1 0 auto">
-          <div fxLayout="row">
+        <div>
 
-            <mat-form-field fxFlex="">
-              <input matInput placeholder="Probabilidad" formControlName="probabilidad" required disabled>
-            </mat-form-field>
+          <mat-form-field fxFlex="">
+            <input matInput placeholder="Probabilidad" formControlName="probabilidad" required disabled>
+          </mat-form-field>
 
-            <mat-form-field fxFlex="">
-              <input matInput placeholder="Impacto" formControlName="impacto" required disabled>
-            </mat-form-field>
+          <mat-form-field fxFlex="">
+            <input matInput placeholder="Impacto" formControlName="impacto" required disabled>
+          </mat-form-field>
 
-          </div>
-          <div fxLayout="row">
-
-            <mat-form-field fxFlex="">
-              <input matInput placeholder="Severidad" formControlName="severidad" required disabled>
-            </mat-form-field>
-
-            <button mat-button color="warn">Alta</button>
-
-            <mat-form-field fxFlex="">
-              <input matInput placeholder="Riesgo residual" formControlName="riesgo_residual" required disabled>
-            </mat-form-field>
-
-          </div>
         </div>
+        <div>
 
+          <mat-form-field fxFlex="">
+            <input matInput placeholder="Severidad" formControlName="severidad" required disabled>
+          </mat-form-field>
+
+          <mat-form-field fxFlex="">
+            <input matInput placeholder="Riesgo residual" formControlName="riesgo_residual" required disabled>
+          </mat-form-field>
+
+        </div>
       </form>
     </div>
   </div>

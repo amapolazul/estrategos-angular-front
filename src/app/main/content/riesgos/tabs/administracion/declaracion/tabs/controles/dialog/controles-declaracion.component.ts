@@ -17,6 +17,7 @@ export class ControlesDeclaracionComponent implements OnInit {
   efectividadRiesgo: ControlsRiskModel[];
   efectividadValue: number;
   descripcionEfectividad: string;
+  efectividadSelected: ControlsRiskModel;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -44,6 +45,8 @@ export class ControlesDeclaracionComponent implements OnInit {
 
   guardarControl() {
     const formIndfo = <ControlesDeclaracionRiesgos>this.composeForm.getRawValue();
+    formIndfo.efectividad_declaracion_string = this.controlsRiskService.getEfectividadString(this.efectividadSelected);
+    console.log(formIndfo.efectividad_declaracion_string);
     const values = {
       formInfo : formIndfo,
       efectividadValue: this.efectividadValue
@@ -56,8 +59,8 @@ export class ControlesDeclaracionComponent implements OnInit {
   }
 
   onChange(itemSelect) {
-    const probabilidadRiesgo = this.efectividadRiesgo.find(x => x.id === itemSelect.value);
-    this.descripcionEfectividad = probabilidadRiesgo.descripcion;
-    this.efectividadValue = probabilidadRiesgo.puntaje;
+    this.efectividadSelected = this.efectividadRiesgo.find(x => x.id === itemSelect.value);
+    this.descripcionEfectividad = this.efectividadSelected.descripcion;
+    this.efectividadValue = this.efectividadSelected.puntaje;
   }
 }

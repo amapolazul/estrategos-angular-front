@@ -21,7 +21,7 @@
     <mat-tab-group dynamicHeight="true">
 
       <mat-tab label="Declaración">
-        <declaracion-create #declaracion (cambiarFactorRiesgo)="actualizarFactorRiesgo($event)"></declaracion-create>
+        <declaracion-create #declaracion [declaracionRiesgoInput]="declaracionEditar" (cambiarFactorRiesgo)="actualizarFactorRiesgo($event)"></declaracion-create>
       </mat-tab>
 
       <mat-tab label="Causas">

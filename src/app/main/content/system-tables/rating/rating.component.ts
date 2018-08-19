@@ -99,11 +99,11 @@ export class SystemRatingComponent implements OnInit {
     }
   }
 
-  getCellClass({ row, column, value }): any {
+  getCellClass(row): any {
     return {
-      'is-yellow': value === 'Amarillo',
-      'is-green': value === 'Verde',
-      'is-red': value === 'Rojo'
+      'is-yellow': row.color === 'Amarillo',
+      'is-green': row.color === 'Verde',
+      'is-red': row.color === 'Rojo'
     };
   }
 

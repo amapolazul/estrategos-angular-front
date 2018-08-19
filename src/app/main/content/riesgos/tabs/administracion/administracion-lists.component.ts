@@ -52,11 +52,15 @@ export class AdministracionListsComponent implements OnInit {
     this.router.navigate(['declaracion-riesgos', this.ejercicioPadre]);
   }
 
-  getCellClass({ row, column, value }): any {
+  edit(row, rowIndex){
+    this.router.navigate(['declaracion-riesgos/editar', row.id]);
+  }
+
+  getCellClass(row): any {
     return {
-      'is-yellow': value === 'Amarillo',
-      'is-green': value === 'Verde',
-      'is-red': value === 'Rojo'
+      'is-yellow': row.calificacion_riesgo === 'Amarillo',
+      'is-green': row.calificacion_riesgo === 'Verde',
+      'is-red': row.calificacion_riesgo === 'Rojo'
     };
   }
 }

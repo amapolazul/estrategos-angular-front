@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import {RatingRiskService} from '../../../system-tables/rating/service/rating-risk.service';
+import {CausesDialogComponent} from '../../../system-tables/causes/dialog/causes-dialog.component';
+import {FormType} from '../../../commons/form-type.enum';
+import {Router} from '@angular/router';
 
 @Component({
     selector   : 'riesgos-lists',
@@ -10,16 +13,21 @@ export class RiesgosListsComponent
 {
     rows = [];
 
-    constructor(private calificacionRiesgoService: RatingRiskService)
+    constructor(private calificacionRiesgoService: RatingRiskService,
+                private route: Router)
     {
 
     }
 
-    getCellClass({ row, column, value }): any {
+    edit(row, rowIndex){
+      this.route.navigate(['declaracion-riesgos/editar', row.id]);
+    }
+
+    getCellClass(row): any {
       return {
-        'is-yellow': value === 'Amarillo',
-        'is-green': value === 'Verde',
-        'is-red': value === 'Rojo'
+        'is-yellow': row.calificacion_riesgo === 'Amarillo',
+        'is-green': row.calificacion_riesgo === 'Verde',
+        'is-red': row.calificacion_riesgo === 'Rojo'
       };
     }
 }

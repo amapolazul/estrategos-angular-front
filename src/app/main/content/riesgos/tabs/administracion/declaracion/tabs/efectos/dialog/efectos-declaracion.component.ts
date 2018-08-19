@@ -18,6 +18,7 @@ export class EfectosDeclaracionComponent implements OnInit {
   impactoValue: number;
   composeForm: FormGroup;
   impactos: ImpactRiskModel[];
+  impactoSelected: ImpactRiskModel;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -43,6 +44,7 @@ export class EfectosDeclaracionComponent implements OnInit {
 
   guardarEfecto() {
     const formIndfo = <EfectosDeclaracionRiesgos>this.composeForm.getRawValue();
+    formIndfo.efecto_declaracion_string = this.impactoRiesgoService.getImpactoString(this.impactoSelected);
     const values = {
       formInfo : formIndfo,
       impactoValue: this.impactoValue
@@ -51,9 +53,9 @@ export class EfectosDeclaracionComponent implements OnInit {
   }
 
   cambiarImpactoName(evento) {
-    const impacto = this.impactos.find(x => x.id === evento.value);
-    this.impactoName = impacto.descripcion;
-    this.impactoValue = parseInt(impacto.puntaje);
+    this.impactoSelected = this.impactos.find(x => x.id === evento.value);
+    this.impactoName = this.impactoSelected.descripcion;
+    this.impactoValue = parseInt(this.impactoSelected.puntaje);
   }
 
   closeModal() {

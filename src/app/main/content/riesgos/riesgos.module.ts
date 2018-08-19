@@ -28,6 +28,10 @@ const routes: Routes = [
     {
       path     : 'declaracion-riesgos/:id',
       component: DeclaracionComponent
+    },
+    {
+      path     : 'declaracion-riesgos/editar/:id',
+      component: DeclaracionComponent
     }
 
 ];

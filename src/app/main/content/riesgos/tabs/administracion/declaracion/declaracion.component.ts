@@ -4,7 +4,7 @@ import {ProcessesService} from '../../../../processes/services/processes.service
 import {RiesgosService} from '../../../services/riesgos.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {EjercicioModel} from '../../ejercicios/model/ejercicio.model';
-import {Proceso, ProductoServicio} from '../../../../processes/models/process.model';
+import {Proceso} from '../../../../processes/models/process.model';
 import {CausasDeclaracionRiesgos, ControlesDeclaracionRiesgos, DeclaracionRiesgos, DeclaracionRiesgosRequest, EfectosDeclaracionRiesgos} from '../../../models/riesgos.models';
 import {CustomSnackBarMessages} from '../../../../commons/messages.service';
 
@@ -21,6 +21,8 @@ export class DeclaracionComponent implements OnInit{
   proceso: Proceso = new Proceso();
   factorRiesgo = '';
 
+  declaracionEditar: DeclaracionRiesgos;
+
   @ViewChild('declaracion') declaracion;
   @ViewChild('causas') causas;
   @ViewChild('efectos') efectos;
@@ -32,14 +34,29 @@ export class DeclaracionComponent implements OnInit{
               private procesoService: ProcessesService,
               private customSnackMessage: CustomSnackBarMessages,
               private router: Router) {
-    this.activatedRoute.params.subscribe(x => {
-      this.ejercicioPadre = x.id;
-    });
-
   }
 
   ngOnInit() {
-    this.traerInformacionEjercicioProceso();
+    this.activatedRoute.url.subscribe(x => {
+      const lastPath = x[1];
+      if (lastPath.path === 'editar') {
+        this.activatedRoute.params.subscribe(y => {
+          this.riesgosService.getRiesgoPorId(y.id).subscribe(z => {
+            this.ejercicioPadre = z.declaracionRiesgo.ejercicio_riesgo_id;
+            this.declaracionEditar = z.declaracionRiesgo;
+            console.log(this.declaracionEditar);
+            this.traerInformacionEjercicioProceso();
+          });
+        });
+      }
+
+      else {
+        this.activatedRoute.params.subscribe(y => {
+          this.ejercicioPadre = y.id;
+          this.traerInformacionEjercicioProceso();
+        });
+      }
+    });
   }
 
   traerInformacionEjercicioProceso() {

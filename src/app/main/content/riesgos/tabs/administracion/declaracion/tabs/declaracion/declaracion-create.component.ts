@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import {FormGroup, FormBuilder} from '@angular/forms';
 import {TypesRiskModel} from '../../../../../../system-tables/types/model/types-risk.model';
 import {TypesRiskService} from '../../../../../../system-tables/types/service/types-risk.service';
@@ -8,13 +8,14 @@ import {DeclaracionEstadoModel} from './model/declaracion-estados.model';
 import {DeclaracionEstadoService} from './service/declaracion-estados.service';
 import {EjercicioModel} from '../../../../ejercicios/model/ejercicio.model';
 import {RiesgosCalculosService} from '../../../../../services/riesgos-calculos.service';
+import {DeclaracionRiesgos} from '../../../../../models/riesgos.models';
 
 @Component({
   selector: 'declaracion-create',
   templateUrl: './declaracion-create.component.html',
   styleUrls: ['./declaracion-create.component.scss']
 })
-export class DeclaracionCreateComponent implements OnInit {
+export class DeclaracionCreateComponent implements OnInit, OnChanges{
 
   form: FormGroup;
   declaracionForm: FormGroup;
@@ -23,6 +24,7 @@ export class DeclaracionCreateComponent implements OnInit {
   estadoRiesgo: DeclaracionEstadoModel[];
 
   @Input() ejercicioSeleccionado: EjercicioModel;
+  @Input() declaracionRiesgoInput: DeclaracionRiesgos;
   @Output() cambiarFactorRiesgo = new EventEmitter<string>();
 
   constructor(private formBuilder: FormBuilder,
@@ -41,7 +43,7 @@ export class DeclaracionCreateComponent implements OnInit {
       factor_riesgo: [''],
       descripcion: [''],
       efectividad_controles: [{value: '', disabled: true}],
-      probabilidad: [''],
+      probabilidad: [{value: '', disabled: true}],
       historico: [false],
       impacto: [{value: '', disabled: true}],
       severidad: [{value: '', disabled: true}],
@@ -61,6 +63,29 @@ export class DeclaracionCreateComponent implements OnInit {
       this.estadoRiesgo = data;
     });
 
+    console.log(this.declaracionRiesgoInput);
+  }
+
+  ngOnChanges() {
+    if (this.declaracionRiesgoInput) {
+      this.llenarFormulario();
+    }
+  }
+
+  llenarFormulario(){
+    this.declaracionForm.setValue({
+      tipo_riesgo_id: this.declaracionRiesgoInput.tipo_riesgo_id,
+      respuesta_riesgo_id: this.declaracionRiesgoInput.respuesta_riesgo_id,
+      estatus_riesgo_id: this.declaracionRiesgoInput.estatus_riesgo_id,
+      factor_riesgo: this.declaracionRiesgoInput.factor_riesgo,
+      descripcion: this.declaracionRiesgoInput.descripcion,
+      efectividad_controles: this.declaracionRiesgoInput.efectividad_controles,
+      probabilidad: this.declaracionRiesgoInput.probabilidad,
+      historico: this.declaracionRiesgoInput.historico,
+      impacto: this.declaracionRiesgoInput.impacto,
+      severidad: this.declaracionRiesgoInput.severidad,
+      riesgo_residual: this.declaracionRiesgoInput.riesgo_residual
+    });
   }
 
   actualizarValores(event) {

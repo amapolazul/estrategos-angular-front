@@ -47,8 +47,14 @@
           <ngx-datatable-column name="Rango máximo" prop="rango_maximo">
           </ngx-datatable-column>
 
-          <ngx-datatable-column name="Color" prop="color" headerClass="" [cellClass]="getCellClass">
+          <ngx-datatable-column name="Color" [canAutoResize]="false" [sortable]="false">
+            <ng-template let-row="row" let-rowIndex="rowIndex" let-id="value" ngx-datatable-cell-template>
+              <div [ngClass]="getCellClass(row)">
+
+              </div>
+            </ng-template>
           </ngx-datatable-column>
+
 
           <ngx-datatable-column name="Acción a tomar" prop="accion_tomar">
           </ngx-datatable-column>

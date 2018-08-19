@@ -55,7 +55,6 @@ export class SystemCausesComponent implements OnInit {
   }
 
   edit(row, rowIndex){
-    console.log(rowIndex);
     const causesRisk = row;
     this.dialogRef = this.dialog.open(CausesDialogComponent, {
       panelClass: 'causes-tabs-riesgo',

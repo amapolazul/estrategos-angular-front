@@ -32,6 +32,7 @@ export class CausasListsComponent
 
     this.dialogRef.afterClosed().subscribe(response => {
       if (response) {
+        console.log(response);
         this.rows.push(response.formInfo);
         this.puntajes.push(response.probabilidadValue);
         this.calcularProbabilidadTotal();

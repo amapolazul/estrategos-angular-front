@@ -15,6 +15,7 @@ export class CausasDeclaracionComponent implements OnInit {
   restData: any;
   composeForm: FormGroup;
   probabilidadRiesgo: ProbabilityRiskModel[];
+  probabilidadSelected: ProbabilityRiskModel;
   descripcionProbabilidad: any;
   probabilidadValue: number;
 
@@ -38,12 +39,12 @@ export class CausasDeclaracionComponent implements OnInit {
 
     this.probabilityRiskService.getProbabilityRisk().subscribe((data) => {
       this.probabilidadRiesgo = data;
-      console.log(this.probabilidadRiesgo);
     });
   }
 
   guardarCausa() {
     const formIndfo = <CausasDeclaracionRiesgos>this.composeForm.getRawValue();
+    formIndfo.probabilidad_string = this.probabilityRiskService.getProbabilidadString(this.probabilidadSelected);
     const values = {
       formInfo : formIndfo,
       probabilidadValue: this.probabilidadValue
@@ -56,8 +57,8 @@ export class CausasDeclaracionComponent implements OnInit {
   }
 
   onChange(itemSelect) {
-    const probabilidadRiesgo = this.probabilidadRiesgo.find(x => x.id === itemSelect.value);
-    this.descripcionProbabilidad = probabilidadRiesgo.descripcion;
-    this.probabilidadValue = probabilidadRiesgo.puntaje;
+    this.probabilidadSelected = this.probabilidadRiesgo.find(x => x.id === itemSelect.value);
+    this.descripcionProbabilidad = this.probabilidadSelected.descripcion;
+    this.probabilidadValue = this.probabilidadSelected.puntaje;
   }
 }
