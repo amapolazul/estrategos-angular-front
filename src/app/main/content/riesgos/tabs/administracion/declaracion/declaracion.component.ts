@@ -22,6 +22,9 @@ export class DeclaracionComponent implements OnInit{
   factorRiesgo = '';
 
   declaracionEditar: DeclaracionRiesgos;
+  causasRiesgoEditar: CausasDeclaracionRiesgos[];
+  efectosRiesgoEditar: EfectosDeclaracionRiesgos[];
+  controlesRiesgoEditar: ControlesDeclaracionRiesgos[];
 
   @ViewChild('declaracion') declaracion;
   @ViewChild('causas') causas;
@@ -44,7 +47,9 @@ export class DeclaracionComponent implements OnInit{
           this.riesgosService.getRiesgoPorId(y.id).subscribe(z => {
             this.ejercicioPadre = z.declaracionRiesgo.ejercicio_riesgo_id;
             this.declaracionEditar = z.declaracionRiesgo;
-            console.log(this.declaracionEditar);
+            this.causasRiesgoEditar = z.causasDeclaracionRiesgo;
+            this.efectosRiesgoEditar = z.efectosDeclaracionRiesgo;
+            this.controlesRiesgoEditar = z.controlesDeclaracionRiesgo;
             this.traerInformacionEjercicioProceso();
           });
         });

@@ -1,27 +1,53 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {ControlesDeclaracionComponent} from './dialog/controles-declaracion.component';
 import {RiesgosCalculosService} from '../../../../../services/riesgos-calculos.service';
+import {ControlsRiskService} from '../../../../../../system-tables/controls/service/controls-risk.service';
+import {ControlsRiskModel} from '../../../../../../system-tables/controls/model/controls-risk.model';
+import {CausasDeclaracionRiesgos, ControlesDeclaracionRiesgos} from '../../../../../models/riesgos.models';
 
 @Component({
     selector   : 'controles-lists',
     templateUrl: './controles-lists.component.html',
     styleUrls  : ['./controles-lists.component.scss']
 })
-export class ControlesListsComponent
+export class ControlesListsComponent implements OnChanges
 {
     dialogRef: any;
     dialogConfirm: any;
     puntajes = [];
     rows = [];
     efectividadTotal = 0;
+    efectividadesRiesgo: ControlsRiskModel[];
 
+    @Input() controlesRiesgosEditar;
     @Output() actualizarEfectividad = new EventEmitter<string>();
 
     constructor(public dialog: MatDialog,
-                private riesgosCalculosService: RiesgosCalculosService)
-    {
+                private controlsRiskService: ControlsRiskService,
+                private riesgosCalculosService: RiesgosCalculosService) {
+      this.controlsRiskService.getControlsRisk().subscribe((data) => {
+        this.efectividadesRiesgo = data;
+      });
+    }
 
+    ngOnChanges() {
+      if (this.controlesRiesgosEditar) {
+        this.controlesRiesgosEditar.forEach(control => {
+          const efectividadControl = this.extraerEfectividadControl(control);
+          const efectividadControlModel = efectividadControl.pop();
+          control.efectividad_declaracion_string = this.controlsRiskService.getEfectividadString(efectividadControlModel);
+          this.rows.push(control);
+          this.puntajes.push(efectividadControlModel.puntaje);
+        });
+
+        this.calcularEfectividadTotal();
+        this.rows = [...this.rows];
+      }
+    }
+
+    extraerEfectividadControl(control: ControlesDeclaracionRiesgos) {
+      return this.efectividadesRiesgo.filter(prob => prob.id === control.efectividad_riesgos_id);
     }
 
     controlesDialog() {

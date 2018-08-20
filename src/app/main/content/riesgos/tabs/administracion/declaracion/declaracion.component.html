@@ -25,15 +25,15 @@
       </mat-tab>
 
       <mat-tab label="Causas">
-        <causas-lists #causas (actualizarProbabilidad)="actualizarValores($event)"></causas-lists>
+        <causas-lists #causas [causasInput]="causasRiesgoEditar" (actualizarProbabilidad)="actualizarValores($event)"></causas-lists>
       </mat-tab>
 
       <mat-tab label="Efectos">
-        <efectos-lists #efectos (actualizarImpacto)="actualizarValores($event)"></efectos-lists>
+        <efectos-lists #efectos [efectosRiesgoEditar]="efectosRiesgoEditar" (actualizarImpacto)="actualizarValores($event)"></efectos-lists>
       </mat-tab>
 
       <mat-tab label="Controles">
-        <controles-lists #controles (actualizarEfectividad)="actualizarValores($event)"></controles-lists>
+        <controles-lists #controles [controlesRiesgosEditar]="controlesRiesgoEditar"  (actualizarEfectividad)="actualizarValores($event)"></controles-lists>
       </mat-tab>
 
     </mat-tab-group>
