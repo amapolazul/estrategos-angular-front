@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ControlsRiskService} from '../../../../../../../system-tables/controls/service/controls-risk.service';
 import {ControlsRiskModel} from '../../../../../../../system-tables/controls/model/controls-risk.model';
 import {CausasDeclaracionRiesgos, ControlesDeclaracionRiesgos} from '../../../../../../models/riesgos.models';
@@ -13,6 +13,7 @@ import {CausasDeclaracionRiesgos, ControlesDeclaracionRiesgos} from '../../../..
 })
 export class ControlesDeclaracionComponent implements OnInit {
   restData: any;
+  formErrors: any;
   composeForm: FormGroup;
   efectividadRiesgo: ControlsRiskModel[];
   efectividadValue: number;
@@ -28,11 +29,16 @@ export class ControlesDeclaracionComponent implements OnInit {
   ) {
     this.descripcionEfectividad = '';
     this.efectividadValue = 0;
+
+    // Reactive form errors
+    this.formErrors = {
+      control: {}
+    };
   }
 
   ngOnInit() {
     this.composeForm = this.formBuilder.group({
-      control: [''],
+      control: ['', [Validators.required]],
       descripcion: [''],
       efectividad_riesgos_id: ['']
     });

@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {FormBuilder, Validators, FormGroup} from '@angular/forms';
 import {ImpactRiskService} from '../../../../../../../system-tables/impact/service/impact-risk.service';
 import {Observable} from 'rxjs/Observable';
 import {ImpactRiskModel} from '../../../../../../../system-tables/impact/model/impact-risk.model';
@@ -14,6 +14,7 @@ import {EfectosDeclaracionRiesgos} from '../../../../../../models/riesgos.models
 })
 export class EfectosDeclaracionComponent implements OnInit {
   restData: any;
+  formErrors: any;
   impactoName: string;
   impactoValue: number;
   composeForm: FormGroup;
@@ -28,11 +29,16 @@ export class EfectosDeclaracionComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) private data: any
   ) {
     this.impactoName = '';
+
+    // Reactive form errors
+    this.formErrors = {
+      impacto: {}
+    };
   }
 
   ngOnInit() {
     this.composeForm = this.formBuilder.group({
-      impacto: [''],
+      impacto: ['', [Validators.required]],
       descripcion: [''],
       impacto_riesgos_id: ['']
     });
