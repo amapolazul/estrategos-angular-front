@@ -5,6 +5,8 @@ import {RiesgosCalculosService} from '../../../../../services/riesgos-calculos.s
 import {ImpactRiskService} from '../../../../../../system-tables/impact/service/impact-risk.service';
 import {CausasDeclaracionRiesgos, EfectosDeclaracionRiesgos} from '../../../../../models/riesgos.models';
 import {ImpactRiskModel} from '../../../../../../system-tables/impact/model/impact-risk.model';
+import {FormType} from '../../../../../../commons/form-type.enum';
+import {ControlesDeclaracionComponent} from '../controles/dialog/controles-declaracion.component';
 
 @Component({
     selector   : 'efectos-lists',
@@ -91,4 +93,27 @@ export class EfectosListsComponent implements OnChanges
           this.calcularImpactoTotal();
         }
       }
+
+  edit(row, rowIndex) {
+    const efecto = row;
+    this.dialogRef = this.dialog.open(EfectosDeclaracionComponent, {
+      panelClass: 'efectos-declaracion-dialog',
+      disableClose: true,
+      data: {
+        formType: FormType.edit,
+        efecto: efecto
+      }
+    });
+
+    this.dialogRef.afterClosed()
+      .subscribe(response => {
+        if (response) {
+          this.rows[rowIndex] = response.formInfo;
+          this.puntajes[rowIndex] = response.impactoValue;
+          this.rows = [...this.rows];
+
+          this.calcularImpactoTotal();
+        }
+      });
+  }
 }
