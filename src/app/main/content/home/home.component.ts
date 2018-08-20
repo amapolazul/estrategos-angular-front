@@ -25,7 +25,6 @@ export class HomeComponent implements OnInit {
 
   constructor(private processesService: ProcessesService,
               private router: Router) {
-    this.tree.emitLoadNextLevel = true;
   }
 
   ngOnInit(): void {
@@ -44,7 +43,6 @@ export class HomeComponent implements OnInit {
       const newChildren: Array<TreeModel> = result.map(x => {
         return {value: x.proceso_Nombre, id: x.proceso_Id, children: []};
       });
-
 
       oopNodeController.setChildren(newChildren);
       oopNodeController.expand();
