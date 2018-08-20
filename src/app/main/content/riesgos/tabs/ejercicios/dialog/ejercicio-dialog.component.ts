@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {EjercicioEstatus, EjercicioModel} from '../model/ejercicio.model';
 import {EjercicioService} from '../service/ejercicio.service';
 import {CustomSnackBarMessages} from '../../../../commons/messages.service';
@@ -17,6 +17,7 @@ import {Observable} from 'rxjs/Observable';
 })
 export class EjercicioDialogComponent implements OnInit {
   restData: any;
+  formErrors: any;
   composeForm: FormGroup;
   ejercicioModel = new EjercicioModel();
   selectedProcess: Proceso;
@@ -30,13 +31,18 @@ export class EjercicioDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) private data: any
   ) {
     this.selectedProcess = this.data.proceso;
+
+    // Reactive form errors
+    this.formErrors = {
+      estatus_id: {}
+    };
   }
 
   ngOnInit() {
 
     this.composeForm = this.formBuilder.group({
       descripcion: [''],
-      estatus_id: ['']
+      estatus_id: ['', [Validators.required]]
     });
     if (this.data && this.data.formType === FormType.edit) {
       this.ejercicioModel = this.data.ejercicio;

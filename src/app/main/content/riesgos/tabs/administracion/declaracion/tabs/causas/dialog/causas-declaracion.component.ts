@@ -1,6 +1,6 @@
 import {Component, Inject, OnChanges, OnInit, ViewEncapsulation} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {FormBuilder, Validators, FormGroup} from '@angular/forms';
 import {ProbabilityRiskService} from '../../../../../../../system-tables/probability/service/probability-risk.service';
 import {ProbabilityRiskModel} from '../../../../../../../system-tables/probability/model/probability-risk.model';
 import {CausasDeclaracionRiesgos, EfectosDeclaracionRiesgos} from '../../../../../../models/riesgos.models';
@@ -14,6 +14,7 @@ import {FormType} from '../../../../../../../commons/form-type.enum';
 })
 export class CausasDeclaracionComponent implements OnInit {
   restData: any;
+  formErrors: any;
   composeForm: FormGroup;
   probabilidadRiesgo: ProbabilityRiskModel[];
   probabilidadSelected: ProbabilityRiskModel;
@@ -28,13 +29,17 @@ export class CausasDeclaracionComponent implements OnInit {
     public dialogRef: MatDialogRef<CausasDeclaracionComponent>,
     @Inject(MAT_DIALOG_DATA) private data: any
   ) {
+    // Reactive form errors
+    this.formErrors = {
+      causa: {}
+    };
     this.probabilidadValue = 0;
   }
 
   ngOnInit() {
     this.descripcionProbabilidad = '';
     this.composeForm = this.formBuilder.group({
-      causa: [''],
+      causa: ['', [Validators.required]],
       descripcion: [''],
       probabilidad_riesgo_id: ['']
     });
