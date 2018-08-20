@@ -26,6 +26,8 @@ export class DeclaracionComponent implements OnInit{
   efectosRiesgoEditar: EfectosDeclaracionRiesgos[];
   controlesRiesgoEditar: ControlesDeclaracionRiesgos[];
 
+  isEditingForm = false;
+
   @ViewChild('declaracion') declaracion;
   @ViewChild('causas') causas;
   @ViewChild('efectos') efectos;
@@ -40,24 +42,25 @@ export class DeclaracionComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.activatedRoute.url.subscribe(x => {
-      const lastPath = x[1];
+    this.activatedRoute.url.subscribe(path => {
+      const lastPath = path[1];
       if (lastPath.path === 'editar') {
-        this.activatedRoute.params.subscribe(y => {
-          this.riesgosService.getRiesgoPorId(y.id).subscribe(z => {
-            this.ejercicioPadre = z.declaracionRiesgo.ejercicio_riesgo_id;
-            this.declaracionEditar = z.declaracionRiesgo;
-            this.causasRiesgoEditar = z.causasDeclaracionRiesgo;
-            this.efectosRiesgoEditar = z.efectosDeclaracionRiesgo;
-            this.controlesRiesgoEditar = z.controlesDeclaracionRiesgo;
+        this.isEditingForm = true;
+        this.activatedRoute.params.subscribe(param => {
+          this.riesgosService.getRiesgoPorId(param.id).subscribe(riesgo => {
+            this.ejercicioPadre = riesgo.declaracionRiesgo.ejercicio_riesgo_id;
+            this.declaracionEditar = riesgo.declaracionRiesgo;
+            this.causasRiesgoEditar = riesgo.causasDeclaracionRiesgo;
+            this.efectosRiesgoEditar = riesgo.efectosDeclaracionRiesgo;
+            this.controlesRiesgoEditar = riesgo.controlesDeclaracionRiesgo;
             this.traerInformacionEjercicioProceso();
           });
         });
       }
 
       else {
-        this.activatedRoute.params.subscribe(y => {
-          this.ejercicioPadre = y.id;
+        this.activatedRoute.params.subscribe(param => {
+          this.ejercicioPadre = param.id;
           this.traerInformacionEjercicioProceso();
         });
       }
@@ -74,9 +77,38 @@ export class DeclaracionComponent implements OnInit{
   }
 
   guardarDeclaracionRiesgo() {
+    if (this.isEditingForm) {
+      this.actualizarDeclaracionRiesgo();
+    }
+    else {
+      const declaracionRequest = <DeclaracionRiesgos>this.declaracion.declaracionForm.getRawValue();
+      declaracionRequest.proceso_id = this.proceso.proceso_Id;
+      declaracionRequest.ejercicio_riesgo_id = this.ejercicioPadre;
+      declaracionRequest.impacto = declaracionRequest.impacto.toString();
+      declaracionRequest.probabilidad = declaracionRequest.probabilidad.toString();
+      declaracionRequest.severidad = declaracionRequest.severidad.toString();
+      declaracionRequest.riesgo_residual = declaracionRequest.riesgo_residual.toString();
+      declaracionRequest.efectividad_controles = declaracionRequest.efectividad_controles.toString();
+      declaracionRequest.fecha_creacion = new Date().getTime();
+      declaracionRequest.fecha_actualizacion = new Date().getTime();
+      const causasRequest = <Array<CausasDeclaracionRiesgos>>this.causas.rows;
+      const efectosRequest = <Array<EfectosDeclaracionRiesgos>>this.efectos.rows;
+      const controlesRequest = <Array<ControlesDeclaracionRiesgos>>this.controles.rows;
+
+      const request = new DeclaracionRiesgosRequest(declaracionRequest, causasRequest, efectosRequest, controlesRequest);
+
+
+      this.riesgosService.crearRiesgoService(request).subscribe(x => {
+        this.customSnackMessage.openSnackBar('Riesgo creado correctamente');
+        this.router.navigate(['administracion-riesgos', this.ejercicioPadre]);
+      }, error => {
+        console.log(error);
+      });
+    }
+  }
+
+  actualizarDeclaracionRiesgo() {
     const declaracionRequest = <DeclaracionRiesgos>this.declaracion.declaracionForm.getRawValue();
-    declaracionRequest.proceso_id = this.proceso.proceso_Id;
-    declaracionRequest.ejercicio_riesgo_id = this.ejercicioPadre;
     declaracionRequest.impacto = declaracionRequest.impacto.toString();
     declaracionRequest.probabilidad = declaracionRequest.probabilidad.toString();
     declaracionRequest.severidad = declaracionRequest.severidad.toString();
@@ -90,14 +122,12 @@ export class DeclaracionComponent implements OnInit{
 
     const request = new DeclaracionRiesgosRequest(declaracionRequest, causasRequest, efectosRequest, controlesRequest);
 
-
-    this.riesgosService.crearRiesgoService(request).subscribe(x => {
-      this.customSnackMessage.openSnackBar('Riesgo creado correctamente');
+    this.riesgosService.actualizarRiesgoService(request).subscribe(x => {
+      this.customSnackMessage.openSnackBar('Riesgo actualizado correctamente');
       this.router.navigate(['administracion-riesgos', this.ejercicioPadre]);
     }, error => {
       console.log(error);
     });
-
   }
 
   actualizarValores(event) {
