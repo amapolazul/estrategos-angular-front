@@ -6,6 +6,8 @@ import {RiesgosCalculosService} from '../../../../../services/riesgos-calculos.s
 import {ProbabilityRiskService} from '../../../../../../system-tables/probability/service/probability-risk.service';
 import {ProbabilityRiskModel} from '../../../../../../system-tables/probability/model/probability-risk.model';
 import {CausasDeclaracionRiesgos} from '../../../../../models/riesgos.models';
+import {FormType} from '../../../../../../commons/form-type.enum';
+import {CharacterizationDialogComponent} from '../../../../../../processes/tabs/characterization/dialog/edit-dialog/characterization-dialog.component';
 
 @Component({
     selector   : 'causas-lists',
@@ -93,4 +95,27 @@ export class CausasListsComponent implements OnInit, OnChanges
         this.calcularProbabilidadTotal();
       }
     }
+
+  edit(row, rowIndex) {
+    const causa = row;
+    this.dialogRef = this.dialog.open(CausasDeclaracionComponent, {
+      panelClass: 'causas-declaracion-dialog',
+      disableClose: true,
+      data: {
+        formType: FormType.edit,
+        causa: causa
+      }
+    });
+
+    this.dialogRef.afterClosed()
+      .subscribe(response => {
+        if (response) {
+          this.rows[rowIndex] = response.formInfo;
+          this.puntajes[rowIndex] = response.probabilidadValue;
+          this.rows = [...this.rows];
+
+          this.calcularProbabilidadTotal();
+        }
+      });
+  }
 }
