@@ -5,6 +5,8 @@ import {RiesgosCalculosService} from '../../../../../services/riesgos-calculos.s
 import {ControlsRiskService} from '../../../../../../system-tables/controls/service/controls-risk.service';
 import {ControlsRiskModel} from '../../../../../../system-tables/controls/model/controls-risk.model';
 import {CausasDeclaracionRiesgos, ControlesDeclaracionRiesgos} from '../../../../../models/riesgos.models';
+import {FormType} from '../../../../../../commons/form-type.enum';
+import {CausasDeclaracionComponent} from '../causas/dialog/causas-declaracion.component';
 
 @Component({
     selector   : 'controles-lists',
@@ -87,4 +89,27 @@ export class ControlesListsComponent implements OnChanges
         this.calcularEfectividadTotal();
       }
     }
+
+  edit(row, rowIndex) {
+    const control = row;
+    this.dialogRef = this.dialog.open(ControlesDeclaracionComponent, {
+      panelClass: 'controles-declaracion-dialog',
+      disableClose: true,
+      data: {
+        formType: FormType.edit,
+        control: control
+      }
+    });
+
+    this.dialogRef.afterClosed()
+      .subscribe(response => {
+        if (response) {
+          this.rows[rowIndex] = response.formInfo;
+          this.puntajes[rowIndex] = response.efectividadValue;
+          this.rows = [...this.rows];
+
+          this.calcularEfectividadTotal();
+        }
+      });
+  }
 }

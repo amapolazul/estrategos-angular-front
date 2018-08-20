@@ -109,12 +109,15 @@ export class DeclaracionComponent implements OnInit{
 
   actualizarDeclaracionRiesgo() {
     const declaracionRequest = <DeclaracionRiesgos>this.declaracion.declaracionForm.getRawValue();
+    declaracionRequest.id = this.declaracionEditar.id;
+    declaracionRequest.proceso_id = this.declaracionEditar.proceso_id;
+    declaracionRequest.ejercicio_riesgo_id = this.declaracionEditar.ejercicio_riesgo_id;
     declaracionRequest.impacto = declaracionRequest.impacto.toString();
     declaracionRequest.probabilidad = declaracionRequest.probabilidad.toString();
     declaracionRequest.severidad = declaracionRequest.severidad.toString();
     declaracionRequest.riesgo_residual = declaracionRequest.riesgo_residual.toString();
     declaracionRequest.efectividad_controles = declaracionRequest.efectividad_controles.toString();
-    declaracionRequest.fecha_creacion = new Date().getTime();
+    declaracionRequest.fecha_creacion = this.declaracionEditar.fecha_creacion;
     declaracionRequest.fecha_actualizacion = new Date().getTime();
     const causasRequest = <Array<CausasDeclaracionRiesgos>>this.causas.rows;
     const efectosRequest = <Array<EfectosDeclaracionRiesgos>>this.efectos.rows;

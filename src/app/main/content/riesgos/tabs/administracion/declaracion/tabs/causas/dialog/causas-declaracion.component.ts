@@ -1,9 +1,10 @@
-import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, Inject, OnChanges, OnInit, ViewEncapsulation} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {FormBuilder, Validators, FormGroup} from '@angular/forms';
 import {ProbabilityRiskService} from '../../../../../../../system-tables/probability/service/probability-risk.service';
 import {ProbabilityRiskModel} from '../../../../../../../system-tables/probability/model/probability-risk.model';
 import {CausasDeclaracionRiesgos, EfectosDeclaracionRiesgos} from '../../../../../../models/riesgos.models';
+import {FormType} from '../../../../../../../commons/form-type.enum';
 
 @Component({
   selector: 'causas-declaracion-dialog',
@@ -20,11 +21,12 @@ export class CausasDeclaracionComponent implements OnInit {
   descripcionProbabilidad: any;
   probabilidadValue: number;
 
+  causaDeclaracionAnterior: CausasDeclaracionRiesgos;
+
   constructor(
     private formBuilder: FormBuilder,
     private probabilityRiskService: ProbabilityRiskService,
     public dialogRef: MatDialogRef<CausasDeclaracionComponent>,
-
     @Inject(MAT_DIALOG_DATA) private data: any
   ) {
     // Reactive form errors
@@ -44,11 +46,37 @@ export class CausasDeclaracionComponent implements OnInit {
 
     this.probabilityRiskService.getProbabilityRisk().subscribe((data) => {
       this.probabilidadRiesgo = data;
+
+      if ( this.data && this.data.formType === FormType.edit ) {
+        this.causaDeclaracionAnterior = this.data.causa;
+        this.llenarFormulario();
+      }
+
     });
+
+  }
+
+
+  llenarFormulario() {
+    this.composeForm.setValue({
+      causa : this.causaDeclaracionAnterior.causa,
+      descripcion : this.causaDeclaracionAnterior.descripcion,
+      probabilidad_riesgo_id : this.causaDeclaracionAnterior.probabilidad_riesgo_id,
+    });
+
+    const probabilidad = this.probabilidadRiesgo.filter(x => x.id === this.causaDeclaracionAnterior.probabilidad_riesgo_id);
+    this.descripcionProbabilidad = probabilidad.pop().descripcion;
+
+    this.probabilidadSelected = this.probabilidadRiesgo.find(x => x.id === this.causaDeclaracionAnterior.probabilidad_riesgo_id);
+    this.probabilidadValue = this.probabilidadSelected.puntaje;
   }
 
   guardarCausa() {
     const formIndfo = <CausasDeclaracionRiesgos>this.composeForm.getRawValue();
+    if (this.causaDeclaracionAnterior) {
+      formIndfo.id = this.causaDeclaracionAnterior.id;
+      formIndfo.declaracion_riesgo_id = this.causaDeclaracionAnterior.declaracion_riesgo_id;
+    }
     formIndfo.probabilidad_string = this.probabilityRiskService.getProbabilidadString(this.probabilidadSelected);
     const values = {
       formInfo : formIndfo,

@@ -21,7 +21,7 @@ export class RiesgosService extends BaseService {
   }
 
   actualizarRiesgoService(request: DeclaracionRiesgosRequest): Observable<number> {
-    return this.http.put<number>(this.serviceUrl, request);
+    return this.http.put<number>(this.serviceUrl + '/' + request.declaracionRiesgo.id , request);
   }
 
   getRiesgosPendientesPorProcesoId(procesoId: number): Observable<DeclaracionRiesgos[]> {
