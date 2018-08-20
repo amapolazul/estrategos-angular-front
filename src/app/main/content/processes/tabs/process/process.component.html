@@ -49,7 +49,7 @@
 
                     <mat-form-field fxFlex="100">
                       <mat-label><b>Responsable</b></mat-label>
-                      <mat-select placeholder="Responsable" formControlName="proceso_Responsable_Id" >
+                      <mat-select placeholder="Responsable" formControlName="proceso_Responsable_Id"  >
                         <mat-option *ngFor="let resp of responsables | async" [value]="resp.responsable_id">{{resp.nombre}}</mat-option>
                       </mat-select>
                     </mat-form-field>

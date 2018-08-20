@@ -13,6 +13,7 @@ import {ProcessCache} from '../../../services/process-cache.service';
 })
 export class DialogComponent implements OnInit
 {
+    formErrors: any;
     showExtraToFields = false;
     composeForm: FormGroup;
     productoServicio = new ProductoServicio();
@@ -23,15 +24,20 @@ export class DialogComponent implements OnInit
         public dialogRef: MatDialogRef<DialogComponent>,
         private processCache: ProcessCache,
         @Inject(MAT_DIALOG_DATA) private data: any
-    )
-    {  }
+    ){
+      // Reactive form errors
+      this.formErrors = {
+        producto_Servicio_nombre: { },
+        producto_Servicio_Codigo: { }
+      };
+    }
 
     ngOnInit()
     {
       this.composeForm = this.formBuilder.group({
         proceso_Nombre: [{value: '', disabled: true}],
-        producto_Servicio_nombre: '',
-        producto_Servicio_Codigo: '',
+        producto_Servicio_nombre: ['', [Validators.required]],
+        producto_Servicio_Codigo: ['', [Validators.required]],
         producto_Caracteristicas: ''
       });
       if ( this.data && this.data.formType === FormType.edit ) {

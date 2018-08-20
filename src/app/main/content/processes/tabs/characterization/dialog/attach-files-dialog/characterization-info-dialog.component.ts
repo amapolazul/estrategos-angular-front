@@ -24,6 +24,7 @@ export class CharacterizationInfoDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<CharacterizationInfoDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private data: any
   ) {
+
   }
 
   ngOnInit() {
