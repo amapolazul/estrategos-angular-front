@@ -90,14 +90,14 @@ export class DeclaracionCreateComponent implements OnInit, OnChanges{
 
   actualizarValores(event) {
     this.declaracionForm.controls['efectividad_controles'].setValue(this.riesgosCalculosService.getEfectividadPromedio());
-    this.declaracionForm.controls['efectividad_controles'].disable();
     this.declaracionForm.controls['probabilidad'].setValue(this.riesgosCalculosService.getProbabilidadPromedio());
-    this.declaracionForm.controls['probabilidad'].disable();
     this.declaracionForm.controls['impacto'].setValue(this.riesgosCalculosService.getImpactoPromedio());
-    this.declaracionForm.controls['impacto'].disable();
     this.declaracionForm.controls['severidad'].setValue(this.riesgosCalculosService.calcularSeveridad());
-    this.declaracionForm.controls['severidad'].disable();
     this.declaracionForm.controls['riesgo_residual'].setValue(this.riesgosCalculosService.calcularRiesgoResidual());
+    this.declaracionForm.controls['efectividad_controles'].disable();
+    this.declaracionForm.controls['probabilidad'].disable();
+    this.declaracionForm.controls['impacto'].disable();
+    this.declaracionForm.controls['severidad'].disable();
     this.declaracionForm.controls['riesgo_residual'].disable();
   }
 
