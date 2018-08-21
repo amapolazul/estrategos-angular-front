@@ -36,7 +36,7 @@ export class CharacterizationInfoDialogComponent implements OnInit {
       procedimiento_Documento_Nombre: '',
       procedimiento_Documento_Descripcion: '',
       procedimiento_Documento_Codigo: '',
-      procedimiento_Documento_Arch: '',
+      procedimiento_Documento_Arch: [{value : '', disabled: true}],
     });
 
   }

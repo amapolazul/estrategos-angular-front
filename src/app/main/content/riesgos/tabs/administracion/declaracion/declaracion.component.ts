@@ -77,33 +77,41 @@ export class DeclaracionComponent implements OnInit{
   }
 
   guardarDeclaracionRiesgo() {
-    if (this.isEditingForm) {
-      this.actualizarDeclaracionRiesgo();
-    }
-    else {
-      const declaracionRequest = <DeclaracionRiesgos>this.declaracion.declaracionForm.getRawValue();
-      declaracionRequest.proceso_id = this.proceso.proceso_Id;
-      declaracionRequest.ejercicio_riesgo_id = this.ejercicioPadre;
-      declaracionRequest.impacto = declaracionRequest.impacto.toString();
-      declaracionRequest.probabilidad = declaracionRequest.probabilidad.toString();
-      declaracionRequest.severidad = declaracionRequest.severidad.toString();
-      declaracionRequest.riesgo_residual = declaracionRequest.riesgo_residual.toString();
-      declaracionRequest.efectividad_controles = declaracionRequest.efectividad_controles.toString();
-      declaracionRequest.fecha_creacion = new Date().getTime();
-      declaracionRequest.fecha_actualizacion = new Date().getTime();
-      const causasRequest = <Array<CausasDeclaracionRiesgos>>this.causas.rows;
-      const efectosRequest = <Array<EfectosDeclaracionRiesgos>>this.efectos.rows;
-      const controlesRequest = <Array<ControlesDeclaracionRiesgos>>this.controles.rows;
+    if (this.declaracion.declaracionForm.valid){
+      if (this.isEditingForm) {
+        this.actualizarDeclaracionRiesgo();
+      }
+      else {
+        const declaracionRequest = <DeclaracionRiesgos>this.declaracion.declaracionForm.getRawValue();
+        declaracionRequest.proceso_id = this.proceso.proceso_Id;
+        declaracionRequest.ejercicio_riesgo_id = this.ejercicioPadre;
+        declaracionRequest.impacto = declaracionRequest.impacto.toString();
+        declaracionRequest.probabilidad = declaracionRequest.probabilidad.toString();
+        declaracionRequest.severidad = declaracionRequest.severidad.toString();
+        declaracionRequest.riesgo_residual = declaracionRequest.riesgo_residual.toString();
+        declaracionRequest.efectividad_controles = declaracionRequest.efectividad_controles.toString();
+        declaracionRequest.fecha_creacion = new Date().getTime();
+        declaracionRequest.fecha_actualizacion = new Date().getTime();
+        const causasRequest = <Array<CausasDeclaracionRiesgos>>this.causas.rows;
+        const efectosRequest = <Array<EfectosDeclaracionRiesgos>>this.efectos.rows;
+        const controlesRequest = <Array<ControlesDeclaracionRiesgos>>this.controles.rows;
 
-      const request = new DeclaracionRiesgosRequest(declaracionRequest, causasRequest, efectosRequest, controlesRequest);
-
-
-      this.riesgosService.crearRiesgoService(request).subscribe(x => {
-        this.customSnackMessage.openSnackBar('Riesgo creado correctamente');
-        this.router.navigate(['administracion-riesgos', this.ejercicioPadre]);
-      }, error => {
-        console.log(error);
-      });
+        if (causasRequest.length === 0 ){
+          this.customSnackMessage.openSnackBar('Debe crear por lo menos una causa');
+        } else if (efectosRequest.length === 0) {
+          this.customSnackMessage.openSnackBar('Debe crear por lo menos un efecto');
+        } else if (controlesRequest.length === 0) {
+          this.customSnackMessage.openSnackBar('Debe crear por lo menos una un control');
+        } else {
+          const request = new DeclaracionRiesgosRequest(declaracionRequest, causasRequest, efectosRequest, controlesRequest);
+          this.riesgosService.crearRiesgoService(request).subscribe(x => {
+            this.customSnackMessage.openSnackBar('Riesgo creado correctamente');
+            this.router.navigate(['administracion-riesgos', this.ejercicioPadre]);
+          }, error => this.customSnackMessage.openSnackBar('Error creando el riesgo. ' + error.message));
+        }
+      }
+    } else {
+      this.customSnackMessage.openSnackBar('Por favor llene los campos del formulario correctamente.');
     }
   }
 
@@ -129,7 +137,7 @@ export class DeclaracionComponent implements OnInit{
       this.customSnackMessage.openSnackBar('Riesgo actualizado correctamente');
       this.router.navigate(['administracion-riesgos', this.ejercicioPadre]);
     }, error => {
-      console.log(error);
+      this.customSnackMessage.openSnackBar('Error actualizado el riesgo. ' + error.message);
     });
   }
 

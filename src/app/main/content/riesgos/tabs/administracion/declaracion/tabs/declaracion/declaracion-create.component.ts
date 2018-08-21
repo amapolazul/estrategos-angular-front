@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
-import {FormGroup, FormBuilder} from '@angular/forms';
+import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import {TypesRiskModel} from '../../../../../../system-tables/types/model/types-risk.model';
 import {TypesRiskService} from '../../../../../../system-tables/types/service/types-risk.service';
 import {ResponseRiskModel} from '../../../../../../system-tables/response/model/response-risk.model';
@@ -37,7 +37,7 @@ export class DeclaracionCreateComponent implements OnInit, OnChanges{
   ngOnInit() {
 
     this.declaracionForm = this.formBuilder.group({
-      tipo_riesgo_id: [''],
+      tipo_riesgo_id: ['', [Validators.required]],
       respuesta_riesgo_id: [''],
       estatus_riesgo_id: [''],
       factor_riesgo: [''],

@@ -34,7 +34,11 @@ export class HomeComponent implements OnInit {
 
   onMenuItemSelected(event: MenuItemSelectedEvent): void {
     if (event.selectedItem.toString() === 'Editar proceso') {
-      this.router.navigate(['procesos/editar', event.node.id]);
+      if (event.node.value === 'Procesos / Sub-procesos') {
+        this.router.navigate(['procesos', event.node.id]);
+      } else {
+        this.router.navigate(['procesos/editar', event.node.id]);
+      }
     } else {
       this.router.navigate(['procesos', event.node.id]);
     }

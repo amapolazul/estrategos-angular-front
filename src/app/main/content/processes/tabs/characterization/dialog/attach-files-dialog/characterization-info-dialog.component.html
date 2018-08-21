@@ -111,7 +111,9 @@
         <input matInput name="procedimiento_Documento_Arch" placeholder="Anexo" formControlName="procedimiento_Documento_Arch" type="text" disabled>
       </mat-form-field>
 
-      <input type="file" (change)="handleFileInput($event.target.files)" placeholder="Cargar archivo" required>
+      <mat-form-field>
+        <input type="file" (change)="handleFileInput($event.target.files)" placeholder="Cargar archivo" required>
+      </mat-form-field>
 
       <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="space-between center">
         <div>
