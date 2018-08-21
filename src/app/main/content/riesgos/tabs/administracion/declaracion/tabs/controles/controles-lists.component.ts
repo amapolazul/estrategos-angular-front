@@ -21,6 +21,7 @@ export class ControlesListsComponent implements OnChanges
     rows = [];
     efectividadTotal = 0;
     efectividadesRiesgo: ControlsRiskModel[];
+    isEditing = true;
 
     @Input() controlesRiesgosEditar;
     @Output() actualizarEfectividad = new EventEmitter<string>();
@@ -35,6 +36,7 @@ export class ControlesListsComponent implements OnChanges
 
     ngOnChanges() {
       if (this.controlesRiesgosEditar) {
+        this.isEditing = true;
         this.controlesRiesgosEditar.forEach(control => {
           const efectividadControl = this.extraerEfectividadControl(control);
           const efectividadControlModel = efectividadControl.pop();

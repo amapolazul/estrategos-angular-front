@@ -54,14 +54,14 @@ export class DialogComponent implements OnInit
       }
     }
 
-  private llenarFormulario() {
-    this.composeForm.setValue({
-      proceso_Nombre: this.productoServicio.proceso_Nombre,
-      producto_Servicio_nombre: this.productoServicio.producto_Servicio_nombre || '',
-      producto_Servicio_Codigo: this.productoServicio.producto_Servicio_Codigo || '',
-      producto_Caracteristicas: this.productoServicio.producto_Caracteristicas || ''
-    });
-  }
+    private llenarFormulario() {
+      this.composeForm.setValue({
+        proceso_Nombre: this.processCache.getProcessName(),
+        producto_Servicio_nombre: this.productoServicio.producto_Servicio_nombre || '',
+        producto_Servicio_Codigo: this.productoServicio.producto_Servicio_Codigo || '',
+        producto_Caracteristicas: this.productoServicio.producto_Caracteristicas || ''
+      });
+    }
 
     salir() {
       this.dialogRef.close();
@@ -69,6 +69,9 @@ export class DialogComponent implements OnInit
 
     guardar() {
       const producto = <ProductoServicio> this.composeForm.getRawValue();
+      if (this.productoServicio.producto_Servicio_Id) {
+        producto.producto_Servicio_Id = this.productoServicio.producto_Servicio_Id;
+      }
       this.dialogRef.close(producto);
     }
 }

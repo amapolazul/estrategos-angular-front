@@ -23,6 +23,7 @@ export class CausasListsComponent implements OnInit, OnChanges
     rows = [];
     probabilidadTotal: number;
     probabilidadesRiesgo: ProbabilityRiskModel[];
+    isEditing = false;
 
     @Input() causasInput;
     @Output() actualizarProbabilidad = new EventEmitter<string>();
@@ -42,6 +43,7 @@ export class CausasListsComponent implements OnInit, OnChanges
 
     ngOnChanges() {
       if (this.causasInput) {
+        this.isEditing = true;
         this.causasInput.forEach(causa => {
           const probabilidadCausa = this.extraerProbabilidadCausa(causa);
           const probabilityRiskModel = probabilidadCausa.pop();

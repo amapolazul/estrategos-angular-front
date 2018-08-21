@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {MatDialog} from '@angular/material';
 import {CharacterizationDialogComponent} from './dialog/edit-dialog/characterization-dialog.component';
@@ -12,23 +12,29 @@ import {Caracterizacion} from '../../models/process.model';
   templateUrl: './characterization.component.html',
   styleUrls: ['./characterization.component.scss']
 })
-export class CharacterizationComponent implements OnInit {
+export class CharacterizationComponent implements OnInit, OnChanges {
   rows = [];
   dialogRef: any;
   loadingIndicator = true;
   reorderable = true;
+  deleteDisable = true;
+
+  @Input() caracterizacionesEditar: Caracterizacion[];
 
   constructor(private http: HttpClient,
               public dialog: MatDialog) {
 
   }
 
-  ngOnInit() {
-    // this.http.get('api/product')
-    //     .subscribe((product: any) => {
-    //         this.rows = product;
-    //         this.loadingIndicator = false;
-    //     });
+  ngOnInit() {}
+
+  ngOnChanges() {
+    if (this.caracterizacionesEditar) {
+      this.rows = this.caracterizacionesEditar;
+      this.rows = [...this.rows];
+      this.loadingIndicator = false;
+      this.deleteDisable = false;
+    }
   }
 
   characterizationDialog(row, rowIndex) {
@@ -53,7 +59,8 @@ export class CharacterizationComponent implements OnInit {
       panelClass: 'characterization-info-dialog',
       disableClose: true,
       data: {
-        caracterizacion: caracterizacion
+        caracterizacion: caracterizacion,
+        deleteDisable: this.deleteDisable
       }
     });
     this.dialogRef.afterClosed()

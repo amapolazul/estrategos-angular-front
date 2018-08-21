@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {NodeEvent, NodeMenuItemAction, TreeModel} from 'ng2-tree';
+import {MenuItemSelectedEvent, NodeEvent, NodeMenuItemAction, TreeModel} from 'ng2-tree';
 import {ProcessesService} from '../processes/services/processes.service';
 import {Router} from '@angular/router';
 
@@ -16,7 +16,8 @@ export class HomeComponent implements OnInit {
     settings : {
       rightMenu : true,
       menuItems: [
-        { action: NodeMenuItemAction.Custom, name: 'Crear proceso', cssClass: 'fa fa-arrow-right' }
+        { action: NodeMenuItemAction.Custom, name: 'Crear proceso', cssClass: 'fa fa-arrow-right' },
+        { action: NodeMenuItemAction.Custom, name: 'Editar proceso', cssClass: 'fa fa-arrow-right' }
       ]
     }
   };
@@ -28,11 +29,15 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.tree.emitLoadNextLevel = true;
   }
 
-
-  onMenuItemSelected(node: NodeEvent): void {
-    this.router.navigate(['procesos', node.node.id]);
+  onMenuItemSelected(event: MenuItemSelectedEvent): void {
+    if (event.selectedItem.toString() === 'Editar proceso') {
+      this.router.navigate(['procesos/editar', event.node.id]);
+    } else {
+      this.router.navigate(['procesos', event.node.id]);
+    }
   }
 
   getSubNodes(node: NodeEvent): void {
@@ -46,7 +51,6 @@ export class HomeComponent implements OnInit {
 
       oopNodeController.setChildren(newChildren);
       oopNodeController.expand();
-
     });
   }
 }

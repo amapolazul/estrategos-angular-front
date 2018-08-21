@@ -14,6 +14,10 @@ const routes: Routes = [
     {
         path     : 'procesos/:id',
         component: ProcessesComponent
+    },
+    {
+      path     : 'procesos/editar/:id',
+      component: ProcessesComponent
     }
 ];
 @NgModule({

@@ -42,7 +42,7 @@
 
           <ngx-datatable-column name="Acciones" [sortable]="false">
             <ng-template let-row="row" let-rowIndex="rowIndex" let-id="value" ngx-datatable-cell-template>
-              <button class="btn btn-sm btn-danger" (click)="delete(row, rowIndex)">
+              <button class="btn btn-sm btn-danger" (click)="delete(row, rowIndex)" *ngIf="!row.procedimiento_Documento_Id">
                 <mat-icon _ngcontent-c71="" class="secondary-text s-48 mat-icon material-icons" role="img" aria-hidden="true">delete</mat-icon>
               </button>
               <!--<button class="btn btn-sm btn-danger" (click)="edit(row, rowIndex)">-->

@@ -19,13 +19,20 @@ export class ProcessesService extends BaseService {
     return this.http.post<string>(this.serviceUrl, procesoRequest);
   }
 
+  updateFullProcesses(procesoRequest: ProcesoCreateRequest): Observable<any> {
+    return this.http.put<string>(this.serviceUrl + '/' + procesoRequest.proceso.proceso_Id, procesoRequest);
+  }
+
   uploadProcessesFiles(files: Array<File>): Observable<any> {
+    console.log(files);
     const endpoint = this.serviceUrl + '/upload';
     const formData: FormData = new FormData();
 
     for (let i = 0; i < files.length; i++){
       const fileToUpload: File = files[i];
-      formData.append('fileKey', fileToUpload, fileToUpload.name);
+      if (fileToUpload) {
+        formData.append('fileKey', fileToUpload, fileToUpload.name);
+      }
     }
 
     return this.http.post<string>(endpoint, formData, {});

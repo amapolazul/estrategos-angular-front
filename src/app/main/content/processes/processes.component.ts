@@ -6,6 +6,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {CustomSnackBarMessages} from '../commons/messages.service';
 import {Observable} from 'rxjs/Observable';
 import {flatMap} from 'rxjs/operators';
+import {ProcessCache} from './services/process-cache.service';
 
 @Component({
   selector: 'processes-classes',
@@ -17,6 +18,12 @@ export class ProcessesComponent implements OnInit{
   process: Proceso;
   parentProcessId: number;
 
+  procesoEditar: Proceso;
+  productosServiciosEditar: ProductoServicio[];
+  caracterizacionesEditar: Caracterizacion[];
+
+  isEditingProcesosForm = false;
+
   @ViewChild('procesos') processComponent;
   @ViewChild('productos') productComponent;
   @ViewChild('caracterizaciones') caracterizacionesComponent;
@@ -26,12 +33,28 @@ export class ProcessesComponent implements OnInit{
               private processService: ProcessesService,
               private activatedRoute: ActivatedRoute,
               private customSnackMessage: CustomSnackBarMessages,
+              private processCache: ProcessCache,
               private router: Router) {
 
-    this.activatedRoute.params.subscribe(x => {
-      this.parentProcessId = x.id;
-    });
+    this.activatedRoute.url.subscribe(path => {
+      const lastPath = path[1];
+      if (lastPath.path === 'editar') {
+        this.isEditingProcesosForm = true;
+        this.activatedRoute.params.subscribe(procesoId => {
+          this.processService.getProcesoById(procesoId.id).subscribe(proceso => {
+            this.procesoEditar = proceso.proceso;
+            this.productosServiciosEditar = proceso.productoServicios;
+            this.caracterizacionesEditar = proceso.caracterizaciones;
 
+            this.processCache.setProcessName(this.procesoEditar.proceso_Nombre);
+          });
+        });
+      } else {
+        this.activatedRoute.params.subscribe(x => {
+          this.parentProcessId = x.id;
+        });
+      }
+    });
   }
 
   ngOnInit() {
@@ -39,7 +62,13 @@ export class ProcessesComponent implements OnInit{
 
   processData() {
     const proceso = <Proceso>this.processComponent.processForm.getRawValue();
-    proceso.proceso_Padre_Id =  this.parentProcessId;
+    if (this.isEditingProcesosForm) {
+      proceso.proceso_Padre_Id =  this.procesoEditar.proceso_Padre_Id;
+      proceso.proceso_Id = this.procesoEditar.proceso_Id;
+    } else {
+      proceso.proceso_Padre_Id =  this.parentProcessId;
+    }
+
     const productsList = <Array<ProductoServicio>>this.productComponent.rows;
     const caracterizacionesList = <Array<Caracterizacion>>this.caracterizacionesComponent.rows;
 
@@ -57,23 +86,40 @@ export class ProcessesComponent implements OnInit{
     const processRequest = this.createProcessesRequest(proceso, productsList, caracterizacionesList);
     if (totalDocuments.length > 0) {
 
-      const result = Observable.merge(
-        this.processService.uploadProcessesFiles(totalDocuments),
-        this.processService.createFullProcesses(processRequest)
-      );
+      let result;
+
+      if (this.isEditingProcesosForm) {
+        result = Observable.merge(
+          this.processService.uploadProcessesFiles(totalDocuments),
+          this.processService.updateFullProcesses(processRequest)
+        );
+      } else {
+        result = Observable.merge(
+          this.processService.uploadProcessesFiles(totalDocuments),
+          this.processService.createFullProcesses(processRequest)
+        );
+      }
 
       result.subscribe(x => {
-        this.customSnackMessage.openSnackBar('Proceso creado correctamente');
+        this.customSnackMessage.openSnackBar('Proceso' + this.isEditingProcesosForm ? 'actualizado' : 'creado' + ' correctamente');
         this.router.navigate(['home']);
       }, (error) => {
         console.log('Error');
       });
 
     } else {
-      this.processService.createFullProcesses(processRequest).subscribe((x) => {
-        this.customSnackMessage.openSnackBar('Proceso creado correctamente');
-        this.router.navigate(['home']);
-      });
+      if (this.isEditingProcesosForm) {
+        this.processService.updateFullProcesses(processRequest).subscribe((x) => {
+          this.customSnackMessage.openSnackBar('Proceso actualizado correctamente');
+          this.router.navigate(['home']);
+        });
+      } else {
+        this.processService.createFullProcesses(processRequest).subscribe((x) => {
+          this.customSnackMessage.openSnackBar('Proceso creado correctamente');
+          this.router.navigate(['home']);
+        });
+      }
+
     }
   }
 

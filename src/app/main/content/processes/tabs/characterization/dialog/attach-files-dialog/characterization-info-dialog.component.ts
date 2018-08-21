@@ -16,7 +16,6 @@ export class CharacterizationInfoDialogComponent implements OnInit {
   loadingIndicator = false;
   reorderable = true;
   document: File = null;
-
   showAttachFilesForm = false;
 
   constructor(

@@ -4,15 +4,15 @@
         <mat-tab-group dynamicHeight="true">
 
             <mat-tab label="Procesos">
-                <process-classes #procesos></process-classes>
+                <process-classes [procesoEditar]="procesoEditar" #procesos></process-classes>
             </mat-tab>
 
             <mat-tab label="Productos / Servicios">
-                <product-classes #productos></product-classes>
+                <product-classes [productosServiciosEditar]="productosServiciosEditar" #productos></product-classes>
             </mat-tab>
 
             <mat-tab label="Caracterización">
-                <characterization-classes #caracterizaciones></characterization-classes>
+                <characterization-classes [caracterizacionesEditar]="caracterizacionesEditar"  #caracterizaciones></characterization-classes>
             </mat-tab>
         </mat-tab-group>
     </div>

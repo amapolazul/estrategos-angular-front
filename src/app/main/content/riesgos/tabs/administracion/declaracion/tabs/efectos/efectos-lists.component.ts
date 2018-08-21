@@ -23,6 +23,8 @@ export class EfectosListsComponent implements OnChanges
     impactoTotal: number;
     impactos: ImpactRiskModel[];
 
+    isEditing = false;
+
     @Input() efectosRiesgoEditar;
     @Output() actualizarImpacto = new EventEmitter<string>();
 
@@ -38,6 +40,7 @@ export class EfectosListsComponent implements OnChanges
 
     ngOnChanges() {
       if (this.efectosRiesgoEditar) {
+        this.isEditing = true;
         this.efectosRiesgoEditar.forEach(efecto => {
           const impactoEfecto = this.extraerEfectoImpacto(efecto);
           const impactoRiskModel = impactoEfecto.pop();

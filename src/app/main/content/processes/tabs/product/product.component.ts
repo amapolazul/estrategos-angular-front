@@ -1,22 +1,24 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material';
 import { DialogComponent } from '../product/dialog/dialog.component';
 import {FormType} from '../../../commons/form-type.enum';
+import {Caracterizacion, ProductoServicio} from '../../models/process.model';
 
 @Component({
     selector   : 'product-classes',
     templateUrl: './product.component.html',
     styleUrls  : ['./product.component.scss']
 })
-export class ProductComponent implements OnInit
-{
+export class ProductComponent implements OnInit, OnChanges {
     rows: any[];
     dialogRef: any;
     loadingIndicator = true;
     reorderable = true;
-
     selected = [];
+    deleteDisable = true;
+
+    @Input() productosServiciosEditar: ProductoServicio[];
 
     constructor(private http: HttpClient,public dialog: MatDialog)
     {
@@ -24,13 +26,16 @@ export class ProductComponent implements OnInit
     }
 
     ngOnInit(){
-
       this.rows = [];
-        // this.http.get('api/product')
-        //     .subscribe((product: any) => {
-        //         this.rows = product;
-        //         this.loadingIndicator = false;
-        //     });
+    }
+
+    ngOnChanges() {
+      if (this.productosServiciosEditar) {
+        this.rows = this.productosServiciosEditar;
+        this.rows = this.rows = [...this.rows];
+        this.loadingIndicator = false;
+        this.deleteDisable = false;
+      }
     }
 
     productDialog(){
@@ -55,7 +60,6 @@ export class ProductComponent implements OnInit
     }
 
     edit(row, rowIndex){
-      console.log(rowIndex);
       const product = row;
       this.dialogRef = this.dialog.open(DialogComponent, {
         panelClass: 'product-dialog',
@@ -67,10 +71,12 @@ export class ProductComponent implements OnInit
 
       this.dialogRef.afterClosed()
         .subscribe(response => {
-          console.log(response);
-          this.rows[rowIndex] = response;
-          this.rows = [...this.rows];
-          this.loadingIndicator = false;
+          if (response) {
+            this.rows[rowIndex] = response;
+            this.rows = [...this.rows];
+            this.loadingIndicator = false;
+          }
+
         });
     }
 }

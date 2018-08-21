@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { FuseConfigService } from '@fuse/services/config.service';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
+import {BaseService, StrategosEndpointService} from '../content/commons/base-service.service';
 
 @Component({
     selector   : 'fuse-toolbar',
@@ -19,12 +20,14 @@ export class FuseToolbarComponent
     showLoadingBar: boolean;
     horizontalNav: boolean;
     noNav: boolean;
+    strategosEndpont: string;
 
     constructor(
         private router: Router,
         private fuseConfig: FuseConfigService,
         private sidebarService: FuseSidebarService,
-        private translate: TranslateService
+        private translate: TranslateService,
+        private strategosEndpointService: StrategosEndpointService
     )
     {
         this.userStatusOptions = [
@@ -86,6 +89,8 @@ export class FuseToolbarComponent
             this.horizontalNav = settings.layout.navigation === 'top';
             this.noNav = settings.layout.navigation === 'none';
         });
+
+        this.strategosEndpont = this.strategosEndpointService.getStrategosEndpoint();
 
     }
 

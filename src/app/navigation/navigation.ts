@@ -15,7 +15,7 @@ export const navigation = [
             },
             {
                 'id': 'procesos',
-                'title': 'Crear procesos',
+                'title': 'procesos',
                 'type': 'item',
                 'icon': 'create_new_folder',
                 'url': '/procesos'
