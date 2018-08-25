@@ -114,14 +114,15 @@ export class ProcessesComponent implements OnInit{
             this.customSnackMessage.openSnackBar('Proceso actualizado correctamente');
             this.router.navigate(['home']);
           }, error => {
-            this.customSnackMessage.openSnackBar('Ha ocurrido un error creando el proceso. ' + error.message);
+
+            this.customSnackMessage.openSnackBar('Ha ocurrido un error creando el proceso . ' + error.message);
           });
         } else {
           this.processService.createFullProcesses(processRequest).subscribe((x) => {
             this.customSnackMessage.openSnackBar('Proceso creado correctamente');
             this.router.navigate(['home']);
           }, error => {
-            this.customSnackMessage.openSnackBar('Ha ocurrido un error creando el proceso. ' + error.message);
+            this.customSnackMessage.openSnackBar('Ha ocurrido un error creando el proceso.. ' + error.message);
           });
         }
 
