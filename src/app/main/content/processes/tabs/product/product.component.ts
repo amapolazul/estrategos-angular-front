@@ -4,6 +4,8 @@ import { MatDialog } from '@angular/material';
 import { DialogComponent } from '../product/dialog/dialog.component';
 import {FormType} from '../../../commons/form-type.enum';
 import {Caracterizacion, ProductoServicio} from '../../models/process.model';
+import {ProductService} from './services/product.service';
+import {CustomSnackBarMessages} from '../../../commons/messages.service';
 
 @Component({
     selector   : 'product-classes',
@@ -20,7 +22,10 @@ export class ProductComponent implements OnInit, OnChanges {
 
     @Input() productosServiciosEditar: ProductoServicio[];
 
-    constructor(private http: HttpClient,public dialog: MatDialog)
+    constructor(private http: HttpClient,
+                private productService: ProductService,
+                private customSnackMessage: CustomSnackBarMessages,
+                public dialog: MatDialog)
     {
 
     }
@@ -53,9 +58,21 @@ export class ProductComponent implements OnInit, OnChanges {
     }
 
     delete(row, rowIndex) {
-      if (rowIndex > -1) {
-        this.rows.splice(rowIndex, 1);
-        this.rows = [...this.rows];
+      if (row.producto_Servicio_Id) {
+        this.productService.deleteProductoServicio(row.producto_Servicio_Id).subscribe(x => {
+          if (rowIndex > -1) {
+            this.customSnackMessage.openSnackBar('Registro Producto servicio eliminado correctamente');
+            this.rows.splice(rowIndex, 1);
+            this.rows = [...this.rows];
+          }
+        }, y => {
+          this.customSnackMessage.openSnackBar('Error borrando registro de producto servicio');
+        });
+      } else {
+        if (rowIndex > -1) {
+          this.rows.splice(rowIndex, 1);
+          this.rows = [...this.rows];
+        }
       }
     }
 

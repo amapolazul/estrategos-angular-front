@@ -45,7 +45,7 @@ export class ProcessComponent implements OnInit, OnChanges {
       proceso_Codigo: ['', Validators.required],
       proceso_Tipo: ['', Validators.required],
       proceso_Descripcion: [''],
-      proceso_Responsable_Id: [],
+      proceso_Responsable_Id: [''],
       proceso_Documento: [{value : '', disabled: true}]
     });
 

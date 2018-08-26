@@ -25,6 +25,8 @@ import {DeclaracionEstadoService} from './content/riesgos/tabs/administracion/de
 import {RiesgosService} from './content/riesgos/services/riesgos.service';
 import {RiesgosCalculosService} from './content/riesgos/services/riesgos-calculos.service';
 import {StrategosEndpointService} from './content/commons/base-service.service';
+import {ProductService} from './content/processes/tabs/product/services/product.service';
+import {CharacterizationService} from './content/processes/tabs/characterization/services/characterization.service';
 
 
 @NgModule({
@@ -64,6 +66,8 @@ import {StrategosEndpointService} from './content/commons/base-service.service';
         RiesgosService,
         DeclaracionEstadoService,
         StrategosEndpointService,
+        ProductService,
+        CharacterizationService
     ],
     exports     : [
         FuseMainComponent

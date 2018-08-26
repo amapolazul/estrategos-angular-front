@@ -50,6 +50,10 @@ export class ProcessesService extends BaseService {
     return this.http.get<Proceso[]>(this.serviceUrl + '/' + id + '/sub-procesos');
   }
 
+  deleteProcessById(procesoId): Observable<any> {
+    return this.http.delete(this.serviceUrl + '/' + procesoId );
+  }
+
   getResourceEndpoint(): string {
     return this.generalUrl + this.getResource();
   }

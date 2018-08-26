@@ -5,6 +5,8 @@ import {CharacterizationDialogComponent} from './dialog/edit-dialog/characteriza
 import {CharacterizationInfoDialogComponent} from './dialog/attach-files-dialog/characterization-info-dialog.component';
 import {FormType} from '../../../commons/form-type.enum';
 import {Caracterizacion} from '../../models/process.model';
+import {CharacterizationService} from './services/characterization.service';
+import {CustomSnackBarMessages} from '../../../commons/messages.service';
 
 
 @Component({
@@ -22,6 +24,8 @@ export class CharacterizationComponent implements OnInit, OnChanges {
   @Input() caracterizacionesEditar: Caracterizacion[];
 
   constructor(private http: HttpClient,
+              private customSnackMessage: CustomSnackBarMessages,
+              private characterizationService: CharacterizationService,
               public dialog: MatDialog) {
 
   }
@@ -75,9 +79,21 @@ export class CharacterizationComponent implements OnInit, OnChanges {
   }
 
   delete(row, rowIndex) {
-    if (rowIndex > -1) {
-      this.rows.splice(rowIndex, 1);
-      this.rows = [...this.rows];
+    if (row.caraceterizacion_id) {
+      this.characterizationService.deleteCaracterizacion(row.caraceterizacion_id).subscribe(x => {
+        if (rowIndex > -1) {
+          this.customSnackMessage.openSnackBar('Registro de caracterización borrado correctamente');
+          this.rows.splice(rowIndex, 1);
+          this.rows = [...this.rows];
+        }
+      }, y => {
+        this.customSnackMessage.openSnackBar('Ha ocurrido un error borrando el registro de caracterización');
+      });
+    } else {
+      if (rowIndex > -1) {
+        this.rows.splice(rowIndex, 1);
+        this.rows = [...this.rows];
+      }
     }
   }
 

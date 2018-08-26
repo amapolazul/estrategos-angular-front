@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {MenuItemSelectedEvent, NodeEvent, NodeMenuItemAction, TreeModel} from 'ng2-tree';
 import {ProcessesService} from '../processes/services/processes.service';
 import {Router} from '@angular/router';
+import {CustomSnackBarMessages} from '../commons/messages.service';
 
 
 @Component({
@@ -17,7 +18,8 @@ export class HomeComponent implements OnInit {
       rightMenu : true,
       menuItems: [
         { action: NodeMenuItemAction.Custom, name: 'Crear proceso', cssClass: 'fa fa-arrow-right' },
-        { action: NodeMenuItemAction.Custom, name: 'Editar proceso', cssClass: 'fa fa-arrow-right' }
+        { action: NodeMenuItemAction.Custom, name: 'Editar proceso', cssClass: 'fa fa-arrow-right' },
+        { action: NodeMenuItemAction.Custom, name: 'Borrar proceso', cssClass: 'fa fa-arrow-right' },
       ]
     }
   };
@@ -25,6 +27,7 @@ export class HomeComponent implements OnInit {
   @ViewChild('treeComponent') treeComponent;
 
   constructor(private processesService: ProcessesService,
+              private customSnackMessage: CustomSnackBarMessages,
               private router: Router) {
   }
 
@@ -39,6 +42,13 @@ export class HomeComponent implements OnInit {
       } else {
         this.router.navigate(['procesos/editar', event.node.id]);
       }
+    } else if (event.selectedItem.toString() === 'Borrar proceso'){
+      this.processesService.deleteProcessById(event.node.id).subscribe(x => {
+        this.customSnackMessage.openSnackBar('Registro de proceso borrado correctamente');
+        event.node.removeItselfFromParent();
+      }, y => {
+        this.customSnackMessage.openSnackBar('Ha ocurrido un error borrando el registro de proceso');
+      });
     } else {
       this.router.navigate(['procesos', event.node.id]);
     }
