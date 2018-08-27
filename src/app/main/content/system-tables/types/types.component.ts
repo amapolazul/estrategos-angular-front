@@ -14,11 +14,11 @@ import {CustomSnackBarMessages} from '../../commons/messages.service';
 export class SystemTypesComponent implements OnInit {
   riskTypes: any[];
   temp: any[];
-  dialogRef: any;
-  dialogConfirm :any;
+  dialogRef:any;
+  dialogConfirm:any;
   loadingIndicator = true;
   reorderable = true;
-  name :any;
+  name:any;
 
   constructor(private typesRiskService: TypesRiskService,
               public dialog: MatDialog,

@@ -3,13 +3,14 @@ import {MenuItemSelectedEvent, NodeEvent, NodeMenuItemAction, TreeModel} from 'n
 import {ProcessesService} from '../processes/services/processes.service';
 import {Router} from '@angular/router';
 import {CustomSnackBarMessages} from '../commons/messages.service';
-
+import { DialogOverviewConfirmDialog } from '../../../../assets/angular-material-examples/dialog-confirm/dialog-confirm';
+import {MatDialog} from '@angular/material';
 
 @Component({
   template: '<tree [tree]="tree" #treeComponent (nodeSelected)="getSubNodes($event)" (menuItemSelected)="onMenuItemSelected($event)"></tree>'
 })
 export class HomeComponent implements OnInit {
-
+  dialogConfirm:any;
   tree: TreeModel = {
     value: 'Procesos / Sub-procesos',
     id: 1,
@@ -28,6 +29,7 @@ export class HomeComponent implements OnInit {
 
   constructor(private processesService: ProcessesService,
               private customSnackMessage: CustomSnackBarMessages,
+              public dialog: MatDialog,
               private router: Router) {
   }
 
@@ -43,18 +45,36 @@ export class HomeComponent implements OnInit {
         this.router.navigate(['procesos/editar', event.node.id]);
       }
     } else if (event.selectedItem.toString() === 'Borrar proceso'){
+
       if (event.node.value === 'Procesos / Sub-procesos') {
         this.customSnackMessage.openSnackBar('No se permite borrar el proceso padre');
       } else {
-        this.processesService.deleteProcessById(event.node.id).subscribe(x => {
-          this.customSnackMessage.openSnackBar('Registro de proceso borrado correctamente');
-          event.node.removeItselfFromParent();
-        }, y => {
-          this.customSnackMessage.openSnackBar('Ha ocurrido un error borrando el registro de proceso');
+
+        this.dialogConfirm = this.dialog.open(DialogOverviewConfirmDialog, {
+          width: '250px',
+          data: { name: event.node.value }
         });
+
+        this.dialogConfirm.afterClosed()
+          .subscribe(response => {
+            console.log(response)
+            this.deleteRow(response, event);
+          });
       }
+
     } else {
       this.router.navigate(['procesos', event.node.id]);
+    }
+  }
+
+  deleteRow( response, event ){
+    if( response ){
+      this.processesService.deleteProcessById(event.node.id ).subscribe(x => {
+        this.customSnackMessage.openSnackBar('Registro de proceso borrado correctamente');
+        event.node.removeItselfFromParent();
+      }, y => {
+        this.customSnackMessage.openSnackBar('Ha ocurrido un error borrando el registro de proceso');
+      });
     }
   }
 
