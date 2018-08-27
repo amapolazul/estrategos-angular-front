@@ -4,8 +4,8 @@ import {Injectable} from '@angular/core';
 export abstract class BaseService {
 
   //private _generalUrl = 'http://52.4.220.100:9000/';
-  private _generalUrl = 'http://localhost:9000/';
-  //private _generalUrl = 'http://PGNSTRAAP03:9000/';
+  //private _generalUrl = 'http://localhost:9000/';
+  private _generalUrl = 'http://pgnstraap03:9000/';
 
   constructor() {
   }
@@ -21,7 +21,7 @@ export abstract class BaseService {
 
 @Injectable()
 export class StrategosEndpointService {
-  private _strategosUrl = 'http://PGNSTRAAP03:8080';
+  private _strategosUrl = 'http://pgnstraap03:8080/Strategosp1/home.action?defaultLoader=true';
 
   public getStrategosEndpoint() {
     return this._strategosUrl;

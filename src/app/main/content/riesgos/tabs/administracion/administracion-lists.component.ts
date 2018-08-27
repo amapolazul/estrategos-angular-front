@@ -6,6 +6,7 @@ import {EjercicioService} from '../ejercicios/service/ejercicio.service';
 import {EjercicioModel} from '../ejercicios/model/ejercicio.model';
 import {Proceso} from '../../../processes/models/process.model';
 import {ProcessesService} from '../../../processes/services/processes.service';
+import {CustomSnackBarMessages} from '../../../commons/messages.service';
 
 @Component({
     selector   : 'administracion-lists',
@@ -23,6 +24,7 @@ export class AdministracionListsComponent implements OnInit {
               private activatedRoute: ActivatedRoute,
               private ejerciciosService: EjercicioService,
               private procesoService: ProcessesService,
+              private customSnackBar: CustomSnackBarMessages,
               private router: Router) {
     this.activatedRoute.params.subscribe(x => {
       this.ejercicioPadre = x.id;
@@ -50,6 +52,22 @@ export class AdministracionListsComponent implements OnInit {
 
   nuevoDeclaracionRiesgo() {
     this.router.navigate(['declaracion-riesgos', this.ejercicioPadre]);
+  }
+
+  delete(row, rowIndex) {
+    if (row.estatus_riesgo_id === 2) {
+      this.customSnackBar.openSnackBar('No es permitido borrar un riesgo en estado Mitigado');
+    } else {
+      this.riesgosService.borrarRiesgo(row.id).subscribe(x => {
+        if (rowIndex > -1) {
+          this.rows.splice(rowIndex, 1);
+          this.rows = [...this.rows];
+          this.customSnackBar.openSnackBar('Registro eliminado');
+        }
+      }, error => {
+        this.customSnackBar.openSnackBar('Ha ocurrido un error borrando el riesgo');
+      });
+    }
   }
 
   edit(row, rowIndex){

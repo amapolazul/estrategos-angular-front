@@ -94,19 +94,24 @@ export class ProcessesComponent implements OnInit{
             this.processService.uploadProcessesFiles(totalDocuments),
             this.processService.updateFullProcesses(processRequest)
           );
+          result.subscribe(x => {
+            this.customSnackMessage.openSnackBar('Proceso actualizado correctamente');
+            this.router.navigate(['home']);
+          }, (error) => {
+            this.customSnackMessage.openSnackBar('Ha ocurrido un error cargando archivos del proceso. ' + error.message);
+          });
         } else {
           result = Observable.merge(
             this.processService.uploadProcessesFiles(totalDocuments),
             this.processService.createFullProcesses(processRequest)
           );
+          result.subscribe(x => {
+            this.customSnackMessage.openSnackBar('Proceso creado correctamente');
+            this.router.navigate(['home']);
+          }, (error) => {
+            this.customSnackMessage.openSnackBar('Ha ocurrido un error cargando archivos del proceso. ' + error.message);
+          });
         }
-
-        result.subscribe(x => {
-          this.customSnackMessage.openSnackBar('Proceso' + this.isEditingProcesosForm ? 'actualizado' : 'creado' + ' correctamente');
-          this.router.navigate(['home']);
-        }, (error) => {
-          this.customSnackMessage.openSnackBar('Ha ocurrido un error cargando archivos del proceso. ' + error.message);
-        });
 
       } else {
         if (this.isEditingProcesosForm) {
@@ -125,7 +130,6 @@ export class ProcessesComponent implements OnInit{
             this.customSnackMessage.openSnackBar('Ha ocurrido un error creando el proceso.. ' + error.message);
           });
         }
-
       }
     } else {
       this.customSnackMessage.openSnackBar('Por favor llene los campos del formulario correctamente.');
