@@ -80,7 +80,7 @@ const routes = [
     RatingDialogComponent,
     TypesDialogComponent,
     ControlsDialogComponent,
-    ResponseDialogComponent
+    ResponseDialogComponent,
   ]
 })
 export class SystemTablesModule
