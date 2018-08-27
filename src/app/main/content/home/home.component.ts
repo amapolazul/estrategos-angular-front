@@ -43,12 +43,16 @@ export class HomeComponent implements OnInit {
         this.router.navigate(['procesos/editar', event.node.id]);
       }
     } else if (event.selectedItem.toString() === 'Borrar proceso'){
-      this.processesService.deleteProcessById(event.node.id).subscribe(x => {
-        this.customSnackMessage.openSnackBar('Registro de proceso borrado correctamente');
-        event.node.removeItselfFromParent();
-      }, y => {
-        this.customSnackMessage.openSnackBar('Ha ocurrido un error borrando el registro de proceso');
-      });
+      if (event.node.value === 'Procesos / Sub-procesos') {
+        this.customSnackMessage.openSnackBar('No se permite borrar el proceso padre');
+      } else {
+        this.processesService.deleteProcessById(event.node.id).subscribe(x => {
+          this.customSnackMessage.openSnackBar('Registro de proceso borrado correctamente');
+          event.node.removeItselfFromParent();
+        }, y => {
+          this.customSnackMessage.openSnackBar('Ha ocurrido un error borrando el registro de proceso');
+        });
+      }
     } else {
       this.router.navigate(['procesos', event.node.id]);
     }

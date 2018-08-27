@@ -100,8 +100,6 @@ export class DeclaracionComponent implements OnInit{
           this.customSnackMessage.openSnackBar('Debe crear por lo menos una causa');
         } else if (efectosRequest.length === 0) {
           this.customSnackMessage.openSnackBar('Debe crear por lo menos un efecto');
-        } else if (controlesRequest.length === 0) {
-          this.customSnackMessage.openSnackBar('Debe crear por lo menos una un control');
         } else {
           const request = new DeclaracionRiesgosRequest(declaracionRequest, causasRequest, efectosRequest, controlesRequest);
           this.riesgosService.crearRiesgoService(request).subscribe(x => {
