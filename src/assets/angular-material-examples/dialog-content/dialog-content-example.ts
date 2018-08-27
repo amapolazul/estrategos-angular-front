@@ -32,4 +32,18 @@ export class DialogContentExample
 })
 export class DialogContentExampleDialog
 {
+  constructor(public dialog: MatDialog)
+  {
+  }
+
+  openDialog()
+  {
+    const dialogRef = this.dialog.open(DialogContentExampleDialog, {
+      height: '350px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 }
