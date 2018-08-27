@@ -77,7 +77,7 @@ export class EfectosListsComponent implements OnChanges
       calcularImpactoTotal() {
         if (this.puntajes.length > 0) {
           const suma = this.puntajes.reduce((x, y) => x + y);
-          this.impactoTotal = Math.ceil(suma / this.puntajes.length);
+          this.impactoTotal = Math.round(suma / this.puntajes.length);
         } else {
           this.impactoTotal = 0;
         }

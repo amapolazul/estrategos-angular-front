@@ -72,7 +72,7 @@ export class ControlesListsComponent implements OnChanges
     calcularEfectividadTotal() {
       if (this.puntajes.length > 0) {
         const suma = this.puntajes.reduce((x, y) => x + y);
-        this.efectividadTotal = Math.ceil(suma / this.puntajes.length);
+        this.efectividadTotal = Math.round(suma / this.puntajes.length);
       } else {
         this.efectividadTotal = 0;
       }

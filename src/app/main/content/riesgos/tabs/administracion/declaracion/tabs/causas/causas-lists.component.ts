@@ -79,7 +79,7 @@ export class CausasListsComponent implements OnInit, OnChanges
     calcularProbabilidadTotal() {
       if (this.puntajes.length > 0) {
         const suma = this.puntajes.reduce((x, y) => parseInt(x) + parseInt(y));
-        this.probabilidadTotal = Math.ceil(suma / this.puntajes.length);
+        this.probabilidadTotal = Math.round(suma / this.puntajes.length);
 
       } else {
         this.probabilidadTotal = 0;
