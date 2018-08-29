@@ -57,7 +57,6 @@ export class HomeComponent implements OnInit {
 
         this.dialogConfirm.afterClosed()
           .subscribe(response => {
-            console.log(response)
             this.deleteRow(response, event);
           });
       }
