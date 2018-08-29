@@ -63,7 +63,7 @@ export class ControlsDialogComponent implements OnInit {
     this.controlsRiskService.postControlsRisk(controlsRisk).subscribe((data: any) => {
       this.restData = data;
       this.dialogRef.close(controlsRisk);
-      this.customSnackMessage.openSnackBar('Nivel creado correctamente');
+      this.customSnackMessage.openSnackBar('Efectividad creada correctamente');
     });
   }
 
