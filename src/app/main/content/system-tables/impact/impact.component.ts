@@ -36,7 +36,7 @@ export class SystemImpactComponent implements OnInit {
     });
   }
 
-  reloadTableServices(){
+  reloadTableServices() {
     this.probabilityRiskService.getImpactRisk().subscribe((data: any) => {
       this.impactRisk = data;
       this.temp = [...data];
@@ -88,13 +88,15 @@ export class SystemImpactComponent implements OnInit {
   }
 
   deleteRow(result, row, rowIndex) {
-    if (result ) {
+    if (result) {
       this.probabilityRiskService.deleteImpactRisk(row.id).subscribe((data: any) => {
         if (rowIndex > -1) {
           this.impactRisk.splice(rowIndex, 1);
           this.impactRisk = [...this.impactRisk];
           this.customSnackMessage.openSnackBar('Registro eliminado');
         }
+      }, (err: any) => {
+        this.customSnackMessage.openSnackBar('Ocurrio un error eliminando el registro de la tabla');
       });
     }
   }

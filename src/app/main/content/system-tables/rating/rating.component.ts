@@ -34,7 +34,7 @@ export class SystemRatingComponent implements OnInit {
     });
   }
 
-  reloadTableServices(){
+  reloadTableServices() {
     this.ratingRiskService.getRatingRisk().subscribe((data: any) => {
       this.ratingTypes = data;
       this.temp = [...data];
@@ -48,7 +48,7 @@ export class SystemRatingComponent implements OnInit {
     });
     this.dialogRef.afterClosed()
       .subscribe(response => {
-        if( response ) {
+        if (response) {
           this.reloadTableServices();
         }
       });
@@ -67,7 +67,7 @@ export class SystemRatingComponent implements OnInit {
 
     this.dialogRef.afterClosed()
       .subscribe(response => {
-        if( response ) {
+        if (response) {
           this.reloadTableServices();
         }
       });
@@ -76,18 +76,18 @@ export class SystemRatingComponent implements OnInit {
   delete(row, rowIndex) {
     this.dialogConfirm = this.dialog.open(DialogOverviewConfirmDialog, {
       width: '250px',
-      data: { name: row.nombre_calificacion_riesgo }
+      data: {name: row.nombre_calificacion_riesgo}
     });
     this.dialogConfirm.afterClosed()
       .subscribe(response => {
-        console.log(response)
+        console.log(response);
         this.deleteRow(response, row, rowIndex);
       });
 
   }
 
   deleteRow(result, row, rowIndex) {
-    if( result ) {
+    if (result) {
       this.ratingRiskService.deleteRatingRisk(row.id).subscribe((data: any) => {
         console.log(data);
         if (rowIndex > -1) {
@@ -95,6 +95,8 @@ export class SystemRatingComponent implements OnInit {
           this.ratingTypes = [...this.ratingTypes];
           this.customSnackMessage.openSnackBar('Registro eliminado');
         }
+      }, (err: any) => {
+        this.customSnackMessage.openSnackBar('Ocurrio un error eliminando el registro de la tabla');
       });
     }
   }
@@ -110,7 +112,7 @@ export class SystemRatingComponent implements OnInit {
   updateFilter(event) {
     const val = event.target.value.toLowerCase();
 
-    const temp = this.temp.filter(function(d) {
+    const temp = this.temp.filter(function (d) {
       return d.nombre_calificacion_riesgo.toLowerCase().indexOf(val) !== -1 || !val;
     });
 
