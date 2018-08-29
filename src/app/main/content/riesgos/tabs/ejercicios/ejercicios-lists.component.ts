@@ -85,7 +85,6 @@ export class EjerciciosListsComponent  implements OnInit {
         .subscribe(response => {
           if (response) {
             this.deleteRow(response, row, rowIndex);
-
           }
         });
     }
