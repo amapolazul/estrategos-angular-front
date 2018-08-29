@@ -3,10 +3,9 @@ import {MatDialog} from '@angular/material';
 import {EfectosDeclaracionComponent} from './dialog/efectos-declaracion.component';
 import {RiesgosCalculosService} from '../../../../../services/riesgos-calculos.service';
 import {ImpactRiskService} from '../../../../../../system-tables/impact/service/impact-risk.service';
-import {CausasDeclaracionRiesgos, EfectosDeclaracionRiesgos} from '../../../../../models/riesgos.models';
+import {EfectosDeclaracionRiesgos} from '../../../../../models/riesgos.models';
 import {ImpactRiskModel} from '../../../../../../system-tables/impact/model/impact-risk.model';
 import {FormType} from '../../../../../../commons/form-type.enum';
-import {ControlesDeclaracionComponent} from '../controles/dialog/controles-declaracion.component';
 
 @Component({
     selector   : 'efectos-lists',
@@ -22,7 +21,7 @@ export class EfectosListsComponent implements OnChanges
 
     impactoTotal: number;
     impactos: ImpactRiskModel[];
-    efectosEliminar: number[];
+    efectosEliminar = [];
 
     isEditing = false;
 

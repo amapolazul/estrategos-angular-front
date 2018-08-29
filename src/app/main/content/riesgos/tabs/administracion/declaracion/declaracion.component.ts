@@ -130,6 +130,7 @@ export class DeclaracionComponent implements OnInit{
     const controlesRequest = <Array<ControlesDeclaracionRiesgos>>this.controles.rows;
 
     const causasEliminar = <Array<number>>this.causas.causasEliminar;
+    console.log(causasEliminar);
     const efectosEliminar = <Array<number>>this.efectos.efectosEliminar;
     const controlesEliminar = <Array<number>>this.controles.controlesEliminar;
 

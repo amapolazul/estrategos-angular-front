@@ -25,7 +25,7 @@ export class CausasListsComponent implements OnInit, OnChanges
     probabilidadesRiesgo: ProbabilityRiskModel[];
     isEditing = false;
 
-    causasEliminar: number[];
+    causasEliminar = [];
 
     @Input() causasInput;
     @Output() actualizarProbabilidad = new EventEmitter<string>();

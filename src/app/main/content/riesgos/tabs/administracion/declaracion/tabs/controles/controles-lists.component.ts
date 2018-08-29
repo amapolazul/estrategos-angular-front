@@ -23,7 +23,7 @@ export class ControlesListsComponent implements OnChanges
     efectividadesRiesgo: ControlsRiskModel[];
     isEditing = true;
 
-    controlesEliminar: number[];
+    controlesEliminar = [];
 
     @Input() controlesRiesgosEditar;
     @Output() actualizarEfectividad = new EventEmitter<string>();

@@ -1,7 +1,7 @@
 export const navigation = [
     {
         'id'      : 'applications',
-        'title'   : 'Applications',
+        'title'   : 'Opciones',
         'translate': 'NAV.APPLICATIONS',
         'type'    : 'group',
         'children': [
