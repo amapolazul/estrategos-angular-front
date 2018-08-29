@@ -8,6 +8,7 @@ import {EjercicioModel} from './model/ejercicio.model';
 import {FormType} from '../../../commons/form-type.enum';
 import {DialogOverviewConfirmDialog} from '../../../../../../assets/angular-material-examples/dialog-confirm/dialog-confirm';
 import {Router} from '@angular/router';
+import {CustomSnackBarMessages} from '../../../commons/messages.service';
 
 @Component({
   selector: 'ejercicios-lists',
@@ -30,6 +31,7 @@ export class EjerciciosListsComponent  implements OnInit {
 
   constructor(private ejercicioService: EjercicioService,
               private router: Router,
+              private customSnackBar: CustomSnackBarMessages,
               public dialog: MatDialog) {
   }
 
@@ -71,29 +73,37 @@ export class EjerciciosListsComponent  implements OnInit {
   }
 
   delete(row, rowIndex) {
-    this.dialogConfirm = this.dialog.open(DialogOverviewConfirmDialog, {
-      width: '250px',
-      data: { name: row.descripcion }
-    });
-    this.dialogConfirm.afterClosed()
-      .subscribe(response => {
-        if (response) {
-          console.log(response)
-          this.deleteRow(response, row, rowIndex);
-        }
-
+    if (row.estatus_id === 2) {
+      console.log('acm1pt');
+      this.customSnackBar.openSnackBar('No se permite borrar un ejercicio de evaluación de riesgo en estado culminado');
+    } else {
+      this.dialogConfirm = this.dialog.open(DialogOverviewConfirmDialog, {
+        width: '250px',
+        data: { name: row.descripcion }
       });
+      this.dialogConfirm.afterClosed()
+        .subscribe(response => {
+          if (response) {
+            this.deleteRow(response, row, rowIndex);
+
+          }
+        });
+    }
   }
 
   deleteRow(result, row, rowIndex)  {
     if (result) {
       this.ejercicioService.deleteEjercicio(row.id).subscribe((data: any) => {
-        console.log(data);
+        if (rowIndex > -1) {
+          this.ejerciciosList.splice(rowIndex, 1);
+          this.ejerciciosList = [...this.ejerciciosList];
+
+          this.customSnackBar.openSnackBar('Registro borrado correctamente');
+        }
+      }, error => {
+        this.customSnackBar.openSnackBar('Ha ocurrido un error borrando el ejercicio de declaración de riesgo. ' +
+          'Verifique que no existan riesgos asociados a este ejercicio');
       });
-      if (rowIndex > -1) {
-        this.ejerciciosList.splice(rowIndex, 1);
-        this.ejerciciosList = [...this.ejerciciosList];
-      }
     }
   }
 
