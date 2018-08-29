@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ProbabilityDialogComponent } from './dialog/probability-dialog.component';
-import { MatDialog } from '@angular/material';
-import { ProbabilityRiskService } from '../probability/service/probability-risk.service';
+import {Component, OnInit} from '@angular/core';
+import {ProbabilityDialogComponent} from './dialog/probability-dialog.component';
+import {MatDialog} from '@angular/material';
+import {ProbabilityRiskService} from '../probability/service/probability-risk.service';
 import {FormType} from '../../commons/form-type.enum';
 import {DialogOverviewConfirmDialog} from '../../../../../assets/angular-material-examples/dialog-confirm/dialog-confirm';
 import {CustomSnackBarMessages} from '../../commons/messages.service';
@@ -26,7 +26,7 @@ export class SystemProbabilityComponent implements OnInit {
 
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.probabilityRisk = [];
     this.probabilityRiskService.getProbabilityRisk().subscribe((data: any) => {
       this.probabilityRisk = data;
@@ -35,7 +35,7 @@ export class SystemProbabilityComponent implements OnInit {
     });
   }
 
-  reloadTableServices(){
+  reloadTableServices() {
     this.probabilityRiskService.getProbabilityRisk().subscribe((data: any) => {
       this.probabilityRisk = data;
       this.temp = [...data];
@@ -43,32 +43,32 @@ export class SystemProbabilityComponent implements OnInit {
     });
   }
 
-  probabilityDialog(){
+  probabilityDialog() {
     this.dialogRef = this.dialog.open(ProbabilityDialogComponent, {
       panelClass: 'probability-dialog'
     });
     this.dialogRef.afterClosed()
       .subscribe(response => {
-        if ( response ) {
+        if (response) {
           this.reloadTableServices();
         }
       });
   }
 
-  edit(row, rowIndex){
+  edit(row, rowIndex) {
     console.log(rowIndex);
     const product = row;
     this.dialogRef = this.dialog.open(ProbabilityDialogComponent, {
       panelClass: 'probability-dialog',
-      data : {
-        formType : FormType.edit,
-        product : product
+      data: {
+        formType: FormType.edit,
+        product: product
       }
     });
 
     this.dialogRef.afterClosed()
       .subscribe(response => {
-        if( response ) {
+        if (response) {
           this.reloadTableServices();
         }
       });
@@ -77,17 +77,17 @@ export class SystemProbabilityComponent implements OnInit {
   delete(row, rowIndex) {
     this.dialogConfirm = this.dialog.open(DialogOverviewConfirmDialog, {
       width: '250px',
-      data: { name: row.probabilidad }
+      data: {name: row.probabilidad}
     });
     this.dialogConfirm.afterClosed()
       .subscribe(response => {
-        console.log(response)
+        console.log(response);
         this.deleteRow(response, row, rowIndex);
       });
   }
 
   deleteRow(result, row, rowIndex) {
-    if( result ) {
+    if (result) {
       this.probabilityRiskService.deleteProbabilityRisk(row.id).subscribe((data: any) => {
         console.log(data);
         if (rowIndex > -1) {
@@ -95,6 +95,8 @@ export class SystemProbabilityComponent implements OnInit {
           this.probabilityRisk = [...this.probabilityRisk];
           this.customSnackMessage.openSnackBar('Registro eliminado');
         }
+      }, (err: any) => {
+        this.customSnackMessage.openSnackBar('Ocurrio un error eliminando el registro de la tabla');
       });
     }
   }
@@ -102,7 +104,7 @@ export class SystemProbabilityComponent implements OnInit {
   updateFilter(event) {
     const val = event.target.value.toLowerCase();
 
-    const temp = this.temp.filter(function(d) {
+    const temp = this.temp.filter(function (d) {
       return d.probabilidad.toLowerCase().indexOf(val) !== -1 || !val;
     });
 
