@@ -1,6 +1,10 @@
 // Import Fuse main library
 @import "@fuse/scss/core";
 
+.mat-dialog-container {
+  padding: 0px!important;
+}
+
 .is-red {
   width: 25px;
   height: 25px;
