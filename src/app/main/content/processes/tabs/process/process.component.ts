@@ -42,7 +42,7 @@ export class ProcessComponent implements OnInit, OnChanges {
 
     this.processForm = this.formBuilder.group({
       proceso_Nombre: ['', Validators.required],
-      proceso_Codigo: ['', Validators.required],
+      proceso_Codigo: [''],
       proceso_Tipo: ['', Validators.required],
       proceso_Descripcion: [''],
       proceso_Responsable_Id: [''],
