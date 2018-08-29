@@ -42,7 +42,7 @@ export class EjercicioDialogComponent implements OnInit {
 
     this.composeForm = this.formBuilder.group({
       descripcion: [''],
-      estatus_id: ['', [Validators.required]]
+      estatus_id: [1, [Validators.required]]
     });
     if (this.data && this.data.formType === FormType.edit) {
       this.ejercicioModel = this.data.ejercicio;

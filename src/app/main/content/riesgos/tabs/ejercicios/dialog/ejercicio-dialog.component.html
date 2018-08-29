@@ -27,7 +27,6 @@
       <mat-form-field>
         <mat-label><b>Estatus</b></mat-label>
         <mat-select placeholder="Estatus" formControlName="estatus_id">
-          <mat-option>Seleccione un estado</mat-option>
           <mat-option *ngFor="let estado of ejercicioEstados | async" [value]="estado.id">
             {{ estado.estatus }}
           </mat-option>
