@@ -55,6 +55,9 @@ export class DeclaracionRiesgosRequest {
   causasDeclaracionRiesgo: CausasDeclaracionRiesgos[];
   efectosDeclaracionRiesgo: EfectosDeclaracionRiesgos[];
   controlesDeclaracionRiesgo: ControlesDeclaracionRiesgos[];
+  causasEliminar?: number[];
+  efectosEliminar?: number[];
+  controlesEliminar?: number[];
 
   constructor(declaracionRiesgoParam,
   causasDeclaracionRiesgoParam,

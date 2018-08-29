@@ -129,7 +129,21 @@ export class DeclaracionComponent implements OnInit{
     const efectosRequest = <Array<EfectosDeclaracionRiesgos>>this.efectos.rows;
     const controlesRequest = <Array<ControlesDeclaracionRiesgos>>this.controles.rows;
 
+    const causasEliminar = <Array<number>>this.causas.causasEliminar;
+    const efectosEliminar = <Array<number>>this.efectos.efectosEliminar;
+    const controlesEliminar = <Array<number>>this.controles.controlesEliminar;
+
     const request = new DeclaracionRiesgosRequest(declaracionRequest, causasRequest, efectosRequest, controlesRequest);
+
+    if (causasEliminar && causasEliminar.length > 0) {
+      request.causasEliminar = causasEliminar;
+    }
+    if (efectosEliminar && efectosEliminar.length > 0) {
+      request.efectosEliminar = efectosEliminar;
+    }
+    if (controlesEliminar && controlesEliminar.length > 0) {
+      request.controlesEliminar = controlesEliminar;
+    }
 
     this.riesgosService.actualizarRiesgoService(request).subscribe(x => {
       this.customSnackMessage.openSnackBar('Riesgo actualizado correctamente');

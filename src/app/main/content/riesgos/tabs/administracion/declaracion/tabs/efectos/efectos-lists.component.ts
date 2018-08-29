@@ -22,6 +22,7 @@ export class EfectosListsComponent implements OnChanges
 
     impactoTotal: number;
     impactos: ImpactRiskModel[];
+    efectosEliminar: number[];
 
     isEditing = false;
 
@@ -92,6 +93,7 @@ export class EfectosListsComponent implements OnChanges
           this.puntajes.splice(rowIndex, 1);
           this.rows.splice(rowIndex, 1);
           this.rows = [...this.rows];
+          this.efectosEliminar.push(row.id);
 
           this.calcularImpactoTotal();
         }

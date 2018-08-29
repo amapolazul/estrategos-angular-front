@@ -23,6 +23,8 @@ export class ControlesListsComponent implements OnChanges
     efectividadesRiesgo: ControlsRiskModel[];
     isEditing = true;
 
+    controlesEliminar: number[];
+
     @Input() controlesRiesgosEditar;
     @Output() actualizarEfectividad = new EventEmitter<string>();
 
@@ -87,6 +89,8 @@ export class ControlesListsComponent implements OnChanges
         this.puntajes.splice(rowIndex, 1);
         this.rows.splice(rowIndex, 1);
         this.rows = [...this.rows];
+
+        this.controlesEliminar.push(row.id);
 
         this.calcularEfectividadTotal();
       }

@@ -25,6 +25,8 @@ export class CausasListsComponent implements OnInit, OnChanges
     probabilidadesRiesgo: ProbabilityRiskModel[];
     isEditing = false;
 
+    causasEliminar: number[];
+
     @Input() causasInput;
     @Output() actualizarProbabilidad = new EventEmitter<string>();
 
@@ -94,6 +96,7 @@ export class CausasListsComponent implements OnInit, OnChanges
         this.rows.splice(rowIndex, 1);
         this.rows = [...this.rows];
 
+        this.causasEliminar.push(row.id);
         this.calcularProbabilidadTotal();
       }
     }
