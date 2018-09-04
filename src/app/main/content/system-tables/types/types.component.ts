@@ -1,6 +1,6 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TypesDialogComponent} from '../types/dialog/types-dialog.component';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
+import {MatDialog} from '@angular/material';
 import {TypesRiskService} from '../../system-tables/types/service/types-risk.service';
 import {FormType} from '../../commons/form-type.enum';
 import {DialogOverviewConfirmDialog} from '../../../../../assets/angular-material-examples/dialog-confirm/dialog-confirm';
