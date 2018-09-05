@@ -5,6 +5,7 @@ import {RatingRiskService} from '../rating/service/rating-risk.service';
 import {FormType} from '../../commons/form-type.enum';
 import {DialogOverviewConfirmDialog} from '../../../../../assets/angular-material-examples/dialog-confirm/dialog-confirm';
 import {CustomSnackBarMessages} from '../../commons/messages.service';
+declare let jsPDF;
 
 @Component({
   selector: 'risk-rating',
@@ -32,6 +33,25 @@ export class SystemRatingComponent implements OnInit {
       this.temp = [...data];
       this.loadingIndicator = false;
     });
+  }
+
+  download(){
+    const doc = new jsPDF();
+    const col = ["ID", "Calificación del riesgo", "Rango mínimo", "Rango máximo", "Color", "Acción a tomar"];
+    const rows = [];
+
+    this.ratingTypes.forEach(x => {
+      const temp = [x.id,
+        x.nombre_calificacion_riesgo,
+        x.rango_minimo,
+        x.rango_maximo,
+        x.color,
+        x.accion_tomar];
+      rows.push(temp);
+    });
+
+    doc.autoTable(col, rows);
+    doc.save('Calificacion_del_riesgo.pdf');
   }
 
   reloadTableServices() {

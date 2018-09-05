@@ -5,6 +5,7 @@ import {TypesRiskService} from '../../system-tables/types/service/types-risk.ser
 import {FormType} from '../../commons/form-type.enum';
 import {DialogOverviewConfirmDialog} from '../../../../../assets/angular-material-examples/dialog-confirm/dialog-confirm';
 import {CustomSnackBarMessages} from '../../commons/messages.service';
+declare let jsPDF;
 
 @Component({
   selector: 'risk-types',
@@ -34,6 +35,20 @@ export class SystemTypesComponent implements OnInit {
       this.loadingIndicator = false;
       console.log(this.riskTypes);
     });
+  }
+
+  download(){
+    const doc = new jsPDF();
+    const col = ["ID", "Tipo de riesgo"];
+    const rows = [];
+
+    this.riskTypes.forEach(x => {
+      const temp = [x.id,x.tipo_riesgo];
+      rows.push(temp);
+    });
+
+    doc.autoTable(col, rows);
+    doc.save('Tipos_de_riesgos.pdf');
   }
 
   reloadTableServices() {

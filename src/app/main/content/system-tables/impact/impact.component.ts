@@ -5,7 +5,7 @@ import {ImpactRiskService} from '../impact/service/impact-risk.service';
 import {FormType} from '../../commons/form-type.enum';
 import {DialogOverviewConfirmDialog} from '../../../../../assets/angular-material-examples/dialog-confirm/dialog-confirm';
 import {CustomSnackBarMessages} from '../../commons/messages.service';
-
+declare let jsPDF;
 
 @Component({
   selector: 'risk-impact',
@@ -34,6 +34,23 @@ export class SystemImpactComponent implements OnInit {
       this.temp = [...data];
       this.loadingIndicator = false;
     });
+  }
+
+  download(){
+    const doc = new jsPDF();
+    const col = ["ID", "Impacto", "Puntaje", "Descripción"];
+    const rows = [];
+
+    this.impactRisk.forEach(x => {
+      const temp = [x.id,
+        x.impacto,
+        x.puntaje,
+        x.descripcion];
+      rows.push(temp);
+    });
+
+    doc.autoTable(col, rows);
+    doc.save('Impacto_del_riesgo.pdf');
   }
 
   reloadTableServices() {

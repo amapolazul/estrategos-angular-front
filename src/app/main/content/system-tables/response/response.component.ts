@@ -6,6 +6,7 @@ import { ResponseRiskService } from './service/response-risk.service';
 import {FormType} from '../../commons/form-type.enum';
 import {DialogOverviewConfirmDialog} from '../../../../../assets/angular-material-examples/dialog-confirm/dialog-confirm';
 import {CustomSnackBarMessages} from '../../commons/messages.service';
+declare let jsPDF;
 
 @Component({
     selector: 'risk-response',
@@ -33,6 +34,20 @@ export class SystemResponseComponent implements OnInit {
       this.temp = [...data];
       this.loadingIndicator = false;
     });
+  }
+
+  download(){
+    const doc = new jsPDF();
+    const col = ["ID", "Respuesta del riesgo", "Descripción"];
+    const rows = [];
+
+    this.responseRisk.forEach(x => {
+      const temp = [x.id,x.respuestaRiesgoNombre,x.descripcion];
+      rows.push(temp);
+    });
+
+    doc.autoTable(col, rows);
+    doc.save('Respuesta_al_riesgo.pdf');
   }
 
   reloadTableServices(){

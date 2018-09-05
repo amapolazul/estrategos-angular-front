@@ -5,6 +5,7 @@ import {CausesRiskService} from './service/causes-risk.service';
 import {FormType} from '../../commons/form-type.enum';
 import {DialogOverviewConfirmDialog} from '../../../../../assets/angular-material-examples/dialog-confirm/dialog-confirm';
 import {CustomSnackBarMessages} from '../../commons/messages.service';
+declare let jsPDF;
 
 @Component({
   selector: 'risk-causes',
@@ -32,6 +33,22 @@ export class SystemCausesComponent implements OnInit {
       this.temp = [...data];
       this.loadingIndicator = false;
     });
+  }
+
+  download(){
+    const doc = new jsPDF();
+    const col = ["ID", "Causa del riesgo", "Descripción"];
+    const rows = [];
+
+    this.causesRisk.forEach(x => {
+      const temp = [x.id,
+        x.causa_riesgo,
+        x.descripcion];
+      rows.push(temp);
+    });
+
+    doc.autoTable(col, rows);
+    doc.save('Causas_de_riesgo.pdf');
   }
 
   reloadTableServices() {
