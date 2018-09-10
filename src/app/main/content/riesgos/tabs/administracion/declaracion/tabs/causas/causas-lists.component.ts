@@ -69,8 +69,6 @@ export class CausasListsComponent implements OnInit, OnChanges
     }
 
     extraerCausa(causa: CausasDeclaracionRiesgos) {
-      console.log(causa);
-      console.log(this.causasRiesgo.find(x => x.id === causa.id).causa_riesgo);
       return this.causasRiesgo.find(x => x.id === causa.causa).causa_riesgo;
     }
 
