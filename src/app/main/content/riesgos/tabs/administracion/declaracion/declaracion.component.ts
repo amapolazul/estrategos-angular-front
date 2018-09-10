@@ -7,7 +7,7 @@ import {EjercicioModel} from '../../ejercicios/model/ejercicio.model';
 import {Proceso} from '../../../../processes/models/process.model';
 import {CausasDeclaracionRiesgos, ControlesDeclaracionRiesgos, DeclaracionRiesgos, DeclaracionRiesgosRequest, EfectosDeclaracionRiesgos} from '../../../models/riesgos.models';
 import {CustomSnackBarMessages} from '../../../../commons/messages.service';
-
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'declaracion-classes',
@@ -38,7 +38,8 @@ export class DeclaracionComponent implements OnInit{
               private ejerciciosService: EjercicioService,
               private procesoService: ProcessesService,
               private customSnackMessage: CustomSnackBarMessages,
-              private router: Router) {
+              private router: Router,
+              private location: Location) {
   }
 
   ngOnInit() {
@@ -65,6 +66,10 @@ export class DeclaracionComponent implements OnInit{
         });
       }
     });
+  }
+
+  exit(){
+    this.location.back();
   }
 
   traerInformacionEjercicioProceso() {

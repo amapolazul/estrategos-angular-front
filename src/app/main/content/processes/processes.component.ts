@@ -60,6 +60,10 @@ export class ProcessesComponent implements OnInit{
   ngOnInit() {
   }
 
+  exit(){
+    this.router.navigate(['home']);
+  }
+
   processData() {
     if (this.processComponent.processForm.valid){
       const proceso = <Proceso>this.processComponent.processForm.getRawValue();
