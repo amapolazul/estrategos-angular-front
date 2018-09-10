@@ -12,7 +12,11 @@
     <form name="composeForm" [formGroup]="composeForm" class="compose-form" fxLayout="column" fxFlex>
 
       <mat-form-field>
-        <input matInput name="causes" placeholder="Causa" formControlName="causa" type="text">
+        <mat-select placeholder="Causas" formControlName="causa" required (change)="onCausasChange($event)" >
+          <mat-option *ngFor="let causa of causasRiesgo" [value]="causa.id">
+            {{ causa.causa_riesgo }}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
 
       <mat-form-field>
