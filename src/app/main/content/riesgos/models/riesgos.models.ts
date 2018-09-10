@@ -27,9 +27,10 @@ export class CausasDeclaracionRiesgos {
   id?: number;
   probabilidad_riesgo_id: number;
   declaracion_riesgo_id?: number;
-  causa: string;
+  causa: number;
   descripcion: string;
   probabilidad_string?: string;
+  causa_string?: string;
 }
 
 export class EfectosDeclaracionRiesgos {

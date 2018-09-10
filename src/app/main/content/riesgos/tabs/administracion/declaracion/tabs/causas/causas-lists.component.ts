@@ -8,6 +8,8 @@ import {ProbabilityRiskModel} from '../../../../../../system-tables/probability/
 import {CausasDeclaracionRiesgos} from '../../../../../models/riesgos.models';
 import {FormType} from '../../../../../../commons/form-type.enum';
 import {CharacterizationDialogComponent} from '../../../../../../processes/tabs/characterization/dialog/edit-dialog/characterization-dialog.component';
+import {CausesRiskModel} from '../../../../../../system-tables/causes/model/causes-risk.model';
+import {CausesRiskService} from '../../../../../../system-tables/causes/service/causes-risk.service';
 
 @Component({
     selector   : 'causas-lists',
@@ -23,6 +25,7 @@ export class CausasListsComponent implements OnInit, OnChanges
     rows = [];
     probabilidadTotal: number;
     probabilidadesRiesgo: ProbabilityRiskModel[];
+    causasRiesgo: CausesRiskModel[];
     isEditing = false;
 
     causasEliminar = [];
@@ -32,10 +35,15 @@ export class CausasListsComponent implements OnInit, OnChanges
 
     constructor(public dialog: MatDialog,
                 private riesgosCalculos: RiesgosCalculosService,
-                private probabilityRiskService: ProbabilityRiskService) {
+                private probabilityRiskService: ProbabilityRiskService,
+                private causesRiskService: CausesRiskService) {
       this.probabilidadTotal = 0;
       this.probabilityRiskService.getProbabilityRisk().subscribe((data) => {
         this.probabilidadesRiesgo = data;
+      });
+      // Carga las causas
+      this.causesRiskService.getCausesRisk().subscribe((causas) => {
+        this.causasRiesgo = causas;
       });
     }
 
@@ -50,6 +58,7 @@ export class CausasListsComponent implements OnInit, OnChanges
           const probabilidadCausa = this.extraerProbabilidadCausa(causa);
           const probabilityRiskModel = probabilidadCausa.pop();
           causa.probabilidad_string = this.probabilityRiskService.getProbabilidadString(probabilityRiskModel);
+          causa.causa_string = this.extraerCausa(causa);
           this.rows.push(causa);
           this.puntajes.push(probabilityRiskModel.puntaje);
         });
@@ -57,6 +66,12 @@ export class CausasListsComponent implements OnInit, OnChanges
         this.calcularProbabilidadTotal();
         this.rows = [...this.rows];
       }
+    }
+
+    extraerCausa(causa: CausasDeclaracionRiesgos) {
+      console.log(causa);
+      console.log(this.causasRiesgo.find(x => x.id === causa.id).causa_riesgo);
+      return this.causasRiesgo.find(x => x.id === causa.causa).causa_riesgo;
     }
 
     extraerProbabilidadCausa(causa: CausasDeclaracionRiesgos) {
