@@ -1,0 +1,16 @@
+<div class="component-style table-component">
+
+  <div class="component-tag">
+    <span>Matriz</span>
+  </div>
+
+  <br>
+
+  <table>
+    <tr>
+      <th *ngFor="let c of columns">{{c}}</th>
+    </tr>
+    <tr class="component-style table-row-component" *ngFor="let ch of characters" app-table-row >
+    </tr>
+  </table>
+</div>

@@ -18,6 +18,7 @@ import { ProcessesModule } from './main/content/processes/processes.module';
 import { SystemTablesModule } from './main/content/system-tables/system-tables.module';
 import { FuseAngularMaterialModule } from '../app/main/content/components/angular-material/angular-material.module';
 import { RiesgosModule } from './main/content/riesgos/riesgos.module';
+import {ProbabilidadImpactoModule} from './main/content/probabilidad-impacto/probabilidad-impacto.module';
 
 const appRoutes: Routes = [
     {
@@ -31,6 +32,10 @@ const appRoutes: Routes = [
     {
         path: 'system-table',
         loadChildren: './main/content/system-tables/system-tables.module#SystemTablesModule'
+    },
+    {
+        path: 'probabilidad-impacto',
+        loadChildren: './main/content/probabilidad-impacto/probabilidad-impacto.module#ProbabilidadImpactoModule'
     },
     {
         path: '**',
@@ -57,7 +62,8 @@ const appRoutes: Routes = [
         ProcessesModule,
         SystemTablesModule,
         RiesgosModule,
-        FuseAngularMaterialModule
+        ProbabilidadImpactoModule,
+        FuseAngularMaterialModule,
     ],
     bootstrap: [
         AppComponent
