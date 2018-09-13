@@ -12,7 +12,7 @@ export class MatrizComponent implements OnInit {
     [
       {
         'ProbabilidadImpacto': 'Muy Alto',
-        'Muy Bajo': '0,05',
+        'Muy Bajo ': '0,05',
         'Bajo': '0,09',
         'Moderado': '0,18',
         'Alto': '0,36',
