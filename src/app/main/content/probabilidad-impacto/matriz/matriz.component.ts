@@ -8,7 +8,7 @@ import {Component, OnInit} from '@angular/core';
 export class MatrizComponent implements OnInit {
 
   columns: string[] = ['ProbabilidadImpacto', 'Muy Bajo', 'Bajo', 'Moderado', 'Alto', 'Muy Alto'];
-  characters: any[] =
+  rowdata: any[] =
     [
       {
         'ProbabilidadImpacto': 'Muy Alto',
@@ -57,7 +57,7 @@ export class MatrizComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.columns);
-    console.log(this.characters);
+    console.log(this.rowdata);
   }
 
 }

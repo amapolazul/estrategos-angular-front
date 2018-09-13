@@ -8,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class MatrizRowComponent implements OnInit {
 
   @Input() contend: any;
-  @Input() characters: string[];
+  @Input() rowdata: string[];
 
   constructor() { }
 

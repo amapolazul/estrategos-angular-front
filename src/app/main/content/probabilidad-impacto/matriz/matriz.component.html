@@ -1,16 +1,21 @@
 <div class="component-style table-component">
 
   <div class="component-tag">
-    <span>Matriz</span>
+    <span>Matriz, Probabilidad Impacto</span>
   </div>
-
   <br>
 
   <table>
     <tr>
-      <th *ngFor="let c of columns">{{c}}</th>
+      <th *ngFor="let col of columns">
+        {{col}}
+      </th>
     </tr>
-    <tr class="component-style table-row-component" *ngFor="let ch of characters" app-table-row >
+    <tr *ngFor="let char of rowdata ">
+      <td *ngFor="let col of columns">
+        {{char[col]}}
+      </td>
     </tr>
   </table>
+
 </div>
