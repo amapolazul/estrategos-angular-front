@@ -11,44 +11,44 @@ export class MatrizComponent implements OnInit {
   rowdata: any[] =
     [
       {
-        'ProbabilidadImpacto': 'Muy Alto',
-        'Muy Bajo ': '0,05',
-        'Bajo': '0,09',
-        'Moderado': '0,18',
-        'Alto': '0,36',
-        'Muy Alto': '0,72'
+        'ProbabilidadImpacto': 'Muy Alto row',
+        'Muy Bajo': '3',
+        'Bajo': '4',
+        'Moderado': '7',
+        'Alto': '8',
+        'Muy Alto': '9'
       },
       {
-        'ProbabilidadImpacto': 'Alto',
-        'Muy Bajo': '0,2',
-        'Bajo': '0,3',
-        'Moderado': '0,4',
-        'Alto': '0,5',
-        'Muy Alto': '0,6'
+        'ProbabilidadImpacto': 'Alto row',
+        'Muy Bajo': '3',
+        'Bajo': '4',
+        'Moderado': '5',
+        'Alto': '7',
+        'Muy Alto': '8'
       },
       {
-        'ProbabilidadImpacto': 'Moderado',
-        'Muy Bajo': '0,2',
-        'Bajo': '0,3',
-        'Moderado': '0,4',
-        'Alto': '0,5',
-        'Muy Alto': '0,6'
+        'ProbabilidadImpacto': 'Moderado row',
+        'Muy Bajo': '3',
+        'Bajo': '3',
+        'Moderado': '5',
+        'Alto': '6',
+        'Muy Alto': '7'
       },
       {
-        'ProbabilidadImpacto': 'Bajo',
-        'Muy Bajo': '0,2',
-        'Bajo': '0,3',
-        'Moderado': '0,4',
-        'Alto': '0,5',
-        'Muy Alto': '0,6'
+        'ProbabilidadImpacto': 'Bajo row',
+        'Muy Bajo': '1',
+        'Bajo': '2',
+        'Moderado': '3',
+        'Alto': '5',
+        'Muy Alto': '6'
       },
       {
-        'ProbabilidadImpacto': 'Muy Bajo',
-        'Muy Bajo': '0,2',
-        'Bajo': '0,3',
-        'Moderado': '0,4',
-        'Alto': '0,5',
-        'Muy Alto': '0,6'
+        'ProbabilidadImpacto': 'Muy Bajo row',
+        'Muy Bajo': '1',
+        'Bajo': '2',
+        'Moderado': '3',
+        'Alto': '3',
+        'Muy Alto': '4'
       }
     ];
 
