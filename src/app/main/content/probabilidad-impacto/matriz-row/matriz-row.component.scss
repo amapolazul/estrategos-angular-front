@@ -1,12 +1,4 @@
-.table-component {
-  border: 2px solid blue;
-  background-color: lightblue;
-}
 
-.table-row-component {
-  border: 2px solid green;
-  background-color: #cefdce;
-}
 
 table {
   width: 100%;
@@ -17,10 +9,67 @@ table, th, td {
   border-collapse: collapse;
 }
 
-.table-row-component td {
-  border: 1px solid lightGreen;
+td {
+
 }
 
-th, td {
-  padding: 15px;
+div[class|=m-1]{
+  padding: 24px;
+  background-color: greenyellow;
+  color:black;
+  margin: 0px;
+}
+div[class|=m-2]{
+  padding: 24px;
+  background-color: greenyellow;
+  color:black;
+  margin: 0px;
+}
+div[class|=m-3]{
+  padding: 24px;
+  background-color: greenyellow;
+  color:black;
+  margin: 0px;
+}
+div[class|=m-4]{
+  padding: 24px;
+  background-color: yellow;
+  color:black;
+  margin: 0px;
+}
+div[class|=m-5]{
+  padding: 24px;
+  background-color: yellow;
+  color:black;
+  margin: 0px;
+}
+div[class|=m-5]{
+  padding: 24px;
+  background-color: yellow;
+  color:black;
+  margin: 0px;
+}
+div[class|=m-6]{
+  padding: 24px;
+  background-color: yellow;
+  color:black;
+  margin: 0px;
+}
+div[class|=m-7]{
+  padding: 24px;
+  background-color: red;
+  color:black;
+  margin: 0px;
+}
+div[class|=m-8]{
+  padding: 24px;
+  background-color: red;
+  color:black;
+  margin: 0px;
+}
+div[class|=m-9]{
+  padding: 24px;
+  background-color: red;
+  color:black;
+  margin: 0px;
 }
