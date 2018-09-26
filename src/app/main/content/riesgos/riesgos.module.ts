@@ -14,6 +14,8 @@ import {ControlesListsComponent} from './tabs/administracion/declaracion/tabs/co
 import {CausasDeclaracionComponent} from './tabs/administracion/declaracion/tabs/causas/dialog/causas-declaracion.component';
 import {EfectosDeclaracionComponent} from './tabs/administracion/declaracion/tabs/efectos/dialog/efectos-declaracion.component';
 import {ControlesDeclaracionComponent} from './tabs/administracion/declaracion/tabs/controles/dialog/controles-declaracion.component';
+import {RiesgoCausasDialogComponent} from './tabs/administracion/riesgos_causas/dialog/riesgo-causas-dialog.component';
+import {NgxChartsModule} from '@swimlane/ngx-charts';
 
 
 const routes: Routes = [
@@ -38,7 +40,8 @@ const routes: Routes = [
 @NgModule({
     imports     : [
         SharedModule,
-        RouterModule.forChild(routes)
+        RouterModule.forChild(routes),
+        NgxChartsModule
     ],
     declarations: [
         RiesgosComponent,
@@ -53,7 +56,8 @@ const routes: Routes = [
         ControlesListsComponent,
         CausasDeclaracionComponent,
         EfectosDeclaracionComponent,
-        ControlesDeclaracionComponent
+        ControlesDeclaracionComponent,
+        RiesgoCausasDialogComponent
     ],
     entryComponents: [
         EjercicioDialogComponent,
@@ -66,7 +70,8 @@ const routes: Routes = [
         ControlesListsComponent,
         CausasDeclaracionComponent,
         EfectosDeclaracionComponent,
-        ControlesDeclaracionComponent
+        ControlesDeclaracionComponent,
+        RiesgoCausasDialogComponent
     ]
 })
 export class RiesgosModule

@@ -2,7 +2,7 @@ import {BaseService} from '../../commons/base-service.service';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {Injectable} from '@angular/core';
-import {DeclaracionRiesgos, DeclaracionRiesgosRequest} from '../models/riesgos.models';
+import {DeclaracionRiesgos, DeclaracionRiesgosCausa, DeclaracionRiesgosRequest} from '../models/riesgos.models';
 
 @Injectable()
 export class RiesgosService extends BaseService {
@@ -38,6 +38,10 @@ export class RiesgosService extends BaseService {
 
   getRiesgoPorId(riesgoId: number): Observable<DeclaracionRiesgosRequest> {
     return this.http.get<DeclaracionRiesgosRequest>(this.serviceUrl + '/' + riesgoId);
+  }
+
+  getCausasRiesgoChart(ejercicioId: number): Observable<DeclaracionRiesgosCausa[]> {
+    return this.http.get<DeclaracionRiesgosCausa[]>(this.serviceUrl + '/charts/causas?ejercicioId=' + ejercicioId);
   }
 
   getResourceEndpoint(): string {

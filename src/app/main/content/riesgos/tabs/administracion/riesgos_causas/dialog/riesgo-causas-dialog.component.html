@@ -1,0 +1,37 @@
+<div class="dialog-content-wrapper">
+  <mat-toolbar matDialogTitle class="mat-accent m-0">
+    <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+      <span class="title dialog-title">Riesgos ejercicio: {{nombreEjercicio}}</span>
+      <button mat-button class="mat-icon-button" (click)="dialogRef.close()" aria-label="Close dialog">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar>
+
+
+  <mat-form-field>
+    <mat-label><b>Proceso</b></mat-label>
+    <input matInput placeholder="Proceso:" [value]="selectedProcess.proceso_Nombre" disabled >
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label><b>Proceso</b></mat-label>
+    <input matInput name="ejercicio_desc" placeholder="Ejercicio:" [value]="ejercicioModel.descripcion" disabled >
+  </mat-form-field>
+
+
+
+  <div mat-dialog-content class="p-24 m-0">
+    <ngx-charts-bar-vertical
+      [scheme]="colorScheme"
+      [results]="chartData"
+      [gradient]="gradient"
+      [xAxis]="showXAxis"
+      [yAxis]="showYAxis"
+      [legend]="showLegend"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [xAxisLabel]="xAxisLabel"
+      [yAxisLabel]="yAxisLabel">
+    </ngx-charts-bar-vertical>
+  </div>
+</div>

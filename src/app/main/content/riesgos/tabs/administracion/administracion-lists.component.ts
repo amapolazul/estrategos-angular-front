@@ -7,6 +7,9 @@ import {EjercicioModel} from '../ejercicios/model/ejercicio.model';
 import {Proceso} from '../../../processes/models/process.model';
 import {ProcessesService} from '../../../processes/services/processes.service';
 import {CustomSnackBarMessages} from '../../../commons/messages.service';
+import {MatDialog} from '@angular/material';
+import {EjercicioDialogComponent} from '../ejercicios/dialog/ejercicio-dialog.component';
+import {RiesgoCausasDialogComponent} from './riesgos_causas/dialog/riesgo-causas-dialog.component';
 
 @Component({
     selector   : 'administracion-lists',
@@ -19,13 +22,15 @@ export class AdministracionListsComponent implements OnInit {
   ejercicioPadre: number;
   ejercicio: EjercicioModel = new EjercicioModel();
   proceso: Proceso = new Proceso();
+  dialogRef: any;
 
   constructor(private riesgosService: RiesgosService,
               private activatedRoute: ActivatedRoute,
               private ejerciciosService: EjercicioService,
               private procesoService: ProcessesService,
               private customSnackBar: CustomSnackBarMessages,
-              private router: Router) {
+              private router: Router,
+              public dialog: MatDialog) {
     this.activatedRoute.params.subscribe(x => {
       this.ejercicioPadre = x.id;
     });
@@ -72,6 +77,18 @@ export class AdministracionListsComponent implements OnInit {
 
   edit(row, rowIndex){
     this.router.navigate(['declaracion-riesgos/editar', row.id]);
+  }
+
+  abrirGraficaCausasRiesgos() {
+    this.dialogRef = this.dialog.open(RiesgoCausasDialogComponent, {
+      panelClass: 'ejercicio-dialog',
+      data: {
+        proceso: this.proceso,
+        ejercicio: this.ejercicio
+      }
+    });
+
+    this.dialogRef.afterClosed().subscribe(response => {});
   }
 
   getCellClass(row): any {

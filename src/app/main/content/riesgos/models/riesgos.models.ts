@@ -72,3 +72,8 @@ export class DeclaracionRiesgosRequest {
 
   }
 }
+
+export class DeclaracionRiesgosCausa {
+  name: string;
+  number: number;
+}

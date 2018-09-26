@@ -19,6 +19,7 @@ import { SystemTablesModule } from './main/content/system-tables/system-tables.m
 import { FuseAngularMaterialModule } from '../app/main/content/components/angular-material/angular-material.module';
 import { RiesgosModule } from './main/content/riesgos/riesgos.module';
 import {ProbabilidadImpactoModule} from './main/content/probabilidad-impacto/probabilidad-impacto.module';
+import {NgxChartsModule} from '@swimlane/ngx-charts';
 
 const appRoutes: Routes = [
     {
@@ -61,6 +62,7 @@ const appRoutes: Routes = [
         HomeModule,
         ProcessesModule,
         SystemTablesModule,
+        NgxChartsModule,
         RiesgosModule,
         ProbabilidadImpactoModule,
         FuseAngularMaterialModule,
