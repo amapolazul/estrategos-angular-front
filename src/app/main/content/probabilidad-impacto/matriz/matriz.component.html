@@ -5,17 +5,34 @@
     <div class="button-row">
       <button mat-flat-button color="accent" (click)="download()">Descargar PDF</button>
     </div>
-    <div class="content p-24">
-      <table>
-        <tr>
-          <th *ngFor="let c of columns">{{c}}</th>
-        </tr>
-        <tr *ngFor="let ch of rowdata "
-            app-matriz-row
-            [rowdata]="ch"
-            [columns]="columns">
-        </tr>
-      </table>
+
+    <div fxLayout="colum">
+      <div fxFlex="20">
+        <table>
+          <tr>
+            <th> titulo</th>
+          </tr>
+          <tr *ngFor="let ch of probabilidades">
+            <td><div class="m-l">{{ ch.probabilidad }}</div></td>
+          </tr>
+        </table>
+      </div>
+      <div fxFlex="">
+        <table>
+          <tr>
+            <th *ngFor="let col of impactos">
+              {{col.impacto}}
+            </th>
+          </tr>
+          <tr *ngFor="let ch of probabilidades">
+            <td *ngFor="let col of impactos">
+              <div class="m-{{colorPorImpactoYProbabilidad(col.puntaje, ch.puntaje)}}">
+                {{filtrarRiesgosPorImpactoYProbabilidad(col.puntaje, ch.puntaje)}}
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
     </div>
   </div>
 </div>

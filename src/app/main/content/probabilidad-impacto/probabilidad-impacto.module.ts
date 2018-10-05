@@ -4,7 +4,6 @@ import { FuseWidgetModule } from '../../../core/components/widget/widget.module'
 import { FuseAngularMaterialModule } from '../components/angular-material/angular-material.module';
 import { SharedModule } from '../../../core/modules/shared.module';
 import {MatrizComponent} from './matriz/matriz.component';
-import {MatrizRowComponent} from './matriz-row/matriz-row.component';
 
 const routes = [
   {
@@ -23,12 +22,10 @@ const routes = [
   ],
   declarations: [
     MatrizComponent,
-    MatrizRowComponent
 
   ],
   entryComponents: [
     MatrizComponent,
-    MatrizRowComponent
 
   ]
 })

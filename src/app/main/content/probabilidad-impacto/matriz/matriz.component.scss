@@ -17,10 +17,28 @@ table, th, td {
   border-collapse: collapse;
 }
 
-.table-row-component td {
-  border: 1px solid lightGreen;
+div[class|=m-Verde]{
+  padding: 24px;
+  background-color: greenyellow;
+  color:black;
+  margin: 0px;
+}
+div[class|=m-Amarillo]{
+  padding: 24px;
+  background-color: yellow;
+  color:black;
+  margin: 0px;
+}
+div[class|=m-Rojo]{
+  padding: 24px;
+  background-color: red;
+  color:black;
+  margin: 0px;
+}
+div[class|=m-l]{
+  padding: 24px;
+  color:black;
+  margin: 0px;
+  font-weight: bold;
 }
 
-th, td {
-  padding: 15px;
-}
