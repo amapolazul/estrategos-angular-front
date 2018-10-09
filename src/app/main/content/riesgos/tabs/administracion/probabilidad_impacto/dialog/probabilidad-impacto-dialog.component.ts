@@ -1,8 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {ProbabilityRiskService} from '../../../../../system-tables/probability/service/probability-risk.service';
 import {ImpactRiskService} from '../../../../../system-tables/impact/service/impact-risk.service';
 import {RiesgosService} from '../../../../services/riesgos.service';
 import {RatingRiskService} from '../../../../../system-tables/rating/service/rating-risk.service';
+import {Proceso} from '../../../../../processes/models/process.model';
+import {MAT_DIALOG_DATA} from '@angular/material';
+import {EjercicioModel} from '../../../ejercicios/model/ejercicio.model';
 
 @Component({
   selector: 'probabilidad-impacto-dialog',
@@ -11,6 +14,7 @@ import {RatingRiskService} from '../../../../../system-tables/rating/service/rat
 })
 export class ProbabilidadImpactoDialogComponent implements OnInit {
 
+  ejercicioModel = new EjercicioModel();
   probabilidades: any[] = [];
   impactos: any[] = [];
   riesgos: any[] = [];
@@ -19,7 +23,9 @@ export class ProbabilidadImpactoDialogComponent implements OnInit {
   constructor(private probabilityRiskService: ProbabilityRiskService,
               private impactRiskService: ImpactRiskService,
               private riesgosService: RiesgosService,
-              private calificacionRiesgoService: RatingRiskService) {
+              private calificacionRiesgoService: RatingRiskService,
+              @Inject(MAT_DIALOG_DATA) private data: any) {
+    this.ejercicioModel  = this.data.ejercicio;
   }
 
   ngOnInit() {
@@ -29,7 +35,7 @@ export class ProbabilidadImpactoDialogComponent implements OnInit {
       console.log('orden', this.probabilidades);
       this.impactRiskService.getImpactRisk().subscribe(y => {
         this.impactos = y.sort(this.sortFunction);
-        this.riesgosService.getRiesgosPorEjercicioId(1).subscribe(z => {
+        this.riesgosService.getRiesgosPorEjercicioId(this.ejercicioModel.id).subscribe(z => {
           this.riesgos = z;
           this.calificacionRiesgoService.getRatingRisk().subscribe(w => {
             this.calificaciones = w;
@@ -48,8 +54,6 @@ export class ProbabilidadImpactoDialogComponent implements OnInit {
 
   colorPorImpactoYProbabilidad(impacto, probabilidad) {
     const res = impacto * probabilidad;
-    console.log('impacto', impacto);
-    console.log(probabilidad);
     const calificacion = this.calificaciones.filter(x => {
       return (res <= x.rango_maximo);
     }).filter(y => {
