@@ -10,6 +10,7 @@ import {CustomSnackBarMessages} from '../../../commons/messages.service';
 import {MatDialog} from '@angular/material';
 import {EjercicioDialogComponent} from '../ejercicios/dialog/ejercicio-dialog.component';
 import {RiesgoCausasDialogComponent} from './riesgos_causas/dialog/riesgo-causas-dialog.component';
+import {ProbabilidadImpactoDialogComponent} from './probabilidad_impacto/dialog/probabilidad-impacto-dialog.component';
 
 @Component({
     selector   : 'administracion-lists',
@@ -98,4 +99,18 @@ export class AdministracionListsComponent implements OnInit {
       'is-red': row.calificacion_riesgo === 'Rojo'
     };
   }
+
+  abrirMapaProbabilidadImpacto(){
+    console.log('HOLA BB..!!!')
+    this.dialogRef = this.dialog.open(ProbabilidadImpactoDialogComponent, {
+      panelClass: 'probabilidad-impacto-dialog',
+      data: {
+        proceso: this.proceso,
+        ejercicio: this.ejercicio
+      }
+    });
+
+    this.dialogRef.afterClosed().subscribe(response => {});
+  }
 }
+

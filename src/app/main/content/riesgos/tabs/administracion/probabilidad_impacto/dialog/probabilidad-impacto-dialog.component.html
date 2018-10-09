@@ -1,0 +1,46 @@
+<div class="dialog-content-wrapper">
+  <mat-toolbar matDialogTitle class="mat-accent m-0">
+    <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+      <span class="title dialog-title">Matriz, Probabilidad Impacto</span>
+      <button mat-button class="mat-icon-button" (click)="dialogRef.close()" aria-label="Close dialog">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar>
+
+  <div class="content p-24">
+
+    <div class="button-row">
+      <button mat-flat-button color="accent" (click)="download()">Descargar PDF</button>
+    </div>
+
+    <div fxLayout="colum">
+      <div fxFlex="20">
+        <table>
+          <tr>
+            <th> titulo</th>
+          </tr>
+          <tr *ngFor="let ch of probabilidades">
+            <td><div class="m-l">{{ ch.probabilidad }}</div></td>
+          </tr>
+        </table>
+      </div>
+      <div fxFlex="">
+        <table>
+          <tr>
+            <th *ngFor="let col of impactos">
+              {{col.impacto}}
+            </th>
+          </tr>
+          <tr *ngFor="let ch of probabilidades">
+            <td *ngFor="let col of impactos">
+              <div class="m-{{colorPorImpactoYProbabilidad(col.puntaje, ch.puntaje)}}">
+                {{filtrarRiesgosPorImpactoYProbabilidad(col.puntaje, ch.puntaje)}}
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
