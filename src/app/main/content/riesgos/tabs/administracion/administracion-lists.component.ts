@@ -101,7 +101,6 @@ export class AdministracionListsComponent implements OnInit {
   }
 
   abrirMapaProbabilidadImpacto(){
-    console.log('HOLA BB..!!!')
     this.dialogRef = this.dialog.open(ProbabilidadImpactoDialogComponent, {
       panelClass: 'probabilidad-impacto-dialog',
       data: {

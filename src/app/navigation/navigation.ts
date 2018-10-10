@@ -40,16 +40,7 @@ export const navigation = [
             'url': 'declaracion-riesgos',
           }
         ]
-      },
-
-      {
-        'id': 'probabilidad-impacto',
-        'title': 'Matriz probabilidad impacto',
-        'type': 'item',
-        'icon': 'extension',
-        'url': '/probabilidad-impacto'
       }
-
     ]
   }
 ];
