@@ -8,27 +8,31 @@
     </div>
   </mat-toolbar>
 
-  <div class="content p-24">
+  <div class="content p-32" fxLayout="column">
 
-  <mat-form-field>
-    <mat-label><b>Proceso</b></mat-label>
-    <input matInput placeholder="Proceso:" [value]="selectedProcess.proceso_Nombre" disabled >
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label><b>Proceso</b></mat-label>
-    <input matInput name="ejercicio_desc" placeholder="Ejercicio:" [value]="ejercicioModel.descripcion" disabled >
-  </mat-form-field>
+    <div fxFlex style="margin-bottom: 20px">
+      <button mat-flat-button color="accent" style="align-content: right" (click)="download()">Descargar PDF</button>
+    </div>
+
+    <div>
+      <mat-form-field fxFlex>
+        <mat-label><b>Proceso</b></mat-label>
+        <input matInput placeholder="Proceso:" [value]="selectedProcess.proceso_Nombre" disabled >
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <mat-label><b>Proceso</b></mat-label>
+        <input matInput name="ejercicio_desc" placeholder="Ejercicio:" [value]="ejercicioModel.descripcion" disabled >
+      </mat-form-field>
+    </div>
 
 
-
-  <div mat-dialog-content class="p-24 m-0">
+  <div mat-dialog-content class="p-24 m-0" id="chart-container">
     <ngx-charts-bar-vertical
       [scheme]="colorScheme"
       [results]="chartData"
       [gradient]="gradient"
       [xAxis]="showXAxis"
       [yAxis]="showYAxis"
-      [legend]="showLegend"
       [showXAxisLabel]="showXAxisLabel"
       [showYAxisLabel]="showYAxisLabel"
       [xAxisLabel]="xAxisLabel"

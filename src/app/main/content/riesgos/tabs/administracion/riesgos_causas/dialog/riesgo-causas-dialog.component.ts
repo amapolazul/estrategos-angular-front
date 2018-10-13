@@ -6,6 +6,8 @@ import {EjercicioModel} from '../../../ejercicios/model/ejercicio.model';
 import {CustomSnackBarMessages} from '../../../../../commons/messages.service';
 import {RiesgosService} from '../../../../services/riesgos.service';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import {DeclaracionRiesgos} from '../../../../models/riesgos.models';
+declare let jsPDF;
 
 
 @Component({
@@ -18,6 +20,8 @@ export class RiesgoCausasDialogComponent implements OnInit {
   ejercicioModel = new EjercicioModel();
   selectedProcess: Proceso;
   nombreEjercicio: string;
+
+  rows = [];
 
   view: any[] = [750, 450];
 
@@ -55,8 +59,43 @@ export class RiesgoCausasDialogComponent implements OnInit {
     }, error => {
 
     });
+
+    this.riesgoService.getRiesgosPorEjercicioId(this.ejercicioModel.id).subscribe(x => {
+      const result = <DeclaracionRiesgos[]> x;
+      this.rows = [...result];
+    });
   }
 
+  download() {
+    const pdf = new jsPDF('p', 'pt', 'a4');
+    const htmlElement = document.getElementById('chart-container');
+    htmlElement.style.backgroundColor = 'white';
+    htmlElement.style.width = '595';
+    htmlElement.style.height = '840';
+
+    const col = [
+      'Riesgo',
+      'Probabilidad',
+      'Impacto',
+      'Severidad',
+      'Estado riesgo'];
+    const rows = [];
+
+    this.rows.forEach(x => {
+      const temp = [
+        x.factor_riesgo,
+        x.probabilidad,
+        x.impacto,
+        x.severidad,
+        x.estatus_riesgo_id];
+      rows.push(temp);
+    });
+
+    pdf.addHTML(htmlElement, () => {
+      pdf.autoTable(col, rows, {margin: {top: 400}});
+      pdf.save('tuPdf.pdf');
+    });
+  }
 
   closeModal() {
     this.dialogRef.close();
