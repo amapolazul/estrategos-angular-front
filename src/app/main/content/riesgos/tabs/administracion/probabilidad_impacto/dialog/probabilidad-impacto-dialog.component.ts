@@ -4,8 +4,10 @@ import {ImpactRiskService} from '../../../../../system-tables/impact/service/imp
 import {RiesgosService} from '../../../../services/riesgos.service';
 import {RatingRiskService} from '../../../../../system-tables/rating/service/rating-risk.service';
 import {Proceso} from '../../../../../processes/models/process.model';
-import {MAT_DIALOG_DATA} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {EjercicioModel} from '../../../ejercicios/model/ejercicio.model';
+
+declare let jsPDF;
 
 @Component({
   selector: 'probabilidad-impacto-dialog',
@@ -22,17 +24,17 @@ export class ProbabilidadImpactoDialogComponent implements OnInit {
 
   constructor(private probabilityRiskService: ProbabilityRiskService,
               private impactRiskService: ImpactRiskService,
+              public dialogRef: MatDialogRef<ProbabilidadImpactoDialogComponent>,
               private riesgosService: RiesgosService,
               private calificacionRiesgoService: RatingRiskService,
               @Inject(MAT_DIALOG_DATA) private data: any) {
-    this.ejercicioModel  = this.data.ejercicio;
+    this.ejercicioModel = this.data.ejercicio;
   }
 
   ngOnInit() {
 
     this.probabilityRiskService.getProbabilityRisk().subscribe(x => {
       this.probabilidades = x.sort(this.sortFunction).reverse();
-      console.log('orden', this.probabilidades);
       this.impactRiskService.getImpactRisk().subscribe(y => {
         this.impactos = y.sort(this.sortFunction);
         this.riesgosService.getRiesgosPorEjercicioId(this.ejercicioModel.id).subscribe(z => {
@@ -49,7 +51,9 @@ export class ProbabilidadImpactoDialogComponent implements OnInit {
     const f = this.riesgos.filter(x => {
       return (x.probabilidad === probabilidad.toString() && x.impacto === impacto.toString());
     });
-    return f.length;
+    if (f.length > 0) {
+      return f.length;
+    }
   }
 
   colorPorImpactoYProbabilidad(impacto, probabilidad) {
@@ -65,11 +69,25 @@ export class ProbabilidadImpactoDialogComponent implements OnInit {
   sortFunction(x, y) {
     if (x.puntaje < y.puntaje) {
       return -1;
-    } if (x.puntaje > y.puntaje) {
+    }
+    if (x.puntaje > y.puntaje) {
       return 1;
     } else {
       return 0;
     }
+  }
+
+  download() {
+    const elementToPrint = document.getElementById('probabilidadImpacto');
+    elementToPrint.style.backgroundColor = 'white';
+    const pdf = new jsPDF('p', 'pt', 'a4');
+    pdf.addHTML(elementToPrint, () => {
+      pdf.save('probabilidadImpacto.pdf');
+    });
+  }
+
+  closeModal() {
+    this.dialogRef.close();
   }
 
 }
