@@ -20,6 +20,7 @@ export class SystemImpactComponent implements OnInit {
   dialogConfirm: any;
   loadingIndicator = true;
   reorderable = true;
+  limit = true;
 
   constructor(private probabilityRiskService: ImpactRiskService,
               public dialog: MatDialog,
@@ -33,6 +34,9 @@ export class SystemImpactComponent implements OnInit {
       this.impactRisk = data;
       this.temp = [...data];
       this.loadingIndicator = false;
+      if (this.impactRisk.length > 4 ){
+        this.limit = false;
+      }
     });
   }
 
@@ -58,6 +62,11 @@ export class SystemImpactComponent implements OnInit {
       this.impactRisk = data;
       this.temp = [...data];
       this.loadingIndicator = false;
+      if (this.impactRisk.length > 4 ){
+        this.limit = false;
+      }else{
+        this.limit = true;
+      }
     });
   }
 
@@ -109,7 +118,7 @@ export class SystemImpactComponent implements OnInit {
       this.probabilityRiskService.deleteImpactRisk(row.id).subscribe((data: any) => {
         if (rowIndex > -1) {
           this.impactRisk.splice(rowIndex, 1);
-          this.impactRisk = [...this.impactRisk];
+          this.reloadTableServices();
           this.customSnackMessage.openSnackBar('Registro eliminado');
         }
       }, (err: any) => {

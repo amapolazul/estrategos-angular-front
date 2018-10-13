@@ -19,6 +19,7 @@ export class SystemProbabilityComponent implements OnInit {
   dialogConfirm: any;
   loadingIndicator = true;
   reorderable = true;
+  limit = true;
 
   constructor(private probabilityRiskService: ProbabilityRiskService,
               public dialog: MatDialog,
@@ -32,6 +33,10 @@ export class SystemProbabilityComponent implements OnInit {
       this.probabilityRisk = data;
       this.temp = [...data];
       this.loadingIndicator = false;
+      console.log(this.probabilityRisk.length)
+      if (this.probabilityRisk.length > 4 ){
+        this.limit = false;
+      }
     });
   }
 
@@ -57,6 +62,11 @@ export class SystemProbabilityComponent implements OnInit {
       this.probabilityRisk = data;
       this.temp = [...data];
       this.loadingIndicator = false;
+      if (this.probabilityRisk.length > 4 ){
+        this.limit = false;
+      }else{
+        this.limit = true;
+      }
     });
   }
 
@@ -109,7 +119,7 @@ export class SystemProbabilityComponent implements OnInit {
         console.log(data);
         if (rowIndex > -1) {
           this.probabilityRisk.splice(rowIndex, 1);
-          this.probabilityRisk = [...this.probabilityRisk];
+          this.reloadTableServices();
           this.customSnackMessage.openSnackBar('Registro eliminado');
         }
       }, (err: any) => {
