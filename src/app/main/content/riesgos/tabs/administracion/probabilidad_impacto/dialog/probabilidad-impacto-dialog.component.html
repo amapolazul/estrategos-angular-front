@@ -9,37 +9,42 @@
   </mat-toolbar>
 
   <div class="content p-24">
-
     <div class="button-row">
       <button mat-flat-button color="accent" (click)="download()">Descargar PDF</button>
     </div>
 
-    <div fxLayout="colum">
-      <div fxFlex="20">
-        <table>
-          <tr>
-            <th> titulo</th>
-          </tr>
-          <tr *ngFor="let ch of probabilidades">
-            <td><div class="m-l">{{ ch.probabilidad }}</div></td>
-          </tr>
-        </table>
-      </div>
-      <div fxFlex="">
-        <table>
-          <tr>
-            <th *ngFor="let col of impactos">
-              {{col.impacto}}
-            </th>
-          </tr>
-          <tr *ngFor="let ch of probabilidades">
-            <td *ngFor="let col of impactos">
-              <div class="m-{{colorPorImpactoYProbabilidad(col.puntaje, ch.puntaje)}}">
-                {{filtrarRiesgosPorImpactoYProbabilidad(col.puntaje, ch.puntaje)}}
-              </div>
-            </td>
-          </tr>
-        </table>
+    <div fxLayout="colum" id="probabilidadImpacto">
+      <div style="margin: 60px;">
+        <div fxFlex="20">
+          <table>
+            <tr>
+              <th style="text-align: initial;">
+                <div class="m-l">Mapa</div>
+              </th>
+            </tr>
+            <tr *ngFor="let ch of probabilidades">
+              <td>
+                <div class="m-l">{{ ch.probabilidad }}</div>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div fxFlex="">
+          <table>
+            <tr>
+              <th *ngFor="let col of impactos">
+                <div class="m-l"> {{col.impacto}}</div>
+              </th>
+            </tr>
+            <tr *ngFor="let ch of probabilidades">
+              <td *ngFor="let col of impactos">
+                <div class="m-{{colorPorImpactoYProbabilidad(col.puntaje, ch.puntaje)}}">
+                  {{filtrarRiesgosPorImpactoYProbabilidad(col.puntaje, ch.puntaje)}}
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
       </div>
     </div>
   </div>
