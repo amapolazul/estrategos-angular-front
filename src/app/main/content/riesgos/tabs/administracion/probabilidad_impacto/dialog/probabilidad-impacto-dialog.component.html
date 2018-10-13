@@ -19,12 +19,12 @@
           <table>
             <tr>
               <th style="text-align: initial;">
-                <div class="m-l">Mapa</div>
+                <div class="m-l">Probabilidad / Impacto</div>
               </th>
             </tr>
             <tr *ngFor="let ch of probabilidades">
               <td>
-                <div class="m-l">{{ ch.probabilidad }}</div>
+                <div class="m-l">{{ ch.probabilidad }} ({{ch.puntaje}})</div>
               </td>
             </tr>
           </table>
@@ -33,7 +33,7 @@
           <table>
             <tr>
               <th *ngFor="let col of impactos">
-                <div class="m-l"> {{col.impacto}}</div>
+                <div class="m-l"> {{col.impacto}} ({{col.puntaje}})</div>
               </th>
             </tr>
             <tr *ngFor="let ch of probabilidades">

@@ -92,8 +92,8 @@ export class RiesgoCausasDialogComponent implements OnInit {
     });
 
     pdf.addHTML(htmlElement, () => {
-      pdf.autoTable(col, rows, {margin: {top: 400}});
-      pdf.save('tuPdf.pdf');
+      pdf.autoTable(col, rows, {margin: {top: 500}});
+      pdf.save('riesposPorCausas.pdf');
     });
   }
 
