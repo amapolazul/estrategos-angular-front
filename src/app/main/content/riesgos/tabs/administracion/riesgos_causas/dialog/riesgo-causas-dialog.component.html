@@ -26,18 +26,21 @@
     </div>
 
 
-  <div mat-dialog-content class="p-28 m-0" id="chart-container">
-    <ngx-charts-bar-vertical
-      [scheme]="colorScheme"
-      [results]="chartData"
-      [gradient]="gradient"
-      [xAxis]="showXAxis"
-      [yAxis]="showYAxis"
-      [showXAxisLabel]="showXAxisLabel"
-      [showYAxisLabel]="showYAxisLabel"
-      [xAxisLabel]="xAxisLabel"
-      [yAxisLabel]="yAxisLabel">
-    </ngx-charts-bar-vertical>
-  </div>
+    <div id="chart-container">
+      <div mat-dialog-content class="p-28 m-0" style="margin:60px;">
+        <ngx-charts-bar-vertical
+          [view]="view"
+          [scheme]="colorScheme"
+          [results]="chartData"
+          [gradient]="gradient"
+          [xAxis]="showXAxis"
+          [yAxis]="showYAxis"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+          [xAxisLabel]="xAxisLabel"
+          [yAxisLabel]="yAxisLabel">
+        </ngx-charts-bar-vertical>
+      </div>
+    </div>
   </div>
 </div>

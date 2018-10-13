@@ -21,6 +21,7 @@ export class ProbabilidadImpactoDialogComponent implements OnInit {
   impactos: any[] = [];
   riesgos: any[] = [];
   calificaciones: any[] = [];
+  rows = [];
 
   constructor(private probabilityRiskService: ProbabilityRiskService,
               private impactRiskService: ImpactRiskService,
@@ -81,9 +82,49 @@ export class ProbabilidadImpactoDialogComponent implements OnInit {
     const elementToPrint = document.getElementById('probabilidadImpacto');
     elementToPrint.style.backgroundColor = 'white';
     const pdf = new jsPDF('p', 'pt', 'a4');
+
+    const col = [
+      'Riesgo',
+      'Probabilidad',
+      'Impacto',
+      'Severidad',
+      'Estado riesgo'];
+    const rows = [];
+
+
+    this.rows.forEach(x => {
+      const temp = [
+        x.factor_riesgo,
+        x.probabilidad,
+        x.impacto,
+        x.severidad,
+        x.estatus_riesgo_id];
+      rows.push(temp);
+    });
+
     pdf.addHTML(elementToPrint, () => {
+      pdf.addPage();
+      pdf.autoTable(col, rows);
       pdf.save('probabilidadImpacto.pdf');
     });
+  }
+
+  getCellClass(row): any {
+    return {
+      'is-yellow': row.calificacion_riesgo === 'Amarillo',
+      'is-green': row.calificacion_riesgo === 'Verde',
+      'is-red': row.calificacion_riesgo === 'Rojo'
+    };
+  }
+
+  mostrarRiesgos(impacto, probabilidad) {
+    const f = this.riesgos.filter(x => {
+      return (x.probabilidad === probabilidad.toString() && x.impacto === impacto.toString());
+    });
+
+    console.log(f);
+
+    this.rows = [...f];
   }
 
   closeModal() {

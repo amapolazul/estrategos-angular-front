@@ -23,8 +23,7 @@ export class RiesgoCausasDialogComponent implements OnInit {
 
   rows = [];
 
-  view: any[] = [750, 450];
-
+  view: any[] = [700, 500];
   // options
   showXAxis = true;
   showYAxis = true;
@@ -34,8 +33,9 @@ export class RiesgoCausasDialogComponent implements OnInit {
   xAxisLabel = 'Causas';
   showYAxisLabel = true;
   yAxisLabel = 'Riesgos';
-
   chartData = [];
+  yScaleMax = 400;
+  YScaleMin = 400;
 
   colorScheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
@@ -70,8 +70,7 @@ export class RiesgoCausasDialogComponent implements OnInit {
     const pdf = new jsPDF('p', 'pt', 'a4');
     const htmlElement = document.getElementById('chart-container');
     htmlElement.style.backgroundColor = 'white';
-    htmlElement.style.width = '595';
-    htmlElement.style.height = '840';
+    htmlElement.style.margin = '60px';
 
     const col = [
       'Riesgo',
@@ -92,7 +91,8 @@ export class RiesgoCausasDialogComponent implements OnInit {
     });
 
     pdf.addHTML(htmlElement, () => {
-      pdf.autoTable(col, rows, {margin: {top: 500}});
+      pdf.addPage();
+      pdf.autoTable(col, rows);
       pdf.save('riesposPorCausas.pdf');
     });
   }
