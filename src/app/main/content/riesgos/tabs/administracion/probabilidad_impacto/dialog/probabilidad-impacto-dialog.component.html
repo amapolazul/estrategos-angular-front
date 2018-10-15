@@ -14,8 +14,8 @@
     </div>
 
     <div fxLayout="colum" id="probabilidadImpacto">
-      <div style="margin: 60px;">
-        <div fxFlex="20">
+      <div style="margin-top: 10px; margin-left: 5px; margin-right: 40px;">
+        <div fxFlex="15">
           <table>
             <tr>
               <th style="text-align: initial;">
@@ -41,6 +41,15 @@
                 <div class="m-{{colorPorImpactoYProbabilidad(col.puntaje, ch.puntaje)}}">
                   <a (click)="mostrarRiesgos(col.puntaje, ch.puntaje)" >{{filtrarRiesgosPorImpactoYProbabilidad(col.puntaje, ch.puntaje)}}</a>
                 </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div fxFlex="10">
+          <table>
+            <tr *ngFor="let ch of probabilidades">
+              <td>
+                <div class="m-l"> Rojo </div>
               </td>
             </tr>
           </table>
