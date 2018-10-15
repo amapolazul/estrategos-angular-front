@@ -26,6 +26,8 @@ div[class|=m-Verde]{
   margin: 0px;
   height: 50px;
   padding-top: 10px;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
 }
 div[class|=m-Amarillo]{
   padding: 5px;
@@ -35,6 +37,8 @@ div[class|=m-Amarillo]{
   color:black;
   height: 50px;
   padding-top: 10px;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
 }
 div[class|=m-Rojo]{
   padding: 5px;
@@ -45,6 +49,8 @@ div[class|=m-Rojo]{
   margin: 0px;
   height: 50px;
   padding-top: 10px;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
 }
 div[class|=m-l]{
   padding: 5px;
@@ -53,6 +59,14 @@ div[class|=m-l]{
   font-weight: bold;
   text-overflow: ellipsis;
   width: 100px;
+  height: 50px;
+}
+div[class|=m-x]{
+  padding: 5px;
+  color:black;
+  margin: 0px;
+  font-weight: bold;
+  width: 120px;
   height: 50px;
 }
 

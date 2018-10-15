@@ -22,6 +22,7 @@ export class ProbabilidadImpactoDialogComponent implements OnInit {
   riesgos: any[] = [];
   calificaciones: any[] = [];
   rows = [];
+  nombreEjercicio: string;
 
   constructor(private probabilityRiskService: ProbabilityRiskService,
               private impactRiskService: ImpactRiskService,
@@ -30,10 +31,10 @@ export class ProbabilidadImpactoDialogComponent implements OnInit {
               private calificacionRiesgoService: RatingRiskService,
               @Inject(MAT_DIALOG_DATA) private data: any) {
     this.ejercicioModel = this.data.ejercicio;
+    this.nombreEjercicio = this.ejercicioModel.descripcion;
   }
 
   ngOnInit() {
-
     this.probabilityRiskService.getProbabilityRisk().subscribe(x => {
       this.probabilidades = x.sort(this.sortFunction).reverse();
       this.impactRiskService.getImpactRisk().subscribe(y => {
@@ -53,7 +54,7 @@ export class ProbabilidadImpactoDialogComponent implements OnInit {
       return (x.probabilidad === probabilidad.toString() && x.impacto === impacto.toString());
     });
     if (f.length > 0) {
-      return f.length;
+      return '( '+f.length+' )';
     }
   }
 

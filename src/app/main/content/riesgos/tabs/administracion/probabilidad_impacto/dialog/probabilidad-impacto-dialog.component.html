@@ -1,14 +1,14 @@
 <div class="dialog-content-wrapper">
   <mat-toolbar matDialogTitle class="mat-accent m-0">
     <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
-      <span class="title dialog-title">Matriz, Probabilidad Impacto</span>
+      <span class="title dialog-title">Matriz, Probabilidad Impacto: {{nombreEjercicio}}</span>
       <button mat-button class="mat-icon-button" (click)="dialogRef.close()" aria-label="Close dialog">
         <mat-icon>close</mat-icon>
       </button>
     </div>
   </mat-toolbar>
 
-  <div class="content p-24">
+  <div mat-dialog-content class="p-24 m-0">
     <div class="button-row">
       <button mat-flat-button color="accent" (click)="download()">Descargar PDF</button>
     </div>
@@ -39,74 +39,78 @@
             <tr *ngFor="let ch of probabilidades">
               <td *ngFor="let col of impactos">
                 <div class="m-{{colorPorImpactoYProbabilidad(col.puntaje, ch.puntaje)}}">
-                  <a (click)="mostrarRiesgos(col.puntaje, ch.puntaje)" >{{filtrarRiesgosPorImpactoYProbabilidad(col.puntaje, ch.puntaje)}}</a>
+                  <a (click)="mostrarRiesgos(col.puntaje, ch.puntaje)">{{filtrarRiesgosPorImpactoYProbabilidad(col.puntaje,
+                    ch.puntaje)}}</a>
                 </div>
               </td>
             </tr>
           </table>
         </div>
         <div fxFlex="10">
-          <table>
-            <tr *ngFor="let ch of probabilidades">
-              <td>
-                <div class="m-l"> Rojo </div>
-              </td>
-            </tr>
-          </table>
+          <div class="m-x"></div>
+          <div class="m-x"> Intolerable
+            <div _ngcontent-c23="" class="ng-star-inserted is-red"></div>
+          </div>
+          <div class="m-x"> Moderado
+            <div _ngcontent-c23="" class="ng-star-inserted is-yellow"></div>
+          </div>
+          <div class="m-x"> Tolerable
+            <div _ngcontent-c23="" class="ng-star-inserted is-green"></div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="content p-24">
+    <div class="content p-24">
 
-    <div class=" mat-elevation-z8">
+      <div class=" mat-elevation-z8">
 
-      <ngx-datatable class="material"
-                     [rows]="rows"
-                     [loadingIndicator]="loadingIndicator"
-                     [columnMode]="'force'"
-                     [headerHeight]="48"
-                     [footerHeight]="56"
-                     [rowHeight]="'auto'"
-                     [scrollbarH]="true"
-                     [reorderable]="reorderable"
-                     [limit]="10">
+        <ngx-datatable class="material"
+                       [rows]="rows"
+                       [loadingIndicator]="loadingIndicator"
+                       [columnMode]="'force'"
+                       [headerHeight]="48"
+                       [footerHeight]="56"
+                       [rowHeight]="'auto'"
+                       [scrollbarH]="true"
+                       [reorderable]="reorderable"
+                       [limit]="10">
 
-        <ngx-datatable-column name="Color" [canAutoResize]="false" [sortable]="false">
-          <ng-template let-row="row" let-rowIndex="rowIndex" let-id="value" ngx-datatable-cell-template>
-            <div [ngClass]="getCellClass(row)">
+          <ngx-datatable-column name="Color" [canAutoResize]="false" [sortable]="false">
+            <ng-template let-row="row" let-rowIndex="rowIndex" let-id="value" ngx-datatable-cell-template>
+              <div [ngClass]="getCellClass(row)">
 
-            </div>
-          </ng-template>
-        </ngx-datatable-column>
+              </div>
+            </ng-template>
+          </ngx-datatable-column>
 
-        <ngx-datatable-column name="Riesgo" prop="factor_riesgo">
-        </ngx-datatable-column>
+          <ngx-datatable-column name="Riesgo" prop="factor_riesgo">
+          </ngx-datatable-column>
 
-        <ngx-datatable-column name="Probabilidad" prop="probabilidad">
-        </ngx-datatable-column>
+          <ngx-datatable-column name="Probabilidad" prop="probabilidad">
+          </ngx-datatable-column>
 
-        <ngx-datatable-column name="Impacto" prop="impacto">
-        </ngx-datatable-column>
+          <ngx-datatable-column name="Impacto" prop="impacto">
+          </ngx-datatable-column>
 
-        <ngx-datatable-column name="Severidad" prop="severidad">
-        </ngx-datatable-column>
+          <ngx-datatable-column name="Severidad" prop="severidad">
+          </ngx-datatable-column>
 
-        <ngx-datatable-column name="Estatus" prop="estatus_riesgo_id">
-          <ng-template let-row="row" let-rowIndex="rowIndex" let-id="value" ngx-datatable-cell-template>
-            {{row.estatus_riesgo_id === 1  ? 'Pendiente' : 'Mitigado'}}
-          </ng-template>
-        </ngx-datatable-column>
+          <ngx-datatable-column name="Estatus" prop="estatus_riesgo_id">
+            <ng-template let-row="row" let-rowIndex="rowIndex" let-id="value" ngx-datatable-cell-template>
+              {{row.estatus_riesgo_id === 1 ? 'Pendiente' : 'Mitigado'}}
+            </ng-template>
+          </ngx-datatable-column>
 
-        <ngx-datatable-column name="Fecha ulitmo ejercicio" prop="fecha_ultimo_ejercicio">
-          <ng-template let-row="row" let-rowIndex="rowIndex" let-id="value" ngx-datatable-cell-template>
-            {{row.fecha_ejercicio | date:"yyyy/MM/dd"}}
-          </ng-template>
-        </ngx-datatable-column>
+          <ngx-datatable-column name="Fecha ulitmo ejercicio" prop="fecha_ultimo_ejercicio">
+            <ng-template let-row="row" let-rowIndex="rowIndex" let-id="value" ngx-datatable-cell-template>
+              {{row.fecha_ejercicio | date:"yyyy/MM/dd"}}
+            </ng-template>
+          </ngx-datatable-column>
 
-      </ngx-datatable>
+        </ngx-datatable>
 
+      </div>
     </div>
   </div>
 </div>
