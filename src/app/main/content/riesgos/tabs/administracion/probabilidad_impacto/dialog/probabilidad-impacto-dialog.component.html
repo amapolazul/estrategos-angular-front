@@ -13,6 +13,19 @@
       <button mat-flat-button color="accent" (click)="download()">Descargar PDF</button>
     </div>
 
+    <br />
+
+    <div>
+      <mat-form-field fxFlex>
+        <mat-label><b>Proceso</b></mat-label>
+        <input matInput placeholder="Proceso:" [value]="selectedProcess.proceso_Nombre" disabled >
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <mat-label><b>Proceso</b></mat-label>
+        <input matInput name="ejercicio_desc" placeholder="Ejercicio:" [value]="nombreEjercicio" disabled >
+      </mat-form-field>
+    </div>
+
     <div fxLayout="colum" id="probabilidadImpacto">
       <div style="margin-top: 10px; margin-left: 5px; margin-right: 40px;">
         <div fxFlex="15">
@@ -39,7 +52,7 @@
             <tr *ngFor="let ch of probabilidades">
               <td *ngFor="let col of impactos">
                 <div class="m-{{colorPorImpactoYProbabilidad(col.puntaje, ch.puntaje)}}">
-                  <a (click)="mostrarRiesgos(col.puntaje, ch.puntaje)">{{filtrarRiesgosPorImpactoYProbabilidad(col.puntaje,
+                  <a (click)="mostrarRiesgos(col.puntaje, ch.puntaje)" style="font-size: 20px; color:black">{{filtrarRiesgosPorImpactoYProbabilidad(col.puntaje,
                     ch.puntaje)}}</a>
                 </div>
               </td>

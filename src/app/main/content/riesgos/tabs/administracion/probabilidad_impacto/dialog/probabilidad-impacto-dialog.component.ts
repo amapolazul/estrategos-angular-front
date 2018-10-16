@@ -23,6 +23,7 @@ export class ProbabilidadImpactoDialogComponent implements OnInit {
   calificaciones: any[] = [];
   rows = [];
   nombreEjercicio: string;
+  selectedProcess: Proceso;
 
   constructor(private probabilityRiskService: ProbabilityRiskService,
               private impactRiskService: ImpactRiskService,
@@ -31,6 +32,7 @@ export class ProbabilidadImpactoDialogComponent implements OnInit {
               private calificacionRiesgoService: RatingRiskService,
               @Inject(MAT_DIALOG_DATA) private data: any) {
     this.ejercicioModel = this.data.ejercicio;
+    this.selectedProcess = this.data.proceso;
     this.nombreEjercicio = this.ejercicioModel.descripcion;
   }
 
