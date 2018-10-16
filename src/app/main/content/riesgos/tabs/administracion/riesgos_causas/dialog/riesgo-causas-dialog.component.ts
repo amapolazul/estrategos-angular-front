@@ -86,7 +86,7 @@ export class RiesgoCausasDialogComponent implements OnInit {
         x.probabilidad,
         x.impacto,
         x.severidad,
-        x.estatus_riesgo_id];
+        x.estatus_riesgo_id === 1  ? 'Pendiente' : 'Mitigado'] ;
       rows.push(temp);
     });
 

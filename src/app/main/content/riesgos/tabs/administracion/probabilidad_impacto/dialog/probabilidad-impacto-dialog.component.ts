@@ -92,13 +92,13 @@ export class ProbabilidadImpactoDialogComponent implements OnInit {
     const rows = [];
 
 
-    this.rows.forEach(x => {
+    this.riesgos.forEach(x => {
       const temp = [
         x.factor_riesgo,
         x.probabilidad,
         x.impacto,
         x.severidad,
-        x.estatus_riesgo_id];
+        x.estatus_riesgo_id === 1  ? 'Pendiente' : 'Mitigado'];
       rows.push(temp);
     });
 
@@ -121,8 +121,6 @@ export class ProbabilidadImpactoDialogComponent implements OnInit {
     const f = this.riesgos.filter(x => {
       return (x.probabilidad === probabilidad.toString() && x.impacto === impacto.toString());
     });
-
-    console.log(f);
 
     this.rows = [...f];
   }
