@@ -56,7 +56,7 @@ export class ProbabilidadImpactoDialogComponent implements OnInit {
       return (x.probabilidad === probabilidad.toString() && x.impacto === impacto.toString());
     });
     if (f.length > 0) {
-      return '( '+f.length+' )';
+      return '( ' + f.length + ' )';
     }
   }
 
