@@ -1,4 +1,4 @@
-import { Component, Inject, HostBinding, OnDestroy } from '@angular/core';
+import { Component, Inject, HostBinding, OnDestroy, Input } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 
 import { Subscription } from 'rxjs/Subscription';

@@ -5,7 +5,7 @@ import {ImpactRiskService} from '../impact/service/impact-risk.service';
 import {FormType} from '../../commons/form-type.enum';
 import {DialogOverviewConfirmDialog} from '../../../../../assets/angular-material-examples/dialog-confirm/dialog-confirm';
 import {CustomSnackBarMessages} from '../../commons/messages.service';
-
+declare let jsPDF;
 
 @Component({
   selector: 'risk-impact',
@@ -20,6 +20,7 @@ export class SystemImpactComponent implements OnInit {
   dialogConfirm: any;
   loadingIndicator = true;
   reorderable = true;
+  limit = true;
 
   constructor(private probabilityRiskService: ImpactRiskService,
               public dialog: MatDialog,
@@ -33,6 +34,39 @@ export class SystemImpactComponent implements OnInit {
       this.impactRisk = data;
       this.temp = [...data];
       this.loadingIndicator = false;
+      if (this.impactRisk.length > 4 ){
+        this.limit = false;
+      }
+    });
+  }
+
+  download(){
+    const doc = new jsPDF();
+    const col = ["ID", "Impacto", "Puntaje", "Descripción"];
+    const rows = [];
+
+    this.impactRisk.forEach(x => {
+      const temp = [x.id,
+        x.impacto,
+        x.puntaje,
+        x.descripcion];
+      rows.push(temp);
+    });
+
+    doc.autoTable(col, rows);
+    doc.save('Impacto_del_riesgo.pdf');
+  }
+
+  reloadTableServices() {
+    this.probabilityRiskService.getImpactRisk().subscribe((data: any) => {
+      this.impactRisk = data;
+      this.temp = [...data];
+      this.loadingIndicator = false;
+      if (this.impactRisk.length > 4 ){
+        this.limit = false;
+      }else{
+        this.limit = true;
+      }
     });
   }
 
@@ -43,9 +77,7 @@ export class SystemImpactComponent implements OnInit {
     this.dialogRef.afterClosed()
       .subscribe(response => {
         if (response) {
-          this.impactRisk.push(response);
-          this.impactRisk = [...this.impactRisk];
-          this.loadingIndicator = false;
+          this.reloadTableServices();
         }
       });
   }
@@ -64,9 +96,7 @@ export class SystemImpactComponent implements OnInit {
     this.dialogRef.afterClosed()
       .subscribe(response => {
         if (response) {
-          this.impactRisk[rowIndex] = response;
-          this.impactRisk = [...this.impactRisk];
-          this.loadingIndicator = false;
+          this.reloadTableServices();
         }
       });
   }
@@ -84,15 +114,16 @@ export class SystemImpactComponent implements OnInit {
   }
 
   deleteRow(result, row, rowIndex) {
-    if (result != undefined) {
+    if (result) {
       this.probabilityRiskService.deleteImpactRisk(row.id).subscribe((data: any) => {
-        console.log(data);
+        if (rowIndex > -1) {
+          this.impactRisk.splice(rowIndex, 1);
+          this.reloadTableServices();
+          this.customSnackMessage.openSnackBar('Registro eliminado');
+        }
+      }, (err: any) => {
+        this.customSnackMessage.openSnackBar('Ocurrio un error eliminando el registro de la tabla');
       });
-      if (rowIndex > -1) {
-        this.impactRisk.splice(rowIndex, 1);
-        this.impactRisk = [...this.impactRisk];
-        this.customSnackMessage.openSnackBar('Registro eliminado');
-      }
     }
   }
 

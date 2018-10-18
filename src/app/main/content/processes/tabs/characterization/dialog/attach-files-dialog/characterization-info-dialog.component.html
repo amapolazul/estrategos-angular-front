@@ -10,14 +10,17 @@
 
     <div mat-dialog-content class="p-24 m-0">
         <mat-form-field>
+          <mat-label><b>Procedimiento</b></mat-label>
           <input matInput name="procedimiento" placeholder="Procedimiento"  type="text" [value]="caracterizacion.procedimiento_Nombre" disabled>
         </mat-form-field>
 
         <mat-form-field>
+          <mat-label><b>Código procedimiento</b></mat-label>
           <input matInput name="procedimiento_cod" placeholder="Código procedimiento" [value]="caracterizacion.procedimiento_Codigo" type="text" disabled>
         </mat-form-field>
 
         <mat-form-field>
+          <mat-label><b>Objetivo</b></mat-label>
          <input matInput name="message" placeholder="Objetivo" [value]="caracterizacion.procedimiento_Objetivo" formControlName="procedimiento_Objetivo" disabled>
         </mat-form-field>
 
@@ -39,7 +42,7 @@
 
           <ngx-datatable-column name="Acciones" [sortable]="false">
             <ng-template let-row="row" let-rowIndex="rowIndex" let-id="value" ngx-datatable-cell-template>
-              <button class="btn btn-sm btn-danger" (click)="delete(row, rowIndex)">
+              <button class="btn btn-sm btn-danger" (click)="delete(row, rowIndex)" *ngIf="!row.procedimiento_Documento_Id">
                 <mat-icon _ngcontent-c71="" class="secondary-text s-48 mat-icon material-icons" role="img" aria-hidden="true">delete</mat-icon>
               </button>
               <!--<button class="btn btn-sm btn-danger" (click)="edit(row, rowIndex)">-->
@@ -84,18 +87,22 @@
     <form name="attachFileForm" [formGroup]="attachFileForm" class="compose-form" fxLayout="column" fxFlex>
 
       <mat-form-field>
+        <mat-label><b>Procedimiento</b></mat-label>
         <input matInput name="procedimiento" placeholder="Procedimiento"  type="text" [value]="caracterizacion.procedimiento_Nombre" disabled>
       </mat-form-field>
 
       <mat-form-field>
+        <mat-label><b>Nombre Documento</b></mat-label>
         <input matInput name="nombre_documento" placeholder="Nombre Documento" formControlName="procedimiento_Documento_Nombre" type="text">
       </mat-form-field>
 
       <mat-form-field>
+        <mat-label><b>Código Documento</b></mat-label>
         <input matInput name="codigo_documento" placeholder="Código Documento" formControlName="procedimiento_Documento_Codigo" type="text">
       </mat-form-field>
 
       <mat-form-field>
+        <mat-label><b>Descripción</b></mat-label>
                 <textarea matInput name="descripcion" placeholder="Descripción" formControlName="procedimiento_Documento_Descripcion">
                 </textarea>
       </mat-form-field>
@@ -104,7 +111,9 @@
         <input matInput name="procedimiento_Documento_Arch" placeholder="Anexo" formControlName="procedimiento_Documento_Arch" type="text" disabled>
       </mat-form-field>
 
-      <input type="file" (change)="handleFileInput($event.target.files)" placeholder="Cargar archivo" required>
+      <mat-form-field>
+        <input type="file" (change)="handleFileInput($event.target.files)" placeholder="Cargar archivo" required>
+      </mat-form-field>
 
       <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="space-between center">
         <div>

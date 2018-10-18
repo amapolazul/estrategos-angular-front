@@ -1,0 +1,48 @@
+<div class="dialog-content-wrapper">
+  <mat-toolbar matDialogTitle class="mat-accent m-0">
+    <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+      <span class="title dialog-title">Riesgos ejercicio: {{nombreEjercicio}}</span>
+      <button mat-button class="mat-icon-button" (click)="dialogRef.close()" aria-label="Close dialog">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar>
+
+  <div class="content p-32" fxLayout="column">
+
+    <div fxFlex style="margin-bottom: 20px">
+      <button mat-flat-button color="accent" style="align-content: right" (click)="download()">Descargar PDF</button>
+    </div>
+
+    <div id="chart-container">
+      <div>
+        <mat-form-field fxFlex>
+          <mat-label><b>Proceso</b></mat-label>
+          <input matInput placeholder="Proceso:" [value]="selectedProcess.proceso_Nombre" disabled>
+        </mat-form-field>
+        <mat-form-field fxFlex>
+          <mat-label><b>Proceso</b></mat-label>
+          <input matInput name="ejercicio_desc" placeholder="Ejercicio:" [value]="ejercicioModel.descripcion" disabled>
+        </mat-form-field>
+      </div>
+
+
+      <div>
+        <div mat-dialog-content class="p-28 m-0" style="margin:60px;">
+          <ngx-charts-bar-vertical
+            [view]="view"
+            [scheme]="colorScheme"
+            [results]="chartData"
+            [gradient]="gradient"
+            [xAxis]="showXAxis"
+            [yAxis]="showYAxis"
+            [showXAxisLabel]="showXAxisLabel"
+            [showYAxisLabel]="showYAxisLabel"
+            [xAxisLabel]="xAxisLabel"
+            [yAxisLabel]="yAxisLabel">
+          </ngx-charts-bar-vertical>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

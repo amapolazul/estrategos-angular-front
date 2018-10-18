@@ -25,8 +25,15 @@
 
           <ngx-datatable-column name="Acciones" [width]="120" [canAutoResize]="false" [sortable]="false">
             <ng-template let-row="row" let-rowIndex="rowIndex" let-id="value" ngx-datatable-cell-template>
-              <button class="btn btn-sm btn-danger" (click)="delete(row, rowIndex)">
-                <mat-icon _ngcontent-c71="" class="secondary-text s-26 mat-icon material-icons" role="img" aria-hidden="true">delete</mat-icon>
+              <button class="btn btn-sm btn-danger" (click)="edit(row, rowIndex)">
+                <mat-icon _ngcontent-c71="" class="secondary-text s-26 mat-icon material-icons" role="img"
+                          aria-hidden="true">edit
+                </mat-icon>
+              </button>
+              <button class="btn btn-sm btn-danger" (click)="delete(row, rowIndex )">
+                <mat-icon _ngcontent-c71="" class="secondary-text s-26 mat-icon material-icons" role="img"
+                          aria-hidden="true">delete
+                </mat-icon>
               </button>
             </ng-template>
           </ngx-datatable-column>
@@ -34,7 +41,7 @@
           <ngx-datatable-column name="Controles Implementados" prop="control">
           </ngx-datatable-column>
 
-          <ngx-datatable-column name="Efectividad" prop="descripcion">
+          <ngx-datatable-column name="Efectividad" prop="efectividad_declaracion_string">
           </ngx-datatable-column>
 
         </ngx-datatable>

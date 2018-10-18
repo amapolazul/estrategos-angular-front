@@ -9,23 +9,26 @@
     </mat-toolbar>
 
     <div mat-dialog-content class="p-24 m-0">
-        <form name="composeForm" [formGroup]="composeForm" class="compose-form" fxLayout="column" fxFlex>
+        <form name="composeForm" [formGroup]="composeForm" (ngSubmit)="saveImpactRisk()" class="compose-form" fxLayout="column" fxFlex>
 
             <mat-form-field>
+              <mat-label><b>Impacto</b></mat-label>
                 <input matInput name="impact" placeholder="Impacto" formControlName="impacto" type="text">
             </mat-form-field>
 
             <mat-form-field>
-                <input matInput name="points" placeholder="Puntaje" formControlName="puntaje" type="text">
+              <mat-label><b>Puntaje</b></mat-label>
+                <input matInput name="points" placeholder="Puntaje" formControlName="puntaje" type="number">
             </mat-form-field>
 
             <mat-form-field>
+              <mat-label><b>Descripción</b></mat-label>
                 <textarea matInput name="description" placeholder="Descripcion" formControlName="descripcion" rows="4">
                 </textarea>
             </mat-form-field>
             <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="space-between center">
                 <div>
-                    <button mat-raised-button class="save-button mat-accent" aria-label="Guardar" (click)="saveImpactRisk()">
+                    <button mat-raised-button class="save-button mat-accent" aria-label="Guardar" [disabled]="composeForm.invalid" type="submit">
                         Guardar
                     </button>
                     <button mat-raised-button class="save-button mat-accent" aria-label="Cancelar" (click)="closeModal()">

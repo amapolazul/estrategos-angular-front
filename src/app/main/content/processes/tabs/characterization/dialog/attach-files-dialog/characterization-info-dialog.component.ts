@@ -16,7 +16,6 @@ export class CharacterizationInfoDialogComponent implements OnInit {
   loadingIndicator = false;
   reorderable = true;
   document: File = null;
-
   showAttachFilesForm = false;
 
   constructor(
@@ -24,6 +23,7 @@ export class CharacterizationInfoDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<CharacterizationInfoDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private data: any
   ) {
+
   }
 
   ngOnInit() {
@@ -36,7 +36,7 @@ export class CharacterizationInfoDialogComponent implements OnInit {
       procedimiento_Documento_Nombre: '',
       procedimiento_Documento_Descripcion: '',
       procedimiento_Documento_Codigo: '',
-      procedimiento_Documento_Arch: '',
+      procedimiento_Documento_Arch: [{value : '', disabled: true}],
     });
 
   }

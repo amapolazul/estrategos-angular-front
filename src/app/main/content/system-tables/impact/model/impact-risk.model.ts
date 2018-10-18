@@ -7,8 +7,12 @@ export class ImpactRiskModel {
   puntaje: string;
   descripcion: string;
 
+  getImpactoString() {
+    return this.impacto + ' (' + this.puntaje + ')';
+  }
 }
 
 export class TypesRiskResponse {
   typesRisk: ImpactRiskModel;
 }
+

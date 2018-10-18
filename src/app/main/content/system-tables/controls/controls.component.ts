@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { MatDialog } from '@angular/material';
-import { ControlsDialogComponent } from './dialog/controls-dialog.component';
-import { ControlsRiskService } from './service/controls-risk.service';
+import {Component, OnInit} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {MatDialog} from '@angular/material';
+import {ControlsDialogComponent} from './dialog/controls-dialog.component';
+import {ControlsRiskService} from './service/controls-risk.service';
 import {FormType} from '../../commons/form-type.enum';
 import {DialogOverviewConfirmDialog} from '../../../../../assets/angular-material-examples/dialog-confirm/dialog-confirm';
 import {CustomSnackBarMessages} from '../../commons/messages.service';
+declare let jsPDF;
 
 @Component({
-    selector: 'risk-controls',
-    templateUrl: './controls.component.html',
-    styleUrls: ['./controls.component.scss']
+  selector: 'risk-controls',
+  templateUrl: './controls.component.html',
+  styleUrls: ['./controls.component.scss']
 })
 export class SystemControlsComponent implements OnInit {
 
@@ -35,35 +36,58 @@ export class SystemControlsComponent implements OnInit {
     });
   }
 
+  download(){
+    const doc = new jsPDF();
+    const col = ["ID", "Efectividad", "Puntaje", "Descripción"];
+    const rows = [];
+
+    this.controlsRisk.forEach(x => {
+      const temp = [x.id,
+        x.efectividad_nombre,
+        x.puntaje,
+        x.descripcion];
+      rows.push(temp);
+    });
+
+    doc.autoTable(col, rows);
+    doc.save('Efectividad_de_los_controles.pdf');
+  }
+
+  reloadTableServices() {
+    this.controlsRiskService.getControlsRisk().subscribe((data: any) => {
+      this.controlsRisk = data;
+      this.temp = [...data];
+      this.loadingIndicator = false;
+    });
+  }
+
   controlsDialog() {
     this.dialogRef = this.dialog.open(ControlsDialogComponent, {
       panelClass: 'controls-tabs-riesgo'
     });
     this.dialogRef.afterClosed()
       .subscribe(response => {
-        if( response ) {
-          this.ngOnInit();
+        if (response) {
+          this.reloadTableServices();
         }
       });
   }
 
-  edit(row, rowIndex){
+  edit(row, rowIndex) {
     console.log(rowIndex);
     const controlsRisk = row;
     this.dialogRef = this.dialog.open(ControlsDialogComponent, {
       panelClass: 'controls-tabs-riesgo',
-      data : {
-        formType : FormType.edit,
-        controlsRisk : controlsRisk
+      data: {
+        formType: FormType.edit,
+        controlsRisk: controlsRisk
       }
     });
 
     this.dialogRef.afterClosed()
       .subscribe(response => {
-        if ( response ) {
-          this.controlsRisk[rowIndex] = response;
-          this.controlsRisk = [...this.controlsRisk];
-          this.loadingIndicator = false;
+        if (response) {
+          this.reloadTableServices();
         }
       });
   }
@@ -71,11 +95,11 @@ export class SystemControlsComponent implements OnInit {
   delete(row, rowIndex) {
     this.dialogConfirm = this.dialog.open(DialogOverviewConfirmDialog, {
       width: '250px',
-      data: { name: row.efectividad_nombre }
+      data: {name: row.efectividad_nombre}
     });
     this.dialogConfirm.afterClosed()
       .subscribe(response => {
-        console.log(response)
+        console.log(response);
         this.deleteRow(response, row, rowIndex);
       });
   }
@@ -84,19 +108,21 @@ export class SystemControlsComponent implements OnInit {
     if (result) {
       this.controlsRiskService.deleteControlsRisk(row.id).subscribe((data: any) => {
         console.log(data);
+        if (rowIndex > -1) {
+          this.controlsRisk.splice(rowIndex, 1);
+          this.controlsRisk = [...this.controlsRisk];
+          this.customSnackMessage.openSnackBar('Registro eliminado');
+        }
+      }, (err: any) => {
+        this.customSnackMessage.openSnackBar('Ocurrio un error eliminando el registro de la tabla');
       });
-      if (rowIndex > -1) {
-        this.controlsRisk.splice(rowIndex, 1);
-        this.controlsRisk = [...this.controlsRisk];
-        this.customSnackMessage.openSnackBar('Registro eliminado');
-      }
     }
   }
 
   updateFilter(event) {
     const val = event.target.value.toLowerCase();
 
-    const temp = this.temp.filter(function(d) {
+    const temp = this.temp.filter(function (d) {
       return d.causa_riesgo.toLowerCase().indexOf(val) !== -1 || !val;
     });
 

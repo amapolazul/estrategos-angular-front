@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import {Caracterizacion, DocumentoCaracterizacion, ProductoServicio} from '../../../../models/process.model';
 import {FormType} from '../../../../../commons/form-type.enum';
@@ -14,6 +14,7 @@ import {ProcessCache} from '../../../../services/process-cache.service';
 })
 export class CharacterizationDialogComponent implements OnInit
 {
+    formErrors: any;
     showExtraToFields = false;
     composeForm: FormGroup;
     isEditing = false;
@@ -24,14 +25,17 @@ export class CharacterizationDialogComponent implements OnInit
         public dialogRef: MatDialogRef<CharacterizationDialogComponent>,
         private processCache: ProcessCache,
         @Inject(MAT_DIALOG_DATA) private data: any
-
-    )
-    {  }
+    ) {
+      // Reactive form errors
+      this.formErrors = {
+        procedimiento_Codigo: { }
+      };
+    }
 
     ngOnInit() {
       this.composeForm = this.formBuilder.group({
         procedimiento_Nombre: [{value: '', disabled: true}],
-        procedimiento_Codigo: [''],
+        procedimiento_Codigo: ['', [Validators.required]],
         procedimiento_Objetivo: [''],
       });
 
@@ -62,7 +66,12 @@ export class CharacterizationDialogComponent implements OnInit
 
     guardar() {
       const caracterizacion = <Caracterizacion> this.composeForm.getRawValue();
-      caracterizacion.documentosCaracterizacion = [];
+      if (this.caracterizacion.caraceterizacion_id){
+        caracterizacion.caraceterizacion_id = this.caracterizacion.caraceterizacion_id;
+        caracterizacion.documentosCaracterizacion = this.caracterizacion.documentosCaracterizacion;
+      } else {
+        caracterizacion.documentosCaracterizacion = [];
+      }
       this.dialogRef.close(caracterizacion);
     }
 

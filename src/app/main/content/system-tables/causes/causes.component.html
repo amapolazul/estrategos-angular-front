@@ -6,6 +6,7 @@
 
         <div class="button-row">
             <button mat-raised-button color="primary" (click)="causesDialog()">Nuevo</button>
+            <button mat-flat-button color="accent" (click)="download()">Descargar PDF</button>
             <input class="search-datatable" type='text'
                  placeholder='Escriba aquí para realizar una busqueda ...' (keyup)='updateFilter($event)'/>
         </div>

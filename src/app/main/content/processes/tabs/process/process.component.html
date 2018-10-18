@@ -9,6 +9,7 @@
             <form name="form" layout-align="column" fxFlex="100" [formGroup]="processForm">
                 <div fxLayout="column" fxFlex="1 0 auto">
                     <mat-form-field fxFlex="100">
+                      <mat-label><b>Proceso / Sub proceso</b></mat-label>
                         <input matInput placeholder="Proceso / Sub proceso" formControlName="proceso_Nombre" required (input)="setProcessName($event)">
                         <mat-error *ngIf="formErrors.proceso_Nombre.required">
                             Proceso / sub proceso es requerido !
@@ -16,29 +17,23 @@
                     </mat-form-field>
 
                     <mat-form-field fxFlex="100">
-                        <input matInput placeholder="Código proceso" formControlName="proceso_Codigo" required>
-                        <mat-error *ngIf="formErrors.proceso_Codigo.required">
-                            Código proceso es requerido !
-                        </mat-error>
+                      <mat-label><b>Código proceso</b></mat-label>
+                        <input matInput placeholder="Código proceso" formControlName="proceso_Codigo">
                     </mat-form-field>
 
                   <mat-form-field fxFlex="100">
-                    <textarea matInput placeholder="Descripción" formControlName="proceso_Descripcion" required> </textarea>
-                    <mat-error *ngIf="formErrors.proceso_Codigo.required">
-                      Código proceso es requerido !
-                    </mat-error>
+                    <mat-label><b>Descripción</b></mat-label>
+                    <textarea matInput placeholder="Descripción" formControlName="proceso_Descripcion" > </textarea>
                   </mat-form-field>
 
                     <mat-form-field fxFlex="100">
+                      <mat-label><b>Tipo de proceso</b></mat-label>
                         <mat-select placeholder="Tipo de proceso" formControlName="proceso_Tipo" required>
                             <mat-option [value]="1">
-                                000120
+                                MISION
                             </mat-option>
                             <mat-option [value]="2">
-                                000120
-                            </mat-option>
-                            <mat-option [value]="3">
-                                000120
+                                APOYO
                             </mat-option>
                         </mat-select>
                         <mat-error *ngIf="formErrors.proceso_Tipo.required">
@@ -47,12 +42,12 @@
                     </mat-form-field>
 
                     <mat-form-field fxFlex="100">
-                      <mat-select placeholder="Responsable" formControlName="proceso_Responsable_Id" required>
-                        <mat-option *ngFor="let resp of responsables | async" [value]="resp.id">{{resp.email}}</mat-option>
-                      </mat-select>
+                      <mat-label><b>Responsable</b></mat-label>
+                      <input matInput placeholder="Responsable" formControlName="proceso_Responsable_Id">
                     </mat-form-field>
 
                    <mat-form-field fxFlex="100">
+                     <mat-label><b>Nombre del documento</b></mat-label>
                         <input matInput placeholder="Nombre del documento" formControlName="proceso_Documento">
                     </mat-form-field>
 

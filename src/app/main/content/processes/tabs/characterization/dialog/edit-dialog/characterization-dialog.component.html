@@ -12,20 +12,23 @@
         <form name="composeForm" [formGroup]="composeForm" class="compose-form" fxLayout="column" fxFlex>
 
             <mat-form-field>
+              <mat-label><b>Procedimiento</b></mat-label>
                 <input matInput name="subject" placeholder="Procedimiento" formControlName="procedimiento_Nombre">
             </mat-form-field>
 
             <mat-form-field>
+              <mat-label><b>Código Procedimiento</b></mat-label>
               <input matInput name="subject" placeholder="Código Procedimiento" formControlName="procedimiento_Codigo">
             </mat-form-field>
 
           <mat-form-field>
+            <mat-label><b>Objetivo</b></mat-label>
             <input matInput name="message" placeholder="Objetivo" formControlName="procedimiento_Objetivo">
           </mat-form-field>
 
             <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="space-between center">
               <div>
-                <button mat-raised-button class="save-button mat-accent" aria-label="Guardar" (click)="guardar()">
+                <button mat-raised-button class="save-button mat-accent" aria-label="Guardar" (click)="guardar()" [disabled]="composeForm.invalid">
                   Guardar
                 </button>
                 <button mat-raised-button class="save-button mat-accent" aria-label="Cancelar" (click)="salir()">

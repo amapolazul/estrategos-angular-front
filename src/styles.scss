@@ -1,17 +1,43 @@
 // Import Fuse main library
 @import "@fuse/scss/core";
 
-.is-green {
-
-  color: green!important;
+.mat-dialog-container {
+  padding: 0px!important;
 }
 
 .is-red {
+  width: 25px;
+  height: 25px;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  border-radius: 25px;
+  background: red;
+}
 
-  color: red!important;
+.is-green {
+  width: 25px;
+  height: 25px;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  border-radius: 25px;
+  background: green;
 }
 
 .is-yellow {
+  width: 25px;
+  height: 25px;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  border-radius: 25px;
+  background: yellow;
+}
 
-  color: #FFC107!important;
+.ngx-datatable.material {
+  .datatable-header {
+    .datatable-header-cell {
+      color:#1e88e1;
+      font-size: 14px;
+      font-weight: bold;
+    }
+  }
 }

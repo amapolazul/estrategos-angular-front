@@ -1,0 +1,72 @@
+.table-component {
+  border: 2px solid blue;
+  background-color: lightblue;
+}
+
+.table-row-component {
+  border: 2px solid green;
+  background-color: #cefdce;
+}
+
+table {
+  width: 100%;
+}
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+div[class|=m-Verde]{
+  padding: 5px;
+  background-color: greenyellow;
+  text-align: center;
+  font-weight: bold;
+  color:black;
+  margin: 0px;
+  height: 50px;
+  padding-top: 10px;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+}
+div[class|=m-Amarillo]{
+  padding: 5px;
+  background-color: yellow;
+  text-align: center;
+  font-weight: bold;
+  color:black;
+  height: 50px;
+  padding-top: 10px;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+}
+div[class|=m-Rojo]{
+  padding: 5px;
+  background-color: red;
+  text-align: center;
+  font-weight: bold;
+  color:black;
+  margin: 0px;
+  height: 50px;
+  padding-top: 10px;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+}
+div[class|=m-l]{
+  padding: 5px;
+  color:black;
+  margin: 0px;
+  font-weight: bold;
+  text-overflow: ellipsis;
+  width: 100px;
+  height: 50px;
+}
+div[class|=m-x]{
+  padding: 5px;
+  color:black;
+  margin: 0px;
+  font-weight: bold;
+  width: 120px;
+  height: 50px;
+}
+

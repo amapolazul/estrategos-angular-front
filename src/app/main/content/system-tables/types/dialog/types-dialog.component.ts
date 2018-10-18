@@ -1,10 +1,9 @@
 import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {FormBuilder, Validators, FormGroup} from '@angular/forms';
 import {TypesRiskModel} from '../model/types-risk.model';
 import {TypesRiskService} from '../../../system-tables/types/service/types-risk.service';
 import {CustomSnackBarMessages} from '../../../commons/messages.service';
-import {RatingRiskModel} from '../../rating/model/rating-risk.model';
 import {FormType} from '../../../commons/form-type.enum';
 
 
@@ -15,8 +14,8 @@ import {FormType} from '../../../commons/form-type.enum';
   encapsulation: ViewEncapsulation.None
 })
 export class TypesDialogComponent implements OnInit {
-  showExtraToFields = false;
   restData: any;
+  formErrors: any;
   composeForm: FormGroup;
   typesRiskModel = new TypesRiskModel();
 
@@ -27,11 +26,16 @@ export class TypesDialogComponent implements OnInit {
     private customSnackMessage: CustomSnackBarMessages,
     @Inject(MAT_DIALOG_DATA) private data: any
   ) {
+
+    // Reactive form errors
+    this.formErrors = {
+      tipo_riesgo: {}
+    };
   }
 
   ngOnInit() {
     this.composeForm = this.formBuilder.group({
-      tipo_riesgo: ['']
+      tipo_riesgo: ['', [Validators.required]]
     });
     if (this.data) {
       this.typesRiskModel = this.data.product;
@@ -40,6 +44,7 @@ export class TypesDialogComponent implements OnInit {
   }
 
   saveRisk() {
+    console.log(this.composeForm.value);
     if (this.data && this.data.formType === FormType.edit) {
       let tipeRisk = <TypesRiskModel> this.composeForm.getRawValue();
       tipeRisk = this.mergeData(tipeRisk);

@@ -27,8 +27,10 @@ export class CausasDeclaracionRiesgos {
   id?: number;
   probabilidad_riesgo_id: number;
   declaracion_riesgo_id?: number;
-  causa: string;
+  causa: number;
   descripcion: string;
+  probabilidad_string?: string;
+  causa_string?: string;
 }
 
 export class EfectosDeclaracionRiesgos {
@@ -37,6 +39,7 @@ export class EfectosDeclaracionRiesgos {
   declaracion_riesgo_id?: number ;
   impacto: string;
   descripcion: string;
+  efecto_declaracion_string?: string;
 }
 
 export class ControlesDeclaracionRiesgos {
@@ -45,6 +48,7 @@ export class ControlesDeclaracionRiesgos {
   declaracion_riesgo_id?: number;
   control: string;
   descripcion: string;
+  efectividad_declaracion_string: string;
 }
 
 export class DeclaracionRiesgosRequest {
@@ -52,6 +56,9 @@ export class DeclaracionRiesgosRequest {
   causasDeclaracionRiesgo: CausasDeclaracionRiesgos[];
   efectosDeclaracionRiesgo: EfectosDeclaracionRiesgos[];
   controlesDeclaracionRiesgo: ControlesDeclaracionRiesgos[];
+  causasEliminar?: number[];
+  efectosEliminar?: number[];
+  controlesEliminar?: number[];
 
   constructor(declaracionRiesgoParam,
   causasDeclaracionRiesgoParam,
@@ -64,4 +71,9 @@ export class DeclaracionRiesgosRequest {
     this.controlesDeclaracionRiesgo = controlesDeclaracionRiesgoParam;
 
   }
+}
+
+export class DeclaracionRiesgosCausa {
+  name: string;
+  number: number;
 }

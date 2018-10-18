@@ -6,6 +6,7 @@ import { ResponseRiskService } from './service/response-risk.service';
 import {FormType} from '../../commons/form-type.enum';
 import {DialogOverviewConfirmDialog} from '../../../../../assets/angular-material-examples/dialog-confirm/dialog-confirm';
 import {CustomSnackBarMessages} from '../../commons/messages.service';
+declare let jsPDF;
 
 @Component({
     selector: 'risk-response',
@@ -35,6 +36,28 @@ export class SystemResponseComponent implements OnInit {
     });
   }
 
+  download(){
+    const doc = new jsPDF();
+    const col = ["ID", "Respuesta del riesgo", "Descripción"];
+    const rows = [];
+
+    this.responseRisk.forEach(x => {
+      const temp = [x.id,x.respuestaRiesgoNombre,x.descripcion];
+      rows.push(temp);
+    });
+
+    doc.autoTable(col, rows);
+    doc.save('Respuesta_al_riesgo.pdf');
+  }
+
+  reloadTableServices(){
+    this.responseRiskService.getResponseRisk().subscribe((data: any) => {
+      this.responseRisk = data;
+      this.temp = [...data];
+      this.loadingIndicator = false;
+    });
+  }
+
   responseDialog() {
     this.dialogRef = this.dialog.open(ResponseDialogComponent, {
       panelClass: 'response-tabs-riesgo'
@@ -42,7 +65,7 @@ export class SystemResponseComponent implements OnInit {
     this.dialogRef.afterClosed()
       .subscribe(response => {
         if( response ) {
-          this.ngOnInit();
+          this.reloadTableServices();
         }
       });
   }
@@ -62,9 +85,7 @@ export class SystemResponseComponent implements OnInit {
       .subscribe(response => {
         if( response ) {
           console.log(response);
-          this.responseRisk[rowIndex] = response;
-          this.responseRisk = [...this.responseRisk];
-          this.loadingIndicator = false;
+          this.reloadTableServices();
         }
       });
   }
@@ -84,15 +105,15 @@ export class SystemResponseComponent implements OnInit {
   }
 
   deleteRow(result, row, rowIndex){
-    if( result != undefined){
+    if( result ){
       this.responseRiskService.deleteResponseRisk(row.id).subscribe((data: any) => {
         console.log(data);
+        if (rowIndex > -1) {
+          this.responseRisk.splice(rowIndex, 1);
+          this.responseRisk = [...this.responseRisk];
+          this.customSnackMessage.openSnackBar('Registro eliminado');
+        }
       });
-      if (rowIndex > -1) {
-        this.responseRisk.splice(rowIndex, 1);
-        this.responseRisk = [...this.responseRisk];
-        this.customSnackMessage.openSnackBar('Registro eliminado');
-      }
     }
   }
 

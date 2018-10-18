@@ -62,7 +62,7 @@
 
           <a routerLink="/tablas-sistema/niveles-controles">
             <button mat-menu-item class="">
-              <span>Niveles de control</span>
+              <span>Efectividad controles</span>
             </button>
           </a>
 
@@ -79,33 +79,30 @@
 
     <div class="" fxFlex="0 1 auto" fxLayout="row" fxLayoutAlign="start center">
 
-      <button mat-button [matMenuTriggerFor]="userMenu"
-              class="user-button">
+      <button mat-button class="user-button">
         <div fxLayout="row" fxLayoutAlign="center center">
-          <img class="avatar" src="assets/images/avatars/profile.jpg">
-          <span class="username mr-12" fxHide fxShow.gt-sm>Juan Martinez</span>
-          <mat-icon class="s-16" fxHide.xs>keyboard_arrow_down</mat-icon>
+          <a class="username mr-12" fxHide fxShow.gt-sm href="{{strategosEndpont}}">Salir</a>
         </div>
       </button>
 
-      <mat-menu #userMenu="matMenu" [overlapTrigger]="false">
+      <!--<mat-menu #userMenu="matMenu" [overlapTrigger]="false">-->
 
-        <button mat-menu-item>
-          <mat-icon>account_circle</mat-icon>
-          <span>Perfil</span>
-        </button>
+        <!--<button mat-menu-item>-->
+          <!--<mat-icon>account_circle</mat-icon>-->
+          <!--<span>Perfil</span>-->
+        <!--</button>-->
 
-        <button mat-menu-item class="">
-          <mat-icon>mail</mat-icon>
-          <span>Notificaciones</span>
-        </button>
+        <!--<button mat-menu-item class="">-->
+          <!--<mat-icon>mail</mat-icon>-->
+          <!--<span>Notificaciones</span>-->
+        <!--</button>-->
 
-        <button mat-menu-item class="">
-          <mat-icon>exit_to_app</mat-icon>
-          <span>Salir</span>
-        </button>
+        <!--<button mat-menu-item class="">-->
+          <!--<mat-icon>exit_to_app</mat-icon>-->
+          <!--<span>Salir</span>-->
+        <!--</button>-->
 
-      </mat-menu>
+      <!--</mat-menu>-->
 
 
       <div class="toolbar-separator"></div>

@@ -18,6 +18,7 @@ import { ProcessesModule } from './main/content/processes/processes.module';
 import { SystemTablesModule } from './main/content/system-tables/system-tables.module';
 import { FuseAngularMaterialModule } from '../app/main/content/components/angular-material/angular-material.module';
 import { RiesgosModule } from './main/content/riesgos/riesgos.module';
+import {NgxChartsModule} from '@swimlane/ngx-charts';
 
 const appRoutes: Routes = [
     {
@@ -56,8 +57,9 @@ const appRoutes: Routes = [
         HomeModule,
         ProcessesModule,
         SystemTablesModule,
+        NgxChartsModule,
         RiesgosModule,
-        FuseAngularMaterialModule
+        FuseAngularMaterialModule,
     ],
     bootstrap: [
         AppComponent

@@ -5,6 +5,7 @@ import {RatingRiskService} from '../rating/service/rating-risk.service';
 import {FormType} from '../../commons/form-type.enum';
 import {DialogOverviewConfirmDialog} from '../../../../../assets/angular-material-examples/dialog-confirm/dialog-confirm';
 import {CustomSnackBarMessages} from '../../commons/messages.service';
+declare let jsPDF;
 
 @Component({
   selector: 'risk-rating',
@@ -34,14 +35,41 @@ export class SystemRatingComponent implements OnInit {
     });
   }
 
+  download(){
+    const doc = new jsPDF();
+    const col = ["ID", "Calificación del riesgo", "Rango mínimo", "Rango máximo", "Color", "Acción a tomar"];
+    const rows = [];
+
+    this.ratingTypes.forEach(x => {
+      const temp = [x.id,
+        x.nombre_calificacion_riesgo,
+        x.rango_minimo,
+        x.rango_maximo,
+        x.color,
+        x.accion_tomar];
+      rows.push(temp);
+    });
+
+    doc.autoTable(col, rows);
+    doc.save('Calificacion_del_riesgo.pdf');
+  }
+
+  reloadTableServices() {
+    this.ratingRiskService.getRatingRisk().subscribe((data: any) => {
+      this.ratingTypes = data;
+      this.temp = [...data];
+      this.loadingIndicator = false;
+    });
+  }
+
   ratingDialog() {
     this.dialogRef = this.dialog.open(RatingDialogComponent, {
       panelClass: 'rating-dialog'
     });
     this.dialogRef.afterClosed()
       .subscribe(response => {
-        if( response ) {
-          this.ngOnInit();
+        if (response) {
+          this.reloadTableServices();
         }
       });
   }
@@ -59,10 +87,8 @@ export class SystemRatingComponent implements OnInit {
 
     this.dialogRef.afterClosed()
       .subscribe(response => {
-        if( response ) {
-          this.ratingTypes[rowIndex] = response;
-          this.ratingTypes = [...this.ratingTypes];
-          this.loadingIndicator = false;
+        if (response) {
+          this.reloadTableServices();
         }
       });
   }
@@ -70,41 +96,43 @@ export class SystemRatingComponent implements OnInit {
   delete(row, rowIndex) {
     this.dialogConfirm = this.dialog.open(DialogOverviewConfirmDialog, {
       width: '250px',
-      data: { name: row.nombre_calificacion_riesgo }
+      data: {name: row.nombre_calificacion_riesgo}
     });
     this.dialogConfirm.afterClosed()
       .subscribe(response => {
-        console.log(response)
+        console.log(response);
         this.deleteRow(response, row, rowIndex);
       });
 
   }
 
   deleteRow(result, row, rowIndex) {
-    if( result != undefined) {
+    if (result) {
       this.ratingRiskService.deleteRatingRisk(row.id).subscribe((data: any) => {
         console.log(data);
+        if (rowIndex > -1) {
+          this.ratingTypes.splice(rowIndex, 1);
+          this.ratingTypes = [...this.ratingTypes];
+          this.customSnackMessage.openSnackBar('Registro eliminado');
+        }
+      }, (err: any) => {
+        this.customSnackMessage.openSnackBar('Ocurrio un error eliminando el registro de la tabla');
       });
-      if (rowIndex > -1) {
-        this.ratingTypes.splice(rowIndex, 1);
-        this.ratingTypes = [...this.ratingTypes];
-        this.customSnackMessage.openSnackBar('Registro eliminado');
-      }
     }
   }
 
-  getCellClass({ row, column, value }): any {
+  getCellClass(row): any {
     return {
-      'is-yellow': value === 'Amarillo',
-      'is-green': value === 'Verde',
-      'is-red': value === 'Rojo'
+      'is-yellow': row.color === 'Amarillo',
+      'is-green': row.color === 'Verde',
+      'is-red': row.color === 'Rojo'
     };
   }
 
   updateFilter(event) {
     const val = event.target.value.toLowerCase();
 
-    const temp = this.temp.filter(function(d) {
+    const temp = this.temp.filter(function (d) {
       return d.nombre_calificacion_riesgo.toLowerCase().indexOf(val) !== -1 || !val;
     });
 

@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ControlsRiskModel} from '../model/controls-risk.model';
 import {ControlsRiskService} from '../service/controls-risk.service';
 import {FormType} from '../../../commons/form-type.enum';
@@ -15,6 +15,7 @@ import {CustomSnackBarMessages} from '../../../commons/messages.service';
 })
 export class ControlsDialogComponent implements OnInit {
   restData: any;
+  formErrors: any;
   composeForm: FormGroup;
   controlsRiskModel = new ControlsRiskModel();
 
@@ -25,13 +26,18 @@ export class ControlsDialogComponent implements OnInit {
     private customSnackMessage: CustomSnackBarMessages,
     @Inject(MAT_DIALOG_DATA) private data: any
   ) {
+    this.formErrors = {
+      efectividad_nombre: {},
+      puntaje: {},
+      descripcion: {}
+    };
   }
 
 
   ngOnInit() {
     this.composeForm = this.formBuilder.group({
-      efectividad_nombre: [''],
-      puntaje : [''],
+      efectividad_nombre: ['', [Validators.required]],
+      puntaje : ['', [Validators.required]],
       descripcion: ['']
     });
     if (this.data && this.data.formType === FormType.edit) {
@@ -57,7 +63,7 @@ export class ControlsDialogComponent implements OnInit {
     this.controlsRiskService.postControlsRisk(controlsRisk).subscribe((data: any) => {
       this.restData = data;
       this.dialogRef.close(controlsRisk);
-      this.customSnackMessage.openSnackBar('Nivel creado correctamente');
+      this.customSnackMessage.openSnackBar('Efectividad creada correctamente');
     });
   }
 

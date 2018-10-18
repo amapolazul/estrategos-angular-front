@@ -14,6 +14,10 @@ export class ControlsRiskService extends BaseService {
     this.serviceUrl = this.getResourceEndpoint();
   }
 
+  getEfectividadString(contronRiskModel: ControlsRiskModel): string {
+    return contronRiskModel.efectividad_nombre + ' (' + contronRiskModel.puntaje + ')';
+  }
+
   getControlsRisk(): Observable<ControlsRiskModel[]> {
     return this.http.get<ControlsRiskModel[]>(this.serviceUrl + '/');
   }

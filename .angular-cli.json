@@ -1,7 +1,7 @@
 {
     "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
     "project": {
-        "name": "STRAGEGOS"
+        "name": "STRATEGOS"
     },
     "apps": [
         {
@@ -22,7 +22,10 @@
                 "styles.scss",
                 "../node_modules/ng2-tree/styles.css"
             ],
-            "scripts": [],
+            "scripts": [
+              "../node_modules/jspdf/dist/jspdf.min.js",
+              "../node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.js"
+            ],
             "environmentSource": "environments/environment.ts",
             "environments": {
                 "dev": "environments/environment.ts",

@@ -30,6 +30,10 @@ export class ProbabilityRiskService extends BaseService {
     return this.http.post<string>(this.serviceUrl, probabilityRiskModel);
   }
 
+  getProbabilidadString(probabilityRiskModel: ProbabilityRiskModel): string {
+    return probabilityRiskModel.probabilidad + '(' + probabilityRiskModel.puntaje + ')';
+  }
+
   getResourceEndpoint(): string {
     return this.generalUrl + this.getResource();
   }

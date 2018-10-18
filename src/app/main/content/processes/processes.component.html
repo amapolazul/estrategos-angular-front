@@ -4,25 +4,26 @@
         <mat-tab-group dynamicHeight="true">
 
             <mat-tab label="Procesos">
-                <process-classes #procesos></process-classes>
+                <process-classes [procesoEditar]="procesoEditar" #procesos></process-classes>
             </mat-tab>
 
             <mat-tab label="Productos / Servicios">
-                <product-classes #productos></product-classes>
+                <product-classes [productosServiciosEditar]="productosServiciosEditar" #productos></product-classes>
             </mat-tab>
 
             <mat-tab label="Caracterización">
-                <characterization-classes #caracterizaciones></characterization-classes>
+                <characterization-classes [caracterizacionesEditar]="caracterizacionesEditar"  #caracterizaciones></characterization-classes>
             </mat-tab>
         </mat-tab-group>
     </div>
-  <div class="button-row" fxLayoutAlign="center center" fxLayout="row" style="color:#fff">
+  <div class="button-row" fxLayoutAlign="center center" fxLayout="row" style="display:flex;align-items: center;justify-content: space-around;">
+    <br>
     <button mat-raised-button color="primary" (click)="processData()">
       <mat-icon aria-label="save icon">save</mat-icon>
       Guardar
     </button>
     <button mat-raised-button color="warn">
-      <mat-icon aria-label="save icon">cancel</mat-icon>
+      <mat-icon aria-label="save icon" (click)="exit()">cancel</mat-icon>
       Salir
     </button>
   </div>

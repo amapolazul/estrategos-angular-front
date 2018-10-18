@@ -13,6 +13,7 @@ import {ProcessCache} from '../../../services/process-cache.service';
 })
 export class DialogComponent implements OnInit
 {
+    formErrors: any;
     showExtraToFields = false;
     composeForm: FormGroup;
     productoServicio = new ProductoServicio();
@@ -23,15 +24,20 @@ export class DialogComponent implements OnInit
         public dialogRef: MatDialogRef<DialogComponent>,
         private processCache: ProcessCache,
         @Inject(MAT_DIALOG_DATA) private data: any
-    )
-    {  }
+    ){
+      // Reactive form errors
+      this.formErrors = {
+        producto_Servicio_nombre: { },
+        producto_Servicio_Codigo: { }
+      };
+    }
 
     ngOnInit()
     {
       this.composeForm = this.formBuilder.group({
         proceso_Nombre: [{value: '', disabled: true}],
-        producto_Servicio_nombre: '',
-        producto_Servicio_Codigo: '',
+        producto_Servicio_nombre: ['', [Validators.required]],
+        producto_Servicio_Codigo: ['', [Validators.required]],
         producto_Caracteristicas: ''
       });
       if ( this.data && this.data.formType === FormType.edit ) {
@@ -48,14 +54,14 @@ export class DialogComponent implements OnInit
       }
     }
 
-  private llenarFormulario() {
-    this.composeForm.setValue({
-      proceso_Nombre: this.productoServicio.proceso_Nombre,
-      producto_Servicio_nombre: this.productoServicio.producto_Servicio_nombre || '',
-      producto_Servicio_Codigo: this.productoServicio.producto_Servicio_Codigo || '',
-      producto_Caracteristicas: this.productoServicio.producto_Caracteristicas || ''
-    });
-  }
+    private llenarFormulario() {
+      this.composeForm.setValue({
+        proceso_Nombre: this.processCache.getProcessName(),
+        producto_Servicio_nombre: this.productoServicio.producto_Servicio_nombre || '',
+        producto_Servicio_Codigo: this.productoServicio.producto_Servicio_Codigo || '',
+        producto_Caracteristicas: this.productoServicio.producto_Caracteristicas || ''
+      });
+    }
 
     salir() {
       this.dialogRef.close();
@@ -63,6 +69,9 @@ export class DialogComponent implements OnInit
 
     guardar() {
       const producto = <ProductoServicio> this.composeForm.getRawValue();
+      if (this.productoServicio.producto_Servicio_Id) {
+        producto.producto_Servicio_Id = this.productoServicio.producto_Servicio_Id;
+      }
       this.dialogRef.close(producto);
     }
 }
