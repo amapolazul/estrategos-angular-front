@@ -13,62 +13,64 @@
       <button mat-flat-button color="accent" (click)="download()">Descargar PDF</button>
     </div>
 
-    <br />
+    <br/>
 
-    <div>
-      <mat-form-field fxFlex>
-        <mat-label><b>Proceso</b></mat-label>
-        <input matInput placeholder="Proceso:" [value]="selectedProcess.proceso_Nombre" disabled >
-      </mat-form-field>
-      <mat-form-field fxFlex>
-        <mat-label><b>Proceso</b></mat-label>
-        <input matInput name="ejercicio_desc" placeholder="Ejercicio:" [value]="nombreEjercicio" disabled >
-      </mat-form-field>
-    </div>
+    <div id="probabilidadImpacto">
+      <div style="margin-top: 20px;">
+        <mat-form-field fxFlex>
+          <mat-label><b>Proceso</b></mat-label>
+          <input matInput placeholder="Proceso:" [value]="selectedProcess.proceso_Nombre" disabled>
+        </mat-form-field>
+        <mat-form-field fxFlex>
+          <mat-label><b>Proceso</b></mat-label>
+          <input matInput name="ejercicio_desc" placeholder="Ejercicio:" [value]="nombreEjercicio" disabled>
+        </mat-form-field>
+      </div>
 
-    <div fxLayout="colum" id="probabilidadImpacto">
-      <div style="margin-top: 10px; margin-left: 5px; margin-right: 40px;">
-        <div fxFlex="15">
-          <table>
-            <tr>
-              <th style="text-align: initial;">
-                <div class="m-l">Probabilidad / Impacto</div>
-              </th>
-            </tr>
-            <tr *ngFor="let ch of probabilidades">
-              <td>
-                <div class="m-l">{{ ch.probabilidad }} ({{ch.puntaje}})</div>
-              </td>
-            </tr>
-          </table>
-        </div>
-        <div fxFlex="">
-          <table>
-            <tr>
-              <th *ngFor="let col of impactos">
-                <div class="m-l"> {{col.impacto}} ({{col.puntaje}})</div>
-              </th>
-            </tr>
-            <tr *ngFor="let ch of probabilidades">
-              <td *ngFor="let col of impactos">
-                <div class="m-{{colorPorImpactoYProbabilidad(col.puntaje, ch.puntaje)}}">
-                  <a (click)="mostrarRiesgos(col.puntaje, ch.puntaje)" style="font-size: 20px; color:black">{{filtrarRiesgosPorImpactoYProbabilidad(col.puntaje,
-                    ch.puntaje)}}</a>
-                </div>
-              </td>
-            </tr>
-          </table>
-        </div>
-        <div fxFlex="10">
-          <div class="m-x"></div>
-          <div class="m-x"> Intolerable
-            <div _ngcontent-c23="" class="ng-star-inserted is-red"></div>
+      <div fxLayout="colum">
+        <div style="margin-top: 10px; margin-left: 5px; margin-right: 40px;">
+          <div fxFlex="15">
+            <table>
+              <tr>
+                <th style="text-align: initial;">
+                  <div class="m-l">Probabilidad / Impacto</div>
+                </th>
+              </tr>
+              <tr *ngFor="let ch of probabilidades">
+                <td>
+                  <div class="m-l">{{ ch.probabilidad }} ({{ch.puntaje}})</div>
+                </td>
+              </tr>
+            </table>
           </div>
-          <div class="m-x"> Moderado
-            <div _ngcontent-c23="" class="ng-star-inserted is-yellow"></div>
+          <div fxFlex="">
+            <table>
+              <tr>
+                <th *ngFor="let col of impactos">
+                  <div class="m-l"> {{col.impacto}} ({{col.puntaje}})</div>
+                </th>
+              </tr>
+              <tr *ngFor="let ch of probabilidades">
+                <td *ngFor="let col of impactos">
+                  <div class="m-{{colorPorImpactoYProbabilidad(col.puntaje, ch.puntaje)}}">
+                    <a (click)="mostrarRiesgos(col.puntaje, ch.puntaje)" style="font-size: 20px; color:black">{{filtrarRiesgosPorImpactoYProbabilidad(col.puntaje,
+                      ch.puntaje)}}</a>
+                  </div>
+                </td>
+              </tr>
+            </table>
           </div>
-          <div class="m-x"> Tolerable
-            <div _ngcontent-c23="" class="ng-star-inserted is-green"></div>
+          <div fxFlex="10">
+            <div class="m-x"></div>
+            <div class="m-x"> Intolerable
+              <div _ngcontent-c23="" class="ng-star-inserted is-red"></div>
+            </div>
+            <div class="m-x"> Moderado
+              <div _ngcontent-c23="" class="ng-star-inserted is-yellow"></div>
+            </div>
+            <div class="m-x"> Tolerable
+              <div _ngcontent-c23="" class="ng-star-inserted is-green"></div>
+            </div>
           </div>
         </div>
       </div>

@@ -92,7 +92,10 @@ export class RiesgoCausasDialogComponent implements OnInit {
 
     pdf.addHTML(htmlElement, () => {
       pdf.addPage();
-      pdf.autoTable(col, rows);
+      pdf.autoTable(col, rows,{
+        bodyStyles: { valign: 'top' },
+        styles: { overflow: 'linebreak' }
+      });
       pdf.save('riesposPorCausas.pdf');
     });
   }

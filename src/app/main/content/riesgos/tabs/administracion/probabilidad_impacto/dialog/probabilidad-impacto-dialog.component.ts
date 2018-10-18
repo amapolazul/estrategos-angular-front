@@ -97,6 +97,7 @@ export class ProbabilidadImpactoDialogComponent implements OnInit {
 
     this.riesgos.forEach(x => {
       const temp = [
+        x.calificacion_riesgo,
         x.factor_riesgo,
         x.probabilidad,
         x.impacto,
@@ -107,7 +108,10 @@ export class ProbabilidadImpactoDialogComponent implements OnInit {
 
     pdf.addHTML(elementToPrint, () => {
       pdf.addPage();
-      pdf.autoTable(col, rows);
+      pdf.autoTable(col, rows,{
+        bodyStyles: { valign: 'top' },
+        styles: { overflow: 'linebreak' }
+      });
       pdf.save('probabilidadImpacto.pdf');
     });
   }
