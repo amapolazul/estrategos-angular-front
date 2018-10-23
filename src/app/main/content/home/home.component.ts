@@ -106,8 +106,8 @@ export class HomeComponent implements OnInit {
 
   download() {
     const doc = new jsPDF();
-    let separador = 10;
     this.procesosArray.forEach(x => {
+      let separador = 10;
       doc.text('Proceso: ' + x.proceso.proceso_Nombre, 20, separador);
       separador = separador + 10;
       doc.text('Descripción: ' + x.proceso.proceso_Descripcion, 20, separador);
@@ -115,7 +115,7 @@ export class HomeComponent implements OnInit {
       doc.text('Responsable: ' + x.proceso.proceso_Responsable_Id, 20, separador);
       separador = separador + 10;
       doc.text('Codigo: ' + x.proceso.proceso_Codigo, 20, separador);
-      separador = separador + 10;
+      separador = separador + 20;
 
       const colsprod = ['Id', 'Producto Servicio', 'Codigo', 'Caracteristicas'];
       const rowsprod = [];
@@ -155,8 +155,8 @@ export class HomeComponent implements OnInit {
         startY: doc.autoTable.previous.finalY  + 20,
       });
 
-      separador = doc.autoTable.previous.finalY + 20;
+      doc.addPage();
     });
-    doc.save('Efectividad_de_los_controles.pdf');
+    doc.save('procesos.pdf');
   }
 }
