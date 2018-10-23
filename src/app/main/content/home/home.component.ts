@@ -5,9 +5,12 @@ import {Router} from '@angular/router';
 import {CustomSnackBarMessages} from '../commons/messages.service';
 import { DialogOverviewConfirmDialog } from '../../../../assets/angular-material-examples/dialog-confirm/dialog-confirm';
 import {MatDialog} from '@angular/material';
+import {ProcesoCreateRequest} from '../processes/models/process.model';
+declare let jsPDF;
 
 @Component({
-  template: '<tree [tree]="tree" #treeComponent (nodeSelected)="getSubNodes($event)" (menuItemSelected)="onMenuItemSelected($event)"></tree>'
+  templateUrl : './home.component.html',
+  styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
   dialogConfirm:any;
@@ -25,6 +28,8 @@ export class HomeComponent implements OnInit {
     }
   };
 
+  procesosArray: Array<ProcesoCreateRequest> = [];
+
   @ViewChild('treeComponent') treeComponent;
 
   constructor(private processesService: ProcessesService,
@@ -35,6 +40,14 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.tree.emitLoadNextLevel = true;
+
+    this.processesService.getProcesos().subscribe(procesos => {
+      procesos.forEach(proceso => {
+        this.processesService.getProcesoById(proceso.proceso_Id).subscribe(response => {
+          this.procesosArray.push(response);
+        });
+      });
+    });
   }
 
   onMenuItemSelected(event: MenuItemSelectedEvent): void {
@@ -89,5 +102,61 @@ export class HomeComponent implements OnInit {
       oopNodeController.setChildren(newChildren);
       oopNodeController.expand();
     });
+  }
+
+  download() {
+    const doc = new jsPDF();
+    let separador = 10;
+    this.procesosArray.forEach(x => {
+      doc.text('Proceso: ' + x.proceso.proceso_Nombre, 20, separador);
+      separador = separador + 10;
+      doc.text('Descripción: ' + x.proceso.proceso_Descripcion, 20, separador);
+      separador = separador + 10;
+      doc.text('Responsable: ' + x.proceso.proceso_Responsable_Id, 20, separador);
+      separador = separador + 10;
+      doc.text('Codigo: ' + x.proceso.proceso_Codigo, 20, separador);
+      separador = separador + 10;
+
+      const colsprod = ['Id', 'Producto Servicio', 'Codigo', 'Caracteristicas'];
+      const rowsprod = [];
+
+      const colscarac = ['Id', 'Codigo procedimiento', 'Objetivo'];
+      const rowscarac = [];
+
+      x.productoServicios.forEach(prodServ => {
+        const temp = [
+          prodServ.producto_Servicio_Id,
+          prodServ.producto_Servicio_nombre,
+          prodServ.producto_Servicio_Codigo,
+          prodServ.producto_Caracteristicas
+        ];
+        rowsprod.push(temp);
+      });
+
+      x.caracterizaciones.forEach(caract => {
+        const temp = [
+          caract.caraceterizacion_id,
+          caract.procedimiento_Codigo,
+          caract.procedimiento_Objetivo
+        ];
+        rowscarac.push(temp);
+      });
+
+      doc.text('Productos Servicios', 20, separador);
+      separador = separador + 10;
+
+      doc.autoTable(colsprod, rowsprod, {
+        startY: separador,
+      });
+
+      doc.text('Caracterizaciones', 20, doc.autoTable.previous.finalY + 10);
+
+      doc.autoTable(colscarac, rowscarac, {
+        startY: doc.autoTable.previous.finalY  + 20,
+      });
+
+      separador = doc.autoTable.previous.finalY + 20;
+    });
+    doc.save('Efectividad_de_los_controles.pdf');
   }
 }

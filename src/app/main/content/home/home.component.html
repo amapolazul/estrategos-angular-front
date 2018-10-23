@@ -1,0 +1,7 @@
+<div id="home" class="p-24" fxFlex="100%">
+  <div class="button-row">
+      <button mat-raised-button color="primary" (click)="download()">Descargar PDF</button>
+  </div>
+  <tree [tree]="tree" #treeComponent (nodeSelected)="getSubNodes($event)" (menuItemSelected)="onMenuItemSelected($event)"></tree>
+</div>
+
