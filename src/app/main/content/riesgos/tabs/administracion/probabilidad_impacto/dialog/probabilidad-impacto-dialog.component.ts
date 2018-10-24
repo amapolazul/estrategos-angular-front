@@ -109,8 +109,10 @@ export class ProbabilidadImpactoDialogComponent implements OnInit {
     pdf.addHTML(elementToPrint, () => {
       pdf.addPage();
       pdf.autoTable(col, rows,{
+        margin: {horizontal: 5},
         bodyStyles: { valign: 'top' },
-        styles: { overflow: 'linebreak' }
+        styles: { overflow: 'linebreak', columnWidth: 'wrap' },
+        columnStyles: {text: {columnWidth: 'auto'}}
       });
       pdf.save('probabilidadImpacto.pdf');
     });
